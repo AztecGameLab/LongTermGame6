@@ -59,7 +59,7 @@ MonoBehaviour:
     CallbackHandler:
       Value: {fileID: 0}
       HasValue: 0
-  outputType: 
+  outputType: AUTODETECT
   threadAffinities:
     Value: []
     HasValue: 0
@@ -114,7 +114,8 @@ MonoBehaviour:
       Value: 0
       HasValue: 1
     Plugins:
-      Value: []
+      Value:
+      - phonon_fmod
       HasValue: 1
     StaticPlugins:
       Value: []
@@ -350,8 +351,10 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Menu
+  Banks:
+  - Testing
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
@@ -573,7 +576,7 @@ MonoBehaviour:
       Value: 9264
       HasValue: 1
     Overlay:
-      Value: 1
+      Value: 0
       HasValue: 1
     Logging:
       Value: 0

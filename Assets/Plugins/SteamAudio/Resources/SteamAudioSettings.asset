@@ -15,14 +15,14 @@ MonoBehaviour:
   audioEngine: 1
   SOFAFiles: []
   defaultMaterial: {fileID: 11400000, guid: a086f686223eed942816c70be67841b0, type: 2}
-  sceneType: 0
+  sceneType: 1
   layerMask:
     serializedVersion: 2
     m_Bits: 0
   maxOcclusionSamples: 16
-  realTimeRays: 4096
-  realTimeBounces: 4
-  realTimeDuration: 1
+  realTimeRays: 6000
+  realTimeBounces: 64
+  realTimeDuration: 10
   realTimeAmbisonicOrder: 1
   realTimeMaxSources: 32
   realTimeCPUCoresPercentage: 5
@@ -30,8 +30,8 @@ MonoBehaviour:
   bakeConvolution: 1
   bakeParametric: 0
   bakingRays: 16384
-  bakingBounces: 16
-  bakingDuration: 1
+  bakingBounces: 64
+  bakingDuration: 2
   bakingAmbisonicOrder: 1
   bakingCPUCoresPercentage: 50
   bakingIrradianceMinDistance: 1
@@ -42,7 +42,7 @@ MonoBehaviour:
   bakingPathRange: 1000
   bakedPathingCPUCoresPercentage: 50
   simulationUpdateInterval: 0.1
-  reflectionEffectType: 0
+  reflectionEffectType: 2
   hybridReverbTransitionTime: 1
   hybridReverbOverlapPercent: 25
   deviceType: 2
