@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d888e4913afd45b39723f1e02cadd099, type: 3}
+  m_Name: New Standard Movement Strategy
+  m_EditorClassIdentifier: 
+  groundedAcceleration: 0.125
+  groundedDeceleration: 0.125
+  airborneAcceleration: 0.3
+  airborneDeceleration: 0.3
