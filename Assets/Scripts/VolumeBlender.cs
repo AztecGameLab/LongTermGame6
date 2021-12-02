@@ -1,0 +1,24 @@
+﻿using UnityEngine;
+using UnityEngine.Rendering;
+
+public class VolumeBlender : MonoBehaviour
+{
+    [SerializeField] private Volume volume;
+    [SerializeField] private float blendSpeed;
+
+    private float _targetWeight;
+
+    private void Update()
+    {
+        float current = volume.weight;
+        float target = _targetWeight;
+        float maxDelta = blendSpeed * Time.deltaTime;
+        
+        volume.weight = Mathf.MoveTowards(current, target, maxDelta);
+    }
+
+    public void BlendWeight(float weight)
+    {
+        _targetWeight = weight;
+    }
+}

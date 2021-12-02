@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CrouchSystem : MonoBehaviour
 {
@@ -17,7 +18,15 @@ public class CrouchSystem : MonoBehaviour
     [SerializeField] private MovementSystem movementSystem;
     [SerializeField] private CapsuleCollider playerCollider;
 
+    [Header("Events")] 
+    [SerializeField] private UnityEvent onCrouchStart;
+    [SerializeField] private UnityEvent onCrouchEnd;
+    
     private bool _blockedAbove;
+    private bool _wasCrouching;
+
+    private bool CrouchJustStarted => IsCrouching && !_wasCrouching;
+    private bool CrouchJustEnded => !IsCrouching && _wasCrouching;
     
     [PublicAPI] public bool IsCrouching { get; set; }
 
@@ -26,7 +35,19 @@ public class CrouchSystem : MonoBehaviour
         _blockedAbove = CheckIfBlockedAbove();
         
         UpdateCollider();
-        UpdateSpeed();            
+        UpdateSpeed();
+        UpdateEvents();
+        
+        _wasCrouching = IsCrouching;
+    }
+
+    private void UpdateEvents()
+    {
+        if (CrouchJustStarted)
+            onCrouchStart.Invoke();
+        
+        else if (CrouchJustEnded)
+            onCrouchEnd.Invoke();
     }
 
     private bool CheckIfBlockedAbove()
