@@ -1,5 +1,140 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1758391769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758391770}
+  - component: {fileID: 1758391772}
+  - component: {fileID: 1758391771}
+  m_Layer: 0
+  m_Name: Jump Audio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1758391770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758391769}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8137009872141556459}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1758391772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758391769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Jump
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 1
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &1758391771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758391769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c3684b22f00604a97bb68037fcf4cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  directBinaural: 1
+  interpolation: 0
+  distanceAttenuation: 0
+  distanceAttenuationInput: 0
+  distanceAttenuationValue: 1
+  airAbsorption: 0
+  airAbsorptionInput: 0
+  airAbsorptionLow: 1
+  airAbsorptionMid: 1
+  airAbsorptionHigh: 1
+  directivity: 0
+  directivityInput: 0
+  dipoleWeight: 0
+  dipolePower: 0
+  directivityValue: 1
+  occlusion: 1
+  occlusionInput: 0
+  occlusionType: 0
+  occlusionRadius: 1
+  occlusionSamples: 16
+  occlusionValue: 1
+  transmission: 1
+  transmissionType: 0
+  transmissionInput: 0
+  transmissionLow: 1
+  transmissionMid: 1
+  transmissionHigh: 1
+  directMixLevel: 1
+  reflections: 0
+  reflectionsType: 0
+  useDistanceCurveForReflections: 0
+  currentBakedSource: {fileID: 0}
+  reverbTimeLow: 0
+  reverbTimeMid: 0
+  reverbTimeHigh: 0
+  hybridReverbEQLow: 1
+  hybridReverbEQMid: 1
+  hybridReverbEQHigh: 1
+  hybridReverbDelay: 0
+  applyHRTFToReflections: 0
+  reflectionsMixLevel: 1
+  pathing: 1
+  pathingProbeBatch: {fileID: 0}
+  pathValidation: 1
+  findAlternatePaths: 1
+  pathingEQ:
+  - 1
+  - 1
+  - 1
+  pathingSH:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  applyHRTFToPathing: 0
+  pathingMixLevel: 1
 --- !u!1 &2146217812501054105
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +201,7 @@ MonoBehaviour:
   leftKey: 97
   rightKey: 100
   movementSystem: {fileID: 8137009872141556461}
-  lookDirection: {fileID: 8137009870776137512}
+  lookDirection: {fileID: 8137009871652392841}
 --- !u!114 &6754808980039367589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpButton: 32
-  scrollToJump: 1
+  scrollToJump: 0
   jumpingSystem: {fileID: 8137009872141556451}
 --- !u!114 &994022623066467067
 MonoBehaviour:
@@ -332,6 +467,7 @@ Transform:
   m_Children:
   - {fileID: 1997660983695085739}
   - {fileID: 8137009871652392841}
+  - {fileID: 1758391770}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -349,8 +485,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showDebug: 0
   pitchConstraint: 90
-  yawConstraint: 0
-  rollConstraint: 0
+  yawConstraint: -1
+  rollConstraint: -1
   pitchTransform: {fileID: 8137009870776137512}
   yawTransform: {fileID: 8137009871652392841}
   rollTransform: {fileID: 8137009870776137512}
@@ -367,11 +503,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDebug: 0
-  baseMovementSpeed: 6.079744
+  baseMovementSpeed: 3
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
   strategy: {fileID: 11400000, guid: ee38fe9e7bdfccf4fa237febf756cb9a, type: 2}
-  lookDirection: {fileID: 8137009870776137512}
+  lookDirection: {fileID: 8137009871652392841}
 --- !u!114 &8137009872141556451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +527,19 @@ MonoBehaviour:
   customGravity: {fileID: 6632994079878567245}
   onJump:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1758391772}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8137009872141556450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,11 +553,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDebug: 0
-  standingHeight: 2
+  standingHeight: 1.8
   standingCenter: {x: 0, y: -1, z: 0}
   crouchHeight: 1.5
   crouchCenter: {x: 0, y: -0.75, z: 0}
-  crouchSpeedMultiplier: 0.25
+  crouchSpeedMultiplier: 0.5
   radiusBuffer: 0.1
   heightBuffer: 0.2
   movementSystem: {fileID: 8137009872141556461}
@@ -443,7 +591,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &8137009872141556463
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -451,11 +599,11 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8137009872141556468}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3167993b53a50cd409ab516df9f46754, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
-  m_Height: 2
+  m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: -1, z: 0}
 --- !u!114 &2569997393202912189
