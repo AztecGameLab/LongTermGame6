@@ -13,7 +13,7 @@ public class VolumeBlender : MonoBehaviour
     {
         float current = volume.weight;
         float target = _targetWeight;
-        float maxDelta = blendSpeed * Time.deltaTime;
+        float maxDelta = blendSpeed >= 0 ? blendSpeed * Time.deltaTime : 1;
         
         volume.weight = Mathf.MoveTowards(current, target, maxDelta);
     }

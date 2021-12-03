@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class HealthSystem : MonoBehaviour
 {
     [Header("Settings")] 
+    [SerializeField] private float currentHealthPercent = 1f;
     [SerializeField] private float healthRecoverySpeed = 1f;
     [SerializeField] private float healthRecoveryTolerance;
     
@@ -12,35 +13,38 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private UnityEvent<float> onHealthChanged;
     [SerializeField] private UnityEvent onDamage;
 
-    private float _currentHealthPercent;
     private float _lastReportedHealth;
     
     private void Update()
     {
+        //TODO remove debug
+        if (Input.GetKeyDown(KeyCode.K))
+            Damage(0.25f);
+        
         RecoverHealth();
         CheckHealthChangeEvent();
     }
 
     private void RecoverHealth()
     {
-        float current = _currentHealthPercent;
+        float current = currentHealthPercent;
         float maxDelta = healthRecoverySpeed * Time.deltaTime;
         
-        _currentHealthPercent = Mathf.MoveTowards(current, 1, maxDelta);
+        currentHealthPercent = Mathf.MoveTowards(current, 1, maxDelta);
     }
 
     private void CheckHealthChangeEvent()
     {
-        if (Math.Abs(_currentHealthPercent - _lastReportedHealth) > healthRecoveryTolerance)
+        if (Math.Abs(currentHealthPercent - _lastReportedHealth) > healthRecoveryTolerance)
         {
-            onHealthChanged.Invoke(_currentHealthPercent);
-            _lastReportedHealth = _currentHealthPercent;
+            onHealthChanged.Invoke(currentHealthPercent);
+            _lastReportedHealth = currentHealthPercent;
         }
     }
     
     public void Damage(float percent)
     {
-        _currentHealthPercent = Mathf.Clamp01(_currentHealthPercent - percent);
+        currentHealthPercent = Mathf.Clamp01(currentHealthPercent - percent);
         onDamage.Invoke();
     }
 }

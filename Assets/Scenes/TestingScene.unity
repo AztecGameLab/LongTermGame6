@@ -815,7 +815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: {fileID: 195183523}
-  blendSpeed: 0.5
+  blendSpeed: 2
   invert: 1
 --- !u!1 &208845986
 GameObject:
@@ -879,7 +879,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: {fileID: 208845987}
-  blendSpeed: 3.5
+  blendSpeed: 1.5
   invert: 0
 --- !u!1 &239389774
 GameObject:
@@ -12310,5 +12310,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 521143698, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
