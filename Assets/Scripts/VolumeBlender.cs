@@ -5,6 +5,7 @@ public class VolumeBlender : MonoBehaviour
 {
     [SerializeField] private Volume volume;
     [SerializeField] private float blendSpeed;
+    [SerializeField] private bool invert;
 
     private float _targetWeight;
 
@@ -19,6 +20,6 @@ public class VolumeBlender : MonoBehaviour
 
     public void BlendWeight(float weight)
     {
-        _targetWeight = weight;
+        _targetWeight = invert ? 1 - weight : weight;
     }
 }

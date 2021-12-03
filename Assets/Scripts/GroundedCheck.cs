@@ -17,7 +17,7 @@ public abstract class GroundedCheck : MonoBehaviour
     [Header("Ground Check Settings")]
     [SerializeField] protected Vector3 gravityDirection = Vector3.down;
     [SerializeField] protected float slopeLimitDegrees = 45f;
-    [SerializeField] private bool showDebug;   
+    [SerializeField] private bool showDebug;
 
     [Space]
     [SerializeField] protected SurfaceCollisionEvents collisionEvents = new SurfaceCollisionEvents();

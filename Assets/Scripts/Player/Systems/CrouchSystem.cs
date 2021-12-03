@@ -6,15 +6,11 @@ public class CrouchSystem : MonoBehaviour
 {
     [Header("Settings")] 
     [SerializeField] private bool showDebug;
-    [SerializeField, Range(0, 5)] private float standingHeight = 2f;
-    [SerializeField] private Vector3 standingCenter = new Vector3(0, -0.5f, 0);
-    [SerializeField, Range(0, 5)] private float crouchHeight = 1f;
-    [SerializeField] private Vector3 crouchCenter = Vector3.zero;
     [SerializeField, Range(0, 1)] private float crouchSpeedMultiplier = 0.25f;
     [SerializeField] private float radiusBuffer = 0.1f;
     [SerializeField] private float heightBuffer = 0.1f;
-    
-    [Header("Dependencies")]
+
+    [Header("Dependencies")] 
     [SerializeField] private MovementSystem movementSystem;
     [SerializeField] private CapsuleCollider playerCollider;
 
@@ -24,23 +20,26 @@ public class CrouchSystem : MonoBehaviour
     
     private bool _blockedAbove;
     private bool _wasCrouching;
-
-    private bool CrouchJustStarted => IsCrouching && !_wasCrouching;
-    private bool CrouchJustEnded => !IsCrouching && _wasCrouching;
+    private bool _isCrouching;
     
-    [PublicAPI] public bool IsCrouching { get; set; }
+    private bool CrouchJustStarted => _isCrouching && !_wasCrouching;
+    private bool CrouchJustEnded => !_isCrouching && _wasCrouching;
+    
+    [PublicAPI] public bool WantsToCrouch { get; set; }
 
     private void Update()
     {
         _blockedAbove = CheckIfBlockedAbove();
         
-        UpdateCollider();
+        if (!_blockedAbove)
+            _isCrouching = WantsToCrouch;
+     
         UpdateSpeed();
         UpdateEvents();
         
-        _wasCrouching = IsCrouching;
+        _wasCrouching = _isCrouching;
     }
-
+    
     private void UpdateEvents()
     {
         if (CrouchJustStarted)
@@ -59,29 +58,14 @@ public class CrouchSystem : MonoBehaviour
         return Physics.SphereCast(ray, radius, maxDistance);
     }
 
-    private void UpdateCollider()
-    {
-        if (IsCrouching)
-        {
-            playerCollider.height = crouchHeight;
-            playerCollider.center = crouchCenter;
-        }
-        
-        else if ((IsCrouching || _blockedAbove) == false)
-        {
-            playerCollider.height = standingHeight;
-            playerCollider.center = standingCenter;
-        }
-    }
-
     private void UpdateSpeed()
     {
         float baseMovementSpeed = movementSystem.BaseMovementSpeed;
         
-        if (IsCrouching)
+        if (WantsToCrouch)
             movementSystem.CurrentMaxSpeed = baseMovementSpeed * crouchSpeedMultiplier;
         
-        else if ((IsCrouching || _blockedAbove) == false)
+        else if ((WantsToCrouch || _blockedAbove) == false)
             movementSystem.CurrentMaxSpeed = baseMovementSpeed;
     }
 
@@ -93,7 +77,7 @@ public class CrouchSystem : MonoBehaviour
 
     private void DrawDebugUI()
     {
-        GUILayout.Label($"Holding crouch: {IsCrouching}");
+        GUILayout.Label($"Holding crouch: {WantsToCrouch}");
         GUILayout.Label($"Blocked above: {_blockedAbove}");
     }
 }

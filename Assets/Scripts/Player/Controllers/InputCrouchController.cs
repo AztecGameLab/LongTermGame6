@@ -10,6 +10,6 @@ public class InputCrouchController : MonoBehaviour
 
     private void Update()
     {
-        crouchSystem.IsCrouching = Input.GetKey(crouchButton);
+        crouchSystem.WantsToCrouch = Input.GetKey(crouchButton);
     }
 }
