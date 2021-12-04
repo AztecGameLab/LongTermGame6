@@ -1,8 +1,6 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-// todo: clean up code here...I want a way to alert interactable when its hovered + get currently hovered interactable
-
 public class InteractionSystem : MonoBehaviour
 {
     [Header("Settings")] 
@@ -11,34 +9,57 @@ public class InteractionSystem : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] private Transform lookDirection;
 
-    private Interactable _targetInteractable;
-    private bool _hasTargetInteractable;
+    public bool LookingAtInteractable { get; private set; }
+    private bool _test;
     private bool _wasHoldingInteract;
+    private Interactable _targetInteractable;
     private RaycastHit[] _hits = new RaycastHit[100];
 
+    private bool JustReleasedInteract => _wasHoldingInteract && !HoldingInteract;
+    private bool JustPressedInteract => !_wasHoldingInteract && HoldingInteract;
+    
     [PublicAPI] public bool HoldingInteract { get; set; }
     
     private void Update()
     {
-        int hits = Physics.RaycastNonAlloc(lookDirection.position, lookDirection.forward, _hits);
-
-        for (int i = 0; i < hits; i++)
+        if (TryGetInteractable(out Interactable target))
         {
-            RaycastHit currentHit = _hits[i];
+            LookingAtInteractable = true;
             
-            if (currentHit.transform.TryGetComponent(out _targetInteractable) && currentHit.distance <= _targetInteractable.InteractRange)
+            if (JustPressedInteract)
             {
-                _hasTargetInteractable = true;
-                break;
+                target.InteractStart();
+                _test = true;
             }
 
-            _hasTargetInteractable = false;
+            if (JustReleasedInteract && _test)
+            {
+                target.InteractEnd();
+                _test = false;
+            }
+
+            _targetInteractable = target;
+        }
+        
+        else if (_targetInteractable != null && _test)
+        {
+            _targetInteractable.InteractEnd();
+            _targetInteractable = null;
+            _test = false;
+            LookingAtInteractable = false;
         }
 
-        if (_hasTargetInteractable && !_wasHoldingInteract && HoldingInteract)
-            _targetInteractable.Interact();
+        else LookingAtInteractable = false;
 
         _wasHoldingInteract = HoldingInteract;
+    }
+
+    private bool TryGetInteractable(out Interactable result)
+    {
+        result = null;
+        
+        return Physics.Raycast(new Ray(lookDirection.position, lookDirection.forward), out RaycastHit hitInfo) &&
+            hitInfo.transform.TryGetComponent(out result) && hitInfo.distance <= result.InteractRange;
     }
 
     private void OnGUI()
@@ -50,7 +71,7 @@ public class InteractionSystem : MonoBehaviour
     private void DrawDebugUI()
     {
         GUILayout.Label($"Holding Interact: {HoldingInteract}");
-        GUILayout.Label($"Target interactable: {(_hasTargetInteractable ? _targetInteractable.name : "None")}");
+        GUILayout.Label($"Target interactable: {(TryGetInteractable(out Interactable result) ? result.name : "None")}");
         GUILayout.Label($"Look direction: {lookDirection}");
     }
 }
