@@ -11,13 +11,11 @@ public class Interactable : MonoBehaviour
     
     public void InteractStart()
     {
-        Debug.Log("Started interaction with " + gameObject.name);
         onInteractStart.Invoke();
     }
 
     public void InteractEnd()
     {
-        Debug.Log("Ended interaction with " + gameObject.name);
         onInteractEnd.Invoke();
     }
 }

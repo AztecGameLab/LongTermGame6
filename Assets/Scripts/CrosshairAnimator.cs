@@ -10,7 +10,11 @@ public class CrosshairAnimator : MonoBehaviour
     
     private void Update()
     {
+        Vector3 current = crosshair.localScale;
         Vector3 target = interactionSystem.LookingAtInteractable ? interactableScale : normalScale;
-        crosshair.localScale = Vector3.MoveTowards(crosshair.localScale, target, animationSpeed * Time.deltaTime);
+        
+        float maxDistanceDelta = animationSpeed * Time.deltaTime;
+        
+        crosshair.localScale = Vector3.MoveTowards(current, target, maxDistanceDelta);
     }
 }
