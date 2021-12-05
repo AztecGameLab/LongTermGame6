@@ -28,13 +28,13 @@ public class InteractionSystem : MonoBehaviour
             
             if (JustPressedInteract)
             {
-                target.InteractStart();
+                target.InteractStart(gameObject);
                 _test = true;
             }
 
             if (JustReleasedInteract && _test)
             {
-                target.InteractEnd();
+                target.InteractEnd(gameObject);
                 _test = false;
             }
 
@@ -43,7 +43,7 @@ public class InteractionSystem : MonoBehaviour
         
         else if (_targetInteractable != null && _test)
         {
-            _targetInteractable.InteractEnd();
+            _targetInteractable.InteractEnd(gameObject);
             _targetInteractable = null;
             _test = false;
             LookingAtInteractable = false;

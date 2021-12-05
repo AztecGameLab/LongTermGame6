@@ -4,18 +4,18 @@ using UnityEngine.Events;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private float interactRange = 1f;
-    [SerializeField] private UnityEvent onInteractStart;
-    [SerializeField] private UnityEvent onInteractEnd;
+    [SerializeField] private UnityEvent<GameObject> onInteractStart;
+    [SerializeField] private UnityEvent<GameObject> onInteractEnd;
 
     public float InteractRange => interactRange;
     
-    public void InteractStart()
+    public void InteractStart(GameObject source)
     {
-        onInteractStart.Invoke();
+        onInteractStart.Invoke(source);
     }
 
-    public void InteractEnd()
+    public void InteractEnd(GameObject source)
     {
-        onInteractEnd.Invoke();
+        onInteractEnd.Invoke(source);
     }
 }
