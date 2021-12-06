@@ -2,14 +2,12 @@
 
 public class InputInteractionController : MonoBehaviour
 {
-    [Header("Settings")] 
-    [SerializeField] private KeyCode interactButton = KeyCode.E;
-    
     [Header("Dependencies")] 
+    [SerializeField] private Controls controls;
     [SerializeField] private InteractionSystem interactionSystem;
 
     private void Update()
     {
-        interactionSystem.HoldingInteract = Input.GetKey(interactButton);
+        interactionSystem.HoldingInteract = Input.GetKey(controls.interactKey);
     }
 }

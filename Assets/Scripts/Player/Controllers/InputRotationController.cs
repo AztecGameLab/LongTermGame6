@@ -2,15 +2,13 @@
 
 public class InputRotationController : MonoBehaviour
 {
-    [Header("Settings")] 
-    [SerializeField] private float rotationSpeed = 1f;
-    
     [Header("Dependencies")] 
+    [SerializeField] private Controls controls;
     [SerializeField] private RotationSystem rotationSystem;
     
     private void Update()
     {
-        rotationSystem.Pitch += -Input.GetAxisRaw("Mouse Y");
-        rotationSystem.Yaw += Input.GetAxisRaw("Mouse X") * rotationSpeed;
+        rotationSystem.Pitch += Input.GetAxisRaw("Mouse Y") * (controls.invertY ? 1 : -1);
+        rotationSystem.Yaw += Input.GetAxisRaw("Mouse X") * controls.mouseSensitivity;
     }
 }

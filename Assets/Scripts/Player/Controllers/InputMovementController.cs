@@ -2,13 +2,8 @@
 
 public class InputMovementController : MonoBehaviour
 {
-    [Header("Settings")] 
-    [SerializeField] private KeyCode forwardKey = KeyCode.W;
-    [SerializeField] private KeyCode backwardKey = KeyCode.S;
-    [SerializeField] private KeyCode leftKey = KeyCode.A;
-    [SerializeField] private KeyCode rightKey = KeyCode.D;
-
     [Header("Dependencies")] 
+    [SerializeField] private Controls controls;
     [SerializeField] private MovementSystem movementSystem;
     [SerializeField] private Transform lookDirection;
 
@@ -19,8 +14,8 @@ public class InputMovementController : MonoBehaviour
     
     private Vector3 GetMovementDirection()
     {
-        float forwardAxis = CalculateAxis(forwardKey, backwardKey);
-        float rightAxis = CalculateAxis(rightKey, leftKey);
+        float forwardAxis = CalculateAxis(controls.forwardKey, controls.backwardKey);
+        float rightAxis = CalculateAxis(controls.rightKey, controls.leftKey);
 
         Vector3 forward = lookDirection.forward * forwardAxis;
         Vector3 right = lookDirection.right * rightAxis;
