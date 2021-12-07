@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 
-// todo: use state-machine so the movement makes more sense.
-
-// e.g. only crouch while grounded, ect. 
+// todo: use state-machine so the code logic makes more sense.
 
 public class FPSController : MonoBehaviour
 {
     [Header("Dependencies")] 
-    [SerializeField] private Controls controls;
+    [SerializeField] private ControlSettings controlSettings;
     [SerializeField] private Transform playerYaw;
     [SerializeField] private GroundedCheck groundCheck;
     
@@ -29,7 +27,7 @@ public class FPSController : MonoBehaviour
 
     private void UpdateCrouch()
     {
-        bool wantsToCrouch = Input.GetKey(controls.crouchKey);
+        bool wantsToCrouch = Input.GetKey(controlSettings.crouchKey);
         
         if (groundCheck.IsGrounded || !wantsToCrouch)
             crouchSystem.WantsToCrouch = wantsToCrouch;
@@ -37,15 +35,15 @@ public class FPSController : MonoBehaviour
 
     private void UpdateJump()
     {
-        jumpingSystem.HoldingJump = !crouchSystem.IsCrouching && Input.GetKey(controls.jumpKey);
+        jumpingSystem.HoldingJump = !crouchSystem.IsCrouching && Input.GetKey(controlSettings.jumpKey);
     }
 
     private void UpdateRotation()
     {
-        float yMultiplier = controls.invertY ? 1 : -1;
+        float yMultiplier = controlSettings.invertY ? 1 : -1;
         
         rotationSystem.Pitch += Input.GetAxisRaw("Mouse Y") * yMultiplier;
-        rotationSystem.Yaw += Input.GetAxisRaw("Mouse X") * controls.mouseSensitivity;
+        rotationSystem.Yaw += Input.GetAxisRaw("Mouse X") * controlSettings.mouseSensitivity;
     }
     
     private void UpdateMovement()
@@ -55,8 +53,8 @@ public class FPSController : MonoBehaviour
     
     private Vector3 GetMovementDirection()
     {
-        float forwardAxis = CalculateAxis(controls.forwardKey, controls.backwardKey);
-        float rightAxis = CalculateAxis(controls.rightKey, controls.leftKey);
+        float forwardAxis = CalculateAxis(controlSettings.forwardKey, controlSettings.backwardKey);
+        float rightAxis = CalculateAxis(controlSettings.rightKey, controlSettings.leftKey);
 
         Vector3 forward = playerYaw.forward * forwardAxis;
         Vector3 right = playerYaw.right * rightAxis;

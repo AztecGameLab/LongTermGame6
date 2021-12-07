@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2f4430530c4ff994857f712fa12011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
+  controlSettings: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
   interactionSystem: {fileID: 8351551621535233386}
 --- !u!114 &600222115
 MonoBehaviour:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3d1a54edf04e078fd65ab0949284b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controls: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
+  controlSettings: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
   playerYaw: {fileID: 8137009871652392841}
   groundCheck: {fileID: 2569997393202912189}
   crouchSystem: {fileID: 8137009872141556450}
@@ -484,12 +484,12 @@ GameObject:
   - component: {fileID: 8137009872141556451}
   - component: {fileID: 8137009872141556450}
   - component: {fileID: 8351551621535233386}
+  - component: {fileID: 521143697}
   - component: {fileID: 8137009872141556462}
   - component: {fileID: 8137009872141556463}
   - component: {fileID: 3706823914220466882}
   - component: {fileID: 2569997393202912189}
   - component: {fileID: 6632994079878567245}
-  - component: {fileID: 521143697}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -547,10 +547,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDebug: 0
-  baseMovementSpeed: 3
+  settings: {fileID: 11400000, guid: ee38fe9e7bdfccf4fa237febf756cb9a, type: 2}
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
-  strategy: {fileID: 11400000, guid: ee38fe9e7bdfccf4fa237febf756cb9a, type: 2}
   lookDirection: {fileID: 8137009871652392841}
 --- !u!114 &8137009872141556451
 MonoBehaviour:
@@ -718,6 +717,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showDebug: 0
   lookDirection: {fileID: 8137009870776137512}
+--- !u!114 &521143697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137009872141556468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5199f4f5aa234319800acab36968d988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealthPercent: 1
+  healthRecoverySpeed: 0.1
+  healthRecoveryTolerance: 0
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: VolumeBlender, Assembly-CSharp
+        m_MethodName: BlendWeight
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1033530912}
+        m_TargetAssemblyTypeName: Cinemachine.CinemachineImpulseSource, Cinemachine
+        m_MethodName: GenerateImpulse
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &8137009872141556462
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -799,51 +843,6 @@ MonoBehaviour:
   targetRigidbody: {fileID: 8137009872141556462}
   gravityDirection: {x: 0, y: -1, z: 0}
   gravity: 0
---- !u!114 &521143697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8137009872141556468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5199f4f5aa234319800acab36968d988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealthPercent: 1
-  healthRecoverySpeed: 0.1
-  healthRecoveryTolerance: 0
-  onHealthChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: VolumeBlender, Assembly-CSharp
-        m_MethodName: BlendWeight
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1033530912}
-        m_TargetAssemblyTypeName: Cinemachine.CinemachineImpulseSource, Cinemachine
-        m_MethodName: GenerateImpulse
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &8441656736048237427
 GameObject:
   m_ObjectHideFlags: 0

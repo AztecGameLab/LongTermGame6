@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu]
-public class Controls : ScriptableObject
+public class ControlSettings : ScriptableObject
 {
     [Header("Walking")]
     public KeyCode forwardKey = KeyCode.W;
@@ -11,7 +11,7 @@ public class Controls : ScriptableObject
     
     [Header("Abilities")]
     public KeyCode crouchKey = KeyCode.LeftShift;
-    public KeyCode interactKey = KeyCode.E;
+    public KeyCode interactKey = KeyCode.Mouse0;
     public KeyCode jumpKey = KeyCode.Space;
     
     [Header("Mouse")]

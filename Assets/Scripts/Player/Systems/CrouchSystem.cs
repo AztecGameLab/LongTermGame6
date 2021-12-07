@@ -2,11 +2,13 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
+// todo: cleanup
+
 public class CrouchSystem : MonoBehaviour
 {
     [Header("Settings")] 
     [SerializeField] private bool showDebug;
-    [SerializeField, Range(0, 1)] private float crouchSpeedMultiplier = 0.25f;
+    [SerializeField] [Range(0, 1)] private float crouchSpeedMultiplier = 0.25f;
     [SerializeField] private float radiusBuffer = 0.1f;
     [SerializeField] private float heightBuffer = 0.1f;
 

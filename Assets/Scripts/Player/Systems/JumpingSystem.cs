@@ -2,14 +2,14 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+// todo: cleanup
+
 public class JumpingSystem : MonoBehaviour
 {
-
-    [Header("Settings")]
     [SerializeField] private bool showDebug;
-    [SerializeField] private JumpSettings settings;
 
     [Header("Dependencies")] 
+    [SerializeField] private JumpSettings settings;
     [SerializeField] private Rigidbody targetRigidbody;
     [SerializeField] private GroundedCheck groundCheck;
     [SerializeField] private CustomGravity customGravity;

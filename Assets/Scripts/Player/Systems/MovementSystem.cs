@@ -1,20 +1,20 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
+// todo: cleanup
+
 public class MovementSystem : MonoBehaviour
 {
-    [Header("Settings")] 
     [SerializeField] protected bool showDebug;
-    [SerializeField] private float baseMovementSpeed;
 
     [Header("Dependencies")] 
+    [SerializeField] private MovementSettings settings;
     [SerializeField] private Rigidbody targetRigidbody;
     [SerializeField] private GroundedCheck groundCheck;
-    [SerializeField] private MovementStrategy strategy;
     [SerializeField] private Transform lookDirection;
 
     [PublicAPI] public bool IsGrounded => groundCheck.IsGrounded;
-    [PublicAPI] public float BaseMovementSpeed => baseMovementSpeed;
+    [PublicAPI] public float BaseMovementSpeed => settings.baseMovementSpeed;
     [PublicAPI] public float TimeSpentOnGround => groundCheck.TimeSpentGrounded;
     [PublicAPI] public float CurrentMaxSpeed { get; set; }
     [PublicAPI] public float ForwardSpeedMultiplier { get; set; } = 1;
@@ -26,8 +26,7 @@ public class MovementSystem : MonoBehaviour
 
     private void SetupVariables()
     {
-        strategy.Initialize(this);
-        CurrentMaxSpeed = baseMovementSpeed;
+        CurrentMaxSpeed = settings.baseMovementSpeed;
     }
 
     public float GetCurrentSpeed()
@@ -55,12 +54,35 @@ public class MovementSystem : MonoBehaviour
 
     private Vector3 CustomUpdateVelocity()
     {
-        return strategy.CalculateVelocity();
+        Vector3 targetVelocity = MovementDirection * CurrentMaxSpeed;
+        targetVelocity.y = Velocity.y;
+
+        float currentGroundedAcceleration = IsAccelerating(targetVelocity)
+            ? CalculateAcceleration(settings.groundedAcceleration)
+            : CalculateAcceleration(settings.groundedDeceleration); 
+        
+        float currentAirborneAcceleration = IsAccelerating(targetVelocity) 
+            ? CalculateAcceleration(settings.airborneAcceleration) 
+            : CalculateAcceleration(settings.airborneDeceleration);
+
+        float acceleration = IsGrounded ? currentGroundedAcceleration : currentAirborneAcceleration;
+        
+        return Vector3.MoveTowards(Velocity, targetVelocity, acceleration);
     }
 
     private void ApplyVelocity(Vector3 targetVelocity)
     {
         targetRigidbody.velocity = targetVelocity; 
+    }
+    
+    private float CalculateAcceleration(float acceleration)
+    {
+        return 1 / acceleration * CurrentMaxSpeed * Time.deltaTime;
+    }
+
+    private static bool IsAccelerating(Vector3 targetVelocity)
+    {
+        return targetVelocity != Vector3.zero;
     }
 
     private void OnGUI()

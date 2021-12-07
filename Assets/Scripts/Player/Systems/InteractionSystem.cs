@@ -1,6 +1,8 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
+// todo: big cleanup
+
 public class InteractionSystem : MonoBehaviour
 {
     [Header("Settings")] 

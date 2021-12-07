@@ -3,11 +3,11 @@
 public class InteractionController : MonoBehaviour
 {
     [Header("Dependencies")] 
-    [SerializeField] private Controls controls;
+    [SerializeField] private ControlSettings controlSettings;
     [SerializeField] private InteractionSystem interactionSystem;
 
     private void Update()
     {
-        interactionSystem.HoldingInteract = Input.GetKey(controls.interactKey);
+        interactionSystem.HoldingInteract = Input.GetKey(controlSettings.interactKey);
     }
 }
