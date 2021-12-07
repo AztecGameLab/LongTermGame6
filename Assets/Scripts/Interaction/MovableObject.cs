@@ -1,12 +1,12 @@
-﻿using UnityEngine;
+﻿using Cinemachine.Utility;
+using UnityEngine;
 
 // todo: make this actually work
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovableObject : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 1f;
-    [SerializeField] private Transform center;
+    [SerializeField] private Renderer targetRenderer;
     
     private bool _isHeld;
     private Rigidbody _rigidbody;
@@ -17,7 +17,7 @@ public class MovableObject : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (_isHeld)
             MoveTowardsTarget();                   
@@ -26,27 +26,29 @@ public class MovableObject : MonoBehaviour
     private void MoveTowardsTarget()
     {
         Vector3 target = _targetTransform.position;
-        Vector3 current = center.position;
+        Vector3 current = targetRenderer.bounds.center;
         Vector3 directionToTarget = target - current;
         
-        Debug.DrawLine(current, target, Color.red);
-        
-        float distanceToTarget = Vector3.Distance(target, current);
+        // float distanceToTarget = Vector3.Distance(target, current);
 
-        _rigidbody.velocity = directionToTarget;
+        _rigidbody.velocity = directionToTarget  / Time.fixedDeltaTime;
     }
 
     public void Grab(GameObject grabber)
     {
         MovingTarget target = grabber.GetComponentInChildren<MovingTarget>();
 
-        
-        _targetTransform = target == null ? grabber.transform : target.transform;
+
+        var transform1 = target.transform;
+        _targetTransform = target == null ? grabber.transform : transform1;
         _isHeld = true;
+        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        transform1.position = targetRenderer.bounds.center;
     }
 
     public void Drop()
     {
         _isHeld = false;
+        _rigidbody.constraints = RigidbodyConstraints.None;
     }
 }

@@ -60,7 +60,7 @@ public class InteractionSystem : MonoBehaviour
     {
         result = null;
         
-        return Physics.Raycast(new Ray(lookDirection.position, lookDirection.forward), out RaycastHit hitInfo) &&
+        return Physics.Raycast(new Ray(lookDirection.position, lookDirection.forward), out RaycastHit hitInfo, float.PositiveInfinity, ~(1 << 6)) &&
             hitInfo.transform.TryGetComponent(out result) && hitInfo.distance <= result.InteractRange;
     }
 
