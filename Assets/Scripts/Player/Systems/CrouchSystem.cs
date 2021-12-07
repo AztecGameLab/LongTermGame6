@@ -20,24 +20,24 @@ public class CrouchSystem : MonoBehaviour
     
     private bool _blockedAbove;
     private bool _wasCrouching;
-    private bool _isCrouching;
     
-    private bool CrouchJustStarted => _isCrouching && !_wasCrouching;
-    private bool CrouchJustEnded => !_isCrouching && _wasCrouching;
+    private bool CrouchJustStarted => IsCrouching && !_wasCrouching;
+    private bool CrouchJustEnded => !IsCrouching && _wasCrouching;
     
     [PublicAPI] public bool WantsToCrouch { get; set; }
-
+    [PublicAPI] public bool IsCrouching { get; private set; }
+    
     private void Update()
     {
         _blockedAbove = CheckIfBlockedAbove();
         
         if (!_blockedAbove)
-            _isCrouching = WantsToCrouch;
+            IsCrouching = WantsToCrouch;
      
         UpdateSpeed();
         UpdateEvents();
         
-        _wasCrouching = _isCrouching;
+        _wasCrouching = IsCrouching;
     }
     
     private void UpdateEvents()
