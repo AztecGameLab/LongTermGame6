@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
+// todo: finish testing + try to integrate with player as an upgrade.
+
+// important aspects: 
+// - get speed before collision (for fall damage, ect.)
+// - quickly and accurately update grounded info (no frame-late events, everything is on time)
+// - easy to read, clean
+
 [RequireComponent(typeof(Collider))]
 public class ImprovedGroundCheck : MonoBehaviour
 {

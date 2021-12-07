@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+// todo: consolidate these like we did with the movement strategies to make things simpler.
+
 [Serializable]
 public class SurfaceCollisionEvents
 {

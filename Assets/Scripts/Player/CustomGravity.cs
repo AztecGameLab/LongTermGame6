@@ -1,6 +1,8 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
+// todo: maybe get rid of this script, might be simpler to just not have 
+
 public class CustomGravity : MonoBehaviour
 {
     [SerializeField] private Rigidbody targetRigidbody;

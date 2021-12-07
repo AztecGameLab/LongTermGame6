@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 
+// todo: send more good information to FMOD for playing audio
+
+// - crouch or not
+// - current surface
+
+// needs walk, jump, fall
+
 public class StepTracker : MonoBehaviour
 {
     [Header("Settings")]
