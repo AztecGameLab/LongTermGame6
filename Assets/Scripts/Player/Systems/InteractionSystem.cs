@@ -7,15 +7,14 @@ public class InteractionSystem : MonoBehaviour
 {
     [Header("Settings")] 
     [SerializeField] private bool showDebug;
+    [SerializeField] private int playerLayer = 6;
     
     [Header("Dependencies")]
     [SerializeField] private Transform lookDirection;
 
+    private Interactable _selectedInteractable;
     public bool LookingAtInteractable { get; private set; }
-    private bool _test;
     private bool _wasHoldingInteract;
-    private Interactable _targetInteractable;
-    private RaycastHit[] _hits = new RaycastHit[100];
 
     private bool JustReleasedInteract => _wasHoldingInteract && !HoldingInteract;
     private bool JustPressedInteract => !_wasHoldingInteract && HoldingInteract;
@@ -24,44 +23,56 @@ public class InteractionSystem : MonoBehaviour
     
     private void Update()
     {
-        if (TryGetInteractable(out Interactable target))
+        if (TryGetInteractable(out Interactable visionInteractable, out Vector3 point))
         {
             LookingAtInteractable = true;
             
             if (JustPressedInteract)
-            {
-                target.InteractStart(gameObject);
-                _test = true;
-            }
-
-            if (JustReleasedInteract && _test)
-            {
-                target.InteractEnd(gameObject);
-                _test = false;
-            }
-
-            _targetInteractable = target;
-        }
-        
-        else if (_targetInteractable != null && _test)
-        {
-            _targetInteractable.InteractEnd(gameObject);
-            _targetInteractable = null;
-            _test = false;
-            LookingAtInteractable = false;
+                GrabObject(visionInteractable, point);
         }
 
         else LookingAtInteractable = false;
 
+        if (JustReleasedInteract)
+            DropCurrentObject();
+        
         _wasHoldingInteract = HoldingInteract;
     }
 
-    private bool TryGetInteractable(out Interactable result)
+    private void GrabObject(Interactable interactable, Vector3 point)
     {
+        DropCurrentObject();
+
+        _selectedInteractable = interactable;
+        _selectedInteractable.InteractStart(gameObject, point);
+    }
+
+    private void DropCurrentObject()
+    {
+        if (_selectedInteractable != null)
+            _selectedInteractable.InteractEnd();
+
+        _selectedInteractable = null;
+    }
+
+    private bool TryGetInteractable(out Interactable result, out Vector3 point)
+    {
+        int layerMask = ~(1 << playerLayer);
+        Ray visionRay = new Ray(lookDirection.position, lookDirection.forward);
+        bool lookingAtObject = Physics.Raycast(visionRay, out RaycastHit hitInfo, float.PositiveInfinity, layerMask);
+
+        if (lookingAtObject)
+        {
+            bool isInteractable = hitInfo.transform.TryGetComponent(out result);
+            bool isInRange = isInteractable && hitInfo.distance <= result.InteractRange;
+            point = hitInfo.point;
+            
+            return isInteractable && isInRange;
+        }
+
+        point = Vector3.zero;
         result = null;
-        
-        return Physics.Raycast(new Ray(lookDirection.position, lookDirection.forward), out RaycastHit hitInfo, float.PositiveInfinity, ~(1 << 6)) &&
-            hitInfo.transform.TryGetComponent(out result) && hitInfo.distance <= result.InteractRange;
+        return false;
     }
 
     private void OnGUI()
@@ -73,7 +84,7 @@ public class InteractionSystem : MonoBehaviour
     private void DrawDebugUI()
     {
         GUILayout.Label($"Holding Interact: {HoldingInteract}");
-        GUILayout.Label($"Target interactable: {(TryGetInteractable(out Interactable result) ? result.name : "None")}");
+        GUILayout.Label($"Target interactable: {(TryGetInteractable(out Interactable result, out Vector3 point) ? result.name : "None")}");
         GUILayout.Label($"Look direction: {lookDirection}");
     }
 }

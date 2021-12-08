@@ -1,13 +1,14 @@
-﻿using Cinemachine.Utility;
-using UnityEngine;
+﻿using UnityEngine;
 
-// todo: make this actually work
+// todo: better system for checking disconnects
+// todo: cleanup
 
 [RequireComponent(typeof(Rigidbody))]
 public class MovableObject : MonoBehaviour
 {
-    [SerializeField] private Renderer targetRenderer;
+    [SerializeField] [Range(0, 1)] private float movementSpeed = 1f;
     
+    private Transform _current;
     private bool _isHeld;
     private Rigidbody _rigidbody;
     private Transform _targetTransform;
@@ -15,6 +16,8 @@ public class MovableObject : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _current = new GameObject("Current Position").transform;
+        _current.parent = transform;
     }
 
     private void FixedUpdate()
@@ -26,29 +29,41 @@ public class MovableObject : MonoBehaviour
     private void MoveTowardsTarget()
     {
         Vector3 target = _targetTransform.position;
-        Vector3 current = targetRenderer.bounds.center;
+        Vector3 current = _current.position;
         Vector3 directionToTarget = target - current;
         
-        // float distanceToTarget = Vector3.Distance(target, current);
 
-        _rigidbody.velocity = directionToTarget  / Time.fixedDeltaTime;
+        _rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
     }
 
-    public void Grab(GameObject grabber)
+    public void Grab(GameObject grabber, Vector3 point)
     {
         MovingTarget target = grabber.GetComponentInChildren<MovingTarget>();
-
 
         var transform1 = target.transform;
         _targetTransform = target == null ? grabber.transform : transform1;
         _isHeld = true;
         _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        transform1.position = targetRenderer.bounds.center;
+        transform1.position = point;
+        _current.position = point;
     }
 
     public void Drop()
     {
         _isHeld = false;
         _rigidbody.constraints = RigidbodyConstraints.None;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //todo: make this less hardcoded
+        if (other.gameObject.layer == 6)
+            Drop();
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.layer == 6)
+            Drop();
     }
 }
