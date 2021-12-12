@@ -5,22 +5,26 @@ using UnityEngine;
 public class JumpSettings : ScriptableObject
 {
     [Header("Standard Jump Settings")] 
-    [SerializeField] public bool holdAndJump;
-    [SerializeField] public float jumpDistance = 4.5f;
-    [SerializeField] public float jumpHeight = 1.1f;
-    [SerializeField] public float assumedInitialSpeed = 5f;
-    [SerializeField] [Range(0.1f, 1)] public float standardSkew = 0.5f;
+    [SerializeField] private bool holdAndJump;
+    [SerializeField] private float jumpDistance = 4.5f;
+    [SerializeField] private float jumpHeight = 1.1f;
+    [SerializeField] private float assumedInitialSpeed = 5f;
+    
+    [SerializeField, Range(0.1f, 1)] 
+    private float standardSkew = 0.5f;
     
     [Header("Fast Fall Settings")] 
-    [SerializeField] public bool enableFastFall;
-    [SerializeField] public float minDistance = 2.5f;
-    [SerializeField] public float minHeight = 0.55f;
-    [SerializeField] [Range(0.1f, 1)] public float fastFallSkew = 0.5f;
+    [SerializeField] private bool enableFastFall;
+    [SerializeField] private float minDistance = 2.5f;
+    [SerializeField] private float minHeight = 0.55f;
+    
+    [SerializeField, Range(0.1f, 1)] 
+    private float fastFallSkew = 0.5f;
 
     [Header("Other Settings")] 
-    [SerializeField] public int airJumps;
-    [SerializeField] public float coyoteTime = 0.15f;
-    [SerializeField] public float jumpBufferTime = 0.15f;
+    [SerializeField] private int airJumps;
+    [SerializeField] private float coyoteTime = 0.15f;
+    [SerializeField] private float jumpBufferTime = 0.15f;
     
     public float JumpSpeed { get; private set; }
 
@@ -28,6 +32,12 @@ public class JumpSettings : ScriptableObject
     public float StandardGravityFalling {get; private set;}
     public float FastFallGravityRising  {get; private set;}
     public float FastFallGravityFalling {get; private set;}
+
+    public bool EnableFastFall => enableFastFall;
+    public bool HoldAndJump => holdAndJump;
+    public float JumpBufferTime => jumpBufferTime;
+    public float CoyoteTime => coyoteTime;
+    public int AirJumps => airJumps;
 
     private void OnEnable()   { CalculateGravityAndSpeed(); }
     private void OnValidate() { CalculateGravityAndSpeed(); }

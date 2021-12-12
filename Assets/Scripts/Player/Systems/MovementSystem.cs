@@ -1,52 +1,45 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-// todo: cleanup
+/// <summary>
+/// Moves a Rigidbody in a direction.
+/// </summary>
 
 public class MovementSystem : MonoBehaviour
 {
-    [SerializeField] protected bool showDebug;
+    [SerializeField] private MovementSettings movementSettings;
+    [SerializeField] private bool showDebug;
 
     [Header("Dependencies")] 
-    [SerializeField] private MovementSettings settings;
     [SerializeField] private Rigidbody targetRigidbody;
     [SerializeField] private GroundedCheck groundCheck;
     [SerializeField] private Transform lookDirection;
 
-    [PublicAPI] public bool IsGrounded => groundCheck.IsGrounded;
-    [PublicAPI] public float BaseMovementSpeed => settings.baseMovementSpeed;
-    [PublicAPI] public float TimeSpentOnGround => groundCheck.TimeSpentGrounded;
-    [PublicAPI] public float CurrentMaxSpeed { get; set; }
-    [PublicAPI] public float ForwardSpeedMultiplier { get; set; } = 1;
-    [PublicAPI] public Vector3 MovementDirection { get; set; }
-    [PublicAPI] public Vector3 Velocity => targetRigidbody.velocity;
+    private float _speedMultiplier = 1f;
+    private float _forwardSpeedMultiplier = 1f;
     
-    private void Start()      { SetupVariables(); }
-    private void OnValidate() { SetupVariables(); }
-
-    private void SetupVariables()
+    [PublicAPI] public float SpeedMultiplier
     {
-        CurrentMaxSpeed = settings.baseMovementSpeed;
+        get => _speedMultiplier;
+        set => _speedMultiplier *= value;
+    }
+    
+    [PublicAPI] public float ForwardSpeedMultiplier
+    {
+        get => _forwardSpeedMultiplier;
+        set => _forwardSpeedMultiplier *= value;
     }
 
-    public void ApplySpeedMultiplier(float multiplier)
-    {
-        CurrentMaxSpeed *= multiplier;
-    }
-
-    public float GetCurrentSpeed()
-    {
-        Vector3 velocity = Velocity;
-        velocity.y = 0;
-
-        return velocity.magnitude;
-    }
+    [PublicAPI] public float CurrentMaxSpeed => movementSettings.MovementSpeed * SpeedMultiplier;
+    [PublicAPI] public Vector3 MovementDirection { get; set; } = Vector3.zero;
+    [PublicAPI] public Rigidbody Rigidbody => targetRigidbody;
+    [PublicAPI] public GroundedCheck GroundCheck => groundCheck;
     
     private void Update()
     {
         ApplyForwardSpeedMultiplier();
-        Vector3 targetVelocity = CustomUpdateVelocity();
-        ApplyVelocity(targetVelocity); 
+        
+        targetRigidbody.velocity = movementSettings.UpdateVelocity(this);
     }
 
     private void ApplyForwardSpeedMultiplier()
@@ -57,38 +50,7 @@ public class MovementSystem : MonoBehaviour
             MovementDirection += lookDirection.forward * forwardSpeed * (ForwardSpeedMultiplier - 1);
     }
 
-    private Vector3 CustomUpdateVelocity()
-    {
-        Vector3 targetVelocity = MovementDirection * CurrentMaxSpeed;
-        targetVelocity.y = Velocity.y;
-
-        float currentGroundedAcceleration = IsAccelerating(targetVelocity)
-            ? CalculateAcceleration(settings.groundedAcceleration)
-            : CalculateAcceleration(settings.groundedDeceleration); 
-        
-        float currentAirborneAcceleration = IsAccelerating(targetVelocity) 
-            ? CalculateAcceleration(settings.airborneAcceleration) 
-            : CalculateAcceleration(settings.airborneDeceleration);
-
-        float acceleration = IsGrounded ? currentGroundedAcceleration : currentAirborneAcceleration;
-        
-        return Vector3.MoveTowards(Velocity, targetVelocity, acceleration);
-    }
-
-    private void ApplyVelocity(Vector3 targetVelocity)
-    {
-        targetRigidbody.velocity = targetVelocity; 
-    }
-    
-    private float CalculateAcceleration(float acceleration)
-    {
-        return 1 / acceleration * CurrentMaxSpeed * Time.deltaTime;
-    }
-
-    private static bool IsAccelerating(Vector3 targetVelocity)
-    {
-        return targetVelocity != Vector3.zero;
-    }
+    #region Debug
 
     private void OnGUI()
     {
@@ -98,10 +60,14 @@ public class MovementSystem : MonoBehaviour
 
     private void DrawDebugUI()
     {
+        Vector3 velocity = targetRigidbody.velocity;
+        velocity.y = 0;
+        float currentRunningSpeed = velocity.magnitude;
+        
         GUILayout.Label($"Movement Direction: {MovementDirection}");
-        GUILayout.Label($"Current Speed: {GetCurrentSpeed()}");
-        GUILayout.Label($"Current Velocity: {Velocity}");
-        GUILayout.Label($"Current Max Speed: {CurrentMaxSpeed}");
+        GUILayout.Label($"Current Speed (Max {CurrentMaxSpeed * ForwardSpeedMultiplier}): {currentRunningSpeed}");
         GUILayout.Label($"Forward Direction Multiplier: {ForwardSpeedMultiplier}");
-    }
+    }    
+
+    #endregion
 }

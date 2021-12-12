@@ -6,32 +6,31 @@ using UnityEngine.Events;
 
 public class JumpingSystem : MonoBehaviour
 {
+    [SerializeField] private JumpSettings settings;
     [SerializeField] private bool showDebug;
 
     [Header("Dependencies")] 
-    [SerializeField] private JumpSettings settings;
     [SerializeField] private Rigidbody targetRigidbody;
     [SerializeField] private GroundedCheck groundCheck;
     [SerializeField] private CustomGravity customGravity;
 
-    [Header("Events")] 
+    [Space(20)]
     [SerializeField] private UnityEvent onJump;
     
-    private Vector3 Velocity => targetRigidbody.velocity;
-    private bool IsGrounded => !groundCheck || groundCheck.IsGrounded;
-    private float TimeSpentFalling => groundCheck.TimeSpentFalling;
-
-    private bool WantsToJump => settings.holdAndJump
-        ? _holdingJump
-        : _holdingJump && !_wasHoldingJump;
-
     private bool _coyoteAvailable;
     private bool _holdingJump = true;
     private bool _wasHoldingJump;
     private int _remainingAirJumps;
     private Vector3 _currentVelocity;
-
     private Buffer _jumpBuffer = new Buffer();
+    
+    private Vector3 Velocity => targetRigidbody.velocity;
+    private bool IsGrounded => !groundCheck || groundCheck.IsGrounded;
+    private float TimeSpentFalling => groundCheck.TimeSpentFalling;
+
+    private bool WantsToJump => settings.HoldAndJump
+        ? _holdingJump
+        : _holdingJump && !_wasHoldingJump;
 
     [PublicAPI] public bool HoldingJump { get; set; }
 
@@ -47,7 +46,7 @@ public class JumpingSystem : MonoBehaviour
 
     private void OnLand(Collider col)
     {
-        _remainingAirJumps = settings.airJumps;
+        _remainingAirJumps = settings.AirJumps;
         _coyoteAvailable = true;
     }
 
@@ -66,7 +65,7 @@ public class JumpingSystem : MonoBehaviour
     {
         bool rising = Velocity.y > 0;
 
-        if (settings.enableFastFall && _holdingJump == false)
+        if (settings.EnableFastFall && _holdingJump == false)
         {
             customGravity.gravity = rising
                 ? settings.FastFallGravityRising
@@ -92,13 +91,13 @@ public class JumpingSystem : MonoBehaviour
 
     private bool ShouldJump()
     {
-        if (_jumpBuffer.IsQueued(settings.jumpBufferTime) == false)
+        if (_jumpBuffer.IsQueued(settings.JumpBufferTime) == false)
             return false;
 
         if (IsGrounded)
             return true;
 
-        if (_coyoteAvailable && TimeSpentFalling < settings.coyoteTime)
+        if (_coyoteAvailable && TimeSpentFalling < settings.CoyoteTime)
             return true;
 
         return _remainingAirJumps > 0;
@@ -118,6 +117,8 @@ public class JumpingSystem : MonoBehaviour
         targetRigidbody.velocity = _currentVelocity;
     }
 
+    #region Debug
+
     private void OnGUI()
     {
         if (showDebug)
@@ -129,7 +130,9 @@ public class JumpingSystem : MonoBehaviour
         GUILayout.Label($"Holding Jump: {_holdingJump}");
         GUILayout.Label($"Current Velocity: {_currentVelocity}");
         GUILayout.Label($"Coyote Available: {_coyoteAvailable}");
-        GUILayout.Label($"Jump Queued: {_jumpBuffer.IsQueued(settings.jumpBufferTime)}");
+        GUILayout.Label($"Jump Queued: {_jumpBuffer.IsQueued(settings.JumpBufferTime)}");
         GUILayout.Label($"Remaining Air Jumps: {_remainingAirJumps}");
     }
+
+    #endregion
 }

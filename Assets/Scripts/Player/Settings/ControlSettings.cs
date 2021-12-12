@@ -10,7 +10,8 @@ public class ControlSettings : ScriptableObject
     public KeyCode rightKey = KeyCode.D;
     
     [Header("Abilities")]
-    public KeyCode crouchKey = KeyCode.LeftShift;
+    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode sprintKey = KeyCode.LeftShift;
     public KeyCode interactKey = KeyCode.Mouse0;
     public KeyCode jumpKey = KeyCode.Space;
     
