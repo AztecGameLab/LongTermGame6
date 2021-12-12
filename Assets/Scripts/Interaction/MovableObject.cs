@@ -7,6 +7,7 @@
 public class MovableObject : MonoBehaviour
 {
     [SerializeField] [Range(0, 1)] private float movementSpeed = 1f;
+    [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private bool freezeRotation = true;
     
     private Transform _current;
@@ -35,6 +36,7 @@ public class MovableObject : MonoBehaviour
         
 
         _rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
+        _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, maxSpeed);
     }
 
     public void Grab(GameObject grabber, Vector3 point)

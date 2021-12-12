@@ -1,85 +1,66 @@
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 
-// todo: cleanup
-
 public class CrouchSystem : MonoBehaviour
 {
-    [Header("Settings")] 
-    [SerializeField] private bool showDebug;
-    [SerializeField] [Range(0, 1)] private float crouchSpeedMultiplier = 0.25f;
-    [SerializeField] private float radiusBuffer = 0.1f;
-    [SerializeField] private float heightBuffer = 0.1f;
+    [Header("Settings")]
+    [SerializeField, Tooltip("Fine-tune to prevent the player from getting stuck crouching.")] 
+    private float radiusBuffer, heightBuffer;
 
     [Header("Dependencies")] 
-    [SerializeField] private MovementSystem movementSystem;
-    [SerializeField] private CapsuleCollider playerCollider;
+    [SerializeField] private CapsuleCollider standingCollider;
+    [SerializeField] private CapsuleCollider crouchingCollider;
 
-    [Header("Events")] 
+    [Space(20)]
+    
     [SerializeField] private UnityEvent onCrouchStart;
     [SerializeField] private UnityEvent onCrouchEnd;
     
-    private bool _blockedAbove;
+    public bool WantsToCrouch { get; set; }
+    public bool IsCrouching { get; private set; }
+    
     private bool _wasCrouching;
-    
-    private bool CrouchJustStarted => IsCrouching && !_wasCrouching;
-    private bool CrouchJustEnded => !IsCrouching && _wasCrouching;
-    
-    [PublicAPI] public bool WantsToCrouch { get; set; }
-    [PublicAPI] public bool IsCrouching { get; private set; }
-    
+
     private void Update()
     {
-        _blockedAbove = CheckIfBlockedAbove();
+        // Ensure that we are only able to change our crouching state if there is room to stand.
         
-        if (!_blockedAbove)
+        if (CheckIfBlockedAbove() == false)
             IsCrouching = WantsToCrouch;
      
-        UpdateSpeed();
         UpdateEvents();
+        UpdateCollider();
         
         _wasCrouching = IsCrouching;
     }
     
-    private void UpdateEvents()
-    {
-        if (CrouchJustStarted)
-            onCrouchStart.Invoke();
-        
-        else if (CrouchJustEnded)
-            onCrouchEnd.Invoke();
-    }
-
     private bool CheckIfBlockedAbove()
     {
-        var ray = new Ray(playerCollider.bounds.center, playerCollider.transform.up);
-        float radius = playerCollider.radius - radiusBuffer;
-        float maxDistance = playerCollider.height / 2 + heightBuffer;
+        Ray upwardsRay = new Ray(standingCollider.bounds.center, standingCollider.transform.up);
         
-        return Physics.SphereCast(ray, radius, maxDistance);
-    }
-
-    private void UpdateSpeed()
-    {
-        float baseMovementSpeed = movementSystem.BaseMovementSpeed;
+        // We divide the height by 2 because our ray is starting at the center of the object, not the bottom.
         
-        if (WantsToCrouch)
-            movementSystem.CurrentMaxSpeed = baseMovementSpeed * crouchSpeedMultiplier;
+        float radiusOfObject = standingCollider.radius - radiusBuffer;
+        float heightOfObject = standingCollider.height / 2 - heightBuffer;
+
+        return Physics.SphereCast(upwardsRay, radiusOfObject, heightOfObject);
+    }
+    
+    private void UpdateEvents()
+    {
+        bool crouchJustStarted = IsCrouching && !_wasCrouching;
+        bool crouchJustEnded = !IsCrouching && _wasCrouching;
         
-        else if ((WantsToCrouch || _blockedAbove) == false)
-            movementSystem.CurrentMaxSpeed = baseMovementSpeed;
+        if (crouchJustStarted)
+            onCrouchStart.Invoke();
+        
+        else if (crouchJustEnded)
+            onCrouchEnd.Invoke();
     }
-
-    private void OnGUI()
+    
+    private void UpdateCollider()
     {
-        if (showDebug)
-            DrawDebugUI();
-    }
-
-    private void DrawDebugUI()
-    {
-        GUILayout.Label($"Holding crouch: {WantsToCrouch}");
-        GUILayout.Label($"Blocked above: {_blockedAbove}");
+        standingCollider.isTrigger = IsCrouching;
+        crouchingCollider.isTrigger = !IsCrouching;
     }
 }

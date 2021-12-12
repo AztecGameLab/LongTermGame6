@@ -29,6 +29,11 @@ public class MovementSystem : MonoBehaviour
         CurrentMaxSpeed = settings.baseMovementSpeed;
     }
 
+    public void ApplySpeedMultiplier(float multiplier)
+    {
+        CurrentMaxSpeed *= multiplier;
+    }
+
     public float GetCurrentSpeed()
     {
         Vector3 velocity = Velocity;
