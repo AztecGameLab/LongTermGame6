@@ -7,6 +7,7 @@
 public class MovableObject : MonoBehaviour
 {
     [SerializeField] [Range(0, 1)] private float movementSpeed = 1f;
+    [SerializeField] private bool freezeRotation = true;
     
     private Transform _current;
     private bool _isHeld;
@@ -43,7 +44,10 @@ public class MovableObject : MonoBehaviour
         var transform1 = target.transform;
         _targetTransform = target == null ? grabber.transform : transform1;
         _isHeld = true;
-        _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        
+        if (freezeRotation)
+            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            
         transform1.position = point;
         _current.position = point;
     }
@@ -51,7 +55,9 @@ public class MovableObject : MonoBehaviour
     public void Drop()
     {
         _isHeld = false;
-        _rigidbody.constraints = RigidbodyConstraints.None;
+        
+        if (freezeRotation)
+           _rigidbody.constraints = RigidbodyConstraints.None;
     }
 
     private void OnCollisionEnter(Collision other)
