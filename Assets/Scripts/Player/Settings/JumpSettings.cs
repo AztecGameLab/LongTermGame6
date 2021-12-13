@@ -62,4 +62,13 @@ public class JumpSettings : ScriptableObject
         FastFallGravityFalling = 2 * minHeight * Mathf.Pow(assumedInitialSpeed, 2) 
                                  / Mathf.Pow(minDistance * (1 - fastFallSkew), 2);
     }
+
+    [PublicAPI]
+    public float GetCurrentGravity(bool rising, bool holdingJump)
+    {
+        if (EnableFastFall && holdingJump == false)
+            return rising ? FastFallGravityRising : FastFallGravityFalling;
+
+        return rising ? StandardGravityRising : StandardGravityFalling;
+    }
 }

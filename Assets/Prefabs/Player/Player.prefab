@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 1997660983695085739}
   - component: {fileID: 1792660044288871909}
   - component: {fileID: 600222115}
+  - component: {fileID: 1903722620}
   m_Layer: 6
   m_Name: Controllers
   m_TagString: Untagged
@@ -204,6 +205,29 @@ MonoBehaviour:
   jumpingSystem: {fileID: 8137009872141556451}
   movementSystem: {fileID: 8137009872141556461}
   rotationSystem: {fileID: 8137009872141556457}
+--- !u!114 &1903722620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146217812501054105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63715860e77f4382a3dd9a3a43fccbac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprintMultiplier: 1.5
+  showDebug: 0
+  controls: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
+  movementSystem: {fileID: 8137009872141556461}
+  crouchSystem: {fileID: 8137009872141556450}
+  onStartSprint:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopSprint:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5360937274436616252
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,10 +551,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851c742d7e1359647882e254de9a2d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showDebug: 0
   pitchConstraint: 90
   yawConstraint: -1
   rollConstraint: -1
+  showDebug: 0
   pitchTransform: {fileID: 8137009870776137512}
   yawTransform: {fileID: 8137009871652392841}
   rollTransform: {fileID: 8137009870776137512}
@@ -546,8 +570,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54df2f30b0afcd94fa834b21e088e95a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSettings: {fileID: 11400000, guid: 6f4a8683c77b3094d85fa12e342378c4, type: 2}
   showDebug: 0
-  settings: {fileID: 11400000, guid: ee38fe9e7bdfccf4fa237febf756cb9a, type: 2}
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
   lookDirection: {fileID: 8137009871652392841}
@@ -563,8 +587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8a74914cc04f746a9a2de46345cf8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSettings: {fileID: 11400000, guid: 42390e2e993808d4382db739b5c5eab8, type: 2}
   showDebug: 0
-  settings: {fileID: 11400000, guid: 42390e2e993808d4382db739b5c5eab8, type: 2}
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
   customGravity: {fileID: 6632994079878567245}
@@ -628,7 +652,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 8137009872141556461}
         m_TargetAssemblyTypeName: MovementSystem, Assembly-CSharp
-        m_MethodName: AddSpeedMultiplier
+        m_MethodName: set_SpeedMultiplier
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -667,7 +691,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 8137009872141556461}
         m_TargetAssemblyTypeName: MovementSystem, Assembly-CSharp
-        m_MethodName: AddSpeedMultiplier
+        m_MethodName: set_SpeedMultiplier
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -799,7 +823,19 @@ MonoBehaviour:
   collisionEvents:
     onEnterCollision:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8137009872141556451}
+          m_TargetAssemblyTypeName: JumpingSystem, Assembly-CSharp
+          m_MethodName: RefreshJumps
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onExitCollision:
       m_PersistentCalls:
         m_Calls: []

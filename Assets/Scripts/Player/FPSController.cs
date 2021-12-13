@@ -15,6 +15,23 @@ public class FPSController : MonoBehaviour
     [SerializeField] private MovementSystem movementSystem;
     [SerializeField] private RotationSystem rotationSystem;
 
+    private Buffer _jumpBuffer = new Buffer();
+
+    private void OnEnable()
+    {
+        jumpingSystem.onJump.AddListener(ClearBuffer);
+    }
+
+    private void OnDisable()
+    {
+        jumpingSystem.onJump.RemoveListener(ClearBuffer);
+    }
+
+    private void ClearBuffer()
+    {
+        _jumpBuffer.Clear();
+    }
+
     private void Update()
     {
         // Not in any particular order right now, I don't think the timing matters (maybe in the future).
@@ -35,7 +52,15 @@ public class FPSController : MonoBehaviour
 
     private void UpdateJump()
     {
-        jumpingSystem.HoldingJump = !crouchSystem.IsCrouching && Input.GetKey(controlSettings.jumpKey);
+        bool wantsToJump = jumpingSystem.JumpSettings.HoldAndJump
+            ? Input.GetKey(controlSettings.jumpKey)
+            : Input.GetKeyDown(controlSettings.jumpKey);
+        
+        if (wantsToJump)
+            _jumpBuffer.Queue();
+
+        jumpingSystem.WantsToJump = !crouchSystem.IsCrouching && _jumpBuffer.IsQueued(jumpingSystem.JumpSettings.JumpBufferTime);
+        jumpingSystem.HoldingJump = Input.GetKey(controlSettings.jumpKey);
     }
 
     private void UpdateRotation()
