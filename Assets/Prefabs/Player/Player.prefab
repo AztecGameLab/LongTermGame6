@@ -78,9 +78,9 @@ MonoBehaviour:
   Event: event:/stone Jump
   PlayEvent: 0
   StopEvent: 0
-  AllowFadeout: 0
+  AllowFadeout: 1
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 0
@@ -132,9 +132,9 @@ MonoBehaviour:
   Event: event:/stone Footstep
   PlayEvent: 0
   StopEvent: 0
-  AllowFadeout: 0
+  AllowFadeout: 1
   TriggerOnce: 0
-  Preload: 0
+  Preload: 1
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 0
@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentBakedListener: {fileID: 0}
   applyReverb: 1
-  reverbType: 0
+  reverbType: 1
   useAllProbeBatches: 1
   probeBatches: []
   mTotalDataSize: 0
