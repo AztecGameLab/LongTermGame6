@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2f4430530c4ff994857f712fa12011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlSettings: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
+  controlSettings: {fileID: 11400000, guid: 5a3afb83cbcfe064189cc0d920ae38d5, type: 2}
   interactionSystem: {fileID: 8351551621535233386}
 --- !u!114 &600222115
 MonoBehaviour:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3d1a54edf04e078fd65ab0949284b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlSettings: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
+  controlSettings: {fileID: 11400000, guid: 5a3afb83cbcfe064189cc0d920ae38d5, type: 2}
   playerYaw: {fileID: 8137009871652392841}
   groundCheck: {fileID: 2569997393202912189}
   crouchSystem: {fileID: 8137009872141556450}
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: 1
-    m_RawSignal: {fileID: 11400000, guid: 554b0ed52734c154eab51f6cedd3a7d7, type: 2}
+    m_RawSignal: {fileID: 11400000, guid: ce8d2980aec60d0409d76444d06f0762, type: 2}
     m_AmplitudeGain: 3
     m_FrequencyGain: 6
     m_RepeatMode: 0
@@ -461,7 +461,7 @@ Animator:
   m_GameObject: {fileID: 8137009871652392842}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cdbc9e94aff0c8a4c8bd4ef1efeb260d, type: 2}
+  m_Controller: {fileID: 9100000, guid: 306757b15a7127040abc1091ed9db479, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8a74914cc04f746a9a2de46345cf8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings: {fileID: 11400000, guid: 42390e2e993808d4382db739b5c5eab8, type: 2}
+  settings: {fileID: 11400000, guid: eb674554600d6c34ca43c029ff4613b6, type: 2}
   showDebug: 0
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
@@ -760,7 +760,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8137009872141556468}
-  m_Material: {fileID: 13400000, guid: 3167993b53a50cd409ab516df9f46754, type: 2}
+  m_Material: {fileID: 13400000, guid: 7278dacf931018641954f8fd2adde85d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
@@ -774,7 +774,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8137009872141556468}
-  m_Material: {fileID: 13400000, guid: 3167993b53a50cd409ab516df9f46754, type: 2}
+  m_Material: {fileID: 13400000, guid: 7278dacf931018641954f8fd2adde85d, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
