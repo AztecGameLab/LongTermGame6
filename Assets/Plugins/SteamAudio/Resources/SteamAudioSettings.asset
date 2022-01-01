@@ -15,23 +15,23 @@ MonoBehaviour:
   audioEngine: 1
   SOFAFiles: []
   defaultMaterial: {fileID: 11400000, guid: a086f686223eed942816c70be67841b0, type: 2}
-  sceneType: 1
+  sceneType: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 0
   maxOcclusionSamples: 16
   realTimeRays: 6000
   realTimeBounces: 13
-  realTimeDuration: 4.02
+  realTimeDuration: 10
   realTimeAmbisonicOrder: 1
   realTimeMaxSources: 32
   realTimeCPUCoresPercentage: 5
   realTimeIrradianceMinDistance: 1
   bakeConvolution: 1
-  bakeParametric: 0
+  bakeParametric: 1
   bakingRays: 16384
   bakingBounces: 64
-  bakingDuration: 2
+  bakingDuration: 3
   bakingAmbisonicOrder: 1
   bakingCPUCoresPercentage: 50
   bakingIrradianceMinDistance: 1

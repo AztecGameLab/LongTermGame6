@@ -4,8 +4,8 @@ using UnityEngine.Events;
 public class CrouchSystem : MonoBehaviour
 {
     [Header("Settings")]
-    [SerializeField, Tooltip("Fine-tune to prevent the player from getting stuck crouching.")] 
-    private float radiusBuffer, heightBuffer;
+    [SerializeField] private float radiusBuffer = 0.1f;
+    [SerializeField] private float heightBuffer = 0.2f;
 
     [Header("Dependencies")] 
     [SerializeField] private CapsuleCollider standingCollider;
