@@ -1,5 +1,4 @@
-﻿using ConsoleUtility;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using UnityEngine;
 
 namespace MyNamespace
@@ -9,7 +8,7 @@ namespace MyNamespace
         [PublicAPI]
         public virtual void Initialize()
         {
-            Console.Log("System", $"Initialized {GetType().Name}");
+            // Allow children to implement their own startup logic.
         }
     }
 }
