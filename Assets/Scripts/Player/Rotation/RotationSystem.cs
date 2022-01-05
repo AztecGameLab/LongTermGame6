@@ -8,21 +8,38 @@ using UnityEngine;
 /// Allows for constrained updating of the pitch, yaw, and roll of an object.
 /// </summary>
 
-public class RotationSystem : MonoBehaviour
+public class RotationSystem : MyNamespace.System
 {
-    [Header("Settings")] 
-    [SerializeField] private float pitchConstraint;
-    [SerializeField] private float yawConstraint;
-    [SerializeField] private float rollConstraint;
-    [SerializeField] private bool showDebug;
-
     [Header("Dependencies")]
     [SerializeField] private Transform pitchTransform;
     [SerializeField] private Transform yawTransform;
     [SerializeField] private Transform rollTransform;
+    
+    [Header("Settings")] 
+    [SerializeField] private float pitchConstraint;
+    [SerializeField] private float yawConstraint;
+    [SerializeField] private float rollConstraint;
 
     private Vector3 _initialRotation;
     private Vector3 _currentRotation;
+
+    [PublicAPI] public Vector3 Forward
+    {
+        get => Quaternion.Euler(_currentRotation) * Vector3.forward;
+
+        set
+        {
+            Vector3 rotation = Quaternion.LookRotation(value).eulerAngles;
+            
+            _currentRotation.x = rotation.x % 360;
+            _currentRotation.y = rotation.y % 360;
+            _currentRotation.z = rotation.z % 360;
+            
+            pitchTransform.localRotation = Quaternion.Euler(_currentRotation.x, 0, 0);
+            yawTransform.localRotation = Quaternion.Euler(0, _currentRotation.y, 0);
+            rollTransform.localRotation = Quaternion.Euler(0, 0, _currentRotation.z);
+        }
+    }
     
     [PublicAPI] public Vector3 CurrentRotation
     {
@@ -68,14 +85,17 @@ public class RotationSystem : MonoBehaviour
         }
     }
 
-    private void Awake()
+    public override void Initialize()
     {
         // Find and save our current euler rotation as a starting point.
         
         if (pitchTransform != null) _currentRotation.x = pitchTransform.localRotation.eulerAngles.x;
         if (yawTransform != null)   _currentRotation.y = yawTransform.localRotation.eulerAngles.y;
         if (rollTransform != null)  _currentRotation.z = rollTransform.localRotation.eulerAngles.z;
-        
+
+        CurrentRotation = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.identity;
+
         _initialRotation = _currentRotation;
     }
 
@@ -88,14 +108,4 @@ public class RotationSystem : MonoBehaviour
         
         return Mathf.Clamp(value, initialValue - constraint, initialValue + constraint);
     }
-
-    #region Debug
-
-    private void OnGUI()
-    {
-        if (showDebug) 
-            GUILayout.Label($"Current Rotation: {CurrentRotation}");
-    }
-
-    #endregion
 }

@@ -10,10 +10,11 @@ public class MovementSettings : ScriptableObject
     [SerializeField] private float groundedDeceleration = 0.2f;
     [SerializeField] private float airborneAcceleration = 0.6f;
     [SerializeField] private float airborneDeceleration = 0.6f;
-
+    [SerializeField] private float decelerationRampPercent = 0.5f;
+    
     private MovementSystem _movementSystem;
-
-    private bool IsAccelerating => _movementSystem.Rigidbody.velocity != Vector3.zero;
+    
+    private bool IsAccelerating => _movementSystem.MovementDirection.x != 0 || _movementSystem.MovementDirection.z != 0;
     public float MovementSpeed => movementSpeed;
     
     [PublicAPI] 
@@ -21,21 +22,39 @@ public class MovementSettings : ScriptableObject
     {
         _movementSystem = system;
 
-        Vector3 velocity = CalculateTargetVelocity();
+        if (IsAccelerating || system.GroundCheck.IsGrounded == false)
+            return CalculateConstantAcceleration();
+
+        return CalculateSmoothStop();
+    }
+
+    private Vector3 CalculateConstantAcceleration()
+    {
+        Vector3 currentVelocity = _movementSystem.Rigidbody.velocity;
+        Vector3 targetVelocity = CalculateTargetVelocity();
         float acceleration = CalculateAcceleration();
 
-        return Vector3.MoveTowards(system.Rigidbody.velocity, velocity, acceleration);
+        return Vector3.MoveTowards(currentVelocity, targetVelocity, acceleration);
+    }
+    
+    private Vector3 CalculateSmoothStop()
+    {
+        Vector3 originalVelocity = _movementSystem.Rigidbody.velocity;
+        Vector3 smoothedVelocity = originalVelocity;
+
+        float deceleration = decelerationRampPercent * Time.deltaTime;
+        smoothedVelocity.x -= smoothedVelocity.x * deceleration;
+        smoothedVelocity.z -= smoothedVelocity.z * deceleration;
+
+        return smoothedVelocity;
     }
 
     private Vector3 CalculateTargetVelocity()
     {
         Vector3 direction = _movementSystem.MovementDirection;
         float speed = _movementSystem.CurrentMaxSpeed;
-        
-        Vector3 velocity = direction * speed;
-        velocity.y = _movementSystem.Rigidbody.velocity.y;
-        
-        return velocity;
+
+        return new Vector3(direction.x * speed, _movementSystem.Rigidbody.velocity.y, direction.z * speed);
     }
 
     private float CalculateAcceleration()

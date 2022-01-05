@@ -1,22 +1,16 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.Events;
-
-// todo: add a sprint / stamina resource to punish infinite sprinting?
 
 /// <summary>
 /// Changes the forward speed of a MovementSystem based on a multiplier.
 /// </summary>
 
-public class SprintController : MonoBehaviour
+public class InputSprintController : InputController<MovementSystem>
 {
     [Header("Settings")] 
     [SerializeField] private float sprintMultiplier = 1f;
     [SerializeField] private bool showDebug;
-
-    [Header("Dependencies")] 
-    [SerializeField] private ControlSettings controls;
-    [SerializeField] private MovementSystem movementSystem;
-    [SerializeField] private CrouchSystem crouchSystem;
     
     [Space(20)]
     [SerializeField] private UnityEvent onStartSprint;
@@ -27,6 +21,8 @@ public class SprintController : MonoBehaviour
     
     private bool JustStartedSprinting => !_wasSprinting && _isSprinting;
     private bool JustStoppedSprinting => _wasSprinting && !_isSprinting;
+    
+    [PublicAPI] public bool Break { get; set; }
     
     private void Update()
     {
@@ -39,27 +35,31 @@ public class SprintController : MonoBehaviour
             UpdateDebug();
 
         _wasSprinting = _isSprinting;
+        Break = false;
     }
 
     private bool CheckIfSprinting()
     {
-        return !crouchSystem.IsCrouching && Input.GetKey(controls.sprintKey);
+        if (Break || !IsRunning)
+            return false;
+        
+        return Input.GetKey(controls.sprint) && Input.GetKey(controls.forward);
     }
 
     private void UpdateSpeed()
     {
         if (JustStartedSprinting)
-            movementSystem.ForwardSpeedMultiplier = sprintMultiplier;
+            system.ForwardSpeedMultiplier = sprintMultiplier;
 
         if (JustStoppedSprinting)
-            movementSystem.ForwardSpeedMultiplier = 1 / sprintMultiplier;
+            system.ForwardSpeedMultiplier = 1 / sprintMultiplier;
     }
 
     private void UpdateEvents()
     {
         if (JustStartedSprinting)
             onStopSprint.Invoke();
-        
+
         if (JustStoppedSprinting)
             onStartSprint.Invoke();
     }

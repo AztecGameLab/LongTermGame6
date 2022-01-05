@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthSystem : MonoBehaviour
+public class Health : MonoBehaviour
 {
     [Header("Settings")] 
     [SerializeField] private float currentHealthPercent = 1f;

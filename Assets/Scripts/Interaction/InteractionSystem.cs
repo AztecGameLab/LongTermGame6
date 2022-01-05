@@ -3,7 +3,7 @@ using UnityEngine;
 
 // todo: big cleanup
 
-public class InteractionSystem : MonoBehaviour
+public class InteractionSystem : MyNamespace.System
 {
     [Header("Settings")] 
     [SerializeField] private bool showDebug;
@@ -84,7 +84,7 @@ public class InteractionSystem : MonoBehaviour
     private void DrawDebugUI()
     {
         GUILayout.Label($"Holding Interact: {HoldingInteract}");
-        GUILayout.Label($"Target interactable: {(TryGetInteractable(out Interactable result, out Vector3 point) ? result.name : "None")}");
+        GUILayout.Label($"Target interactable: {(TryGetInteractable(out Interactable result, out Vector3 _) ? result.name : "None")}");
         GUILayout.Label($"Look direction: {lookDirection}");
     }
 }

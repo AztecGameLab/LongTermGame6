@@ -6,7 +6,7 @@ using UnityEngine;
 // todo: use ConnectedCollider and velocity to implement cool surfing slide sound
 
 [RequireComponent(typeof(Collider))]
-public class GroundedCollisionListener : GroundedCheck
+public class GroundCollisionListener : GroundCheck
 {
     public override bool IsGrounded => _collidersToNormals
         .Any(pair => Vector3.Angle(-gravityDirection, pair.Value) <= slopeLimitDegrees);

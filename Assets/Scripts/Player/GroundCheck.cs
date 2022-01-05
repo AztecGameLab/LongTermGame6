@@ -14,7 +14,7 @@ public class SurfaceCollisionEvents
     public UnityEvent<Collider> onExitCollision = new UnityEvent<Collider>();
 }
 
-public abstract class GroundedCheck : MonoBehaviour
+public abstract class GroundCheck : MonoBehaviour
 {
     [Header("Ground Check Settings")]
     [SerializeField] protected Vector3 gravityDirection = Vector3.down;

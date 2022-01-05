@@ -469,9 +469,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1997660983695085739}
+  - component: {fileID: 7403966049076821551}
+  - component: {fileID: 9141996839154583918}
+  - component: {fileID: 3491722859275575447}
   - component: {fileID: 1792660044288871909}
-  - component: {fileID: 600222115}
-  - component: {fileID: 1903722620}
+  - component: {fileID: 579056689269063858}
   m_Layer: 6
   m_Name: Controllers
   m_TagString: Untagged
@@ -493,6 +495,49 @@ Transform:
   m_Father: {fileID: 8137009872141556459}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7403966049076821551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146217812501054105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee1e0de9a9544486a5979b958c46503c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  system: {fileID: 8137009872141556461}
+  controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
+  playerYaw: {fileID: 8137009871652392841}
+--- !u!114 &9141996839154583918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146217812501054105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ed4ae487f748e4a52f75f8e44099d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  system: {fileID: 8137009872141556457}
+  controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
+--- !u!114 &3491722859275575447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146217812501054105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b20b3b64670419b844fb12bc8d3027e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  system: {fileID: 8137009872141556451}
+  controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
 --- !u!114 &1792660044288871909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,9 +550,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb2f4430530c4ff994857f712fa12011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlSettings: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
-  interactionSystem: {fileID: 8351551621535233386}
---- !u!114 &600222115
+  system: {fileID: 8351551621535233386}
+  controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
+--- !u!114 &579056689269063858
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -516,39 +561,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2146217812501054105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a3d1a54edf04e078fd65ab0949284b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 645f902450b14107b5065fef610c7926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlSettings: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
-  playerYaw: {fileID: 8137009871652392841}
+  system: {fileID: 8137009872141556450}
+  controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
   groundCheck: {fileID: 2569997393202912189}
-  crouchSystem: {fileID: 8137009872141556450}
-  jumpingSystem: {fileID: 8137009872141556451}
-  movementSystem: {fileID: 8137009872141556461}
-  rotationSystem: {fileID: 8137009872141556457}
---- !u!114 &1903722620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146217812501054105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63715860e77f4382a3dd9a3a43fccbac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprintMultiplier: 1.5
-  showDebug: 0
-  controls: {fileID: 11400000, guid: 012f09f12bd5d5e489bbc98aaeeccbff, type: 2}
-  movementSystem: {fileID: 8137009872141556461}
-  crouchSystem: {fileID: 8137009872141556450}
-  onStartSprint:
-    m_PersistentCalls:
-      m_Calls: []
-  onStopSprint:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &5360937274436616252
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,13 +893,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851c742d7e1359647882e254de9a2d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchConstraint: 90
-  yawConstraint: -1
-  rollConstraint: -1
-  showDebug: 0
   pitchTransform: {fileID: 8137009870776137512}
   yawTransform: {fileID: 8137009871652392841}
   rollTransform: {fileID: 8137009870776137512}
+  pitchConstraint: 90
+  yawConstraint: -1
+  rollConstraint: -1
 --- !u!114 &8137009872141556461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,11 +911,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54df2f30b0afcd94fa834b21e088e95a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSettings: {fileID: 11400000, guid: 6f4a8683c77b3094d85fa12e342378c4, type: 2}
-  showDebug: 0
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
   lookDirection: {fileID: 8137009871652392841}
+  movementSettings: {fileID: 11400000, guid: 6f4a8683c77b3094d85fa12e342378c4, type: 2}
 --- !u!114 &8137009872141556451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -911,11 +927,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8a74914cc04f746a9a2de46345cf8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSettings: {fileID: 11400000, guid: 42390e2e993808d4382db739b5c5eab8, type: 2}
-  showDebug: 0
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
   customGravity: {fileID: 6632994079878567245}
+  jumpSettings: {fileID: 11400000, guid: 42390e2e993808d4382db739b5c5eab8, type: 2}
+  showDebug: 0
   onJump:
     m_PersistentCalls:
       m_Calls:
@@ -1175,9 +1191,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9071fa8fc168dd04f87b28e185dd83f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRigidbody: {fileID: 8137009872141556462}
   gravityDirection: {x: 0, y: -1, z: 0}
-  gravity: 0
+  gravityMagnitude: 9.8
 --- !u!1 &8441656736048237427
 GameObject:
   m_ObjectHideFlags: 0

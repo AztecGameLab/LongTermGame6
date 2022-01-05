@@ -1,23 +1,24 @@
-﻿using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
-// todo: maybe get rid of this script, might be simpler to just not have 
-
+[RequireComponent(typeof(Rigidbody))]
 public class CustomGravity : MonoBehaviour
 {
-    [SerializeField] private Rigidbody targetRigidbody;
-    [SerializeField] private Vector3 gravityDirection = Vector3.down;
+    [Header("Settings")]
+    [SerializeField] public Vector3 gravityDirection = Vector3.down;
+    [SerializeField] public float gravityMagnitude = 9.8f;
     
-    [PublicAPI] public float gravity;
-    [PublicAPI] public Vector3 GravityDirection => gravityDirection;
+    private Rigidbody _rigidbody;
+
+    public Vector3 GravityDirection => gravityDirection;
+
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
-        ApplyGravity();
-    }
-
-    private void ApplyGravity()
-    {
-        targetRigidbody.AddForce(GravityDirection * gravity, ForceMode.Acceleration);
+        Vector3 gravityForce = GravityDirection * gravityMagnitude;
+        _rigidbody.AddForce(gravityForce, ForceMode.Acceleration);
     }
 }

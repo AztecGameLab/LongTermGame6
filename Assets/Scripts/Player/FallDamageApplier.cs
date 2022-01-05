@@ -13,7 +13,7 @@ public class FallDamageApplier : MonoBehaviour
     [SerializeField] private AnimationCurve damageCurve;
 
     [Header("Dependencies")] 
-    [SerializeField] private GroundedCheck groundCheck;
+    [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private Rigidbody targetRigidbody;
 
     [Header("Events")] 

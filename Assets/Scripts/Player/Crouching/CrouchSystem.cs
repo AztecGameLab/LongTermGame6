@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CrouchSystem : MonoBehaviour
+public class CrouchSystem : MyNamespace.System
 {
     [Header("Settings")]
     [SerializeField] private float radiusBuffer = 0.1f;

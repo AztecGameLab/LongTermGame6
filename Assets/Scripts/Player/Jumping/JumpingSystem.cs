@@ -6,15 +6,16 @@ using UnityEngine.Events;
 /// Allows a Rigidbody to use advanced jumping mechanics like coyote time and air jumping.
 /// </summary>
 
-public class JumpingSystem : MonoBehaviour
+public class JumpingSystem : MyNamespace.System
 {
-    [SerializeField] private JumpSettings jumpSettings;
-    [SerializeField] private bool showDebug;
-
     [Header("Dependencies")] 
     [SerializeField] private Rigidbody targetRigidbody;
-    [SerializeField] private GroundedCheck groundCheck;
+    [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private CustomGravity customGravity;
+    
+    [Header("Settings")]
+    [SerializeField] private JumpSettings jumpSettings;
+    [SerializeField] private bool showDebug;
 
     [Space(20)]
     [SerializeField] public UnityEvent onJump;
@@ -25,9 +26,6 @@ public class JumpingSystem : MonoBehaviour
     private bool CoyoteAvailable => _coyoteAvailable && groundCheck.TimeSpentFalling < jumpSettings.CoyoteTime;
     public JumpSettings JumpSettings => jumpSettings;
     
-    [PublicAPI] public bool HoldingJump { get; set; }
-    [PublicAPI] public bool WantsToJump { get; set; }
-
     [PublicAPI] 
     public void RefreshJumps()
     {
@@ -38,19 +36,14 @@ public class JumpingSystem : MonoBehaviour
         _coyoteAvailable = true;
     }
 
-    private void FixedUpdate()
+    public void TryToJump()
     {
         if (ShouldJump())
             ApplyJump();
-
-        ApplyGravity();
     }
 
     private bool ShouldJump()
     {
-        if (WantsToJump == false)
-            return false;
-
         if (groundCheck.IsGrounded || CoyoteAvailable)
         {
             if (showDebug) 
@@ -59,7 +52,7 @@ public class JumpingSystem : MonoBehaviour
             return true;
         }
 
-        if (_remainingAirJumps > 0)
+        if (!groundCheck.IsGrounded && _remainingAirJumps > 0)
         {
             if (showDebug) 
                 Debug.Log("Jumped: Air");
@@ -73,34 +66,19 @@ public class JumpingSystem : MonoBehaviour
 
     private void ApplyJump()
     {
-        targetRigidbody.velocity = targetRigidbody.velocity.SetY(jumpSettings.JumpSpeed);
+        Vector3 currentVelocity = targetRigidbody.velocity;
+        currentVelocity.y = jumpSettings.JumpSpeed;
+        targetRigidbody.velocity = currentVelocity;
+        
         _coyoteAvailable = false;
         onJump.Invoke();
     }
 
-    private void ApplyGravity()
+    public void UpdateGravity(bool holdingJump)
     {
         bool rising = targetRigidbody.velocity.y > 0;
-        float currentGravity = jumpSettings.GetCurrentGravity(rising, HoldingJump);
+        float currentGravity = jumpSettings.GetCurrentGravity(rising, holdingJump);
 
-        customGravity.gravity = currentGravity;
+        customGravity.gravityMagnitude = currentGravity;
     }
-
-    #region Debug
-
-    private void OnGUI()
-    {
-        if (showDebug)
-            DrawDebugUI();
-    }
-
-    private void DrawDebugUI()
-    {
-        GUILayout.Label($"Holding Jump: {HoldingJump}");
-        GUILayout.Label($"Wants to Jump: {WantsToJump}");
-        GUILayout.Label($"Coyote Available: {CoyoteAvailable}");
-        GUILayout.Label($"Remaining Air Jumps: {_remainingAirJumps}");
-    }
-
-    #endregion
 }

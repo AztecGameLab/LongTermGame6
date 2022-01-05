@@ -14,7 +14,7 @@ public class StepTracker : MonoBehaviour
     [SerializeField] [Range(0, 5)] private float stepDistance = 2f;
 
     [Header("Dependencies")]
-    [SerializeField] private GroundedCheck groundCheck;
+    [SerializeField] private GroundCheck groundCheck;
     [SerializeField] private Transform movementSource;
 
     [Header("Events")]
