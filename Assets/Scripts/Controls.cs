@@ -17,8 +17,10 @@ public class Controls : ScriptableObject
     [SerializeField] public KeyCode jump = KeyCode.Space;
     [SerializeField] public KeyCode sneak = KeyCode.LeftControl;
     [SerializeField] public KeyCode sprint = KeyCode.LeftShift;
-    [SerializeField] public KeyCode interact = KeyCode.E;
+    [SerializeField] public KeyCode interact = KeyCode.Mouse0;
     [SerializeField] public KeyCode pause = KeyCode.Escape;
+    [SerializeField] public KeyCode leanLeft = KeyCode.Q;
+    [SerializeField] public KeyCode leanRight = KeyCode.E;
     
     [Header("Ability Keybinds")]
     [SerializeField] public KeyCode primary = KeyCode.Mouse0;

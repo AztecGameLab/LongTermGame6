@@ -12,15 +12,14 @@ public class InteractionSystem : MyNamespace.System
     [Header("Dependencies")]
     [SerializeField] private Transform lookDirection;
 
-    private Interactable _selectedInteractable;
-    public bool LookingAtInteractable { get; private set; }
     private bool _wasHoldingInteract;
-
     private bool JustReleasedInteract => _wasHoldingInteract && !HoldingInteract;
     private bool JustPressedInteract => !_wasHoldingInteract && HoldingInteract;
     
+    [PublicAPI] public bool LookingAtInteractable { get; private set; }
     [PublicAPI] public bool HoldingInteract { get; set; }
-    
+    [PublicAPI] public Interactable CurrentInteractable { get; private set; }
+
     private void Update()
     {
         if (TryGetInteractable(out Interactable visionInteractable, out Vector3 point))
@@ -43,16 +42,16 @@ public class InteractionSystem : MyNamespace.System
     {
         DropCurrentObject();
 
-        _selectedInteractable = interactable;
-        _selectedInteractable.InteractStart(gameObject, point);
+        CurrentInteractable = interactable;
+        CurrentInteractable.InteractStart(gameObject, point);
     }
 
     private void DropCurrentObject()
     {
-        if (_selectedInteractable != null)
-            _selectedInteractable.InteractEnd();
+        if (CurrentInteractable != null)
+            CurrentInteractable.InteractEnd();
 
-        _selectedInteractable = null;
+        CurrentInteractable = null;
     }
 
     private bool TryGetInteractable(out Interactable result, out Vector3 point)
