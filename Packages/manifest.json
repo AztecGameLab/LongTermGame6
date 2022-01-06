@@ -12,18 +12,19 @@
       "url": "https://package.openupm.com",
       "scopes": [
         "com.av.smart-hierarchy",
-        "com.openupm"
+        "com.dbrizov.naughtyattributes",
+        "com.openupm",
+        "net.peeweek.console"
       ]
     }
   ],
   "dependencies": {
-    "com.fluid.behavior-tree": "2.2.0",
+    "com.fluid.behavior-tree": "2.2.3",
     "com.unity.cinemachine": "2.6.11",
     "com.unity.collab-proxy": "1.13.5",
     "com.unity.ide.rider": "2.0.7",
-    "com.unity.ide.visualstudio": "2.0.11",
+    "com.unity.ide.visualstudio": "2.0.12",
     "com.unity.ide.vscode": "1.2.4",
-    "com.unity.inputsystem": "1.0.2",
     "com.unity.probuilder": "4.5.2",
     "com.unity.progrids": "3.0.3-preview.6",
     "com.unity.render-pipelines.universal": "10.7.0",
@@ -31,6 +32,7 @@
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.4.8",
     "com.unity.ugui": "1.0.0",
+    "net.peeweek.console": "1.5.2",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
@@ -61,6 +63,7 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.xr": "1.0.0",
+    "com.dbrizov.naughtyattributes": "2.1.1"
   }
 }

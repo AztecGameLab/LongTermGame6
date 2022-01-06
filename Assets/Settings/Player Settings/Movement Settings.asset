@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bece2052824fd0985e3fa894981748, type: 3}
   m_Name: Movement Settings
   m_EditorClassIdentifier: 
-  baseMovementSpeed: 3
-  groundedAcceleration: 0.125
+  movementSpeed: 2.5
+  groundedAcceleration: 0.15
   groundedDeceleration: 0.2
   airborneAcceleration: 0.6
   airborneDeceleration: 0.6
+  decelerationRampPercent: 10

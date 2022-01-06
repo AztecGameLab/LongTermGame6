@@ -1,30 +1,65 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using NaughtyAttributes;
+using UnityEngine;
 
 // todo: better system for checking disconnects
-// todo: cleanup
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(Interactable))]
 public class MovableObject : MonoBehaviour
 {
-    [SerializeField] [Range(0, 1)] private float movementSpeed = 1f;
+    [SerializeField] [Range(0, 1)] private float movementSpeed = 0.5f;
+    [SerializeField, Layer] private int playerLayer = 6;
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private bool freezeRotation = true;
     
     private Transform _current;
-    private bool _isHeld;
-    private Rigidbody _rigidbody;
     private Transform _targetTransform;
-    
+
+    [PublicAPI] public Interactable Interactable { get; private set; }
+    [PublicAPI] public Rigidbody Rigidbody { get; private set; }
+
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
+        Interactable = GetComponent<Interactable>();
+        
         _current = new GameObject("Current Position").transform;
         _current.parent = transform;
+    }
+    
+    private void OnEnable()
+    {
+        Interactable.onInteractStart.AddListener(HandleInteractStart);
+        Interactable.onInteractEnd.AddListener(HandleInteractEnd);
+    }
+
+    private void OnDisable()
+    {
+        Interactable.onInteractStart.RemoveListener(HandleInteractStart);
+        Interactable.onInteractEnd.RemoveListener(HandleInteractEnd);
+    }
+
+    private void HandleInteractEnd()
+    {
+        if (freezeRotation)
+            Rigidbody.constraints = RigidbodyConstraints.None;
+    }
+
+    private void HandleInteractStart(GameObject grabber, Vector3 point)
+    {
+        if (freezeRotation)
+            Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+        
+        MovingTarget target = grabber.GetComponentInChildren<MovingTarget>();
+
+        _targetTransform = target == null ? grabber.transform : target.transform;
+        _targetTransform.position = point;
+        _current.position = point;
     }
 
     private void FixedUpdate()
     {
-        if (_isHeld)
+        if (Interactable.IsHeld)
             MoveTowardsTarget();                   
     }
 
@@ -34,44 +69,19 @@ public class MovableObject : MonoBehaviour
         Vector3 current = _current.position;
         Vector3 directionToTarget = target - current;
         
-
-        _rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
-        _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, maxSpeed);
-    }
-
-    public void Grab(GameObject grabber, Vector3 point)
-    {
-        MovingTarget target = grabber.GetComponentInChildren<MovingTarget>();
-
-        var transform1 = target.transform;
-        _targetTransform = target == null ? grabber.transform : transform1;
-        _isHeld = true;
-        
-        if (freezeRotation)
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-            
-        transform1.position = point;
-        _current.position = point;
-    }
-
-    public void Drop()
-    {
-        _isHeld = false;
-        
-        if (freezeRotation)
-           _rigidbody.constraints = RigidbodyConstraints.None;
+        Rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
+        Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, maxSpeed);
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        //todo: make this less hardcoded
-        if (other.gameObject.layer == 6)
-            Drop();
+        if (other.gameObject.layer == playerLayer)
+            Interactable.InteractEnd();
     }
 
     private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.layer == 6)
-            Drop();
+        if (other.gameObject.layer == playerLayer)
+            Interactable.InteractEnd();
     }
 }
