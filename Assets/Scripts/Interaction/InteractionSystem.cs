@@ -10,7 +10,7 @@ public class InteractionSystem : MyNamespace.System
     [SerializeField] private int playerLayer = 6;
     
     [Header("Dependencies")]
-    [SerializeField] private Transform lookDirection;
+    [SerializeField] public Transform lookDirection;
 
     private bool _wasHoldingInteract;
     private bool JustReleasedInteract => _wasHoldingInteract && !HoldingInteract;
