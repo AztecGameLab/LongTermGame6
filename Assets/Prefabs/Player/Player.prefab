@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 1792660044288871909}
   - component: {fileID: 579056689269063858}
   - component: {fileID: 5230634589444924451}
+  - component: {fileID: 3135498021369530535}
   m_Layer: 6
   m_Name: Controllers
   m_TagString: Untagged
@@ -583,6 +584,22 @@ MonoBehaviour:
   system: {fileID: 1187921412257107173}
   controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
   mode: 1
+--- !u!114 &3135498021369530535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146217812501054105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9be2af8b5bb1642b737fcc4e1cae08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  system: {fileID: 8351551621535233386}
+  controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
+  maxThrowSpeed: 7.5
+  massFactor: 0.0625
 --- !u!1 &2461774755661653572
 GameObject:
   m_ObjectHideFlags: 0
