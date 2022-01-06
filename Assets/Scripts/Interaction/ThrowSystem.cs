@@ -12,7 +12,7 @@ public class ThrowSystem : InputController<InteractionSystem>
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            if (system.CurrentInteractable.TryGetComponent<MovableObject>(out var targetMovableObject))
+            if (system.CurrentInteractable != null && system.CurrentInteractable.TryGetComponent<MovableObject>(out var targetMovableObject))
             {
                 system.CurrentInteractable.InteractEnd();
                 targetMovableObject.Rigidbody.AddForce((system.lookDirection.forward * maxThrowSpeed) / Mathf.Max(Mathf.Sqrt(targetMovableObject.Rigidbody.mass*massFactor),1), ForceMode.VelocityChange);
