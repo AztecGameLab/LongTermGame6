@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 // todo: better system for checking disconnects
 // todo: cleanup
@@ -12,12 +13,13 @@ public class MovableObject : MonoBehaviour
     
     private Transform _current;
     private bool _isHeld;
-    private Rigidbody _rigidbody;
     private Transform _targetTransform;
-    
+
+    [PublicAPI] public Rigidbody Rigidbody { get; private set; }
+
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        Rigidbody = GetComponent<Rigidbody>();
         _current = new GameObject("Current Position").transform;
         _current.parent = transform;
     }
@@ -35,8 +37,8 @@ public class MovableObject : MonoBehaviour
         Vector3 directionToTarget = target - current;
         
 
-        _rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
-        _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, maxSpeed);
+        Rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
+        Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, maxSpeed);
     }
 
     public void Grab(GameObject grabber, Vector3 point)
@@ -48,7 +50,7 @@ public class MovableObject : MonoBehaviour
         _isHeld = true;
         
         if (freezeRotation)
-            _rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             
         transform1.position = point;
         _current.position = point;
@@ -59,7 +61,7 @@ public class MovableObject : MonoBehaviour
         _isHeld = false;
         
         if (freezeRotation)
-           _rigidbody.constraints = RigidbodyConstraints.None;
+           Rigidbody.constraints = RigidbodyConstraints.None;
     }
 
     private void OnCollisionEnter(Collision other)
