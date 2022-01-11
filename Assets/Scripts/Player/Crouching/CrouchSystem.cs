@@ -1,15 +1,19 @@
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class CrouchSystem : MyNamespace.System
 {
-    [Header("Settings")]
-    [SerializeField] private float radiusBuffer = 0.1f;
-    [SerializeField] private float heightBuffer = 0.2f;
+    // [Header("Settings")]
+    // [SerializeField] private float radiusBuffer = 0.1f;
+    // [SerializeField] private float heightBuffer = 0.2f;
 
     [Header("Dependencies")] 
-    [SerializeField] private CapsuleCollider standingCollider;
-    [SerializeField] private CapsuleCollider crouchingCollider;
+    [SerializeField] private Trigger crouchTrigger;
+    [SerializeField] private Collider crouchCollider;
+    
+    [SerializeField] private Trigger standingTrigger;
+    [SerializeField] private Collider standingCollider;
 
     [Space(20)]
     
@@ -36,14 +40,7 @@ public class CrouchSystem : MyNamespace.System
     
     private bool CheckIfBlockedAbove()
     {
-        Ray upwardsRay = new Ray(standingCollider.bounds.center, standingCollider.transform.up);
-        
-        // We divide the height by 2 because our ray is starting at the center of the object, not the bottom.
-        
-        float radiusOfObject = standingCollider.radius - radiusBuffer;
-        float heightOfObject = standingCollider.height / 2 - heightBuffer;
-
-        return Physics.SphereCast(upwardsRay, radiusOfObject, heightOfObject);
+        return standingTrigger.IsOccupied;
     }
     
     private void UpdateEvents()
@@ -60,7 +57,7 @@ public class CrouchSystem : MyNamespace.System
     
     private void UpdateCollider()
     {
-        standingCollider.isTrigger = IsCrouching;
-        crouchingCollider.isTrigger = !IsCrouching;
+        crouchCollider.enabled = IsCrouching;
+        standingCollider.enabled = !IsCrouching;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 // todo : seek higher knowledge for better algorithms here, my code smell sense is tingling
 // todo: use ConnectedCollider and velocity to implement cool surfing slide sound
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Rigidbody))]
 public class GroundCollisionListener : GroundCheck
 {
     public override bool IsGrounded => _collidersToNormals
