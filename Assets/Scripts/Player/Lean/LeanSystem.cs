@@ -5,6 +5,8 @@ namespace Player.Lean
     public class LeanSystem : MyNamespace.System
     {
         [SerializeField] private Animator leanAnimator;
+        [SerializeField] private Collider leanLeftCollider;
+        [SerializeField] private Collider leanRightCollider;
         
         private static readonly int LeftTrigger = Animator.StringToHash("leanLeft");
         private static readonly int RightTrigger = Animator.StringToHash("leanRight");
@@ -14,18 +16,27 @@ namespace Player.Lean
         
         public void LeanLeft()
         {
+            leanLeftCollider.enabled = true;
+            leanRightCollider.enabled = false;
+            
             IsLeaning = true;
             leanAnimator.SetTrigger(LeftTrigger);
         }
 
         public void LeanRight()
         {
+            leanLeftCollider.enabled = false;
+            leanRightCollider.enabled = true;
+            
             IsLeaning = true;
             leanAnimator.SetTrigger(RightTrigger);
         }
 
         public void ResetLean()
         {
+            leanLeftCollider.enabled = false;
+            leanRightCollider.enabled = false;
+            
             IsLeaning = false;
             leanAnimator.SetTrigger(ResetLeanTrigger);
         }

@@ -1,4 +1,3 @@
-using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,10 +8,8 @@ public class CrouchSystem : MyNamespace.System
     // [SerializeField] private float heightBuffer = 0.2f;
 
     [Header("Dependencies")] 
-    [SerializeField] private Trigger crouchTrigger;
-    [SerializeField] private Collider crouchCollider;
-    
     [SerializeField] private Trigger standingTrigger;
+    [SerializeField] private Collider crouchCollider;
     [SerializeField] private Collider standingCollider;
 
     [Space(20)]

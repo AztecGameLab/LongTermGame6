@@ -12,6 +12,8 @@ namespace Player.Lean
         }
 
         [SerializeField] private LeanMode mode;
+        [SerializeField] private Trigger leanLeftTrigger;
+        [SerializeField] private Trigger leanRightTrigger;
         
         private void Update()
         {
@@ -30,7 +32,7 @@ namespace Player.Lean
 
         private void HandleToggle()
         {
-            if (Input.GetKeyDown(controls.leanLeft))
+            if (Input.GetKeyDown(controls.leanLeft) && !leanLeftTrigger.IsOccupied)
             {
                 if (system.IsLeaning)
                     system.ResetLean();
@@ -38,7 +40,7 @@ namespace Player.Lean
                 else system.LeanLeft();
             }
 
-            if (Input.GetKeyDown(controls.leanRight))
+            if (Input.GetKeyDown(controls.leanRight) && !leanRightTrigger.IsOccupied)
             {
                 if (system.IsLeaning)
                     system.ResetLean();
@@ -49,10 +51,10 @@ namespace Player.Lean
 
         private void HandleHold()
         {
-            if (Input.GetKeyDown(controls.leanLeft))
+            if (Input.GetKeyDown(controls.leanLeft) && !leanLeftTrigger.IsOccupied)
                 system.LeanLeft();
             
-            if (Input.GetKeyDown(controls.leanRight))
+            if (Input.GetKeyDown(controls.leanRight) && !leanRightTrigger.IsOccupied)
                 system.LeanRight();
             
             if (system.IsLeaning && (Input.GetKeyUp(controls.leanLeft) || Input.GetKeyUp(controls.leanRight)))
