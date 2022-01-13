@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 1766463588}
   - component: {fileID: 1766463587}
   - component: {fileID: 1766463589}
+  - component: {fileID: 8852063956200383047}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -456,10 +457,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionSystem: {fileID: 8351551621535233386}
-  crosshair: {fileID: 1766463586}
+  crosshair: {fileID: 8852063956200383047}
   interactableScale: {x: 0.175, y: 0.175, z: 1}
   normalScale: {x: 0.075, y: 0.075, z: 1}
   animationSpeed: 1
+  fadeSpeed: 8
+--- !u!225 &8852063956200383047
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766463585}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &188406540674221708
 GameObject:
   m_ObjectHideFlags: 0
