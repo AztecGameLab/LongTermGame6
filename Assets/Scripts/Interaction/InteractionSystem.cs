@@ -60,9 +60,9 @@ public class InteractionSystem : MyNamespace.System
         Ray visionRay = new Ray(lookDirection.position, lookDirection.forward);
         bool lookingAtObject = Physics.Raycast(visionRay, out RaycastHit hitInfo, float.PositiveInfinity, layerMask);
 
-        if (lookingAtObject)
+        if (lookingAtObject && hitInfo.rigidbody != null)
         {
-            bool isInteractable = hitInfo.transform.TryGetComponent(out result);
+            bool isInteractable = hitInfo.rigidbody.TryGetComponent(out result);
             bool isInRange = isInteractable && hitInfo.distance <= result.InteractRange;
             point = hitInfo.point;
             
