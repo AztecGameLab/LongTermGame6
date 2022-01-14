@@ -133,7 +133,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Yaw
+  m_Name: Crouch Animation
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: CrouchStart
@@ -168,7 +168,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crouch Down
+  m_Name: Crouch Start
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -195,7 +195,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerUncrouch
+  m_Name: Crouch End
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:

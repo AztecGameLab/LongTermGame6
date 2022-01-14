@@ -19,7 +19,8 @@ public class InteractionSystem : MyNamespace.System
     [PublicAPI] public bool LookingAtInteractable { get; private set; }
     [PublicAPI] public bool HoldingInteract { get; set; }
     [PublicAPI] public Interactable CurrentInteractable { get; private set; }
-
+    [PublicAPI] public bool HasInteractable => CurrentInteractable != null;
+    
     private void Update()
     {
         if (TryGetInteractable(out Interactable visionInteractable, out Vector3 point))
