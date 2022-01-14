@@ -16,9 +16,9 @@ public class RotationSystem : MyNamespace.System
     [SerializeField] private Transform rollTransform;
     
     [Header("Settings")] 
-    [SerializeField] private float pitchConstraint;
-    [SerializeField] private float yawConstraint;
-    [SerializeField] private float rollConstraint;
+    [SerializeField] private float pitchConstraint = 90f;
+    [SerializeField] private float yawConstraint = -1f;
+    [SerializeField] private float rollConstraint = -1f;
 
     private Vector3 _initialRotation;
     private Vector3 _currentRotation;

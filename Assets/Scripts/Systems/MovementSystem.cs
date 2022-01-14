@@ -40,7 +40,7 @@ public class MovementSystem : MyNamespace.System
         }
     }
     [PublicAPI] public float CurrentMaxSpeed => movementSettings.MovementSpeed * SpeedMultiplier;
-    [PublicAPI] public Vector3 MovementDirection { get; set; } = Vector3.zero;
+    [PublicAPI] public Vector3 MovementDirection { get; private set; } = Vector3.zero;
     [PublicAPI] public Rigidbody Rigidbody => targetRigidbody;
     [PublicAPI] public GroundCheck GroundCheck => groundCheck;
     
