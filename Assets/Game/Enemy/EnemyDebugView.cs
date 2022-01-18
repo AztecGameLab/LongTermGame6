@@ -5,6 +5,9 @@ namespace Game.Enemy
 {
     public class EnemyDebugView : MonoBehaviour
     {
-        public Display stateDisplay;
+        public Display enemyName;
+        public Display enemyTasks;
+
+        public Display debugData;
     }
 }
