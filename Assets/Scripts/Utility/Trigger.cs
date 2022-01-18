@@ -48,7 +48,10 @@ public class Trigger : MonoBehaviour
     
     private bool IsValidCollider(Collider other)
     {
-        return other.gameObject.layer != excludeLayer;
+        bool isTrigger = other.isTrigger;
+        bool isExcludeLayer = other.gameObject.layer != excludeLayer;
+        
+        return !isTrigger && !isExcludeLayer;
     }
 
     private void OnGUI()
