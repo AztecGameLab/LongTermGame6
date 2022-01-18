@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 985c12cb5f71c6440825869433552460, type: 3}
+  m_Name: LookDev Enviroments
+  m_EditorClassIdentifier: 
+  <environments>k__BackingField:
+  - {fileID: 4243990677374016272}
+  - {fileID: 7449845229063155603}
+--- !u!114 &4243990677374016272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612aa45d38dd94a479185b83f080aa22, type: 3}
+  m_Name: Sunny
+  m_EditorClassIdentifier: 
+  m_CubemapGUID: 6fa3f446deee84c52aec507bd0aca28c
+  rotation: 0
+  exposure: 1
+  m_Latitude: 15.454546
+  m_Longitude: 180.90453
+  shadowColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+--- !u!114 &7449845229063155603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 612aa45d38dd94a479185b83f080aa22, type: 3}
+  m_Name: Cloudy
+  m_EditorClassIdentifier: 
+  m_CubemapGUID: c8f21f62fdb3e43c5b32917c84683698
+  rotation: 0
+  exposure: 1
+  m_Latitude: 6.3636365
+  m_Longitude: 151.95981
+  shadowColor: {r: 0.7, g: 0.7, b: 0.7, a: 1}
