@@ -11,40 +11,33 @@ namespace Game.Enemy
         [SerializeField, Range(0, 1)] private float attackDamage = 0.25f;
         [SerializeField] private float attackFrequencySeconds = 1f;
         [SerializeField] private float attackDistance = 1.5f;
+        [SerializeField] private float smoothTime = 1f;
         
         [Header("Dependencies")]
         [SerializeField] private RotationSystem rotationSystem;
         [SerializeField] private NavMeshAgent pathfinder;
         [SerializeField] private Trigger damageTrigger;
         [SerializeField] private Transform viewTransform;
+        [SerializeField] private Sense attackSense;
 
-        // todo ai general 1: turn into a "sense" behaviour that only populates on LOS
-        
-        [Header("Senses")]
-        [SerializeField] private Transform target;
-
+        private Transform _attackTarget;
         private float _lastAttackTime;
 
         private float TimeSinceAttack => Time.time - _lastAttackTime;
-
-        private void Awake()
-        {
-            pathfinder.updateRotation = false;
-        }
 
         public override BehaviorTree GetTree(GameObject owner)
         {
             var tree = new BehaviorTreeBuilder(owner)
                 .Selector()
-                    .Condition("Has No Attack Target", HasNoAttackTarget)
-                    .Sequence("Attack Target")
+                    .Condition("Target Hidden", TargetHidden)
+                    .Sequence()
                         .Do(LookAtTarget)
                         .Selector()
-                            .Condition("In Attack Range", InAttackRange)
-                            .Do("Move To Target", MoveToTarget)
+                            .Condition("In Range", InAttackRange)
+                            .Do("Move", MoveToTarget)
                         .End()
                         .Selector()
-                            .Condition("On Attack Cooldown", OnAttackCooldown)
+                            .Condition("Cooldown", OnAttackCooldown)
                             .Do("Attack", Attack)
                         .End()
                     .End()
@@ -54,9 +47,9 @@ namespace Game.Enemy
             return tree;
         }
 
-        private bool HasNoAttackTarget()
+        private bool TargetHidden()
         {
-            return target == null;
+            return !attackSense.TryGetTarget(out _attackTarget);
         }
 
         private bool OnAttackCooldown()
@@ -66,28 +59,28 @@ namespace Game.Enemy
 
         private bool InAttackRange()
         {
-            Vector3 targetPosition = target.position;
+            Vector3 targetPosition = _attackTarget.position;
             Vector3 sourcePosition = viewTransform.position;
             float distanceToTarget = Vector3.Distance(targetPosition, sourcePosition);
             
             return distanceToTarget < attackDistance;
         }
 
+        private Vector3 _velocity;
+
         private TaskStatus LookAtTarget()
         {
-            // todo ai attack 1: add smoothing or integrate IK into the look at function
-            
-            Vector3 vectorToPlayer = target.position - viewTransform.position;
-            rotationSystem.Forward = vectorToPlayer;
-            
+            rotationSystem.Forward = Vector3.SmoothDamp(rotationSystem.Forward, _attackTarget.position - viewTransform.position, ref _velocity, smoothTime);
             return TaskStatus.Success;
         }
 
         private TaskStatus MoveToTarget()
         {
             pathfinder.isStopped = false;
-            pathfinder.SetDestination(target.position);
-            return TaskStatus.Continue;
+            
+            return pathfinder.SetDestination(_attackTarget.position) 
+                ? TaskStatus.Continue 
+                : TaskStatus.Failure;
         }
 
         private TaskStatus Attack()
