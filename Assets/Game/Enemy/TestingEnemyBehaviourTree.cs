@@ -1,4 +1,5 @@
-﻿using CleverCrow.Fluid.BTs.Tasks;
+﻿using System.Text;
+using CleverCrow.Fluid.BTs.Tasks;
 using CleverCrow.Fluid.BTs.Trees;
 using UnityEngine;
 
@@ -8,62 +9,82 @@ namespace Game.Enemy
     
     public class TestingEnemyBehaviourTree : MonoBehaviour
     {
-        [SerializeField] private BehaviorTree tree;
+        public enum IdleType
+        {
+            Patrol,
+            Guard,
+            Wander,
+            Follow
+        }
 
-        [SerializeField] private float stopDistance = 1f;
-        [SerializeField] private float sightAngle = 45f;
-        [SerializeField] private Transform playerTransform;
+        [SerializeField] private float viewRange;
+        [SerializeField] private LineOfSight target;
+        [SerializeField] private BehaviorTree tree;
+        [SerializeField] private EnemyDebugView debugView;
         [SerializeField] private Transform viewTransform;
-        [SerializeField] private MovementSystem movementSystem;
-        [SerializeField] private RotationSystem rotationSystem;
+        [SerializeField] private IdleType type;
         
-        private Vector3 VectorToPlayer => playerTransform.position - viewTransform.position;
+        private StringBuilder _taskBuilder = new StringBuilder();
+        private StringBuilder _debugBuilder = new StringBuilder();
         
         private void Awake()
         {
-            movementSystem.Initialize();
-            rotationSystem.Initialize();
-            
             tree = new BehaviorTreeBuilder(gameObject)
-                .Sequence("Chase Player")
-                    .Condition("Can See Player", CanSeePlayer)
-                    .Do("Move Towards Player", MoveTowardsPlayer)
+                .Selector("Enemy States")
+                    .Selector("Alert")
+                        .IsVisible(viewTransform, target, viewRange)
+                        .Sequence("Eliminate Target")
+                            .Do(() => TaskStatus.Success)
+                        .End()
+                    .End()
+                    .Selector("Suspicious")
+                        .Condition("Noticed Something Suspicious", () => false)
+                        .Sequence("Investigate Suspicions")
+                            .Do(() => TaskStatus.Success)
+                        .End()
+                    .End()
+                    .Selector("Idle")
+                        .Sequence($"{type.ToString()}")
+                            .Do(() => TaskStatus.Success)
+                        .End()
+                    .End()
                 .End()
                 .Build();
-        }
-
-        private bool CanSeePlayer()
-        {
-            if (Vector3.Angle(viewTransform.forward, VectorToPlayer.normalized) > sightAngle)
-                return false;
-
-            Ray rayToPlayer = new Ray(transform.position, VectorToPlayer);
-            return Physics.Raycast(rayToPlayer, out var hitInfo) && hitInfo.transform.CompareTag("Player");
-        }
-
-        private TaskStatus MoveTowardsPlayer()
-        {
-            if (CanSeePlayer() == false)
-            {
-                movementSystem.UpdateMovement(Vector3.zero);
-                return TaskStatus.Failure;
-            }
-            
-            rotationSystem.Forward = VectorToPlayer;
-
-            if (VectorToPlayer.magnitude > stopDistance)
-            {
-                movementSystem.UpdateMovement(VectorToPlayer.normalized);
-                return TaskStatus.Continue;
-            }
-
-            movementSystem.UpdateMovement(Vector3.zero);
-            return TaskStatus.Success;
         }
 
         private void Update()
         {
             tree.Tick();
+            UpdateDebug();
+        }
+
+        private void UpdateDebug()
+        {
+            string enemyName = gameObject.name;
+            string enemyTasks = GetTaskDescriptions();
+            string debugData = GetDebugData();
+            
+            debugView.enemyName.UpdateText(enemyName);
+            debugView.enemyTasks.UpdateText(enemyTasks);
+            debugView.debugData.UpdateText(debugData);
+        }
+
+        private string GetTaskDescriptions()
+        {
+            _taskBuilder.Clear();
+            
+            foreach (var task in tree.ActiveTasks)
+                _taskBuilder.Append($"\n{task.Name}");
+
+            return _taskBuilder.ToString();
+        }
+
+        private string GetDebugData()
+        {
+            string result = _debugBuilder.ToString();
+            _debugBuilder.Clear();
+
+            return result;
         }
     }
 }
