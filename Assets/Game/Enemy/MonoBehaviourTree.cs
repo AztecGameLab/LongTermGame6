@@ -5,9 +5,6 @@ namespace Game.Enemy
 {
     public abstract class MonoBehaviourTree : MonoBehaviour
     {
-        [Header("Dependencies")]
-        [SerializeField] protected GameObject owner;
-        
-        public abstract BehaviorTree GetTree();
+        public abstract BehaviorTree GetTree(GameObject owner);
     }
 }

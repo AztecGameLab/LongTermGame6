@@ -16,9 +16,9 @@ namespace Game.Enemy
         
         private void Awake()
         {
-            var attackTree = attackBehaviour.GetTree();
-            var alertTree = alertBehaviour.GetTree();
-            var idleTree = idleBehaviour.GetTree();
+            var attackTree = attackBehaviour.GetTree(gameObject);
+            var alertTree = alertBehaviour.GetTree(gameObject);
+            var idleTree = idleBehaviour.GetTree(gameObject);
             
             tree = new BehaviorTreeBuilder(gameObject)
                 .Sequence("Root")
