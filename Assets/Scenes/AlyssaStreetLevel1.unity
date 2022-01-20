@@ -16096,7 +16096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2620666226370321362, guid: a9a74faecb2f3a3418ff8acfb9196aec, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.02
+      value: 20.77
       objectReference: {fileID: 0}
     - target: {fileID: 2620666226370321362, guid: a9a74faecb2f3a3418ff8acfb9196aec, type: 3}
       propertyPath: m_LocalRotation.w
@@ -17316,7 +17316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.02
+      value: 20.77
       objectReference: {fileID: 0}
     - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -39370,13 +39370,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 972150247}
+  - component: {fileID: 972150242}
+  - component: {fileID: 972150241}
+  - component: {fileID: 972150240}
   - component: {fileID: 972150246}
   - component: {fileID: 972150245}
   - component: {fileID: 972150244}
   - component: {fileID: 972150243}
-  - component: {fileID: 972150242}
-  - component: {fileID: 972150241}
-  - component: {fileID: 972150240}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -39453,9 +39453,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 972150239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc41e7e8632a4f2d9861e66671a8c447, type: 3}
+  m_Script: {fileID: 11500000, guid: 39598efe2dd24cf5a7f2939f7ad6a75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackDamage: 0.25
+  attackFrequencySeconds: 1
+  attackDistance: 1.5
+  smoothTime: 0.5
+  rotationSystem: {fileID: 972150241}
+  pathfinder: {fileID: 972150242}
+  damageTrigger: {fileID: 1783188414}
+  viewTransform: {fileID: 1632422398}
+  attackSense: {fileID: 972150240}
 --- !u!114 &972150244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39465,18 +39474,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 972150239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c736c3e73c19455dbce82d48aea72d87, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e90897d7b2d4493becefdfcf43cffdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathfinder: {fileID: 972150242}
-  rotationSystem: {fileID: 972150241}
-  stopDistance: 0.1
-  smoothTime: 3
-  patrolPoints:
-  - {fileID: 1794288893}
-  - {fileID: 769363467}
-  viewTransform: {fileID: 1632422398}
-  attackSense: {fileID: 972150240}
 --- !u!114 &972150245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39486,16 +39486,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 972150239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b203b8cb6ef24438bd7a62a51d29252e, type: 3}
+  m_Script: {fileID: 11500000, guid: b0f6799f435d4c23be1835eae9d5a6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0.25
-  attackFrequencySeconds: 1
-  attackDistance: 1.5
-  smoothTime: 0.25
-  rotationSystem: {fileID: 972150241}
   pathfinder: {fileID: 972150242}
-  damageTrigger: {fileID: 1783188414}
+  rotationSystem: {fileID: 972150241}
+  stopDistance: 0.1
+  smoothTime: 2
+  patrolPoints:
+  - {fileID: 1794288893}
+  - {fileID: 769363467}
   viewTransform: {fileID: 1632422398}
   attackSense: {fileID: 972150240}
 --- !u!114 &972150246
@@ -39507,12 +39507,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 972150239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1432034ffae479487d8d4d38c154c1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6581af8963ff4edf9f1465ead521ce63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackBehaviour: {fileID: 972150245}
-  alertBehaviour: {fileID: 972150243}
-  idleBehaviour: {fileID: 972150244}
+  showDebug: 0
+  idleState: {fileID: 972150245}
+  alertState: {fileID: 972150244}
+  attackState: {fileID: 972150243}
 --- !u!4 &972150247
 Transform:
   m_ObjectHideFlags: 0

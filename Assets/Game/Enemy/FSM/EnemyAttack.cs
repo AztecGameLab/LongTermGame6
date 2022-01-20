@@ -5,8 +5,10 @@ using UnityEngine.AI;
 
 namespace Game.Enemy
 {
-    public class AttackBehaviour : MonoBehaviourTree
+    public class EnemyAttack : EnemyState 
     {
+        public override string StateName => "Attack";
+        
         [Header("Settings")] 
         [SerializeField, Range(0, 1)] private float attackDamage = 0.25f;
         [SerializeField] private float attackFrequencySeconds = 1f;
@@ -20,36 +22,61 @@ namespace Game.Enemy
         [SerializeField] private Transform viewTransform;
         [SerializeField] private Sense attackSense;
 
+        [SerializeField] private BehaviorTree attackTree;
+        
         private Transform _attackTarget;
         private float _lastAttackTime;
 
         private float TimeSinceAttack => Time.time - _lastAttackTime;
 
-        public override BehaviorTree GetTree(GameObject owner)
+        private void Awake()
         {
-            var tree = new BehaviorTreeBuilder(owner)
-                .Selector()
-                    .Condition("Target Hidden", TargetHidden)
-                    .Sequence()
-                        .Do(LookAtTarget)
-                        .Selector()
-                            .Condition("In Range", InAttackRange)
-                            .Do("Move", MoveToTarget)
-                        .End()
-                        .Selector()
-                            .Condition("Cooldown", OnAttackCooldown)
-                            .Do("Attack", Attack)
+            attackTree = BuildAttackTree();
+        }
+
+        #region Finite State Machine
+
+        public override void OnStateEnter(EnemyStateManager enemy)
+        {
+            base.OnStateEnter(enemy);
+            pathfinder.ResetPath();
+            pathfinder.isStopped = false;
+            pathfinder.updateRotation = false;
+            attackTree.Reset();
+        }
+
+        public override void OnStateExit(EnemyStateManager enemy)
+        {
+            base.OnStateExit(enemy);
+            pathfinder.ResetPath();
+            attackTree.Reset();
+        }
+        
+        public override void OnStateUpdate(EnemyStateManager enemy)
+        {
+            if (!attackSense.TryGetTarget(out _attackTarget))
+                enemy.ChangeState(enemy.IdleState);
+
+            else attackTree.Tick();
+        }
+
+        #endregion
+
+        #region Behaviour Tree
+
+        public BehaviorTree BuildAttackTree()
+        {
+            return new BehaviorTreeBuilder(gameObject)
+                .Parallel()
+                    .Do(LookAtTarget)
+                    .RepeatForever()
+                        .Sequence()
+                            .Do(MoveToTarget)
+                            .Do(Attack)
                         .End()
                     .End()
                 .End()
                 .Build();
-                
-            return tree;
-        }
-
-        private bool TargetHidden()
-        {
-            return !attackSense.TryGetTarget(out _attackTarget);
         }
 
         private bool OnAttackCooldown()
@@ -71,20 +98,26 @@ namespace Game.Enemy
         private TaskStatus LookAtTarget()
         {
             rotationSystem.Forward = Vector3.SmoothDamp(rotationSystem.Forward, _attackTarget.position - viewTransform.position, ref _velocity, smoothTime);
-            return TaskStatus.Success;
+            return TaskStatus.Continue;
         }
 
         private TaskStatus MoveToTarget()
         {
-            pathfinder.isStopped = false;
+            if (InAttackRange())
+                return TaskStatus.Success;
             
-            return pathfinder.SetDestination(_attackTarget.position) 
-                ? TaskStatus.Continue 
+            pathfinder.isStopped = false;
+
+            return pathfinder.SetDestination(_attackTarget.position)
+                ? TaskStatus.Continue
                 : TaskStatus.Failure;
         }
 
         private TaskStatus Attack()
         {
+            if (OnAttackCooldown())
+                return TaskStatus.Failure;
+            
             pathfinder.isStopped = true;
             _lastAttackTime = Time.time;
 
@@ -96,8 +129,10 @@ namespace Game.Enemy
                 if (occupant.TryGetComponent(out Health health))
                     health.Damage(attackDamage);
             }
-            
+
             return TaskStatus.Success;
         }
+
+        #endregion
     }
 }

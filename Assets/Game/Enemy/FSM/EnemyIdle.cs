@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Game.Enemy
 {
-    public class IdleBehaviour : MonoBehaviourTree
+    public class EnemyIdle : EnemyState
     {
         [SerializeField] private NavMeshAgent pathfinder;
         [SerializeField] private RotationSystem rotationSystem;
@@ -15,42 +15,70 @@ namespace Game.Enemy
         [SerializeField] private Transform viewTransform;
         [SerializeField] private Sense attackSense;
         
+        [SerializeField] private BehaviorTree patrolTree;
         private int _currentPatrolPointIndex;
+        private Vector3 _velocity;
+
+        public override string StateName => "Idle";
 
         private void Awake()
         {
-            pathfinder.updateRotation = false;
+            patrolTree = BuildPatrolTree();
         }
 
-        public override BehaviorTree GetTree(GameObject owner)
+        #region Finite State Machine
+
+        public override void OnStateEnter(EnemyStateManager enemy)
         {
-            var tree = new BehaviorTreeBuilder(owner)
-                .Selector()
-                    .Condition(() => attackSense.TryGetTarget(out _))
-                    .Sequence()
-                        .Do(Rotate)
-                        .Selector()
-                            .Condition(Traveling)
-                            .Do(SelectNewDestination)        
-                        .End()
+            base.OnStateEnter(enemy);
+            pathfinder.ResetPath();
+            pathfinder.isStopped = false;
+            pathfinder.updateRotation = false;
+            pathfinder.SetDestination(patrolPoints[_currentPatrolPointIndex].position);
+            patrolTree.Reset();
+        }
+
+        public override void OnStateExit(EnemyStateManager enemy)
+        {
+            base.OnStateExit(enemy);
+            pathfinder.ResetPath();
+            patrolTree.Reset();
+        }
+
+        public override void OnStateUpdate(EnemyStateManager enemy)
+        {
+            if (attackSense.TryGetTarget(out _))
+                enemy.ChangeState(enemy.AttackState);
+
+            else patrolTree.Tick();
+        }
+
+        #endregion
+        
+        #region Behaviour Tree
+
+        private BehaviorTree BuildPatrolTree()
+        {
+            return new BehaviorTreeBuilder(gameObject)
+                .Parallel()
+                    .Do(Rotate)
+                    .Selector()
+                        .Condition(Traveling)
+                        .Do(SelectNewDestination)        
                     .End()
                 .End()
                 .Build();
-                
-            return tree;
         }
-
+        
         private TaskStatus SelectNewDestination()
         {
             _currentPatrolPointIndex = (_currentPatrolPointIndex + 1) % patrolPoints.Length;
             Vector3 destination = patrolPoints[_currentPatrolPointIndex].position;
             
             return pathfinder.SetDestination(destination) 
-                ? TaskStatus.Continue 
+                ? TaskStatus.Success 
                 : TaskStatus.Failure;
         }
-
-        private Vector3 _velocity;
 
         private TaskStatus Rotate()
         {
@@ -61,6 +89,8 @@ namespace Game.Enemy
         private bool Traveling()
         {
             return pathfinder.remainingDistance > stopDistance;
-        }
+        }        
+
+        #endregion
     }
 }

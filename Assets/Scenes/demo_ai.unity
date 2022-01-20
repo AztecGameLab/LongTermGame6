@@ -195,7 +195,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh94468
+  m_Name: pb_Mesh114022
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -424,7 +424,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh133230
+  m_Name: pb_Mesh114118
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -931,7 +931,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh133286
+  m_Name: pb_Mesh114174
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1155,7 +1155,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh133246
+  m_Name: pb_Mesh114134
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1319,7 +1319,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh94594
+  m_Name: pb_Mesh114152
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1486,13 +1486,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774970524}
-  - component: {fileID: 774970525}
-  - component: {fileID: 774970528}
-  - component: {fileID: 774970527}
-  - component: {fileID: 774970526}
   - component: {fileID: 774970529}
   - component: {fileID: 774970530}
   - component: {fileID: 774970531}
+  - component: {fileID: 774970528}
+  - component: {fileID: 774970527}
+  - component: {fileID: 774970526}
+  - component: {fileID: 774970525}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -1525,12 +1525,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 774970523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1432034ffae479487d8d4d38c154c1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 39598efe2dd24cf5a7f2939f7ad6a75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackBehaviour: {fileID: 774970528}
-  alertBehaviour: {fileID: 774970526}
-  idleBehaviour: {fileID: 774970527}
+  attackDamage: 0.25
+  attackFrequencySeconds: 1
+  attackDistance: 1.5
+  smoothTime: 1
+  rotationSystem: {fileID: 774970530}
+  pathfinder: {fileID: 774970529}
+  damageTrigger: {fileID: 248915378}
+  viewTransform: {fileID: 1265467138}
+  attackSense: {fileID: 774970531}
 --- !u!114 &774970526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1540,7 +1546,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 774970523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc41e7e8632a4f2d9861e66671a8c447, type: 3}
+  m_Script: {fileID: 11500000, guid: 3e90897d7b2d4493becefdfcf43cffdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &774970527
@@ -1552,13 +1558,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 774970523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c736c3e73c19455dbce82d48aea72d87, type: 3}
+  m_Script: {fileID: 11500000, guid: b0f6799f435d4c23be1835eae9d5a6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pathfinder: {fileID: 774970529}
   rotationSystem: {fileID: 774970530}
   stopDistance: 0.1
-  smoothTime: 3
+  smoothTime: 2
   patrolPoints:
   - {fileID: 336754042}
   - {fileID: 481777556}
@@ -1574,18 +1580,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 774970523}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b203b8cb6ef24438bd7a62a51d29252e, type: 3}
+  m_Script: {fileID: 11500000, guid: 6581af8963ff4edf9f1465ead521ce63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0.25
-  attackFrequencySeconds: 1
-  attackDistance: 1.5
-  smoothTime: 0.25
-  rotationSystem: {fileID: 774970530}
-  pathfinder: {fileID: 774970529}
-  damageTrigger: {fileID: 248915378}
-  viewTransform: {fileID: 1265467138}
-  attackSense: {fileID: 774970531}
+  showDebug: 0
+  idleState: {fileID: 774970527}
+  alertState: {fileID: 774970526}
+  attackState: {fileID: 774970525}
 --- !u!195 &774970529
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2535,7 +2536,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh133298
+  m_Name: pb_Mesh114186
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3944,7 +3945,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh94528
+  m_Name: pb_Mesh114084
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4858,7 +4859,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh133180
+  m_Name: pb_Mesh114070
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
