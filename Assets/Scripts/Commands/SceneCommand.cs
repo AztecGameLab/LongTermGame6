@@ -22,6 +22,7 @@ namespace Commands
             get
             {
                 yield return Console.Alias.Get("load", "scene load");
+                yield return Console.Alias.Get("reload", "scene reload");
             }
         }
         
@@ -29,6 +30,9 @@ namespace Commands
         {
             if (args.Length > 1 && args[0] == "load")
                 HandleLoad(args[1]);
+
+            if (args.Length > 0 && args[0] == "reload")
+                HandleLoad(SceneManager.GetActiveScene().name);
 
             else HandleList();
         }
