@@ -21,8 +21,9 @@ public class Controls : ScriptableObject
     [SerializeField] public KeyCode pause = KeyCode.Escape;
     [SerializeField] public KeyCode leanLeft = KeyCode.Q;
     [SerializeField] public KeyCode leanRight = KeyCode.E;
-    
-    [Header("Ability Keybinds")]
+
+    [Header("Ability Keybinds")] 
+    [SerializeField] public KeyCode throwAbility = KeyCode.Mouse1;
     [SerializeField] public KeyCode primary = KeyCode.Mouse0;
     [SerializeField] public KeyCode secondary = KeyCode.Mouse1;
 }

@@ -52,7 +52,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9002933665572775252}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -111,9 +111,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &6499754372677302386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,37 +126,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 306cc629845d0ac4aa473c9a92bdb9c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactRange: 1.5
+  interactRange: 2
   onInteractStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7241472463710246339}
-        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
-        m_MethodName: Grab
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onInteractEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7241472463710246339}
-        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
-        m_MethodName: Drop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &7241472463710246339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d2b56bc29ab4c818b1822e1903d7a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  movementSpeed: 0.5
+  playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
