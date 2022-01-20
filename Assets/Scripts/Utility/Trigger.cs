@@ -37,19 +37,14 @@ public class Trigger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (IsValidCollider(other))
-        {
-            if (!_occupants.Contains(other.attachedRigidbody))
-                _occupants.Add(other.attachedRigidbody);
-            
             _hasObjectInTrigger = true;
-        }
     }
     
     private void OnTriggerEnter(Collider other)
     {
         if (IsValidCollider(other))
         {
-            if (!_occupants.Contains(other.attachedRigidbody))
+            if (other.attachedRigidbody != null && !_occupants.Contains(other.attachedRigidbody))
                 _occupants.Add(other.attachedRigidbody);
             
             collisionEnter?.Invoke(other);
@@ -58,20 +53,21 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (IsValidCollider(other) || _occupants.Contains(other.attachedRigidbody))
+        if (IsValidCollider(other))
         {
-            _occupants.Remove(other.attachedRigidbody);
+            if (other.attachedRigidbody != null && _occupants.Contains(other.attachedRigidbody))
+                _occupants.Remove(other.attachedRigidbody);
+            
             collisionExit.Invoke(other);
         }
     }
     
     private bool IsValidCollider(Collider other)
     {
-        bool hasRigidbody = other.attachedRigidbody != null;
         bool isTrigger = other.isTrigger;
         bool isExcludeLayer = other.gameObject.layer == excludeLayer;
         
-        return hasRigidbody && !isTrigger && !isExcludeLayer;
+        return !isTrigger && !isExcludeLayer;
     }
 
     private void OnGUI()
