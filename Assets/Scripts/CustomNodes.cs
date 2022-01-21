@@ -9,14 +9,14 @@ namespace UnityTemplateProjects
         private static MoveTowardsTask _moveTowardsTask = new MoveTowardsTask();
         private static LookAtTask _lookAtTask = new LookAtTask();
         
-        public static TaskStatus MoveTowards(this NavMeshAgent agent, Vector3 target, float stopDistance = 0.1f)
+        public static TaskStatus MoveTowards(this NavMeshAgent agent, Vector3 position, float stopDistance = 0.1f)
         {
-             return _moveTowardsTask.Perform(agent, target, stopDistance);
+             return _moveTowardsTask.Perform(agent, position, stopDistance);
         }
         
-        public static TaskStatus LookAt(this RotationSystem rotationSystem, Vector3 target, float smoothTime = 0.25f)
+        public static TaskStatus LookAt(this RotationSystem rotationSystem, Vector3 position, float smoothTime = 0.25f)
         {
-            return _lookAtTask.Perform(rotationSystem, target, smoothTime);
+            return _lookAtTask.Perform(rotationSystem, position, smoothTime);
         }
     }
 

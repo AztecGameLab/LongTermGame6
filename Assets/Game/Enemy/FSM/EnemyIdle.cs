@@ -37,7 +37,7 @@ namespace Game.Enemy
             patrolTree.Reset();
             
             // Switch to using the NavMeshAgent for calculating rotation because its smooth.
-            rotationSystem.Reset();
+            rotationSystem.Deactivate();
             agent.updateRotation = true;
         }
 
@@ -49,7 +49,7 @@ namespace Game.Enemy
 
         public override void OnStateUpdate(EnemyStateManager enemy)
         {
-            if (attackSense.TryGetTarget(out _))
+            if (attackSense.HasTarget)
                 enemy.ChangeState(enemy.AttackState);
 
             else patrolTree.Tick();
@@ -62,17 +62,15 @@ namespace Game.Enemy
         private BehaviorTree BuildPatrolTree()
         {
             return new BehaviorTreeBuilder(gameObject)
-                .Sequence()
-                
-                    // Always move towards the next patrol point.
-                
-                    .RepeatForever()
-                        .Sequence()
-                            .Do(MoveToPatrolPoint)
-                            .Do(FindNextPatrolPoint)
-                        .End().End()
-                
-                .End()
+            
+                // Always move towards the next patrol point.
+            
+                .RepeatForever()
+                    .Sequence()
+                        .Do("Move To Point", MoveToPatrolPoint)
+                        .Do("Find Next Point", FindNextPatrolPoint)
+                    .End().End()
+            
                 .Build();
         }
 

@@ -1,5 +1,4 @@
-﻿using System;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using UnityEngine;
 
 // todo: support real-time changing of constraints, e.g. for ladders or other gameplay things
@@ -28,21 +27,28 @@ public class RotationSystem : MyNamespace.System
     public Transform YawTransform => yawTransform;
     public Transform RollTransform => rollTransform;
 
-    public void Setup()
+    private void Awake()
+    {
+        Activate();
+    }
+    
+    public void Activate()
     {
         // Find and save our current euler rotation as a starting point.
-        
+
+        Transform targetTransform = transform;
+
         if (pitchTransform != null) _currentRotation.x = pitchTransform.localRotation.eulerAngles.x;
         if (yawTransform != null)   _currentRotation.y = yawTransform.localRotation.eulerAngles.y;
         if (rollTransform != null)  _currentRotation.z = rollTransform.localRotation.eulerAngles.z;
 
-        CurrentRotation = transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.identity;
+        CurrentRotation = targetTransform.rotation.eulerAngles;
+        targetTransform.rotation = Quaternion.identity;
 
         _initialRotation = _currentRotation;
     }
     
-    public void Reset()
+    public void Deactivate()
     {
         transform.rotation = Quaternion.Euler(CurrentRotation);
         CurrentRotation = Vector3.zero;
@@ -108,16 +114,6 @@ public class RotationSystem : MyNamespace.System
             _currentRotation.z = roll % 360;
             rollTransform.localRotation = Quaternion.Euler(0, 0, _currentRotation.z);
         }
-    }
-
-    private void Awake()
-    {
-        Setup();
-    }
-
-    public override void Initialize()
-    {
-        
     }
 
     private static float Constrain(float value, float initialValue, float constraint)

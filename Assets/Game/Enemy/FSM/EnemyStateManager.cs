@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Display = UnityTemplateProjects.UI.Display;
 
 namespace Game.Enemy
 {
@@ -12,7 +13,7 @@ namespace Game.Enemy
 
         [SerializeField] 
         [Tooltip("Log debug information about this enemy to the console.")]
-        private bool showDebug;
+        private Display debugDisplay;
         
         [Header("Dependencies")]
         
@@ -25,8 +26,6 @@ namespace Game.Enemy
         private EnemyState attackState;
 
         // Internal Data
-
-        public bool ShowDebug => showDebug;
 
         public EnemyState DefaultState => defaultState;
         public EnemyState IdleState => idleState;
@@ -45,6 +44,9 @@ namespace Game.Enemy
         private void Update()
         {
             CurrentState.OnStateUpdate(this);
+            
+            if (debugDisplay != null)
+                debugDisplay.UpdateText(CurrentState.StateName);
         }
 
         public void ChangeState(EnemyState state)

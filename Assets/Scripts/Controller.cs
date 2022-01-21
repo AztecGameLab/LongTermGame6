@@ -6,9 +6,4 @@ public abstract class Controller<T> : MonoBehaviour where T : MyNamespace.System
     [SerializeField] protected T system;
     
     public bool IsRunning { get; set; } = true;
-    
-    private void Start()
-    {
-        system.Initialize();
-    }
 }

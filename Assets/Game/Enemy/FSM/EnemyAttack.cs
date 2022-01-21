@@ -23,12 +23,14 @@ namespace Game.Enemy
         [SerializeField] private Sense attackSense;
 
         [SerializeField] private BehaviorTree attackTree;
-        
-        private Transform _attackTarget;
-        private float _lastAttackTime;
 
         private float TimeSinceAttack => Time.time - _lastAttackTime;
+        private float _lastAttackTime;
 
+        private Vector3 TargetPosition => attackSense.HasTarget 
+            ? attackSense.Target.position 
+            : Vector3.zero;
+        
         private void Awake()
         {
             attackTree = BuildAttackTree();
@@ -44,7 +46,7 @@ namespace Game.Enemy
             attackTree.Reset();
 
             // Switch to using RotationSystem because its snappy and has constraints.            
-            rotationSystem.Setup();
+            rotationSystem.Activate();
             agent.updateRotation = false;
         }
 
@@ -56,7 +58,7 @@ namespace Game.Enemy
         
         public override void OnStateUpdate(EnemyStateManager enemy)
         {
-            if (!attackSense.TryGetTarget(out _attackTarget))
+            if (attackSense.HasTarget == false)
                 enemy.ChangeState(enemy.IdleState);
 
             else attackTree.Tick();
@@ -74,14 +76,14 @@ namespace Game.Enemy
                     // Always try to maintain LOS with the target.
                 
                     .RepeatForever()
-                        .Do(LookAtTarget).End()
+                        .Do("Look at Target", LookAtTarget).End()
                 
                     // Always try to move into attack range, then attack the target.
                 
                     .RepeatForever()
                         .Sequence()
-                            .Do(MoveTowardsTarget)
-                            .Do(AttackTarget)
+                            .Do("Move Towards Target", MoveTowardsTarget)
+                            .Do("Attack Target", AttackTarget)
                         .End().End()
                 
                 .End()
@@ -90,12 +92,12 @@ namespace Game.Enemy
 
         private TaskStatus LookAtTarget()
         {
-            return rotationSystem.LookAt(_attackTarget.position, smoothTime);
+            return rotationSystem.LookAt(TargetPosition, smoothTime);
         }
 
         private TaskStatus MoveTowardsTarget()
         {
-            return agent.MoveTowards(_attackTarget.position, attackDistance);
+            return agent.MoveTowards(TargetPosition, attackDistance);
         }
 
         // todo: move into its own "combat system" behaviour

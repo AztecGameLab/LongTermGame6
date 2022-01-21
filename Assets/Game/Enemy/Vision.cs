@@ -12,7 +12,7 @@ namespace Game.Enemy
         [Header("Dependencies")]
         [SerializeField] private Transform viewTransform;
 
-        public override bool IsDetected(Transform target)
+        protected override bool IsDetected(Transform target)
         {
             Vector3 origin = viewTransform.position;
             
@@ -24,15 +24,5 @@ namespace Game.Enemy
             
             return !Physics.Raycast(rayToTarget, vectorToTarget.magnitude ,collisionLayerMask.value, QueryTriggerInteraction.Ignore);
         }
-
-        // public bool IsExposedTo(Transform source, float maxRange)
-        // {
-        //     Vector3 sourcePosition = source.position;
-        //     
-        //     var vectorToTarget = viewTransform.position - sourcePosition;
-        //     var rayToTarget = new Ray(sourcePosition, vectorToTarget);
-        //
-        //     return Physics.Raycast(rayToTarget, out var hitInfo, maxRange) && hitInfo.rigidbody == viewRigidbody;
-        // }
     }
 }
