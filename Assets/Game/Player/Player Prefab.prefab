@@ -456,12 +456,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ecff5f1e20448f9d92d18f3408317d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionSystem: {fileID: 8351551621535233386}
-  crosshair: {fileID: 8852063956200383047}
   interactableScale: {x: 0.175, y: 0.175, z: 1}
   normalScale: {x: 0.075, y: 0.075, z: 1}
   animationSpeed: 1
   fadeSpeed: 8
+  interactionSystem: {fileID: 8351551621535233386}
+  crosshair: {fileID: 8852063956200383047}
 --- !u!225 &8852063956200383047
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1712,12 +1712,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 851c742d7e1359647882e254de9a2d51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pitchTransform: {fileID: 8137009870776137512}
-  yawTransform: {fileID: 8137009871652392841}
-  rollTransform: {fileID: 8137009870776137512}
   pitchConstraint: 90
   yawConstraint: -1
   rollConstraint: -1
+  pitchTransform: {fileID: 8137009870776137512}
+  yawTransform: {fileID: 8137009871652392841}
+  rollTransform: {fileID: 8137009870776137512}
 --- !u!114 &8137009872141556461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1730,10 +1730,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54df2f30b0afcd94fa834b21e088e95a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSettings: {fileID: 11400000, guid: 6f4a8683c77b3094d85fa12e342378c4, type: 2}
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
   lookDirection: {fileID: 8137009871652392841}
-  movementSettings: {fileID: 11400000, guid: 6f4a8683c77b3094d85fa12e342378c4, type: 2}
 --- !u!114 &8137009872141556451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1746,11 +1746,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df8a74914cc04f746a9a2de46345cf8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSettings: {fileID: 11400000, guid: 42390e2e993808d4382db739b5c5eab8, type: 2}
+  showDebug: 0
   targetRigidbody: {fileID: 8137009872141556462}
   groundCheck: {fileID: 2569997393202912189}
   customGravity: {fileID: 6632994079878567245}
-  jumpSettings: {fileID: 11400000, guid: 42390e2e993808d4382db739b5c5eab8, type: 2}
-  showDebug: 0
   onJump:
     m_PersistentCalls:
       m_Calls:
@@ -1872,7 +1872,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showDebug: 0
-  playerLayer: 6
+  ignoredLayers:
+    serializedVersion: 2
+    m_Bits: 64
   lookDirection: {fileID: 8137009870776137512}
 --- !u!114 &1187921412257107173
 MonoBehaviour:
@@ -1903,7 +1905,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealthPercent: 1
   healthRecoverySpeed: 0.1
-  healthRecoveryTolerance: 0
   onHealthChanged:
     m_PersistentCalls:
       m_Calls:

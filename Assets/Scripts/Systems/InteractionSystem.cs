@@ -50,32 +50,33 @@ public class InteractionSystem : MyNamespace.System
 
         else LookingAtInteractable = false;
 
-        if (JustReleasedInteract)
-            DropCurrentObject();
+        if (JustReleasedInteract && HasInteractable)
+            CurrentInteractable.InteractEnd();
         
         _wasHoldingInteract = HoldingInteract;
     }
 
     private void GrabObject(Interactable interactable, Vector3 point)
     {
-        DropCurrentObject();
-
+        if (HasInteractable)
+            CurrentInteractable.InteractEnd();
+        
         CurrentInteractable = interactable;
         CurrentInteractable.InteractStart(gameObject, point);
+        
+        CurrentInteractable.onInteractEnd.AddListener(DropCurrentObject);
     }
 
     private void DropCurrentObject()
     {
-        if (CurrentInteractable != null)
-            CurrentInteractable.InteractEnd();
-
+        CurrentInteractable.onInteractEnd.RemoveListener(DropCurrentObject);
         CurrentInteractable = null;
     }
 
     private bool TryGetInteractable(out Interactable result, out Vector3 point)
     {
         Ray visionRay = new Ray(lookDirection.position, lookDirection.forward);
-        bool lookingAtObject = Physics.Raycast(visionRay, out RaycastHit hitInfo, float.PositiveInfinity, ignoredLayers.value, QueryTriggerInteraction.Ignore);
+        bool lookingAtObject = Physics.Raycast(visionRay, out RaycastHit hitInfo, float.PositiveInfinity, ~ignoredLayers.value, QueryTriggerInteraction.Ignore);
 
         if (lookingAtObject && hitInfo.rigidbody != null)
         {
