@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NaughtyAttributes;
+﻿using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,16 +14,11 @@ public class Trigger : MonoBehaviour
     [SerializeField] private UnityEvent<Collider> collisionEnter;
     [SerializeField] private UnityEvent<Collider> collisionExit;
 
-    public IEnumerable<Rigidbody> Occupants => _occupants;
     public bool IsOccupied { get; private set; }
-
-    private List<Rigidbody> _occupants;
     private bool _hasObjectInTrigger;
     
     private void Awake()
     {
-        _occupants = new List<Rigidbody>();
-        
         GetComponent<Collider>().isTrigger = true;
     }
 
@@ -43,31 +37,18 @@ public class Trigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (IsValidCollider(other))
-        {
-            if (other.attachedRigidbody != null && !_occupants.Contains(other.attachedRigidbody))
-                _occupants.Add(other.attachedRigidbody);
-            
             collisionEnter?.Invoke(other);
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (IsValidCollider(other))
-        {
-            if (other.attachedRigidbody != null && _occupants.Contains(other.attachedRigidbody))
-                _occupants.Remove(other.attachedRigidbody);
-            
             collisionExit.Invoke(other);
-        }
     }
     
     private bool IsValidCollider(Collider other)
     {
-        bool isTrigger = other.isTrigger;
-        bool isExcludeLayer = other.gameObject.layer == excludeLayer;
-        
-        return !isTrigger && !isExcludeLayer;
+        return other.gameObject.layer != excludeLayer;
     }
 
     private void OnGUI()

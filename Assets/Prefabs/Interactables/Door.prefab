@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2904333231284592453}
   - component: {fileID: 2904333231284592458}
   - component: {fileID: 2904333231284592459}
+  - component: {fileID: 2904333231284592456}
   - component: {fileID: 2904333231284592457}
   - component: {fileID: 2904333231284592462}
   - component: {fileID: 2904333231284592463}
@@ -342,6 +343,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &2904333231284592456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904333231284592466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb43d10a308b2f46ad4561774f97e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asset: {fileID: 11400000, guid: f63252a7b610f5c47af5176400800ffb, type: 2}
 --- !u!114 &2904333231284592457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,10 +386,34 @@ MonoBehaviour:
   interactRange: 2
   onInteractStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2904333231284592460}
+        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onInteractEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2904333231284592460}
+        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
+        m_MethodName: Drop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &2904333231284592463
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -405,7 +443,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
-  playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
 --- !u!153 &2904333231284592461
