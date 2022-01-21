@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using NaughtyAttributes;
+using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -30,7 +31,8 @@ public class StepTracker : MonoBehaviour
     [Space(20f)]
     
     [Tooltip("Called every time we take a step (as defined above).")]
-    [SerializeField] private UnityEvent stepEvent;
+    [SerializeField] 
+    private UnityEvent stepEvent;
 
     // Internal State
     

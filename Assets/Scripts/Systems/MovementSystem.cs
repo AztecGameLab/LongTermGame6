@@ -7,14 +7,27 @@ using UnityEngine;
 
 public class MovementSystem : MyNamespace.System
 {
-    [Header("Dependencies")] 
-    [SerializeField] private Rigidbody targetRigidbody;
-    [SerializeField] private GroundCheck groundCheck;
-    [SerializeField] private Transform lookDirection;
-    
     [Header("Settings")]
-    [SerializeField] private MovementSettings movementSettings;
+    
+    [SerializeField]
+    private MovementSettings movementSettings;
+    
+    [Header("Dependencies")] 
+    
+    [SerializeField] 
+    [Tooltip("The rigidbody that our movement force is applied to.")]
+    private Rigidbody targetRigidbody;
+    
+    [SerializeField] 
+    [Tooltip("Used to determine whether we are grounded or not.")]
+    private GroundCheck groundCheck;
+    
+    [SerializeField]
+    [Tooltip("The forward direction used for calculating a sprint boost.")]
+    private Transform lookDirection;
 
+    // Internal State
+    
     private float _speedMultiplier = 1f;
     private float _forwardSpeedMultiplier = 1f;
     
@@ -43,6 +56,8 @@ public class MovementSystem : MyNamespace.System
     [PublicAPI] public Vector3 MovementDirection { get; private set; } = Vector3.zero;
     [PublicAPI] public Rigidbody Rigidbody => targetRigidbody;
     [PublicAPI] public GroundCheck GroundCheck => groundCheck;
+    
+    // Methods
     
     public void UpdateMovement(Vector3 direction)
     {
