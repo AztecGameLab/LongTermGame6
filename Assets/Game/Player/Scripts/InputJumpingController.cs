@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controls the jumping system with input.
+/// </summary>
+
 public class InputJumpingController : InputController<JumpingSystem>
 {
     private Buffer _jumpBuffer = new Buffer();
@@ -14,12 +18,12 @@ public class InputJumpingController : InputController<JumpingSystem>
     
     private void Update()
     {
-        if (IsRunning == false)
-            return;
-        
         bool wantsToJump = system.JumpSettings.HoldAndJump
             ? Input.GetKey(controls.jump)
             : Input.GetKeyDown(controls.jump);
+ 
+        // Instead of jumping whenever we press a button, we queue a jump instead.
+        // This will still be responsive when grounded, and won't eat your inputs when falling.
         
         if (wantsToJump)
             _jumpBuffer.Queue();
@@ -27,9 +31,6 @@ public class InputJumpingController : InputController<JumpingSystem>
 
     private void FixedUpdate()
     {
-        if (IsRunning == false)
-            return;
-        
         if (_jumpBuffer.IsQueued(system.JumpSettings.JumpBufferTime))
             system.TryToJump();
         

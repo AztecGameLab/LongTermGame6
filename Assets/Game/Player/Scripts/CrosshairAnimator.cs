@@ -1,15 +1,41 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Animates a UI element based on the current state of an interaction system.
+/// </summary>
+
 public class CrosshairAnimator : MonoBehaviour
 {
-    [SerializeField] private InteractionSystem interactionSystem;
-    [SerializeField] private CanvasGroup crosshair;
-    [SerializeField] private Vector3 interactableScale;
-    [SerializeField] private Vector3 normalScale;
-    [SerializeField] private float animationSpeed;
-
-    [SerializeField] private float fadeSpeed = 1f;
+    [Header("Settings")]
     
+    [SerializeField]
+    [Tooltip("Crosshair scale when interacting with something.")]
+    private Vector3 interactableScale;
+    
+    [SerializeField]
+    [Tooltip("Default crosshair scale.")]
+    private Vector3 normalScale;
+    
+    [SerializeField]
+    [Tooltip("How long it should take to animate the crosshair scale, in seconds.")]
+    private float animationSpeed;
+    
+    [SerializeField]
+    [Tooltip("How long it should take to animate the crosshair alpha, in seconds.")]
+    private float fadeSpeed = 1f;
+
+    [Header("Dependencies")]
+    
+    [SerializeField]
+    [Tooltip("Used to check if we are holding anything.")]
+    private InteractionSystem interactionSystem;
+    
+    [SerializeField]
+    [Tooltip("The UI element that is faded in or out depending on our interaction state.")]
+    private CanvasGroup crosshair;
+    
+    // Methods
+
     private void Update()
     {
         UpdateCrosshairAlpha();

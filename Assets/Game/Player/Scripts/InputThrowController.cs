@@ -3,8 +3,14 @@ using UnityEngine;
 public class InputThrowController : InputController<InteractionSystem>
 {
     [Header("Settings")]
-    [SerializeField] private float maxThrowSpeed;
-    [SerializeField] private float massFactor;
+    
+    [SerializeField]
+    [Tooltip("What is this objects max velocity when thrown?")]
+    private float maxThrowSpeed;
+    
+    [SerializeField] 
+    [Tooltip("Use this to tune how fast heavy objects are thrown.")]
+    private float massFactor;
     
     private void Update()
     {

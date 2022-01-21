@@ -1,5 +1,4 @@
-﻿using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
@@ -9,20 +8,30 @@ using UnityEngine.Events;
 public class InputSprintController : InputController<MovementSystem>
 {
     [Header("Settings")] 
-    [SerializeField] private float sprintMultiplier = 1f;
-    [SerializeField] private bool showDebug;
+    
+    [SerializeField]
+    [Tooltip("How much faster should we move while sprinting.")]
+    private float sprintMultiplier = 1f;
+    
+    [SerializeField] 
+    [Tooltip("Write debugging information to the console and screen.")]
+    private bool showDebug;
     
     [Space(20)]
-    [SerializeField] private UnityEvent onStartSprint;
-    [SerializeField] private UnityEvent onStopSprint;
+    
+    [SerializeField]
+    [Tooltip("Called when we start sprinting.")]
+    private UnityEvent onStartSprint;
+    
+    [SerializeField] 
+    [Tooltip("Called when we stop sprinting.")]
+    private UnityEvent onStopSprint;
 
     private bool _isSprinting;
     private bool _wasSprinting;
     
     private bool JustStartedSprinting => !_wasSprinting && _isSprinting;
     private bool JustStoppedSprinting => _wasSprinting && !_isSprinting;
-    
-    [PublicAPI] public bool Break { get; set; }
     
     private void Update()
     {
@@ -35,14 +44,10 @@ public class InputSprintController : InputController<MovementSystem>
             UpdateDebug();
 
         _wasSprinting = _isSprinting;
-        Break = false;
     }
 
     private bool CheckIfSprinting()
     {
-        if (Break || !IsRunning)
-            return false;
-        
         return Input.GetKey(controls.sprint) && Input.GetKey(controls.forward);
     }
 

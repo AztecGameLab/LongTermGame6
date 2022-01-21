@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace Player.Lean
 {
+    /// <summary>
+    /// Controls the leaning system with input.
+    /// </summary>
+    
+    // todo: the state logic is a bit confusing, and the LeanMode.Hold setting has not been tested very much.
+    
     public class InputLeanController : InputController<LeanSystem>
     {
         public enum LeanMode
@@ -11,9 +17,21 @@ namespace Player.Lean
             Toggle
         }
 
-        [SerializeField] private LeanMode mode;
-        [SerializeField] private Trigger leanLeftTrigger;
-        [SerializeField] private Trigger leanRightTrigger;
+        [Header("Settings")]
+        
+        [SerializeField] 
+        [Tooltip("Hold will only lean while the button is held. Toggle will remain leaning until pressed again.")]
+        private LeanMode mode;
+        
+        [Header("Dependencies")]
+        
+        [SerializeField] 
+        [Tooltip("Detects potential collisions when leaning left.")]
+        private Trigger leanLeftTrigger;
+        
+        [SerializeField] 
+        [Tooltip("Detects potential collisions when leaning right.")]
+        private Trigger leanRightTrigger;
         
         private void Update()
         {

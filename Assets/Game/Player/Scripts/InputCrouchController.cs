@@ -2,9 +2,17 @@
 
 namespace Player.Crouching
 {
+    /// <summary>
+    /// Controls the crouching system with input.
+    /// </summary>
+    
     public class InputCrouchController : InputController<CrouchSystem>
     {
-        [SerializeField] private GroundCheck groundCheck;
+        [Header("Dependencies")]
+        
+        [SerializeField]
+        [Tooltip("We can only crouch on the ground - this object tells us if that happens.")]
+        private GroundCheck groundCheck;
         
         private void Update()
         {

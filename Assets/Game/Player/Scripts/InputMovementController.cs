@@ -1,8 +1,16 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Controls the movement system with input.
+/// </summary>
+
 public class InputMovementController : InputController<MovementSystem>
 {
-    [SerializeField] private Transform playerYaw;
+    [Header("Dependencies")]
+    
+    [SerializeField] 
+    [Tooltip("The transform that points in the forward movement direction.")]
+    private Transform playerYaw;
 
     private void Update()
     {
@@ -12,7 +20,7 @@ public class InputMovementController : InputController<MovementSystem>
         Vector3 forward = playerYaw.forward * forwardAxis;
         Vector3 right = playerYaw.right * rightAxis;
 
-        system.UpdateMovement(IsRunning ? (forward + right).normalized : Vector3.zero);
+        system.UpdateMovement((forward + right).normalized);
     }
     
     private static float CalculateAxis(KeyCode positive, KeyCode negative)

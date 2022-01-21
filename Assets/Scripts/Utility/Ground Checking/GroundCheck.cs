@@ -2,7 +2,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-// todo: consolidate these like we did with the movement strategies to make things simpler.
+// todo: overhaul of the ground check systems is needed - untested WIP in "ImprovedGroundCheck"
+
+// - needs to provide more collision information for fall damage to be implemented
+// - doesn't need this much abstraction, could be turned into one file.
+// - overall bloated and hard to understand, probably inefficient too
 
 [Serializable]
 public class SurfaceCollisionEvents
