@@ -2,6 +2,7 @@
 using CleverCrow.Fluid.BTs.Trees;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityTemplateProjects;
 
 namespace Game.Enemy
 {
@@ -17,9 +18,8 @@ namespace Game.Enemy
         
         [Header("Dependencies")]
         [SerializeField] private RotationSystem rotationSystem;
-        [SerializeField] private NavMeshAgent pathfinder;
+        [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Trigger damageTrigger;
-        [SerializeField] private Transform viewTransform;
         [SerializeField] private Sense attackSense;
 
         [SerializeField] private BehaviorTree attackTree;
@@ -39,17 +39,19 @@ namespace Game.Enemy
         public override void OnStateEnter(EnemyStateManager enemy)
         {
             base.OnStateEnter(enemy);
-            pathfinder.ResetPath();
-            pathfinder.isStopped = false;
-            pathfinder.updateRotation = false;
+
+            agent.ResetPath();
             attackTree.Reset();
+
+            // Switch to using RotationSystem because its snappy and has constraints.            
+            rotationSystem.Setup();
+            agent.updateRotation = false;
         }
 
         public override void OnStateExit(EnemyStateManager enemy)
         {
             base.OnStateExit(enemy);
-            pathfinder.ResetPath();
-            attackTree.Reset();
+            agent.ResetPath();
         }
         
         public override void OnStateUpdate(EnemyStateManager enemy)
@@ -68,57 +70,42 @@ namespace Game.Enemy
         {
             return new BehaviorTreeBuilder(gameObject)
                 .Parallel()
-                    .Do(LookAtTarget)
+                
+                    // Always try to maintain LOS with the target.
+                
+                    .RepeatForever()
+                        .Do(LookAtTarget).End()
+                
+                    // Always try to move into attack range, then attack the target.
+                
                     .RepeatForever()
                         .Sequence()
-                            .Do(MoveToTarget)
-                            .Do(Attack)
-                        .End()
-                    .End()
+                            .Do(MoveTowardsTarget)
+                            .Do(AttackTarget)
+                        .End().End()
+                
                 .End()
                 .Build();
         }
 
-        private bool OnAttackCooldown()
-        {
-            return TimeSinceAttack <= attackFrequencySeconds;
-        }
-
-        private bool InAttackRange()
-        {
-            Vector3 targetPosition = _attackTarget.position;
-            Vector3 sourcePosition = viewTransform.position;
-            float distanceToTarget = Vector3.Distance(targetPosition, sourcePosition);
-            
-            return distanceToTarget < attackDistance;
-        }
-
-        private Vector3 _velocity;
-
         private TaskStatus LookAtTarget()
         {
-            rotationSystem.Forward = Vector3.SmoothDamp(rotationSystem.Forward, _attackTarget.position - viewTransform.position, ref _velocity, smoothTime);
-            return TaskStatus.Continue;
+            return rotationSystem.LookAt(_attackTarget.position, smoothTime);
         }
 
-        private TaskStatus MoveToTarget()
+        private TaskStatus MoveTowardsTarget()
         {
-            if (InAttackRange())
-                return TaskStatus.Success;
-            
-            pathfinder.isStopped = false;
-
-            return pathfinder.SetDestination(_attackTarget.position)
-                ? TaskStatus.Continue
-                : TaskStatus.Failure;
+            return agent.MoveTowards(_attackTarget.position, attackDistance);
         }
 
-        private TaskStatus Attack()
+        // todo: move into its own "combat system" behaviour
+        
+        private TaskStatus AttackTarget()
         {
-            if (OnAttackCooldown())
-                return TaskStatus.Failure;
+            if (TimeSinceAttack <= attackFrequencySeconds)
+                return TaskStatus.Continue;
             
-            pathfinder.isStopped = true;
+            // agent.isStopped = true;
             _lastAttackTime = Time.time;
 
             // todo ai attack 2: add stronger damage feel (knock-back, sound effects, ect.)

@@ -5,48 +5,53 @@ namespace Game.Enemy
     public class EnemyStateManager : MonoBehaviour
     {
         [Header("Settings")]
-        [SerializeField] private bool showDebug;
         
-        [SerializeField] private EnemyIdle idleState;
-        [SerializeField] private EnemyAlert alertState;
-        [SerializeField] private EnemyAttack attackState;
+        [SerializeField]
+        [Tooltip("The starting state for this enemy.")]
+        private EnemyState defaultState;
 
-        private EnemyState _currentState;
+        [SerializeField] 
+        [Tooltip("Log debug information about this enemy to the console.")]
+        private bool showDebug;
+        
+        [Header("Dependencies")]
+        
+        [SerializeField]
+        [Tooltip("Behaviour for when no targets can be found.")]
+        private EnemyState idleState;
+        
+        [SerializeField] 
+        [Tooltip("Behaviour for when a target is found.")]
+        private EnemyState attackState;
 
-        public EnemyIdle IdleState => idleState;
-        public EnemyAlert AlertState => alertState;
-        public EnemyAttack AttackState => attackState;
+        // Internal Data
+
         public bool ShowDebug => showDebug;
 
+        public EnemyState DefaultState => defaultState;
+        public EnemyState IdleState => idleState;
+        public EnemyState AttackState => attackState;
+        
+        public EnemyState CurrentState { get; private set; }
+        
+        // Methods
+        
         private void Start()
         {
-            ChangeState(idleState);
+            CurrentState = DefaultState;
+            CurrentState.OnStateEnter(this);
         }
-
-        #if UNITY_EDITOR
-        
-        private void OnDrawGizmos()
-        {
-            string currentStateName = _currentState != null ? _currentState.StateName : "Uninitialized";
-            UnityEditor.Handles.Label(transform.position, $"State: {currentStateName}");
-        }
-        
-        #endif
 
         private void Update()
         {
-            _currentState.OnStateUpdate(this);
+            CurrentState.OnStateUpdate(this);
         }
 
         public void ChangeState(EnemyState state)
         {
-            if (_currentState != null)
-                _currentState.OnStateExit(this);
-            
-            _currentState = state;
-            
-            if (_currentState != null)
-                _currentState.OnStateEnter(this);
+            CurrentState.OnStateExit(this);
+            CurrentState = state;
+            CurrentState.OnStateEnter(this);
         }
     }
 }

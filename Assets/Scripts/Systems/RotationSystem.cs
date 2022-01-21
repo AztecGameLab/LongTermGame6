@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 // todo: support real-time changing of constraints, e.g. for ladders or other gameplay things
@@ -23,6 +24,30 @@ public class RotationSystem : MyNamespace.System
     private Vector3 _initialRotation;
     private Vector3 _currentRotation;
 
+    public Transform PitchTransform => pitchTransform;
+    public Transform YawTransform => yawTransform;
+    public Transform RollTransform => rollTransform;
+
+    public void Setup()
+    {
+        // Find and save our current euler rotation as a starting point.
+        
+        if (pitchTransform != null) _currentRotation.x = pitchTransform.localRotation.eulerAngles.x;
+        if (yawTransform != null)   _currentRotation.y = yawTransform.localRotation.eulerAngles.y;
+        if (rollTransform != null)  _currentRotation.z = rollTransform.localRotation.eulerAngles.z;
+
+        CurrentRotation = transform.rotation.eulerAngles;
+        transform.rotation = Quaternion.identity;
+
+        _initialRotation = _currentRotation;
+    }
+    
+    public void Reset()
+    {
+        transform.rotation = Quaternion.Euler(CurrentRotation);
+        CurrentRotation = Vector3.zero;
+    }
+    
     [PublicAPI] public Vector3 Forward
     {
         get => Quaternion.Euler(_currentRotation) * Vector3.forward;
@@ -85,18 +110,14 @@ public class RotationSystem : MyNamespace.System
         }
     }
 
+    private void Awake()
+    {
+        Setup();
+    }
+
     public override void Initialize()
     {
-        // Find and save our current euler rotation as a starting point.
         
-        if (pitchTransform != null) _currentRotation.x = pitchTransform.localRotation.eulerAngles.x;
-        if (yawTransform != null)   _currentRotation.y = yawTransform.localRotation.eulerAngles.y;
-        if (rollTransform != null)  _currentRotation.z = rollTransform.localRotation.eulerAngles.z;
-
-        CurrentRotation = transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.identity;
-
-        _initialRotation = _currentRotation;
     }
 
     private static float Constrain(float value, float initialValue, float constraint)
