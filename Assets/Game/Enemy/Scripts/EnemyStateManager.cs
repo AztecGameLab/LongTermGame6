@@ -12,7 +12,7 @@ namespace Game.Enemy
         private EnemyState defaultState;
 
         [SerializeField] 
-        [Tooltip("Log debug information about this enemy to the console.")]
+        [Tooltip("The display used to show debug information.")]
         private Display debugDisplay;
         
         [Header("Dependencies")]

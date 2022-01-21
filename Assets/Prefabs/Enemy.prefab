@@ -301,11 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f6799f435d4c23be1835eae9d5a6d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolPoints: []
+  stopDistance: 0.1
   agent: {fileID: 4854316226130966732}
   rotationSystem: {fileID: 4854316226130966735}
-  stopDistance: 0.1
-  patrolPoints: []
-  attackSense: {fileID: 4854316226130966734}
+  attackTargetDetector: {fileID: 4854316226130966734}
 --- !u!114 &4854316226130966733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,13 +319,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 0.25
-  attackFrequencySeconds: 1
+  attackFrequency: 1
   attackDistance: 1.5
   smoothTime: 0.25
   rotationSystem: {fileID: 4854316226130966735}
   agent: {fileID: 4854316226130966732}
   damageTrigger: {fileID: 4854316225331455632}
-  attackSense: {fileID: 4854316226130966734}
+  attackTargetDetector: {fileID: 4854316226130966734}
 --- !u!1 &8714140211943568576
 GameObject:
   m_ObjectHideFlags: 0
