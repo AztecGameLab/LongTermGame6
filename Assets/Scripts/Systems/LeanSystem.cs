@@ -2,17 +2,35 @@
 
 namespace Player.Lean
 {
+    /// <summary>
+    /// Allows an object to safely lean left and right, without clipping into a wall.
+    /// </summary>
+    
     public class LeanSystem : MyNamespace.System
     {
-        [SerializeField] private Animator leanAnimator;
-        [SerializeField] private Collider leanLeftCollider;
-        [SerializeField] private Collider leanRightCollider;
+        [Header("Dependencies")]
+        
+        [SerializeField] 
+        [Tooltip("The component that will animate our lean effect.")]
+        private Animator leanAnimator;
+        
+        [SerializeField] 
+        [Tooltip("The collider that is enabled when leaning left.")]
+        private Collider leanLeftCollider;
+        
+        [SerializeField] 
+        [Tooltip("The collider that is enabled when leaning right.")]
+        private Collider leanRightCollider;
+
+        // Internal State
         
         private static readonly int LeftTrigger = Animator.StringToHash("leanLeft");
         private static readonly int RightTrigger = Animator.StringToHash("leanRight");
         private static readonly int ResetLeanTrigger = Animator.StringToHash("resetLean");
 
         public bool IsLeaning { get; private set; }
+        
+        // Methods
         
         public void LeanLeft()
         {

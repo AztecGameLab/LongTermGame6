@@ -10,19 +10,72 @@ using UnityEngine;
 
 public class RotationSystem : MyNamespace.System
 {
-    [Header("Dependencies")]
-    [SerializeField] private Transform pitchTransform;
-    [SerializeField] private Transform yawTransform;
-    [SerializeField] private Transform rollTransform;
-    
     [Header("Settings")] 
-    [SerializeField] private float pitchConstraint = 90f;
-    [SerializeField] private float yawConstraint = -1f;
-    [SerializeField] private float rollConstraint = -1f;
+    
+    [SerializeField] 
+    [Tooltip("The max and min value for pitch (X). [-1 means no constraint]")]
+    private float pitchConstraint = 90f;
+    
+    [SerializeField]
+    [Tooltip("The max and min value for yaw (Y). [-1 means no constraint]")]
+    private float yawConstraint = -1f;
+    
+    [SerializeField]
+    [Tooltip("The max and min value for roll (Z). [-1 means no constraint]")]
+    private float rollConstraint = -1f;
+    
+    [Header("Dependencies")]
+    
+    [SerializeField] 
+    [Tooltip("The transform to control X rotation.")]
+    private Transform pitchTransform;
+    
+    [SerializeField]
+    [Tooltip("The transform to control Y rotation.")]
+    private Transform yawTransform;
+    
+    [SerializeField] 
+    [Tooltip("The transform to control Z rotation.")]
+    private Transform rollTransform;
+
+    // Internal State
 
     private Vector3 _initialRotation;
     private Vector3 _currentRotation;
 
+    public Transform PitchTransform => pitchTransform;
+    public Transform YawTransform => yawTransform;
+    public Transform RollTransform => rollTransform;
+
+    // Methods
+    
+    private void Awake()
+    {
+        Activate();
+    }
+    
+    public void Activate()
+    {
+        // Find and save our current euler rotation as a starting point.
+
+        Transform targetTransform = transform;
+
+        if (pitchTransform != null) _currentRotation.x = pitchTransform.localRotation.eulerAngles.x;
+        if (yawTransform != null)   _currentRotation.y = yawTransform.localRotation.eulerAngles.y;
+        if (rollTransform != null)  _currentRotation.z = rollTransform.localRotation.eulerAngles.z;
+
+        CurrentRotation = targetTransform.rotation.eulerAngles;
+        targetTransform.rotation = Quaternion.identity;
+
+        _initialRotation = _currentRotation;
+    }
+    
+    public void Deactivate()
+    {
+        transform.rotation = Quaternion.Euler(CurrentRotation);
+        CurrentRotation = Vector3.zero;
+    }
+    
     [PublicAPI] public Vector3 Forward
     {
         get => Quaternion.Euler(_currentRotation) * Vector3.forward;
@@ -83,20 +136,6 @@ public class RotationSystem : MyNamespace.System
             _currentRotation.z = roll % 360;
             rollTransform.localRotation = Quaternion.Euler(0, 0, _currentRotation.z);
         }
-    }
-
-    public override void Initialize()
-    {
-        // Find and save our current euler rotation as a starting point.
-        
-        if (pitchTransform != null) _currentRotation.x = pitchTransform.localRotation.eulerAngles.x;
-        if (yawTransform != null)   _currentRotation.y = yawTransform.localRotation.eulerAngles.y;
-        if (rollTransform != null)  _currentRotation.z = rollTransform.localRotation.eulerAngles.z;
-
-        CurrentRotation = transform.rotation.eulerAngles;
-        transform.rotation = Quaternion.identity;
-
-        _initialRotation = _currentRotation;
     }
 
     private static float Constrain(float value, float initialValue, float constraint)
