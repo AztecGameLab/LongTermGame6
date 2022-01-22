@@ -9,16 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03cd6855d7ed449cb658dd0ecb9f211c, type: 3}
+  m_Script: {fileID: 11500000, guid: 790eceb0cc2a4a8c849b8f963d6ca88a, type: 3}
   m_Name: Default Controls
   m_EditorClassIdentifier: 
-  forwardKey: 119
-  backwardKey: 115
-  leftKey: 97
-  rightKey: 100
-  crouchKey: 306
-  sprintKey: 304
-  interactKey: 323
-  jumpKey: 32
+  sensitivity: 1
   invertY: 0
-  mouseSensitivity: 1
+  forward: 119
+  backward: 115
+  left: 97
+  right: 100
+  jump: 32
+  sneak: 306
+  sprint: 304
+  interact: 323
+  pause: 27
+  primary: 323
+  secondary: 324
