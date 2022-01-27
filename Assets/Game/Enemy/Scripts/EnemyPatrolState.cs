@@ -53,7 +53,9 @@ namespace Game.Enemy
         private void Awake()
         {
             patrolTree = BuildPatrolTree();
-            FindNextPatrolPoint();
+            
+            if (HasPatrolPoints())
+                FindNextPatrolPoint();
         }
 
         #region Finite State Machine
