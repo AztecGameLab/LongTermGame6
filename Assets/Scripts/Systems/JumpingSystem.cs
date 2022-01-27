@@ -8,23 +8,44 @@ using UnityEngine.Events;
 
 public class JumpingSystem : MyNamespace.System
 {
-    [Header("Dependencies")] 
-    [SerializeField] private Rigidbody targetRigidbody;
-    [SerializeField] private GroundCheck groundCheck;
-    [SerializeField] private CustomGravity customGravity;
-    
     [Header("Settings")]
-    [SerializeField] private JumpSettings jumpSettings;
-    [SerializeField] private bool showDebug;
-
+    
+    [SerializeField] 
+    private JumpSettings jumpSettings;
+    
+    [SerializeField]
+    [Tooltip("Writes debugging info to the console.")]
+    private bool showDebug;
+    
+    [Header("Dependencies")] 
+    
+    [SerializeField] 
+    [Tooltip("The rigidbody to apply our jumping force to.")]
+    private Rigidbody targetRigidbody;
+    
+    [SerializeField] 
+    [Tooltip("Used to determine if we are grounded.")]
+    private GroundCheck groundCheck;
+    
+    [SerializeField]
+    [Tooltip("Controlled at runtime for special jumping effects, like holding to jump longer.")]
+    private CustomGravity customGravity;
+    
     [Space(20)]
-    [SerializeField] public UnityEvent onJump;
+    
+    [SerializeField] 
+    [Tooltip("Invoked when we jump.")]
+    public UnityEvent onJump;
+    
+    // Internal State
     
     private bool _coyoteAvailable;
     private int _remainingAirJumps;
 
     private bool CoyoteAvailable => _coyoteAvailable && groundCheck.TimeSpentFalling < jumpSettings.CoyoteTime;
     public JumpSettings JumpSettings => jumpSettings;
+    
+    // Methods
     
     [PublicAPI] 
     public void RefreshJumps()

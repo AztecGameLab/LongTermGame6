@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KeyLock : MonoBehaviour
@@ -37,9 +35,9 @@ public class KeyLock : MonoBehaviour
         if (other.gameObject.Equals(keyObject))
         {
             hinge.limits = openLimits;
-            Instantiate(dummyLockPrefab, this.transform.position, this.transform.rotation);
+            Instantiate(dummyLockPrefab, transform.position, transform.rotation);
             Destroy(keyObject);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }
