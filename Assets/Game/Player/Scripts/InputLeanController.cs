@@ -50,7 +50,7 @@ namespace Player.Lean
 
         private void HandleToggle()
         {
-            if (Input.GetKeyDown(controls.leanLeft) && !leanLeftTrigger.IsOccupied)
+            if (Input.GetKeyDown(controls.leanLeft) && leanLeftTrigger.Colliders.Count == 0)
             {
                 if (system.IsLeaning)
                     system.ResetLean();
@@ -58,7 +58,7 @@ namespace Player.Lean
                 else system.LeanLeft();
             }
 
-            if (Input.GetKeyDown(controls.leanRight) && !leanRightTrigger.IsOccupied)
+            if (Input.GetKeyDown(controls.leanRight) && leanRightTrigger.Colliders.Count == 0)
             {
                 if (system.IsLeaning)
                     system.ResetLean();
@@ -69,10 +69,10 @@ namespace Player.Lean
 
         private void HandleHold()
         {
-            if (Input.GetKeyDown(controls.leanLeft) && !leanLeftTrigger.IsOccupied)
+            if (Input.GetKeyDown(controls.leanLeft) && leanLeftTrigger.Colliders.Count == 0)
                 system.LeanLeft();
             
-            if (Input.GetKeyDown(controls.leanRight) && !leanRightTrigger.IsOccupied)
+            if (Input.GetKeyDown(controls.leanRight) && leanRightTrigger.Colliders.Count == 0)
                 system.LeanRight();
             
             if (system.IsLeaning && (Input.GetKeyUp(controls.leanLeft) || Input.GetKeyUp(controls.leanRight)))
