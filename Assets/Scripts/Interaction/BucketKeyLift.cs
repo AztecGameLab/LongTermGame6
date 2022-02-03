@@ -6,6 +6,7 @@ public class BucketKeyLift : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] public GameObject keyObject;
+    [SerializeField] public GameObject bucketKeyObject;
     [SerializeField] public GameObject openedLockPrefab;
     [SerializeField] public GameObject animatedGameObject;
 
@@ -16,6 +17,8 @@ public class BucketKeyLift : MonoBehaviour
     {
         if (other.gameObject.Equals(keyObject))
         {
+            //Market key movable object must be disabled on start
+            bucketKeyObject.GetComponent<MovableObject>().enabled = true;   //enables the well key to move
             animatedGameObject.GetComponent<Animator>().SetTrigger("LiftBucket");
             Instantiate(openedLockPrefab, transform.position, transform.rotation);
             Destroy(keyObject);
