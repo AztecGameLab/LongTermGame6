@@ -6,18 +6,24 @@ public class AnimalPen : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] public GameObject keyObject;
-    [SerializeField] public GameObject dummyLockPrefab;
-    [SerializeField] public GameObject animatedGameObject;
+    [SerializeField] public GameObject itemToSpawn;
+    [SerializeField] public GameObject pig;
+    [SerializeField] public GameObject smallPig1;
+    [SerializeField] public GameObject smallPig2;
+    [SerializeField] private GameObject newKey;
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.Equals(keyObject))
         {
-            animatedGameObject.GetComponent<Animator>().SetTrigger("Unlocked");
-            Instantiate(dummyLockPrefab, transform.position, transform.rotation);
+
+            Destroy(pig);
             Destroy(keyObject);
-            Destroy(gameObject);
-            Destroy(animatedGameObject);
+            smallPig1.SetActive(true);
+            smallPig2.SetActive(true);
+            newKey.SetActive(true);
+            Destroy(gameObject); 
         }
     }
 }
