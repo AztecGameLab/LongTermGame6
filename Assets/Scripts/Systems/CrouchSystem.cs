@@ -55,7 +55,7 @@ public class CrouchSystem : MyNamespace.System
     
     private bool CheckIfBlockedAbove()
     {
-        return standingTrigger.Colliders.Count > 0;
+        return standingTrigger.IsOccupied;
     }
     
     private void UpdateEvents()
@@ -72,7 +72,7 @@ public class CrouchSystem : MyNamespace.System
     
     private void UpdateCollider()
     {
-        crouchCollider.gameObject.SetActive(IsCrouching);
-        standingCollider.gameObject.SetActive(!IsCrouching);
+        crouchCollider.enabled = IsCrouching;
+        standingCollider.enabled = !IsCrouching;
     }
 }
