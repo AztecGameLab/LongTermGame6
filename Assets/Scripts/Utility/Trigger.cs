@@ -1,52 +1,57 @@
 ﻿using System.Collections.Generic;
-using NaughtyAttributes;
+using ConsoleUtility;
 using UnityEngine;
 using UnityEngine.Events;
 
-// Wraps a trigger Collider and provides UnityEvents for OnTriggerEnter / Exit / Stay
+/// <summary>
+/// Wraps a trigger Collider and provides UnityEvents for OnTriggerEnter / Exit / Stay
+/// </summary>
+
 [RequireComponent(typeof(Collider))]
 public class Trigger : MonoBehaviour
 {
-    // todo: use actual LayerMask because its more powerful, but I don't wanna think about the bitwise ops right now
-    [SerializeField, Layer] private int excludeLayer;
-    [SerializeField] private bool showDebug;
+    [Header("Settings")]
+    
+    [SerializeField]
+    [Tooltip("Which layers should be ignored when checking collisions.")]
+    private LayerMask excludeLayers;
 
     [Space(20f)]
-    [SerializeField] private UnityEvent<Collider> collisionEnter;
-    [SerializeField] private UnityEvent<Collider> collisionExit;
-
-    public IEnumerable<Rigidbody> Occupants => _occupants;
-    public bool IsOccupied { get; private set; }
-
-    private List<Rigidbody> _occupants;
-    private bool _hasObjectInTrigger;
     
-    private void Awake()
+    [SerializeField] 
+    [Tooltip("Called when a collider enters this trigger.")]
+    private UnityEvent<Collider> collisionEnter;
+    
+    [SerializeField] 
+    [Tooltip("Called when a collider exits this trigger.")]
+    private UnityEvent<Collider> collisionExit;
+
+    // Internal State
+    
+    public IReadOnlyCollection<Rigidbody> Rigidbodies => _rigidbodies;
+    public IReadOnlyCollection<Collider> Colliders => _colliders;
+
+    private HashSet<Rigidbody> _rigidbodies = new HashSet<Rigidbody>();
+    private HashSet<Collider> _colliders = new HashSet<Collider>();
+    
+    // Methods
+    
+    private void OnValidate()
     {
-        _occupants = new List<Rigidbody>();
-        
+        // Ensure that the collider is always set to be a trigger.
         GetComponent<Collider>().isTrigger = true;
     }
-
-    private void FixedUpdate()
-    {
-        IsOccupied = _hasObjectInTrigger;
-        _hasObjectInTrigger = false;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (IsValidCollider(other))
-            _hasObjectInTrigger = true;
-    }
+    
+    // Note: enter / exit can sometime miss objects, so we cannot rely on it for updating our lists.
+    // However, its convenient for sending UnityEvents to the editor. 
     
     private void OnTriggerEnter(Collider other)
     {
         if (IsValidCollider(other))
         {
-            if (other.attachedRigidbody != null && !_occupants.Contains(other.attachedRigidbody))
-                _occupants.Add(other.attachedRigidbody);
-            
+            if (showDebug)
+                Debug.Log($"Entered trigger: {other.gameObject.name}", gameObject);
+                
             collisionEnter?.Invoke(other);
         }
     }
@@ -55,24 +60,63 @@ public class Trigger : MonoBehaviour
     {
         if (IsValidCollider(other))
         {
-            if (other.attachedRigidbody != null && _occupants.Contains(other.attachedRigidbody))
-                _occupants.Remove(other.attachedRigidbody);
-            
+            if (showDebug)
+                Debug.Log($"Exited trigger: {other.gameObject.name}", gameObject);
+                
             collisionExit.Invoke(other);
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        // Every physics update, we clear our state and repopulate with new data from OnTriggerStay.
+        
+        _rigidbodies.Clear();
+        _colliders.Clear();
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (IsValidCollider(other))
+        {
+            _colliders.Add(other);
+            
+            if (other.attachedRigidbody != null)
+                _rigidbodies.Add(other.attachedRigidbody);
         }
     }
     
     private bool IsValidCollider(Collider other)
     {
+        // weird bit-mask code for checking if the object is a valid layer
+        bool isExcludeLayer = excludeLayers.value == (excludeLayers.value | (1 << other.gameObject.layer));
         bool isTrigger = other.isTrigger;
-        bool isExcludeLayer = other.gameObject.layer == excludeLayer;
         
         return !isTrigger && !isExcludeLayer;
     }
 
-    private void OnGUI()
-    {
-        if (showDebug)
-            GUILayout.Label($"Is occupied: {IsOccupied}");
-    }
+    #region Debug
+
+        [SerializeField] 
+        [Tooltip("Writes debug information to the screen.")]
+        private bool showDebug;
+    
+        private void OnGUI()
+        {
+            if (showDebug)
+            {
+                GUILayout.Label($"Rigidbodies: {Rigidbodies.Count}");
+                
+                foreach (var occupiedRigidbody in Rigidbodies)
+                    GUILayout.Label(occupiedRigidbody.name);
+
+                GUILayout.Label($"Colliders: {Colliders.Count}");
+
+                foreach (var occupiedCollider in Colliders)
+                    GUILayout.Label(occupiedCollider.name);
+            }
+        }
+
+    #endregion
+    
 }

@@ -10,15 +10,35 @@ using UnityEngine;
 
 public class RotationSystem : MyNamespace.System
 {
-    [Header("Dependencies")]
-    [SerializeField] private Transform pitchTransform;
-    [SerializeField] private Transform yawTransform;
-    [SerializeField] private Transform rollTransform;
-    
     [Header("Settings")] 
-    [SerializeField] private float pitchConstraint = 90f;
-    [SerializeField] private float yawConstraint = -1f;
-    [SerializeField] private float rollConstraint = -1f;
+    
+    [SerializeField] 
+    [Tooltip("The max and min value for pitch (X). [-1 means no constraint]")]
+    private float pitchConstraint = 90f;
+    
+    [SerializeField]
+    [Tooltip("The max and min value for yaw (Y). [-1 means no constraint]")]
+    private float yawConstraint = -1f;
+    
+    [SerializeField]
+    [Tooltip("The max and min value for roll (Z). [-1 means no constraint]")]
+    private float rollConstraint = -1f;
+    
+    [Header("Dependencies")]
+    
+    [SerializeField] 
+    [Tooltip("The transform to control X rotation.")]
+    private Transform pitchTransform;
+    
+    [SerializeField]
+    [Tooltip("The transform to control Y rotation.")]
+    private Transform yawTransform;
+    
+    [SerializeField] 
+    [Tooltip("The transform to control Z rotation.")]
+    private Transform rollTransform;
+
+    // Internal State
 
     private Vector3 _initialRotation;
     private Vector3 _currentRotation;
@@ -27,6 +47,8 @@ public class RotationSystem : MyNamespace.System
     public Transform YawTransform => yawTransform;
     public Transform RollTransform => rollTransform;
 
+    // Methods
+    
     private void Awake()
     {
         Activate();
