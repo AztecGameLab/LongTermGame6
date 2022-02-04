@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 
-public abstract class Controller<T> : MonoBehaviour where T : MyNamespace.System
+/// <summary>
+/// Generalizes behaviours that control an object.
+/// </summary>
+/// <typeparam name="T">The object we want to control.</typeparam>
+
+public abstract class Controller<T> : MonoBehaviour where T : Object
 {
-    [Header("Dependencies")] 
-    [SerializeField] protected T system;
-    
-    public bool IsRunning { get; set; } = true;
+    [SerializeField] 
+    [Tooltip("The system this object controls.")]
+    protected T system;
 }
