@@ -7,7 +7,9 @@ using TMPro;
 
 public class Settings : MonoBehaviour
 {
-    public AudioMixer audioMixer;
+    public AudioMixer masterAudioMixer;
+    public AudioMixer SFXAudioMixer;
+    public AudioMixer musicAudioMixer;
 
     public TMP_Dropdown resolutionDropdown;
     
@@ -45,10 +47,22 @@ public class Settings : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
-    public void SetVolume(float volume)
+    public void SetMasterVolume(float volume)
     {
         //Updates the mixer with the slider value
-        audioMixer.SetFloat("MasterVolume", volume);
+        masterAudioMixer.SetFloat("MasterVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        //Updates the mixer with the slider value
+        SFXAudioMixer.SetFloat("SFXVolume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        //Updates the mixer with the slider value
+        musicAudioMixer.SetFloat("MusicVolume", volume);
     }
 
     public void SetQuality(int qualityIndex)
