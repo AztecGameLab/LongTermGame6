@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using Utility;
 
 /// <summary>
 /// Allows an object to switch between colliders in a safe way, without clipping into walls.
@@ -12,16 +13,12 @@ public class CrouchSystem : MyNamespace.System
     private GroundCheck groundCheck;
     
     [SerializeField] 
-    [Tooltip("The trigger used to check if we can stand up without hitting our head.")]
-    private Trigger standingTrigger;
-    
-    [SerializeField] 
     [Tooltip("The collider that is enabled when we are crouching.")]
-    private Collider crouchCollider;
+    private SafeCollider crouchCollider;
     
     [SerializeField] 
     [Tooltip("The collider that is enabled when we are standing.")]
-    private Collider standingCollider;
+    private SafeCollider standingCollider;
 
     [Space(20)]
     
@@ -62,29 +59,28 @@ public class CrouchSystem : MyNamespace.System
     private bool ShouldCrouch()
     {
         bool isGrounded = groundCheck.IsGrounded;
-        return WantsToCrouch && isGrounded && !_wasCrouching;
+        return WantsToCrouch && isGrounded && !_wasCrouching && crouchCollider.IsClear;
     }
     
     private void Crouch()
     {
         onCrouchStart.Invoke();
 
-        crouchCollider.gameObject.SetActive(true);
-        standingCollider.gameObject.SetActive(false);
+        crouchCollider.SafeEnable();
+        standingCollider.Disable();
     }
 
     private bool ShouldStand()
     {
-        bool blockedAbove = standingTrigger.Colliders.Count > 0;
         bool isGrounded = groundCheck.IsGrounded;
-        return !WantsToCrouch && isGrounded && !blockedAbove && _wasCrouching;
+        return !WantsToCrouch && isGrounded && _wasCrouching && standingCollider.IsClear;
     }
 
     private void Stand()
     {
         onCrouchEnd.Invoke();
         
-        crouchCollider.gameObject.SetActive(false);
-        standingCollider.gameObject.SetActive(true);
+        crouchCollider.Disable();
+        standingCollider.SafeEnable();
     }
 }

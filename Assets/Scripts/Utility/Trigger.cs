@@ -20,11 +20,11 @@ public class Trigger : MonoBehaviour
     
     [SerializeField] 
     [Tooltip("Called when a collider enters this trigger.")]
-    private UnityEvent<Collider> collisionEnter;
+    private UnityEvent<Collider> collisionEnter = new UnityEvent<Collider>();
     
     [SerializeField] 
     [Tooltip("Called when a collider exits this trigger.")]
-    private UnityEvent<Collider> collisionExit;
+    private UnityEvent<Collider> collisionExit = new UnityEvent<Collider>();
 
     // Internal State
     
