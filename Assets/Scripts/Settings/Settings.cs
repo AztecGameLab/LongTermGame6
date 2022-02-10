@@ -75,6 +75,20 @@ public class Settings : MonoBehaviour
         QualitySettings.SetQualityLevel(qualityIndex);
     }
 
+    public void VsyncToggle()
+    {
+        if (QualitySettings.vSyncCount > 0)
+        {
+            QualitySettings.vSyncCount = 0;
+            Debug.Log("vSyncCount = 0");
+        }
+        else
+        {
+            QualitySettings.vSyncCount = 1;
+            Debug.Log("vSyncCount = 1");
+        }
+    }
+
 
 
     
