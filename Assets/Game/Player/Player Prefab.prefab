@@ -902,14 +902,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5695e84c5bf77947bf9a1a60f2428ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  excludeLayer: 6
-  showDebug: 0
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   collisionEnter:
     m_PersistentCalls:
       m_Calls: []
   collisionExit:
     m_PersistentCalls:
       m_Calls: []
+  showDebug: 0
 --- !u!1 &4107684638142178194
 GameObject:
   m_ObjectHideFlags: 0
@@ -967,14 +969,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5695e84c5bf77947bf9a1a60f2428ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  excludeLayer: 6
-  showDebug: 0
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   collisionEnter:
     m_PersistentCalls:
       m_Calls: []
   collisionExit:
     m_PersistentCalls:
       m_Calls: []
+  showDebug: 0
 --- !u!1 &4263017966335658579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,14 +1037,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5695e84c5bf77947bf9a1a60f2428ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  excludeLayer: 6
-  showDebug: 0
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   collisionEnter:
     m_PersistentCalls:
       m_Calls: []
   collisionExit:
     m_PersistentCalls:
       m_Calls: []
+  showDebug: 0
 --- !u!1 &5122896776779306956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,14 +1396,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5695e84c5bf77947bf9a1a60f2428ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  excludeLayer: 6
-  showDebug: 0
+  excludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   collisionEnter:
     m_PersistentCalls:
       m_Calls: []
   collisionExit:
     m_PersistentCalls:
       m_Calls: []
+  showDebug: 0
 --- !u!1 &6976010289910180502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,6 +1787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43e93cf31f9d5842819518e3ffbdf48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundCheck: {fileID: 4270235084506005007}
   standingTrigger: {fileID: 8981197211344518494}
   crouchCollider: {fileID: 4190067940714404376}
   standingCollider: {fileID: 8513406412306230801}

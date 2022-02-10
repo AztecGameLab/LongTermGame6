@@ -8,6 +8,8 @@ using UnityEngine.Events;
 public class CrouchSystem : MyNamespace.System
 {
     [Header("Dependencies")] 
+    [SerializeField]
+    private GroundCheck groundCheck;
     
     [SerializeField] 
     [Tooltip("The trigger used to check if we can stand up without hitting our head.")]
@@ -34,45 +36,55 @@ public class CrouchSystem : MyNamespace.System
     // Internal State
     
     public bool WantsToCrouch { get; set; }
-    public bool IsCrouching { get; private set; }
     
+    private bool _isCrouching;
     private bool _wasCrouching;
 
     // Methods
     
     private void Update()
     {
-        // Ensure that we are only able to change our crouching state if there is room to stand.
+        _wasCrouching = _isCrouching;
+
+        if (ShouldCrouch())
+        {
+            _isCrouching = true;
+            Crouch();
+        }
         
-        if (CheckIfBlockedAbove() == false)
-            IsCrouching = WantsToCrouch;
-     
-        UpdateEvents();
-        UpdateCollider();
-        
-        _wasCrouching = IsCrouching;
+        else if (ShouldStand())
+        {
+            _isCrouching = false;
+            Stand();
+        }
+    }
+
+    private bool ShouldCrouch()
+    {
+        bool isGrounded = groundCheck.IsGrounded;
+        return WantsToCrouch && isGrounded && !_wasCrouching;
     }
     
-    private bool CheckIfBlockedAbove()
+    private void Crouch()
     {
-        return standingTrigger.Colliders.Count > 0;
+        onCrouchStart.Invoke();
+
+        crouchCollider.gameObject.SetActive(true);
+        standingCollider.gameObject.SetActive(false);
     }
-    
-    private void UpdateEvents()
+
+    private bool ShouldStand()
     {
-        bool crouchJustStarted = IsCrouching && !_wasCrouching;
-        bool crouchJustEnded = !IsCrouching && _wasCrouching;
-        
-        if (crouchJustStarted)
-            onCrouchStart.Invoke();
-        
-        else if (crouchJustEnded)
-            onCrouchEnd.Invoke();
+        bool blockedAbove = standingTrigger.Colliders.Count > 0;
+        bool isGrounded = groundCheck.IsGrounded;
+        return !WantsToCrouch && isGrounded && !blockedAbove && _wasCrouching;
     }
-    
-    private void UpdateCollider()
+
+    private void Stand()
     {
-        crouchCollider.gameObject.SetActive(IsCrouching);
-        standingCollider.gameObject.SetActive(!IsCrouching);
+        onCrouchEnd.Invoke();
+        
+        crouchCollider.gameObject.SetActive(false);
+        standingCollider.gameObject.SetActive(true);
     }
 }
