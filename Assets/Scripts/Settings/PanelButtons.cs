@@ -14,16 +14,14 @@ public class PanelButtons : MonoBehaviour
 
     public void BringControlPanelForward()
     {
-        
-      // controlsPanel.transform.SetSiblingIndex()  //setttings canvas child count minus one
-
+        controlsPanel.transform.SetSiblingIndex(settingsCanvas.transform.childCount - 2); //setttings canvas child count minus one
     }
     public void BringGraphicsPanelForward()
     {
-
+        graphicsPanel.transform.SetSiblingIndex(settingsCanvas.transform.childCount - 2);
     }
     public void BringAudioPanelForward()
     {
-
+        audioPanel.transform.SetSiblingIndex(settingsCanvas.transform.childCount - 2);
     }
 }

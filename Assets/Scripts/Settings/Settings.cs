@@ -12,10 +12,10 @@ public class Settings : MonoBehaviour
     public AudioMixer musicAudioMixer;
 
     public TMP_Dropdown resolutionDropdown;
-    
 
     Resolution[] resolutions;
 
+    public Controls pain;
     private void Start()
     {
         resolutions = Screen.resolutions;
@@ -64,6 +64,11 @@ public class Settings : MonoBehaviour
         //Updates the mixer with the slider value
         musicAudioMixer.SetFloat("MusicVolume", volume);
     }
+
+   // public void SetMouseSensitiviy()
+   // {
+    //    MouseLook
+    //}
 
     public void SetQuality(int qualityIndex)
     {
