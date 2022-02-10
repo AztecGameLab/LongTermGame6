@@ -12,8 +12,10 @@ namespace Utility
         private void Awake()
         {
             var triggerObject = new GameObject("Safe Trigger");
+            
             triggerObject.transform.SetParent(transform);
             triggerObject.transform.localPosition = Vector3.zero;
+            triggerObject.transform.localRotation = Quaternion.identity;
 
             _collider = GetCollider();
             _trigger = AddTrigger(triggerObject);
@@ -32,7 +34,5 @@ namespace Utility
 
         public abstract Collider GetCollider();
         public abstract Trigger AddTrigger(GameObject target);
-        
-        // public abstract void CopyData(T trigger, T original);
     }
 }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Utility;
 
 namespace Player.Lean
 {
@@ -8,6 +10,8 @@ namespace Player.Lean
     
     public class LeanSystem : MyNamespace.System
     {
+        public enum LeanState { Left, Right, Center }
+
         [Header("Dependencies")]
         
         [SerializeField] 
@@ -16,47 +20,56 @@ namespace Player.Lean
         
         [SerializeField] 
         [Tooltip("The collider that is enabled when leaning left.")]
-        private Collider leanLeftCollider;
+        private SafeCollider leftCollider;
         
         [SerializeField] 
         [Tooltip("The collider that is enabled when leaning right.")]
-        private Collider leanRightCollider;
+        private SafeCollider rightCollider;
+        
+        [SerializeField] 
+        [Tooltip("The collider that is enabled when leaning right.")]
+        private SafeCollider centerCollider;
 
         // Internal State
         
         private static readonly int LeftTrigger = Animator.StringToHash("leanLeft");
         private static readonly int RightTrigger = Animator.StringToHash("leanRight");
-        private static readonly int ResetLeanTrigger = Animator.StringToHash("resetLean");
-
-        public bool IsLeaning { get; private set; }
+        private static readonly int CenterTrigger = Animator.StringToHash("resetLean");
+        
+        public LeanState TargetState { get; set; }
+        public LeanState CurrentState { get; private set; }
         
         // Methods
-        
-        public void LeanLeft()
+
+        private void Update()
         {
-            leanLeftCollider.enabled = true;
-            leanRightCollider.enabled = false;
-            
-            IsLeaning = true;
-            leanAnimator.SetTrigger(LeftTrigger);
+            switch (TargetState)
+            {
+                case LeanState.Left  : UpdateLean(leftCollider, LeftTrigger);
+                    break;
+                case LeanState.Right : UpdateLean(rightCollider, RightTrigger);
+                    break;
+                case LeanState.Center: UpdateLean(centerCollider, CenterTrigger);
+                    break;
+                
+                default: throw new ArgumentOutOfRangeException();
+            }
         }
 
-        public void LeanRight()
+        private void UpdateLean(SafeCollider targetCollider, int animationTrigger)
         {
-            leanLeftCollider.enabled = false;
-            leanRightCollider.enabled = true;
-            
-            IsLeaning = true;
-            leanAnimator.SetTrigger(RightTrigger);
-        }
-
-        public void ResetLean()
-        {
-            leanLeftCollider.enabled = false;
-            leanRightCollider.enabled = false;
-            
-            IsLeaning = false;
-            leanAnimator.SetTrigger(ResetLeanTrigger);
+            if (targetCollider.IsClear && CurrentState != TargetState)
+            {
+                CurrentState = TargetState;
+                
+                leftCollider.Disable();
+                rightCollider.Disable();
+                centerCollider.Disable();
+                
+                targetCollider.SafeEnable();
+                
+                leanAnimator.SetTrigger(animationTrigger);
+            }
         }
     }
 }
