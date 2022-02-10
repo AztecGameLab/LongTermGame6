@@ -21,5 +21,10 @@ namespace Player.Crouching
             if (groundCheck.IsGrounded || !wantsToCrouch)
                 system.WantsToCrouch = wantsToCrouch;
         }
+
+        private void OnDisable()
+        {
+            system.WantsToCrouch = false;
+        }
     }
 }

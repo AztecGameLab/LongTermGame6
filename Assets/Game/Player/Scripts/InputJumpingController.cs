@@ -8,8 +8,17 @@ public class InputJumpingController : InputController<JumpingSystem>
 {
     private Buffer _jumpBuffer = new Buffer();
 
-    private void OnEnable()  { system.onJump.AddListener(ClearBuffer);    }
-    private void OnDisable() { system.onJump.RemoveListener(ClearBuffer); }
+    private void OnEnable()
+    {
+        system.onJump.AddListener(ClearBuffer);
+    }
+
+    private void OnDisable()
+    {
+        system.onJump.RemoveListener(ClearBuffer);
+        system.UpdateGravity(false);
+        _jumpBuffer.Clear();
+    }
 
     private void ClearBuffer()
     {
