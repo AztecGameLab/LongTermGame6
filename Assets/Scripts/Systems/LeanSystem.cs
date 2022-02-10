@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.Mathematics;
 using UnityEngine;
 using Utility;
 
@@ -12,12 +13,16 @@ namespace Player.Lean
     {
         public enum LeanState { Left, Right, Center }
 
+        [Header("Settings")] 
+        [SerializeField] private Transform leanTransform;
+        [SerializeField] private float leanDuration = 1f;
+        
+        [SerializeField] private Transform rightTransform;
+        [SerializeField] private Transform centerTransform;
+        [SerializeField] private Transform leftTransform;
+        
         [Header("Dependencies")]
-        
-        [SerializeField] 
-        [Tooltip("The component that will animate our lean effect.")]
-        private Animator leanAnimator;
-        
+
         [SerializeField] 
         [Tooltip("The collider that is enabled when leaning left.")]
         private SafeCollider leftCollider;
@@ -32,10 +37,6 @@ namespace Player.Lean
 
         // Internal State
         
-        private static readonly int LeftTrigger = Animator.StringToHash("leanLeft");
-        private static readonly int RightTrigger = Animator.StringToHash("leanRight");
-        private static readonly int CenterTrigger = Animator.StringToHash("resetLean");
-        
         public LeanState TargetState { get; set; }
         public LeanState CurrentState { get; private set; }
         
@@ -45,31 +46,49 @@ namespace Player.Lean
         {
             switch (TargetState)
             {
-                case LeanState.Left  : UpdateLean(leftCollider, LeftTrigger);
+                case LeanState.Left  : UpdateLean(leftCollider, leftTransform);
                     break;
-                case LeanState.Right : UpdateLean(rightCollider, RightTrigger);
+                case LeanState.Right : UpdateLean(rightCollider, rightTransform);
                     break;
-                case LeanState.Center: UpdateLean(centerCollider, CenterTrigger);
+                case LeanState.Center: UpdateLean(centerCollider, centerTransform);
                     break;
                 
                 default: throw new ArgumentOutOfRangeException();
             }
         }
 
-        private void UpdateLean(SafeCollider targetCollider, int animationTrigger)
+        private float _startTime;
+        
+        private void UpdateLean(SafeCollider targetCollider, Transform targetTransform)
         {
-            if (targetCollider.IsClear && CurrentState != TargetState)
+            // We can only animate our leaning if there is nothing in our way.
+            if (targetCollider.IsClear)
             {
-                CurrentState = TargetState;
+                // On the first frame that we change state, do some initialization. 
+                if (CurrentState != TargetState)
+                {
+                    CurrentState = TargetState;
+                    _startTime = Time.time;
+
+                    leftCollider.Disable();
+                    rightCollider.Disable();
+                    centerCollider.Disable();
+                    targetCollider.SafeEnable();
+                }
+
+                // Animate our transform's position and rotation with the SmoothStep function.
+                // See: https://en.wikipedia.org/wiki/Smoothstep
                 
-                leftCollider.Disable();
-                rightCollider.Disable();
-                centerCollider.Disable();
-                
-                targetCollider.SafeEnable();
-                
-                leanAnimator.SetTrigger(animationTrigger);
+                float percentDone = math.smoothstep(0, leanDuration, Time.time - _startTime);
+                leanTransform.position = Vector3.Lerp(leanTransform.position, targetTransform.position, percentDone);
+                leanTransform.localRotation = Quaternion.Lerp(leanTransform.localRotation, targetTransform.localRotation, percentDone);
             }
+        }
+
+        private void OnGUI()
+        {
+            GUILayout.Label($"Target State {TargetState}");
+            GUILayout.Label($"Current State {CurrentState}");
         }
     }
 }

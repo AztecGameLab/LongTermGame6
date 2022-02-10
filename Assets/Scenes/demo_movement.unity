@@ -4007,78 +4007,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1775186043772962475, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3712433954132606359, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: padding
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 3738002231856725615, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: padding
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866448393073835139, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: padding
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4127,12 +4055,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556468, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 600222115, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
 --- !u!1001 &978253209
 PrefabInstance:
