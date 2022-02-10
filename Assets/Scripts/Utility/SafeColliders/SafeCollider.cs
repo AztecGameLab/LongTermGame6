@@ -9,7 +9,7 @@ namespace Utility
 
         public bool IsClear => _trigger.Colliders.Count <= 0;
         
-        private void Awake()
+        private void Start()
         {
             var triggerObject = new GameObject("Safe Trigger");
             

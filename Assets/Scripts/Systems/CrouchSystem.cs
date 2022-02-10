@@ -46,7 +46,7 @@ public class CrouchSystem : MyNamespace.System
     
     private bool _isCrouching;
     private bool _wasCrouching;
-    private float _startTime;
+    private float _crouchStartTime;
 
     // Methods
     
@@ -55,57 +55,71 @@ public class CrouchSystem : MyNamespace.System
         _wasCrouching = _isCrouching;
 
         if (ShouldCrouch())
+        {
+            _isCrouching = true;
             Crouch();
+        }
         
         else if (ShouldStand())
+        {
+            _isCrouching = false;
             Stand();
+        }
     }
 
     private bool ShouldCrouch()
     {
         bool isGrounded = groundCheck.IsGrounded;
-        return WantsToCrouch && isGrounded && crouchCollider.IsClear;
+        bool isNotObstructed = crouchCollider.IsClear;
+        
+        return WantsToCrouch && isGrounded && isNotObstructed;
     }
     
     private bool ShouldStand()
     {
         bool isGrounded = groundCheck.IsGrounded;
-        return !WantsToCrouch && isGrounded && standingCollider.IsClear;
+        bool isNotObstructed = standingCollider.IsClear;
+        bool wantsToStand = !WantsToCrouch;
+        
+        return wantsToStand && isGrounded && isNotObstructed;
     }
 
     private void Crouch()
     {
         if (!_wasCrouching)
         {
-            _startTime = Time.time;
-            _isCrouching = true;
             onCrouchStart.Invoke();
             crouchCollider.SafeEnable();
             standingCollider.Disable();
+            
+            _crouchStartTime = Time.time;
         }
 
-        // Animate our transform's position with the SmoothStep function.
-        // See: https://en.wikipedia.org/wiki/Smoothstep
-                
-        float percentDone = math.smoothstep(0, crouchDuration, (Time.time - _startTime) * Time.timeScale);
-        crouchTransform.position = Vector3.Lerp(crouchTransform.position, crouchTarget.position, percentDone);
+        ApplyAnimation(crouchTarget.position);
     }
 
     private void Stand()
     {
         if (_wasCrouching)
         {
-            _startTime = Time.time;
-            _isCrouching = false;
             onCrouchEnd.Invoke();
             crouchCollider.Disable();
             standingCollider.SafeEnable();
+            
+            _crouchStartTime = Time.time;
         }
-        
-        // Animate our transform's position with the SmoothStep function.
-        // See: https://en.wikipedia.org/wiki/Smoothstep
                 
-        float percentDone = math.smoothstep(0, crouchDuration, (Time.time - _startTime) * Time.timeScale);
-        crouchTransform.position = Vector3.Lerp(crouchTransform.position, standingTarget.position, percentDone);
+        ApplyAnimation(standingTarget.position);
+    }
+
+    // Animate our transform's position with the SmoothStep function.
+    // See: https://en.wikipedia.org/wiki/Smoothstep
+    
+    private void ApplyAnimation(Vector3 targetPosition)
+    {
+        float elapsedTime = Time.time - _crouchStartTime;
+        float percentDone = math.smoothstep(0, crouchDuration, elapsedTime * Time.timeScale);
+        
+        crouchTransform.position = Vector3.Lerp(crouchTransform.position, targetPosition, percentDone);
     }
 }

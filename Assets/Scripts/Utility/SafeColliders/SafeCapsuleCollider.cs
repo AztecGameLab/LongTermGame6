@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Utility
 {
-    [RequireComponent(typeof(CapsuleCollider))]
     public class SafeCapsuleCollider : SafeColliderGeneric<CapsuleCollider>
     {
         [SerializeField] private float padding = 0.05f;

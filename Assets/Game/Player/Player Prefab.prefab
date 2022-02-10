@@ -1561,7 +1561,7 @@ MonoBehaviour:
   crouchTarget: {fileID: 8489611037715634830}
   standingTarget: {fileID: 1869049090054658596}
   crouchTransform: {fileID: 8137009871652392841}
-  crouchDuration: 1
+  crouchDuration: 2
   onCrouchStart:
     m_PersistentCalls:
       m_Calls:
@@ -1858,6 +1858,10 @@ PrefabInstance:
     - target: {fileID: 2518930760343150127, guid: a28108ddace2f1e41803202e92839e8c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739734336484492618, guid: a28108ddace2f1e41803202e92839e8c, type: 3}
+      propertyPath: targetScene
+      value: Main Menu
       objectReference: {fileID: 0}
     - target: {fileID: 5739734336484492618, guid: a28108ddace2f1e41803202e92839e8c, type: 3}
       propertyPath: onPause.m_PersistentCalls.m_Calls.Array.size

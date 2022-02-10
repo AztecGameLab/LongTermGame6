@@ -37,8 +37,10 @@ namespace Player.Lean
 
         // Internal State
         
-        public LeanState TargetState { get; set; }
-        public LeanState CurrentState { get; private set; }
+        private float _leanStartTime;
+
+        public LeanState TargetState { get; set; } = LeanState.Center;
+        public LeanState CurrentState { get; private set; } = LeanState.Center;
         
         // Methods
 
@@ -46,49 +48,53 @@ namespace Player.Lean
         {
             switch (TargetState)
             {
-                case LeanState.Left  : UpdateLean(leftCollider, leftTarget);
+                case LeanState.Left: 
+                    if (leftCollider.IsClear)
+                        UpdateLean(leftCollider, leftTarget);
                     break;
-                case LeanState.Right : UpdateLean(rightCollider, rightTarget);
+                
+                case LeanState.Right:
+                    if (rightCollider.IsClear)
+                        UpdateLean(rightCollider, rightTarget);
                     break;
-                case LeanState.Center: UpdateLean(centerCollider, centerTarget);
+                
+                case LeanState.Center:
+                    if (centerCollider.IsClear)
+                        UpdateLean(centerCollider, centerTarget);
                     break;
                 
                 default: throw new ArgumentOutOfRangeException();
             }
         }
 
-        private float _startTime;
         
         private void UpdateLean(SafeCollider targetCollider, Transform targetTransform)
         {
-            // We can only animate our leaning if there is nothing in our way.
-            if (targetCollider.IsClear)
+            if (CurrentState != TargetState)
             {
-                // On the first frame that we change state, do some initialization. 
-                if (CurrentState != TargetState)
-                {
-                    CurrentState = TargetState;
-                    _startTime = Time.time;
-
-                    leftCollider.Disable();
-                    rightCollider.Disable();
-                    centerCollider.Disable();
-                    targetCollider.SafeEnable();
-                }
-
-                // Animate our transform's position and rotation with the SmoothStep function.
-                // See: https://en.wikipedia.org/wiki/Smoothstep
+                leftCollider.Disable();
+                rightCollider.Disable();
+                centerCollider.Disable();
                 
-                float percentDone = math.smoothstep(0, leanDuration, (Time.time - _startTime) * Time.timeScale);
-                leanTransform.position = Vector3.Lerp(leanTransform.position, targetTransform.position, percentDone);
-                leanTransform.localRotation = Quaternion.Lerp(leanTransform.localRotation, targetTransform.localRotation, percentDone);
+                targetCollider.SafeEnable();
+                
+                _leanStartTime = Time.time;
+                CurrentState = TargetState;
             }
+
+            ApplyAnimation(targetTransform.position, targetTransform.localRotation);
         }
 
-        private void OnGUI()
+        // Animate our transform's position and rotation with the SmoothStep function.
+        // See: https://en.wikipedia.org/wiki/Smoothstep
+        
+        private void ApplyAnimation(Vector3 targetPosition, Quaternion targetRotation)
         {
-            GUILayout.Label($"Target State {TargetState}");
-            GUILayout.Label($"Current State {CurrentState}");
+            float elapsedTime = Time.time - _leanStartTime;
+            float percentDone = math.smoothstep(0, leanDuration, elapsedTime * Time.timeScale);
+        
+            leanTransform.position = Vector3.Lerp(leanTransform.position, targetPosition, percentDone);
+            leanTransform.localRotation = Quaternion.Lerp(leanTransform.localRotation, targetRotation, percentDone);
         }
     }
 }

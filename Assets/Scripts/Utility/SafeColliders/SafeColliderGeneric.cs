@@ -13,6 +13,7 @@ namespace Utility
         {
             var originalCollider = GetComponent<T>();
             var targetCollider = target.AddComponent<T>();
+            targetCollider.isTrigger = true;
             
             CopyTo(targetCollider, originalCollider);
 
