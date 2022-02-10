@@ -1,26 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
-    public GameObject deathCanvas;
-    public static PlayerDeath instance;
+    [Header("Settings")]
+    
+    [Scene]
+    [SerializeField]
+    private string sceneName = "StreetLevel";
+    
+    [Header("Dependencies")]
+    
+    [SerializeField]
+    private GameObject deathCanvas;
+    
+    [SerializeField]
     private Animator animator;
-    private bool respawned = false;
-    public string sceneName = "StreetLevel";
+
+    public static PlayerDeath Instance;
+    private bool _respawned;
+
     public void Awake()
     {
-        instance = this;
+        Instance = this;
         animator = deathCanvas.GetComponent<Animator>();
     }
+    
     private void Update()
     {
         if (deathCanvas.activeInHierarchy)
-        {
             Respawn();
-        }
     }
 
     public void EnableCanvas()
@@ -30,17 +40,14 @@ public class PlayerDeath : MonoBehaviour
         gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
     }
 
-
     public void Respawn()
     {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && respawned == false)
-            {  
-            respawned = true;
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && _respawned == false)
+        {  
+            _respawned = true;
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            gameObject.transform.position = RespawnPosition._instance.respawnPosition;
+            gameObject.transform.position = RespawnPosition.Instance.respawnPosition;
             SceneManager.LoadScene(sceneName);
-
         } 
     }
-
 }

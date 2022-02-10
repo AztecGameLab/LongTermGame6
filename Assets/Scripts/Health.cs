@@ -31,10 +31,9 @@ public class Health : MonoBehaviour
     private void Update()
     {
         RecoverHealth();
+        
         if (currentHealthPercent < 0.1)
-        {
-            PlayerDeath.instance.EnableCanvas();
-        }
+            PlayerDeath.Instance.EnableCanvas();
     }
 
 

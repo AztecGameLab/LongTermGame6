@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+// todo: integrate save system, instead of fixed respawn points
 
 public class RespawnPosition : MonoBehaviour
 {
-
-    public static RespawnPosition _instance;
+    public static RespawnPosition Instance;
+    
     public Vector3 respawnPosition;
+    
     private void Awake()
     {
-        if(_instance == null)
+        if(Instance == null)
         {
-            _instance = this;
+            Instance = this;
         }
         else
         {
@@ -19,6 +20,5 @@ public class RespawnPosition : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
-        
     }
 }
