@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
@@ -20,6 +21,15 @@ public class CrouchSystem : MyNamespace.System
     [Tooltip("The collider that is enabled when we are standing.")]
     private SafeCollider standingCollider;
 
+    [SerializeField] 
+    private Transform crouchTarget;
+    
+    [SerializeField]
+    private Transform standingTarget;
+    
+    [SerializeField] private Transform crouchTransform;
+    [SerializeField] private float crouchDuration = 1f;
+
     [Space(20)]
     
     [SerializeField] 
@@ -36,6 +46,7 @@ public class CrouchSystem : MyNamespace.System
     
     private bool _isCrouching;
     private bool _wasCrouching;
+    private float _startTime;
 
     // Methods
     
@@ -44,43 +55,57 @@ public class CrouchSystem : MyNamespace.System
         _wasCrouching = _isCrouching;
 
         if (ShouldCrouch())
-        {
-            _isCrouching = true;
             Crouch();
-        }
         
         else if (ShouldStand())
-        {
-            _isCrouching = false;
             Stand();
-        }
     }
 
     private bool ShouldCrouch()
     {
         bool isGrounded = groundCheck.IsGrounded;
-        return WantsToCrouch && isGrounded && !_wasCrouching && crouchCollider.IsClear;
+        return WantsToCrouch && isGrounded && crouchCollider.IsClear;
     }
     
-    private void Crouch()
-    {
-        onCrouchStart.Invoke();
-
-        crouchCollider.SafeEnable();
-        standingCollider.Disable();
-    }
-
     private bool ShouldStand()
     {
         bool isGrounded = groundCheck.IsGrounded;
-        return !WantsToCrouch && isGrounded && _wasCrouching && standingCollider.IsClear;
+        return !WantsToCrouch && isGrounded && standingCollider.IsClear;
+    }
+
+    private void Crouch()
+    {
+        if (!_wasCrouching)
+        {
+            _startTime = Time.time;
+            _isCrouching = true;
+            onCrouchStart.Invoke();
+            crouchCollider.SafeEnable();
+            standingCollider.Disable();
+        }
+
+        // Animate our transform's position with the SmoothStep function.
+        // See: https://en.wikipedia.org/wiki/Smoothstep
+                
+        float percentDone = math.smoothstep(0, crouchDuration, (Time.time - _startTime) * Time.timeScale);
+        crouchTransform.position = Vector3.Lerp(crouchTransform.position, crouchTarget.position, percentDone);
     }
 
     private void Stand()
     {
-        onCrouchEnd.Invoke();
+        if (_wasCrouching)
+        {
+            _startTime = Time.time;
+            _isCrouching = false;
+            onCrouchEnd.Invoke();
+            crouchCollider.Disable();
+            standingCollider.SafeEnable();
+        }
         
-        crouchCollider.Disable();
-        standingCollider.SafeEnable();
+        // Animate our transform's position with the SmoothStep function.
+        // See: https://en.wikipedia.org/wiki/Smoothstep
+                
+        float percentDone = math.smoothstep(0, crouchDuration, (Time.time - _startTime) * Time.timeScale);
+        crouchTransform.position = Vector3.Lerp(crouchTransform.position, standingTarget.position, percentDone);
     }
 }

@@ -17,9 +17,9 @@ namespace Player.Lean
         [SerializeField] private Transform leanTransform;
         [SerializeField] private float leanDuration = 1f;
         
-        [SerializeField] private Transform rightTransform;
-        [SerializeField] private Transform centerTransform;
-        [SerializeField] private Transform leftTransform;
+        [SerializeField] private Transform rightTarget;
+        [SerializeField] private Transform leftTarget;
+        [SerializeField] private Transform centerTarget;
         
         [Header("Dependencies")]
 
@@ -46,11 +46,11 @@ namespace Player.Lean
         {
             switch (TargetState)
             {
-                case LeanState.Left  : UpdateLean(leftCollider, leftTransform);
+                case LeanState.Left  : UpdateLean(leftCollider, leftTarget);
                     break;
-                case LeanState.Right : UpdateLean(rightCollider, rightTransform);
+                case LeanState.Right : UpdateLean(rightCollider, rightTarget);
                     break;
-                case LeanState.Center: UpdateLean(centerCollider, centerTransform);
+                case LeanState.Center: UpdateLean(centerCollider, centerTarget);
                     break;
                 
                 default: throw new ArgumentOutOfRangeException();
@@ -79,7 +79,7 @@ namespace Player.Lean
                 // Animate our transform's position and rotation with the SmoothStep function.
                 // See: https://en.wikipedia.org/wiki/Smoothstep
                 
-                float percentDone = math.smoothstep(0, leanDuration, Time.time - _startTime);
+                float percentDone = math.smoothstep(0, leanDuration, (Time.time - _startTime) * Time.timeScale);
                 leanTransform.position = Vector3.Lerp(leanTransform.position, targetTransform.position, percentDone);
                 leanTransform.localRotation = Quaternion.Lerp(leanTransform.localRotation, targetTransform.localRotation, percentDone);
             }
