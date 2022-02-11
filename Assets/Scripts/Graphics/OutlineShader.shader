@@ -1,7 +1,10 @@
 Shader "Custom/Outline" {
     Properties {
-        _MainTex ("Texture", 2D) = "white" {}
+        _OutlineColor ("Outline Color", Color) = (1, 1, 1, 1)
+        _OutlineIntensity ("Outline Intensity", Float) = 1.0
+        _DepthRadius ("Depth Radius", Float) = 0.01
     }
+    
     SubShader {
         Tags { "RenderType"="Opaque" }
         LOD 100
@@ -29,6 +32,9 @@ Shader "Custom/Outline" {
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _DepthRadius;
+            float4 _OutlineColor;
+            float _OutlineIntensity;
             UNITY_DECLARE_DEPTH_TEXTURE(_CameraDepthTexture);
             UNITY_DECLARE_TEX2D(_CameraOpaqueTexture);
 
@@ -42,18 +48,35 @@ Shader "Custom/Outline" {
                 return o;
             }
 
+            float getDepth(v2f i, float4 offset) {
+                float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos + offset)));
+                return sceneZ - i.screenPos.z;
+            }
+
+            float getMax(float4 values) {
+                float maxValue = 0;
+                for (int i = 0; i < 4; i++) maxValue = max(maxValue, values[i]);
+                return maxValue;
+            }
+
             fixed4 frag (v2f i) : SV_Target {
                 // depth
-                float sceneZ = LinearEyeDepth (SAMPLE_DEPTH_TEXTURE_PROJ(_CameraDepthTexture, UNITY_PROJ_COORD(i.screenPos)));
-                float depth = sceneZ - i.screenPos.z;
+                // float4 depthOffset = float4(0.1, 0.1, 0, 0);
+                // float depth = getDepth(i, depthOffset);
+                float4 adjacentDepths = 0;
+                float4 localDepth = getDepth(i, 0);
+                adjacentDepths[0] = getDepth(i, float4(-_DepthRadius, 0, 0, 0));
+                adjacentDepths[1] = getDepth(i, float4(_DepthRadius, 0, 0, 0));
+                adjacentDepths[2] = getDepth(i, float4(0, -_DepthRadius, 0, 0));
+                adjacentDepths[3] = getDepth(i, float4(0, _DepthRadius, 0, 0));
 
                 // screen color
                 float2 screenPosition = i.screenPos.xy / i.screenPos.w;
                 fixed4 screenColor = UNITY_SAMPLE_TEX2D(_CameraOpaqueTexture, screenPosition);
 
                 // mixing
-                fixed4 depthColor = fixed4(depth, depth, depth, 1) * 5;
-                fixed4 col = (depth > 0.01) ? depthColor : screenColor;
+                float depth = max(adjacentDepths[0], getMax(adjacentDepths));
+                fixed4 col = (depth > 0.1) ? _OutlineColor * _OutlineIntensity : screenColor;
                 // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
