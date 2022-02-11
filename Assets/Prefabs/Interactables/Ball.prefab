@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7609458109135603034}
   - component: {fileID: 7609458109135603035}
   - component: {fileID: 7609458109135603028}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2525,6 +2525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
+  playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
 --- !u!114 &7609458109135603028

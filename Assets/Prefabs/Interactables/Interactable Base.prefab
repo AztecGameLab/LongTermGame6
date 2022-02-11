@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7007801196651952347}
   - component: {fileID: 4723133526917844122}
   - component: {fileID: 4793178900451971204}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Interactable Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,5 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 0.5
+  playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1

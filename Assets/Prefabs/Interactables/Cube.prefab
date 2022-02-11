@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4795329138781609756}
   - component: {fileID: 4795329138781609757}
   - component: {fileID: 4795329138781609758}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 1
+  playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
 --- !u!1 &4795329138887181543
@@ -424,7 +425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4795329138887181542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
