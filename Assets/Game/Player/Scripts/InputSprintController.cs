@@ -68,7 +68,7 @@ public class InputSprintController : InputController<MovementSystem>
         if (JustStoppedSprinting)
             onStartSprint.Invoke();
     }
-
+    
     #region Debug
 
     private void UpdateDebug()
