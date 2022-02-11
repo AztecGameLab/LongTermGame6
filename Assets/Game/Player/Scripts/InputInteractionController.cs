@@ -10,4 +10,9 @@ public class InputInteractionController : InputController<InteractionSystem>
     {
         system.HoldingInteract = Input.GetKey(controls.interact);
     }
+
+    private void OnDisable()
+    {
+        system.HoldingInteract = false;
+    }
 }
