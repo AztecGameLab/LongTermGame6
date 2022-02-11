@@ -27,6 +27,9 @@ public class Health : MonoBehaviour
     [SerializeField] 
     private UnityEvent onDamage;
 
+    [SerializeField] 
+    private UnityEvent onDeath;
+    
     // Methods
     
     private void Update()
@@ -47,6 +50,9 @@ public class Health : MonoBehaviour
     {
         currentHealthPercent = percent;
         onHealthChanged.Invoke(currentHealthPercent);
+        
+        if (currentHealthPercent <= 0)
+            onDeath.Invoke();
     }
 
     /// <summary>
@@ -57,6 +63,7 @@ public class Health : MonoBehaviour
     public void Damage(float percent)
     {
         float clampedPercent = Mathf.Clamp01(currentHealthPercent - percent);
+
         SetHealthPercent(clampedPercent);
         onDamage.Invoke();
     }
