@@ -12,5 +12,10 @@ namespace Player.Crouching
         {
             system.WantsToCrouch = Input.GetKey(controls.sneak);
         }
+
+        private void OnDisable()
+        {
+            system.WantsToCrouch = false;
+        }
     }
 }

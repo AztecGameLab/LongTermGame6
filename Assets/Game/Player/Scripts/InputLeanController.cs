@@ -66,5 +66,10 @@ namespace Player.Lean
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
+
+        private void OnDisable()
+        {
+            system.TargetState = LeanSystem.LeanState.Center;
+        }
     }
 }
