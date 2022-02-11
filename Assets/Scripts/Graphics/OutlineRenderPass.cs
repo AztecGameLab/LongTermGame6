@@ -28,7 +28,6 @@ public class OutlineRenderPass : ScriptableRenderPass {
         CommandBuffer cmd = CommandBufferPool.Get(profilerTag);
         cmd.Clear();
         
-        // TODO stuff happens here!
         cmd.Blit(cameraColorTargetIdent, tempTexture.Identifier(), material, 0);
         cmd.Blit(tempTexture.Identifier(), cameraColorTargetIdent);
         context.ExecuteCommandBuffer(cmd);
