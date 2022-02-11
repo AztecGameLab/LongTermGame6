@@ -78,5 +78,10 @@ namespace Player.Lean
             if (system.IsLeaning && (Input.GetKeyUp(controls.leanLeft) || Input.GetKeyUp(controls.leanRight)))
                 system.ResetLean();
         }
+
+        private void OnDisable()
+        {
+            system.ResetLean();
+        }
     }
 }
