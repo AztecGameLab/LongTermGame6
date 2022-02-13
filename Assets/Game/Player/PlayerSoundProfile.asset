@@ -14,11 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surfaces:
   - surfaceTag: Mud
-    defaultStepSound: event:/Footsteps Stone
+    defaultStepSound: event:/Player Jump
     crouchedStepSound: 
     jumpSound: 
     isWet: 0
   - surfaceTag: Wood
+    defaultStepSound: event:/Player Step
+    crouchedStepSound: 
+    jumpSound: 
+    isWet: 0
+  - surfaceTag: Cobble
+    defaultStepSound: event:/Footsteps Stone
+    crouchedStepSound: 
+    jumpSound: 
+    isWet: 0
+  - surfaceTag: Sand
     defaultStepSound: event:/Player Step
     crouchedStepSound: 
     jumpSound: 
