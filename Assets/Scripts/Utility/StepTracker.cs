@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using FMODUnity;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -18,6 +19,9 @@ public class StepTracker : MonoBehaviour
     [Tooltip("How far we can walk before registering a step.")]
     private float stepDistance = 2f;
 
+    [SerializeField]
+    [Tooltip("The sound profile of the entity making the steps")]
+    private EntitySoundProfile soundProfile;
     [Header("Dependencies")]
     
     [SerializeField]
@@ -53,6 +57,9 @@ public class StepTracker : MonoBehaviour
 
         if (_elapsedDistance > stepDistance)
         {
+            string footStepSound = soundProfile.GetSoundOnSurface(groundCheck.ConnectedCollider.tag);
+            if(footStepSound!="")
+                RuntimeManager.PlayOneShot(footStepSound,transform.position);
             stepEvent.Invoke();
             _elapsedDistance = 0f;
         }
