@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c2fe17c8fc01545bd324eb7cad3703, type: 3}
   m_Name: PlayerSoundProfile
   m_EditorClassIdentifier: 
-  surfaces: []
+  surfaces:
+  - surfaceTag: Mud
+    defaultStepSound: event:/Footsteps Stone
+    crouchedStepSound: 
+    jumpSound: 
+    isWet: 0
+  - surfaceTag: Wood
+    defaultStepSound: event:/Player Step
+    crouchedStepSound: 
+    jumpSound: 
+    isWet: 0
