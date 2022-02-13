@@ -15,7 +15,10 @@ public class Settings : MonoBehaviour
 
     Resolution[] resolutions;
 
-    public Controls pain;
+    public Controls customControls;
+
+    public GameObject Player;
+    public int controllerChildIndex;
     private void Start()
     {
         resolutions = Screen.resolutions;
@@ -65,10 +68,19 @@ public class Settings : MonoBehaviour
         musicAudioMixer.SetFloat("MusicVolume", volume);
     }
 
-   // public void SetMouseSensitiviy()
-   // {
-    //    MouseLook
-    //}
+    public void SetMouseSensitiviy(float sensitivity)
+    {
+        SwitchToCustomControls();
+        customControls.sensitivity = sensitivity;
+    }
+
+    void SwitchToCustomControls()
+    {
+        if(Player.transform.GetChild(controllerChildIndex).GetComponent<InputRotationController>().controls != customControls)
+        {
+            Player.transform.GetChild(controllerChildIndex).GetComponent<InputRotationController>().controls = customControls;
+        }
+    }
 
     public void SetQuality(int qualityIndex)
     {
