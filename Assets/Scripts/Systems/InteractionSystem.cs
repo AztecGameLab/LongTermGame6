@@ -27,7 +27,7 @@ public class InteractionSystem : MyNamespace.System
 
     [SerializeField]
     [Tooltip("The transform used see position of main camera")]
-    public Transform cameraPosition;
+    public Transform cameraTransform;
 
     // Internal State
 

@@ -35,8 +35,8 @@ public class InputInteractionController : InputController<InteractionSystem>
 
         if (currentScrollSpeed != 0)
         {
-            Vector3 normalizedDirection = (system.CurrentMovableObject._targetTransform.position - system.cameraPosition.position).normalized;
-            float CurrentDistance = Vector3.Distance(system.CurrentMovableObject.GetComponent<Rigidbody>().ClosestPointOnBounds(system.cameraPosition.position), system.cameraPosition.position);
+            Vector3 normalizedDirection = (system.CurrentMovableObject._targetTransform.position - system.cameraTransform.position).normalized;
+            float CurrentDistance = Vector3.Distance(system.CurrentMovableObject.GetComponent<Rigidbody>().ClosestPointOnBounds(system.cameraTransform.position), system.cameraTransform.position);
 
             if (currentScrollSpeed > 0 && CurrentDistance < system.CurrentInteractable.InteractRange) //forward : make sure not to pull extra use the InteractRange
             {
