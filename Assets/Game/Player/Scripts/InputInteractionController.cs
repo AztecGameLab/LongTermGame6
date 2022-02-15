@@ -48,4 +48,9 @@ public class InputInteractionController : InputController<InteractionSystem>
             }
         }
     }
+
+    private void OnDisable()
+    {
+        system.HoldingInteract = false;
+    }
 }
