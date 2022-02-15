@@ -10,12 +10,14 @@ namespace Game
     [Serializable]
     public class Save
     {
-        public string CurrentScene { get; set; }
         public string SaveName { get; private set; }
-        
+        public string CurrentScene { get; set; }
+
+        private Dictionary<string, Dictionary<string, object>> _sceneData = 
+            new Dictionary<string, Dictionary<string, object>>();
+
         public Save(string saveSaveName)
         {
-            CurrentScene = SceneManager.GetActiveScene().name;
             SaveName = saveSaveName;
             
             if (IsValid())
@@ -24,11 +26,42 @@ namespace Game
             Debug.Log($"Created new save \"{saveSaveName}\".");
         }
 
+        public void UpdateData()
+        {
+            CurrentScene = SceneManager.GetActiveScene().name;
+
+            if (_sceneData.ContainsKey(CurrentScene) == false)
+                _sceneData.Add(CurrentScene, new Dictionary<string, object>());
+            
+            foreach (var saveData in SaveData.Instances)
+            {
+                string saveID = saveData.GetID();
+                
+                if (_sceneData[CurrentScene].ContainsKey(saveID) == false)
+                    _sceneData[CurrentScene].Add(saveID, null);
+
+                _sceneData[CurrentScene][saveID] = saveData.WriteData();
+            }
+
+            Debug.Log($"Updated save {SaveName}.");
+        }
+
+        public void ApplyData()
+        {
+            SceneManager.LoadScene(CurrentScene);
+
+            foreach (SaveData instance in SaveData.Instances)
+            {
+                object saveData = _sceneData[CurrentScene][instance.GetID()];
+                instance.ReadData(saveData);
+            }
+        }
+        
         #region Instance Methods
 
         public void Write()
         {
-            Debug.Log($"Updated save {SaveName}.");
+            UpdateData();
             
             // Creates a new file for the save.
             string savePath = GetPath();
@@ -37,6 +70,8 @@ namespace Game
             // Writes our data to the file.
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(saveFile, this);
+            
+            Debug.Log("Wrote save to disk.");
         }
         
         public void Delete()

@@ -27,14 +27,14 @@ namespace Commands
 
         private void HandleCreate(string saveName)
         {
-            var newSave = new Save(saveName);
-            newSave.Write();
+            var targetSave = new Save(saveName);
+            targetSave.Write();
         }
 
         private void HandleLoad(string saveName)
         {
-            var target = Save.Read(saveName);
-            SceneManager.LoadScene(target.CurrentScene);
+            var targetSave = Save.Read(saveName);
+            SceneManager.LoadScene(targetSave.CurrentScene);
         }
     }
 }
