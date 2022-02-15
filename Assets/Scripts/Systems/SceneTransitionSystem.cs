@@ -30,6 +30,7 @@ public class SceneTransitionSystem : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
             instance = this;
+            TransitionToScene(1);
         }
     }
     public void TransitionToScene(int buildIndex) 
