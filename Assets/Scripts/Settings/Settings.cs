@@ -7,34 +7,35 @@ using TMPro;
 
 public class Settings : MonoBehaviour
 {
-    public AudioMixer masterAudioMixer;
-    public AudioMixer SFXAudioMixer;
-    public AudioMixer musicAudioMixer;
+    [Header("Dependencies")]
+    [SerializeField] private AudioMixer masterAudioMixer;
+    [SerializeField] private AudioMixer SFXAudioMixer;
+    [SerializeField] private AudioMixer musicAudioMixer;
 
-    public TMP_Dropdown resolutionDropdown;
+    [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [SerializeField] private Controls customControls;
+    [SerializeField] private GameObject Player;
 
-    Resolution[] resolutions;
+    [Header("Settings")]
+    [SerializeField]public int playerControllerChildIndex;
+    Resolution[] _resolutions;
 
-    public Controls customControls;
-
-    public GameObject Player;
-    public int controllerChildIndex;
     private void Start()
     {
-        resolutions = Screen.resolutions;
+        _resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
 
         List<string> resolutionOptions = new List<string>();
 
         int currentResolutionsIndex = 0;
-        for(int i = 0; i < resolutions.Length; i++)
+        for(int i = 0; i < _resolutions.Length; i++)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
+            string option = _resolutions[i].width + "x" + _resolutions[i].height;
             resolutionOptions.Add(option);
 
-            if(resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            if(_resolutions[i].width == Screen.currentResolution.width &&
+                _resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionsIndex = i;
             }
@@ -47,24 +48,21 @@ public class Settings : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        Resolution resolution = resolutions[resolutionIndex];
+        Resolution resolution = _resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
     public void SetMasterVolume(float volume)
     {
-        //Updates the mixer with the slider value
         masterAudioMixer.SetFloat("MasterVolume", volume);
     }
 
     public void SetSFXVolume(float volume)
     {
-        //Updates the mixer with the slider value
         SFXAudioMixer.SetFloat("SFXVolume", volume);
     }
 
     public void SetMusicVolume(float volume)
     {
-        //Updates the mixer with the slider value
         musicAudioMixer.SetFloat("MusicVolume", volume);
     }
 
@@ -76,9 +74,9 @@ public class Settings : MonoBehaviour
 
     void SwitchToCustomControls()
     {
-        if(Player.transform.GetChild(controllerChildIndex).GetComponent<InputRotationController>().controls != customControls)
+        if(Player.transform.GetChild(playerControllerChildIndex).GetComponent<InputRotationController>().controls != customControls)
         {
-            Player.transform.GetChild(controllerChildIndex).GetComponent<InputRotationController>().controls = customControls;
+            Player.transform.GetChild(playerControllerChildIndex).GetComponent<InputRotationController>().controls = customControls;
         }
     }
 
@@ -92,12 +90,10 @@ public class Settings : MonoBehaviour
         if (QualitySettings.vSyncCount > 0)
         {
             QualitySettings.vSyncCount = 0;
-            Debug.Log("vSyncCount = 0");
         }
         else
         {
             QualitySettings.vSyncCount = 1;
-            Debug.Log("vSyncCount = 1");
         }
     }
 
