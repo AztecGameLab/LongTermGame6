@@ -1710,6 +1710,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &609158536 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2620666226370321362, guid: a9a74faecb2f3a3418ff8acfb9196aec, type: 3}
+  m_PrefabInstance: {fileID: 978253209}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &620604095
 Mesh:
   m_ObjectHideFlags: 0
@@ -2044,7 +2049,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-143022
+  m_Name: pb_Mesh-14552
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2055,8 +2060,8 @@ Mesh:
     firstVertex: 0
     vertexCount: 24
     localAABB:
-      m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0, y: 0, z: 0}
+      m_Center: {x: 0.12963693, y: 1.125, z: -0.4999034}
+      m_Extent: {x: 0.035887256, y: 1.125, z: 0.7233047}
   m_Shapes:
     vertices: []
     shapes: []
@@ -2626,6 +2631,7 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
+  _targetTransform: {fileID: 0}
 --- !u!114 &798913139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4102,6 +4108,7 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
+  _targetTransform: {fileID: 0}
 --- !u!64 &934679651
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6694,6 +6701,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8351551621535233386, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
+      propertyPath: cameraPosition
+      value: 
+      objectReference: {fileID: 609158536}
     m_RemovedComponents:
     - {fileID: 600222115, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
@@ -7489,6 +7500,7 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
+  _targetTransform: {fileID: 0}
 --- !u!114 &1247135932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8693,6 +8705,7 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
+  _targetTransform: {fileID: 0}
 --- !u!114 &1307437157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14253,6 +14266,7 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
+  _targetTransform: {fileID: 0}
 --- !u!114 &1497602018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15274,6 +15288,7 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
+  _targetTransform: {fileID: 0}
 --- !u!114 &1999056348
 MonoBehaviour:
   m_ObjectHideFlags: 0

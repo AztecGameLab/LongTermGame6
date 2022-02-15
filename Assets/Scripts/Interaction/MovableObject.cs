@@ -13,7 +13,8 @@ public class MovableObject : MonoBehaviour
     [SerializeField] private bool freezeRotation = true;
     
     private Transform _current;
-    private Transform _targetTransform;
+    [HideInInspector]
+    public Transform _targetTransform;
 
     [PublicAPI] public Interactable Interactable { get; private set; }
     [PublicAPI] public Rigidbody Rigidbody { get; private set; }
