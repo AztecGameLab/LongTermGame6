@@ -265,10 +265,10 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 0
+  HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: 
-  sourceBankPath: Banks
+  sourceProjectPath: FMOD/LongTermGame6.fspro
+  sourceBankPath: FMOD\Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -288,8 +288,9 @@ MonoBehaviour:
   RealChannelSettings: []
   Plugins: []
   MasterBanks:
-  - Master
-  Banks: []
+  - Menu
+  Banks:
+  - Testing
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
