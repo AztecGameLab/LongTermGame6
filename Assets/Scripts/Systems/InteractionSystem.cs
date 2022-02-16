@@ -34,7 +34,6 @@ public class InteractionSystem : MyNamespace.System
     [PublicAPI] public bool LookingAtInteractable { get; private set; }
     [PublicAPI] public bool HoldingInteract { get; set; }
     [PublicAPI] public Interactable CurrentInteractable { get; private set; }
-    [PublicAPI] public MovableObject CurrentMovableObject { get; private set; }
     [PublicAPI] public bool HasInteractable => CurrentInteractable != null;
     
     // Methods
@@ -46,13 +45,7 @@ public class InteractionSystem : MyNamespace.System
             LookingAtInteractable = true;
             
             if (JustPressedInteract)
-            { 
                 GrabObject(visionInteractable, point);
-
-                if(CurrentInteractable.GetComponent<MovableObject>() != null)
-                    CurrentMovableObject = CurrentInteractable.GetComponent<MovableObject>();
-            }
-                
         }
 
         else LookingAtInteractable = false;

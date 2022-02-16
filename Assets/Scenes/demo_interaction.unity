@@ -2044,7 +2044,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-25012
+  m_Name: pb_Mesh-157206
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2626,8 +2626,6 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
-  _targetTransform: {fileID: 0}
-  hasCollision: 0
 --- !u!114 &798913139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4106,8 +4104,6 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
-  _targetTransform: {fileID: 0}
-  hasCollision: 0
 --- !u!64 &934679651
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6624,6 +6620,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1792660044288871909, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
+      propertyPath: scrollWheelSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1792660044288871909, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
+      propertyPath: interactableDistance
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6953,7 +6957,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2359756735399934657, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2359756735399934658, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
       propertyPath: m_ConnectedBody
@@ -7499,8 +7503,6 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
-  _targetTransform: {fileID: 0}
-  hasCollision: 0
 --- !u!114 &1247135932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8706,8 +8708,6 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
-  _targetTransform: {fileID: 0}
-  hasCollision: 0
 --- !u!114 &1307437157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14269,8 +14269,6 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
-  _targetTransform: {fileID: 0}
-  hasCollision: 0
 --- !u!114 &1497602018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15293,8 +15291,6 @@ MonoBehaviour:
   playerLayer: 6
   maxSpeed: 10
   freezeRotation: 1
-  _targetTransform: {fileID: 0}
-  hasCollision: 0
 --- !u!114 &1999056348
 MonoBehaviour:
   m_ObjectHideFlags: 0
