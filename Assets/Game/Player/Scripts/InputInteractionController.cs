@@ -6,51 +6,55 @@
 
 public class InputInteractionController : InputController<InteractionSystem>
 {
-    //METHODS FOR SCROLLWHEEL MOVEMENT
     [SerializeField]
-    [Tooltip("Control the scrollWheel speed to objects")]
-    private float _scaleScrollWheelSpeed;
+    [Tooltip("Scroll wheel speed")]
+    private float scrollWheelSpeed;
 
     [SerializeField]
-    [Tooltip("Distance between interactables and player when using scrollwheel")]
-    private float _interactableDistance;
+    [Tooltip("Distance between player and gameobject")]
+    private float interactableDistance;
+
+    private Transform _camaraTransform;
+
 
     private void Awake()
     {
-        _scaleScrollWheelSpeed = 0.5f;
-        _interactableDistance = 0.75f;
+        _camaraTransform = Camera.main.transform != null? Camera.main.transform: transform;
+        scrollWheelSpeed = 0.5f;
+        interactableDistance = 0.75f;
     }
 
     private void Update()
     {
         system.HoldingInteract = Input.GetKey(controls.interact);
 
-        if (system.HasInteractable && system.CurrentMovableObject.GetComponent<Rigidbody>() != null)
-            ScrollWheelController();
-    }
-
-    private void ScrollWheelController()
-    {
-        float currentScrollSpeed = Input.GetAxis("Mouse ScrollWheel");
-
-        if (currentScrollSpeed != 0)
-        {
-            Vector3 normalizedDirection = (system.CurrentMovableObject._targetTransform.position - system.cameraTransform.position).normalized;
-            float CurrentDistance = Vector3.Distance(system.CurrentMovableObject.GetComponent<Rigidbody>().ClosestPointOnBounds(system.cameraTransform.position), system.cameraTransform.position);
-
-            if (currentScrollSpeed > 0 && CurrentDistance < system.CurrentInteractable.InteractRange) //forward : make sure not to pull extra use the InteractRange
-            {
-                system.CurrentMovableObject._targetTransform.position += (normalizedDirection * currentScrollSpeed * _scaleScrollWheelSpeed);
-            }
-            if (currentScrollSpeed < 0 && CurrentDistance > _interactableDistance) // backwards : make sure cant pull towards the player
-            {
-                system.CurrentMovableObject._targetTransform.position += (normalizedDirection * currentScrollSpeed * _scaleScrollWheelSpeed);
-            }
-        }
+        if (system.HoldingInteract )//&& system.CurrentInteractable.GetComponent<Rigidbody>() != null)
+            scrollWheelController();
     }
 
     private void OnDisable()
     {
         system.HoldingInteract = false;
+    }
+
+    private void scrollWheelController()
+    {
+        float currentScrollSpeed = Input.GetAxis("Mouse ScrollWheel");
+
+        if( currentScrollSpeed != 0 && !system.CurrentMovableObject.hasCollision )
+        {
+            Vector3 normalizedDirection = (system.CurrentMovableObject._targetTransform.position - _camaraTransform.position ).normalized;
+            Vector3 distanceAdded = system.CurrentMovableObject._targetTransform.position + normalizedDirection * currentScrollSpeed * scrollWheelSpeed;
+            float distanceFromObject = Vector3.Distance(distanceAdded, _camaraTransform.position);
+
+            if (currentScrollSpeed > 0 && distanceFromObject < system.CurrentInteractable.InteractRange )
+            {
+                system.CurrentMovableObject._targetTransform.position += normalizedDirection * currentScrollSpeed * scrollWheelSpeed;
+            }
+            if (currentScrollSpeed < 0 && distanceFromObject > interactableDistance )
+            {
+                system.CurrentMovableObject._targetTransform.position += normalizedDirection * currentScrollSpeed * scrollWheelSpeed;
+            }
+        }
     }
 }

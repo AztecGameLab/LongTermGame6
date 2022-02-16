@@ -25,12 +25,8 @@ public class InteractionSystem : MyNamespace.System
     [Tooltip("The transform used to calculate what direction we are looking.")]
     public Transform lookDirection;
 
-    [SerializeField]
-    [Tooltip("The transform used see position of main camera")]
-    public Transform cameraTransform;
-
     // Internal State
-
+    
     private bool _wasHoldingInteract;
     private bool JustReleasedInteract => _wasHoldingInteract && !HoldingInteract;
     private bool JustPressedInteract => !_wasHoldingInteract && HoldingInteract;
@@ -38,7 +34,7 @@ public class InteractionSystem : MyNamespace.System
     [PublicAPI] public bool LookingAtInteractable { get; private set; }
     [PublicAPI] public bool HoldingInteract { get; set; }
     [PublicAPI] public Interactable CurrentInteractable { get; private set; }
-    public MovableObject CurrentMovableObject { get; private set; }
+    [PublicAPI] public MovableObject CurrentMovableObject { get; private set; }
     [PublicAPI] public bool HasInteractable => CurrentInteractable != null;
     
     // Methods
@@ -50,9 +46,11 @@ public class InteractionSystem : MyNamespace.System
             LookingAtInteractable = true;
             
             if (JustPressedInteract)
-            {
+            { 
                 GrabObject(visionInteractable, point);
-                CurrentMovableObject = CurrentInteractable.gameObject.GetComponent<MovableObject>();
+
+                if(CurrentInteractable.GetComponent<MovableObject>() != null)
+                    CurrentMovableObject = CurrentInteractable.GetComponent<MovableObject>();
             }
                 
         }

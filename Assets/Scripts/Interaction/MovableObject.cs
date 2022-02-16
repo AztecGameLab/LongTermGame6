@@ -15,6 +15,7 @@ public class MovableObject : MonoBehaviour
     private Transform _current;
     [HideInInspector]
     public Transform _targetTransform;
+    public bool hasCollision;
 
     [PublicAPI] public Interactable Interactable { get; private set; }
     [PublicAPI] public Rigidbody Rigidbody { get; private set; }
@@ -26,6 +27,8 @@ public class MovableObject : MonoBehaviour
         
         _current = new GameObject("Current Position").transform;
         _current.parent = transform;
+
+        hasCollision = false;
     }
     
     private void OnEnable()
@@ -76,6 +79,7 @@ public class MovableObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        hasCollision = true;
         if (other.gameObject.layer == playerLayer)
             Interactable.InteractEnd();
     }
@@ -84,5 +88,9 @@ public class MovableObject : MonoBehaviour
     {
         if (other.gameObject.layer == playerLayer)
             Interactable.InteractEnd();
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        hasCollision = false;
     }
 }
