@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 9362ef8c2fd8b334182e3af95ab8aeef, type: 2}
+--- !u!4 &18328387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8137009871652392841, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
+  m_PrefabInstance: {fileID: 1854321066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &25939544
 Mesh:
   m_ObjectHideFlags: 0
@@ -1176,6 +1181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -1493,6 +1499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -2093,6 +2100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 3
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -2586,6 +2594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -3567,7 +3576,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35996
+  m_Name: pb_Mesh25466
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4105,6 +4114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -4501,6 +4511,7 @@ GameObject:
   - component: {fileID: 711728993}
   - component: {fileID: 711728997}
   - component: {fileID: 711728992}
+  - component: {fileID: 711728998}
   m_Layer: 0
   m_Name: Haybale
   m_TagString: Untagged
@@ -4816,12 +4827,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 711728998}
+        m_TargetAssemblyTypeName: HaybaleEventHandler, Assembly-CSharp
+        m_MethodName: hidePlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onInteractEnd:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &711728998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711728991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec7e98e41b43aa4fafe90fe80512447, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideSystem: {fileID: 0}
+  start: {fileID: 0}
+  transition: {fileID: 0}
+  end: {fileID: 0}
 --- !u!1 &715182377
 GameObject:
   m_ObjectHideFlags: 0
@@ -5545,6 +5585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -6538,6 +6579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls:
@@ -10647,6 +10689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -10931,6 +10974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -14059,7 +14103,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-29242
+  m_Name: pb_Mesh25260
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16702,6 +16746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -17848,6 +17893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -18141,6 +18187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbfc000b511c26549a19f01705cbb19a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideTime: 1
+  playerTransform: {fileID: 18328387}
 --- !u!43 &1856879070
 Mesh:
   m_ObjectHideFlags: 0
@@ -20343,6 +20391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
