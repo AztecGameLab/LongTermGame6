@@ -30,20 +30,28 @@ public class Interactable : MonoBehaviour
     public float InteractRange => interactRange;
     public bool IsHeld { get; private set; }
     public Vector3 GrabPoint { get; private set; }
-    private Transform holder;
-    private Transform CameraPosition;
-    private float lastLineOfSightCheck;
+    
+    private int _ignoreRaycastLayer;
+    private Transform _cameraTransform;
+    private float _lastLineOfSightCheck;
+    
     // Methods
-    private void Awake(){
-        CameraPosition=Camera.main.transform;
+
+    private void Awake()
+    {
+        _ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
+        
+        if (Camera.main != null)
+            _cameraTransform = Camera.main.transform;
     }
+
     public void InteractStart(GameObject source, Vector3 point)
     {
+        onInteractStart.Invoke(source, point);
         GrabPoint = point;
         IsHeld = true;
-        onInteractStart.Invoke(source, point);
-        holder=source.transform;
-        lastLineOfSightCheck=Time.time;
+        
+        _lastLineOfSightCheck = Time.time;
     }
 
     public void InteractEnd()
@@ -52,21 +60,31 @@ public class Interactable : MonoBehaviour
         onInteractEnd.Invoke();
     }
 
-    private void Update(){
-        if(IsHeld&&holder.root.CompareTag("Player")&&lineOfSightCheckInterval<Time.time-lastLineOfSightCheck){
-            lastLineOfSightCheck=Time.time;
-            RaycastHit hit;
-            int layerStorage=gameObject.layer;
-            gameObject.layer=2;
-            bool isPlayerInLineOfSight=false;
-            if(Physics.Raycast(transform.position,Camera.main.transform.position-transform.position,out hit,Mathf.Infinity)){
-                if(hit.transform.root.CompareTag("Player")){
-                    isPlayerInLineOfSight=true;
-                }
-            }
-            if(!isPlayerInLineOfSight)
-                InteractEnd();
-            gameObject.layer=layerStorage;
+    private void Update()
+    {
+        if(IsHeld && lineOfSightCheckInterval < Time.time - _lastLineOfSightCheck)
+        {
+            _lastLineOfSightCheck = Time.time;
+            CheckForObstruction();
         }
+    }
+
+    private void CheckForObstruction()
+    {
+        Vector3 directionToPlayer = _cameraTransform.position - transform.position;
+        GameObject self = gameObject;
+            
+        // Move this object to the "Ignore Raycast" layer so we don't count ourself as a blocking object. 
+        int originalLayer = self.layer;
+        self.layer = _ignoreRaycastLayer;
+            
+        if (Physics.Raycast(transform.position, directionToPlayer, out var hit))
+        {
+            // Drop this object if something is obstructing our line to the player.
+            if (hit.transform.CompareTag("Player") == false)
+                InteractEnd();
+        }
+            
+        gameObject.layer = originalLayer;
     }
 }
