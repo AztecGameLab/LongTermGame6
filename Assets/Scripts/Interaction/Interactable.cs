@@ -37,7 +37,7 @@ public class Interactable : MonoBehaviour
     
     // Methods
 
-    private void Awake()
+    private void Start()
     {
         _ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
         
