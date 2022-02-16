@@ -915,7 +915,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh205796
+  m_Name: pb_Mesh22532
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1716,7 +1716,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh205934
+  m_Name: pb_Mesh22670
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2044,7 +2044,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-143022
+  m_Name: pb_Mesh-1938
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2413,7 +2413,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh205898
+  m_Name: pb_Mesh22634
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2639,6 +2639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -3870,7 +3871,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh205834
+  m_Name: pb_Mesh22572
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4064,6 +4065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -6776,7 +6778,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh205748
+  m_Name: pb_Mesh22484
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6944,6 +6946,10 @@ PrefabInstance:
     - target: {fileID: 2359756735399934657, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
       propertyPath: m_Name
       value: Door v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359756735399934657, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2359756735399934658, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
       propertyPath: m_ConnectedBody
@@ -7502,6 +7508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -8706,6 +8713,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -14266,6 +14274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -14703,7 +14712,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh205734
+  m_Name: pb_Mesh22470
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15061,7 +15070,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh205858
+  m_Name: pb_Mesh22596
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15287,6 +15296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []

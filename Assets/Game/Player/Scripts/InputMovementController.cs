@@ -8,7 +8,7 @@ public class InputMovementController : InputController<MovementSystem>
 {
     [Header("Dependencies")]
     
-    [SerializeField] 
+    [SerializeField]
     [Tooltip("The transform that points in the forward movement direction.")]
     private Transform playerYaw;
 
@@ -34,5 +34,11 @@ public class InputMovementController : InputController<MovementSystem>
             result -= 1;
 
         return result;
+    }
+
+    private void OnDisable()
+    {
+        system.UpdateMovement(Vector3.zero);
+        system.Rigidbody.velocity = Vector3.zero;
     }
 }
