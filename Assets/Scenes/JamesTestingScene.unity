@@ -1176,6 +1176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -1493,6 +1494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -2093,6 +2095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 3
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -2586,6 +2589,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -3941,6 +3945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -5046,6 +5051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -6039,6 +6045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls:
@@ -9792,6 +9799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -10076,6 +10084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -14521,7 +14530,7 @@ GameObject:
   - component: {fileID: 1608453045}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15653,6 +15662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -16799,6 +16809,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -19255,6 +19266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 1.5
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
