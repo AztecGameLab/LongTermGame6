@@ -7,18 +7,22 @@ using TMPro;
 
 public class Settings : MonoBehaviour
 {
+    [Header("Settings")]
+    [Tooltip("Player Prefab has a child named 'Controllers'")]
+    [SerializeField] public int playerControllerChildIndex;
+    private Resolution[] _resolutions;
+
     [Header("Dependencies")]
     [SerializeField] private AudioMixer masterAudioMixer;
     [SerializeField] private AudioMixer SFXAudioMixer;
     [SerializeField] private AudioMixer musicAudioMixer;
 
     [SerializeField] private TMP_Dropdown resolutionDropdown;
+    [Tooltip("Scriptable object for player that will replace the default controls scriptable object")]
     [SerializeField] private Controls customControls;
     [SerializeField] private GameObject Player;
 
-    [Header("Settings")]
-    [SerializeField]public int playerControllerChildIndex;
-    Resolution[] _resolutions;
+    
 
     private void Start()
     {
@@ -29,6 +33,8 @@ public class Settings : MonoBehaviour
         List<string> resolutionOptions = new List<string>();
 
         int currentResolutionsIndex = 0;
+
+        //for loops fills the fills the resolutions dropdown
         for(int i = 0; i < _resolutions.Length; i++)
         {
             string option = _resolutions[i].width + "x" + _resolutions[i].height;
