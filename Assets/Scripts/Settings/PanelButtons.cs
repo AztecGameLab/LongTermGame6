@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 //The purpose of the script is to bring the panel that is selected in front of the other panels
 public class PanelButtons : MonoBehaviour
 {
-    
     [Header("Dependencies")]
-    public GameObject controlsPanel;
-    public GameObject audioPanel;
-    public GameObject graphicsPanel;
-    public GameObject settingsCanvas;
+    [SerializeField] private GameObject controlsPanel;
+    [SerializeField] private GameObject audioPanel;
+    [SerializeField] private GameObject graphicsPanel;
+    [SerializeField] private GameObject settingsCanvas;
 
     public void BringControlPanelForward()
     {

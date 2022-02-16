@@ -1,28 +1,29 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 using TMPro;
 
 public class Settings : MonoBehaviour
 {
-    [Header("Settings")]
-    [Tooltip("Player Prefab has a child named 'Controllers'")]
-    [SerializeField] public int playerControllerChildIndex;
-    private Resolution[] _resolutions;
-
     [Header("Dependencies")]
-    [SerializeField] private AudioMixer masterAudioMixer;
-    [SerializeField] private AudioMixer SFXAudioMixer;
-    [SerializeField] private AudioMixer musicAudioMixer;
-
-    [SerializeField] private TMP_Dropdown resolutionDropdown;
-    [Tooltip("Scriptable object for player that will replace the default controls scriptable object")]
-    [SerializeField] private Controls customControls;
-    [SerializeField] private GameObject Player;
-
     
+    [SerializeField] 
+    private AudioMixer masterAudioMixer;
+    
+    [SerializeField] 
+    private AudioMixer sfxAudioMixer;
+    
+    [SerializeField] 
+    private AudioMixer musicAudioMixer;
+
+    [SerializeField] 
+    private TMP_Dropdown resolutionDropdown;
+    
+    [SerializeField] 
+    [Tooltip("Scriptable object for player that will replace the default controls scriptable object")]
+    private Controls customControls;
+
+    private Resolution[] _resolutions;
 
     private void Start()
     {
@@ -30,14 +31,14 @@ public class Settings : MonoBehaviour
 
         resolutionDropdown.ClearOptions();
 
-        List<string> resolutionOptions = new List<string>();
+        var resolutionOptions = new List<string>();
 
         int currentResolutionsIndex = 0;
 
         //for loops fills the fills the resolutions dropdown
         for(int i = 0; i < _resolutions.Length; i++)
         {
-            string option = _resolutions[i].width + "x" + _resolutions[i].height;
+            string option = _resolutions[i].width + "x" + _resolutions[i].height + " : " + _resolutions[i].refreshRate;
             resolutionOptions.Add(option);
 
             if(_resolutions[i].width == Screen.currentResolution.width &&
@@ -62,9 +63,9 @@ public class Settings : MonoBehaviour
         masterAudioMixer.SetFloat("MasterVolume", volume);
     }
 
-    public void SetSFXVolume(float volume)
+    public void SetSfxVolume(float volume)
     {
-        SFXAudioMixer.SetFloat("SFXVolume", volume);
+        sfxAudioMixer.SetFloat("SFXVolume", volume);
     }
 
     public void SetMusicVolume(float volume)
@@ -72,18 +73,9 @@ public class Settings : MonoBehaviour
         musicAudioMixer.SetFloat("MusicVolume", volume);
     }
 
-    public void SetMouseSensitiviy(float sensitivity)
+    public void SetMouseSensitivity(float sensitivity)
     {
-        SwitchToCustomControls();
         customControls.sensitivity = sensitivity;
-    }
-
-    void SwitchToCustomControls()
-    {
-        if(Player.transform.GetChild(playerControllerChildIndex).GetComponent<InputRotationController>().controls != customControls)
-        {
-            Player.transform.GetChild(playerControllerChildIndex).GetComponent<InputRotationController>().controls = customControls;
-        }
     }
 
     public void SetQuality(int qualityIndex)
@@ -93,17 +85,6 @@ public class Settings : MonoBehaviour
 
     public void VsyncToggle()
     {
-        if (QualitySettings.vSyncCount > 0)
-        {
-            QualitySettings.vSyncCount = 0;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 1;
-        }
+        QualitySettings.vSyncCount = QualitySettings.vSyncCount > 0 ? 0 : 1;
     }
-
-
-
-    
 }

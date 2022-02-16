@@ -349,7 +349,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &84770159
 GameObject:
@@ -1006,7 +1006,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 488353159}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: SetSFXVolume
+        m_MethodName: SetSfxVolume
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2191,12 +2191,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterAudioMixer: {fileID: 24100000, guid: 394b32e2b69f97346843785e8c32a838, type: 2}
-  SFXAudioMixer: {fileID: 24100000, guid: 5cadeac28b9ef8244a95a19c0f33338e, type: 2}
+  sfxAudioMixer: {fileID: 24100000, guid: 5cadeac28b9ef8244a95a19c0f33338e, type: 2}
   musicAudioMixer: {fileID: 24100000, guid: dc1cec7fa5870ba40bce5815f89350e8, type: 2}
   resolutionDropdown: {fileID: 493322228}
   customControls: {fileID: 11400000, guid: e8c5170e8cfee8644b5ee7659b96c305, type: 2}
-  Player: {fileID: 614216971}
-  playerControllerChildIndex: 2
 --- !u!114 &488353160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2230,7 +2228,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -2274,7 +2272,7 @@ RectTransform:
   - {fileID: 2047388941}
   - {fileID: 1369593160}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2800,11 +2798,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 612755763}
   m_CullTransparentMesh: 1
---- !u!1 &614216971 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8137009872141556468, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-  m_PrefabInstance: {fileID: 1976409264}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &626306110
 GameObject:
   m_ObjectHideFlags: 0
@@ -3601,7 +3594,7 @@ RectTransform:
   m_Children:
   - {fileID: 1538139652}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5228,7 +5221,6 @@ MonoBehaviour:
   controlsPanel: {fileID: 2087769714}
   audioPanel: {fileID: 1828185798}
   graphicsPanel: {fileID: 2047388940}
-  gameobjectClosestToScreen: {fileID: 1369593159}
   settingsCanvas: {fileID: 488353158}
 --- !u!1 &1374555199
 GameObject:
@@ -5608,7 +5600,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650501537
 GameObject:
@@ -5674,7 +5666,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1669922921
 GameObject:
@@ -6864,8 +6856,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 488353159}
         m_TargetAssemblyTypeName: Settings, Assembly-CSharp
-        m_MethodName: SetMouseSensitiviy
-        m_Mode: 4
+        m_MethodName: SetMouseSensitivity
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7226,63 +7218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
---- !u!1001 &1976409264
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8137009872141556468, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
-      propertyPath: m_Name
-      value: Player Prefab
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
 --- !u!1 &2047388940
 GameObject:
   m_ObjectHideFlags: 0
