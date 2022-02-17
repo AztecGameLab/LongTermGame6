@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 2518930760343150127}
   - component: {fileID: 7787318708514139205}
   - component: {fileID: 5739734336484492618}
+  - component: {fileID: 5742301502455093517}
   m_Layer: 5
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -223,12 +224,38 @@ MonoBehaviour:
   system: {fileID: 4047881698099694121}
   controls: {fileID: 11400000, guid: 459093781390f7346a7bd841d2a16bfe, type: 2}
   targetScene: Main Menu
+  pauseSnapshot: {fileID: 5742301502455093517}
   onPause:
     m_PersistentCalls:
       m_Calls: []
   onResume:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5742301502455093517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1565818058159314709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: snapshot:/Paused
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params:
+  - Name: Intensity
+    Value: 0
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &1784465045548928053
 GameObject:
   m_ObjectHideFlags: 0

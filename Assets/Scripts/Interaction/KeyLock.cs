@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class KeyLock : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class KeyLock : MonoBehaviour
     [Space(10)]
     [SerializeField] public GameObject dummyLockPrefab;
 
+    [Space(20)] 
+    [SerializeField] public UnityEvent onUnlock;
+
     private void OnEnable()
     {
         lockedLimits = hinge.limits;
@@ -34,6 +38,8 @@ public class KeyLock : MonoBehaviour
     {
         if (other.gameObject.Equals(keyObject))
         {
+            onUnlock.Invoke();
+            
             hinge.limits = openLimits;
             Instantiate(dummyLockPrefab, transform.position, transform.rotation);
             Destroy(keyObject);
