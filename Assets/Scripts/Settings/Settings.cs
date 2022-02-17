@@ -23,9 +23,42 @@ public class Settings : MonoBehaviour
     [Tooltip("Scriptable object for player that will replace the default controls scriptable object")]
     private Controls customControls;
 
+    [Header("Settings")]
+    [SerializeField]
+    private int masterMixerDefaultLevel;
+
+    [SerializeField]
+    private int sfxMixerDefaultLevel;
+
+    [SerializeField]
+    private int musicMixerDefaultLevel;
+
+    [SerializeField]
+    [Range(0,2)]
+    [Tooltip("0 = low, 1 = medium, 2 = high")]
+    private int qualitySettingOnStart;
+
+    [SerializeField][Range(0,100)] //TO DO determine what the range is for the sensitivity
+    private int mouseSensitivityOnStart;
+
+    [SerializeField]
+    [Range(0, 1)]
+    [Tooltip("0 = off, 1 = on")]
+    private int vSyncSettingOnStart;
+
+
     private Resolution[] _resolutions;
 
     private void Start()
+    {
+        InitializeResolutions();
+        InitializeAudioMixers();
+        SetQuality(qualitySettingOnStart);
+        SetMouseSensitivity(mouseSensitivityOnStart);
+        InitializeVsync(vSyncSettingOnStart);
+    }
+
+    private void InitializeResolutions()
     {
         _resolutions = Screen.resolutions;
 
@@ -36,12 +69,12 @@ public class Settings : MonoBehaviour
         int currentResolutionsIndex = 0;
 
         //for loops fills the fills the resolutions dropdown
-        for(int i = 0; i < _resolutions.Length; i++)
+        for (int i = 0; i < _resolutions.Length; i++)
         {
             string option = _resolutions[i].width + "x" + _resolutions[i].height + " : " + _resolutions[i].refreshRate;
             resolutionOptions.Add(option);
 
-            if(_resolutions[i].width == Screen.currentResolution.width &&
+            if (_resolutions[i].width == Screen.currentResolution.width &&
                 _resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionsIndex = i;
@@ -53,6 +86,17 @@ public class Settings : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
+    private void InitializeAudioMixers()
+    {
+        masterAudioMixer.SetFloat("MasterVolume", masterMixerDefaultLevel);
+        sfxAudioMixer.SetFloat("SFXVolume", sfxMixerDefaultLevel);
+        musicAudioMixer.SetFloat("MusicVolume", musicMixerDefaultLevel);
+    }
+
+    private void InitializeVsync(int vsynOption)
+    {
+        QualitySettings.vSyncCount = vsynOption;
+    }
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = _resolutions[resolutionIndex];
