@@ -60,7 +60,7 @@ namespace Commands
 
                 if (scene == sceneName)
                 {
-                    SceneManager.LoadScene(sceneName);
+                    SceneTransitionSystem.Instance.TransitionToScene(sceneName);
                     Console.Log(name, $"Loaded {sceneName}.");
                     return;
                 }
