@@ -18,6 +18,10 @@ public class HaybaleEventHandler : MonoBehaviour
 
     private bool _isHideing;
 
+    private void Awake()
+    {
+        _isHideing = false;
+    }
 
     public void hidePlayer()
     {
@@ -27,7 +31,7 @@ public class HaybaleEventHandler : MonoBehaviour
             _isHideing = true;
         } else
         {
-            hideSystem.unhide(end, start);
+            hideSystem.unhide(end);
             _isHideing = false;
         }
     }
