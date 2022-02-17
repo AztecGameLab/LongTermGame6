@@ -83,6 +83,7 @@ Shader "Custom/Outline"
                 // mixing
                 float depth = max(localDepth, getMax(adjacentDepths));
                 fixed4 col = (depth > THRESHOLD) ? _OutlineColor * _OutlineIntensity : screenColor;
+                col = lerp(screenColor, col, _OutlineColor[3]); // apply opacity of color
                 
                 // apply fog?
                 UNITY_APPLY_FOG(i.fogCoord, col);
