@@ -18,6 +18,9 @@ namespace Game
 
         public override string GetID()
         {
+
+            // new GUID for every object // binary formatter
+            
             // create some kind of unique ID for this object, that we can use to look it up when we reload
             string uniqueID = this.gameObject.name + "1";
             
@@ -29,10 +32,12 @@ namespace Game
             // generate the data that represents this object's current state.
             Data data = new Data
             {
+                // lock and key data 
                 position = transform.position,
                 rotation = transform.rotation,
                 scale = transform.localScale,
-                isObjectEnabled = this.gameObject.activeInHierarchy
+                isObjectEnabled = this.gameObject.activeInHierarchy,
+                
             };
            // _instances.Add(data.position);
             return data;

@@ -7,7 +7,7 @@ namespace Game
 {
     public abstract class SaveData : MonoBehaviour
     {
-        protected static HashSet<SaveData> _instances = new HashSet<SaveData>();
+        private  static HashSet<SaveData> _instances = new HashSet<SaveData>();
         public static IReadOnlyCollection<SaveData> Instances => _instances;
        
         private void Awake()

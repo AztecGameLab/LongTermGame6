@@ -11,12 +11,13 @@ public class CheckPoint : MonoBehaviour
     {
         
     }
-    //private GameObject saveData = Game.SaveData.WriteData
+   
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.Equals(triggerObject))
         {
-            gameObjectSaveDataScript.WriteData();
+            // save here s
+           /// Save.Read()
         }
     }
 
