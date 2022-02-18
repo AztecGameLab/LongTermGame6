@@ -89,7 +89,7 @@ public class MovableObject : MonoBehaviour
         Vector3 target = TargetTransform.position;
         Vector3 current = _currentPosition.position;
         Vector3 directionToTarget = target - current;
-        
+
         Rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
         Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, maxSpeed);
     }
@@ -99,6 +99,7 @@ public class MovableObject : MonoBehaviour
         if (Interactable.GetComponent<HingeJoint>() == null)//make sure its not a door
         {// thinking of making doors tagged or tag all objects that dont require the rotation
             Rigidbody.MoveRotation(_cameraTransform.rotation * offsetRot);
+            //Rigidbody.rotation = (_cameraTransform.rotation * offsetRot);
         }
     }
 
