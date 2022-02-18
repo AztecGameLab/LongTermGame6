@@ -15,6 +15,11 @@ public class MovableObject : MonoBehaviour
     // The current position of this object
     private Transform _currentPosition;
 
+    //The rotation of object when picked up
+    private Quaternion offsetRot;
+
+    private Transform _cameraTransform;
+
     // The position this object is trying to accelerate towards.
     public Transform TargetTransform { get; private set; }
 
@@ -24,8 +29,6 @@ public class MovableObject : MonoBehaviour
     [PublicAPI] public Interactable Interactable { get; private set; }
     [PublicAPI] public Rigidbody Rigidbody { get; private set; }
 
-    private Quaternion offsetRot;
-
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
@@ -33,6 +36,9 @@ public class MovableObject : MonoBehaviour
         
         _currentPosition = new GameObject("Current Position").transform;
         _currentPosition.parent = transform;
+
+        if (Camera.main != null)
+            _cameraTransform = Camera.main.transform;
     }
     
     private void OnEnable()
@@ -65,7 +71,7 @@ public class MovableObject : MonoBehaviour
         
         _currentPosition.position = point;
 
-        offsetRot = Quaternion.Inverse(Camera.main.transform.rotation) * transform.rotation;
+        offsetRot = Quaternion.Inverse(_cameraTransform.rotation) * transform.rotation;
     }
 
     private void FixedUpdate()
@@ -90,9 +96,9 @@ public class MovableObject : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        if (Interactable.GetComponent<HingeJoint>() == null)
-        {
-            Rigidbody.MoveRotation(Camera.main.transform.rotation * offsetRot);
+        if (Interactable.GetComponent<HingeJoint>() == null)//make sure its not a door
+        {// thinking of making doors tagged or tag all objects that dont require the rotation
+            Rigidbody.MoveRotation(_cameraTransform.rotation * offsetRot);
         }
     }
 
