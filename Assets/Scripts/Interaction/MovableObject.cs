@@ -24,6 +24,8 @@ public class MovableObject : MonoBehaviour
     [PublicAPI] public Interactable Interactable { get; private set; }
     [PublicAPI] public Rigidbody Rigidbody { get; private set; }
 
+    private Quaternion offsetRot;
+
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
@@ -62,12 +64,18 @@ public class MovableObject : MonoBehaviour
         TargetTransform.position = point;
         
         _currentPosition.position = point;
+
+        offsetRot = Quaternion.Inverse(Camera.main.transform.rotation) * transform.rotation;
     }
 
     private void FixedUpdate()
     {
         if (Interactable.IsHeld)
-            MoveTowardsTarget();                   
+        {
+            MoveTowardsTarget();
+            RotateTowardsTarget();
+        }
+                             
     }
 
     private void MoveTowardsTarget()
@@ -78,6 +86,14 @@ public class MovableObject : MonoBehaviour
         
         Rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
         Rigidbody.velocity = Vector3.ClampMagnitude(Rigidbody.velocity, maxSpeed);
+    }
+
+    private void RotateTowardsTarget()
+    {
+        if (Interactable.GetComponent<HingeJoint>() == null)
+        {
+            Rigidbody.MoveRotation(Camera.main.transform.rotation * offsetRot);
+        }
     }
 
     private void OnCollisionEnter(Collision other)
