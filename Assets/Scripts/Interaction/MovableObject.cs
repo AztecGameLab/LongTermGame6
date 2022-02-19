@@ -17,6 +17,7 @@ public class MovableObject : MonoBehaviour
 
     //The rotation of object when picked up
     private Quaternion offsetRot;
+    public float RotSpeed = 10f;
 
     private Transform _cameraTransform;
 
@@ -98,7 +99,14 @@ public class MovableObject : MonoBehaviour
     {
         if (Interactable.GetComponent<HingeJoint>() == null)//make sure its not a door
         {// thinking of making doors tagged or tag all objects that dont require the rotation
-            Rigidbody.MoveRotation(_cameraTransform.rotation * offsetRot);
+
+
+
+            //Rigidbody.MoveRotation(Quaternion.Lerp(Rigidbody.rotation, _cameraTransform.rotation * offsetRot, Time.fixedDeltaTime * RotSpeed));
+
+            Rigidbody.MoveRotation(Quaternion.Lerp(Rigidbody.rotation, _cameraTransform.rotation * offsetRot, Time.fixedDeltaTime * RotSpeed));
+
+            //Rigidbody.MoveRotation(_cameraTransform.rotation * offsetRot );
             //Rigidbody.rotation = (_cameraTransform.rotation * offsetRot);
         }
     }
