@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
-    [SerializeField] private GameObject triggerObject;
-    [SerializeField] private Game.GameObjectSaveData gameObjectSaveDataScript;
-
-    public void Start()
-    {
-        
-    }
-   
+    [Header("DEPENDENCIES")]
+    [SerializeField] private GameObject keyObject;   
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.Equals(triggerObject))
+        if (other.gameObject.Equals(keyObject))
         {
-            // save here s
-           /// Save.Read()
+            //Save.WriteData();
         }
     }
 

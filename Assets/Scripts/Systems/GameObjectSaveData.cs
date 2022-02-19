@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 
 namespace Game
 {
@@ -9,7 +9,7 @@ namespace Game
     {
         public struct Data
         {
-            // all of the important state (position, rotation, is enabled, ect.)
+            
             public Vector3 position;
             public Quaternion rotation;
             public Vector3 scale;
@@ -18,13 +18,9 @@ namespace Game
 
         public override string GetID()
         {
-
-            // new GUID for every object // binary formatter
-            
-            // create some kind of unique ID for this object, that we can use to look it up when we reload
-            string uniqueID = this.gameObject.name + "1";
-            
-            return "placeholder unique ID";
+            // new ID for every saved object
+            string objectID = Guid.NewGuid().ToString();
+            return objectID;
         }
 
         public override object WriteData()
@@ -32,17 +28,12 @@ namespace Game
             // generate the data that represents this object's current state.
             Data data = new Data
             {
-                // lock and key data 
                 position = transform.position,
                 rotation = transform.rotation,
                 scale = transform.localScale,
-                isObjectEnabled = this.gameObject.activeInHierarchy,
-                
+                isObjectEnabled = this.gameObject.activeInHierarchy,               
             };
-           // _instances.Add(data.position);
             return data;
-            
-            //_instances.Add(Data);
         }
        
         public override void ReadData(object data)
@@ -50,6 +41,9 @@ namespace Game
             // apply our saved data to our current object!
             Data savedData = (Data)data;
             transform.position = savedData.position;
+            transform.rotation = savedData.rotation;
+            transform.localScale = savedData.scale;
+            this.gameObject.SetActive(savedData.isObjectEnabled);
         }
     }
 }
