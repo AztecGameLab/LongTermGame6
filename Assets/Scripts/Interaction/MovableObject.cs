@@ -12,8 +12,14 @@ public class MovableObject : MonoBehaviour
     [SerializeField] private float maxSpeed = 10f;
     [SerializeField] private bool freezeRotation = true;
     
-    private Transform _current;
-    private Transform _targetTransform;
+    // The current position of this object
+    private Transform _currentPosition;
+
+    // The position this object is trying to accelerate towards.
+    public Transform TargetTransform { get; private set; }
+
+    // Is this object currently colliding with something?
+    public bool HasCollision { get; private set; }
 
     [PublicAPI] public Interactable Interactable { get; private set; }
     [PublicAPI] public Rigidbody Rigidbody { get; private set; }
@@ -23,8 +29,8 @@ public class MovableObject : MonoBehaviour
         Rigidbody = GetComponent<Rigidbody>();
         Interactable = GetComponent<Interactable>();
         
-        _current = new GameObject("Current Position").transform;
-        _current.parent = transform;
+        _currentPosition = new GameObject("Current Position").transform;
+        _currentPosition.parent = transform;
     }
     
     private void OnEnable()
@@ -52,9 +58,10 @@ public class MovableObject : MonoBehaviour
         
         MovingTarget target = grabber.GetComponentInChildren<MovingTarget>();
 
-        _targetTransform = target == null ? grabber.transform : target.transform;
-        _targetTransform.position = point;
-        _current.position = point;
+        TargetTransform = target == null ? grabber.transform : target.transform;
+        TargetTransform.position = point;
+        
+        _currentPosition.position = point;
     }
 
     private void FixedUpdate()
@@ -65,8 +72,8 @@ public class MovableObject : MonoBehaviour
 
     private void MoveTowardsTarget()
     {
-        Vector3 target = _targetTransform.position;
-        Vector3 current = _current.position;
+        Vector3 target = TargetTransform.position;
+        Vector3 current = _currentPosition.position;
         Vector3 directionToTarget = target - current;
         
         Rigidbody.velocity = directionToTarget * movementSpeed / Time.fixedDeltaTime;
@@ -75,6 +82,8 @@ public class MovableObject : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        HasCollision = true;
+        
         if (other.gameObject.layer == playerLayer)
             Interactable.InteractEnd();
     }
@@ -83,5 +92,9 @@ public class MovableObject : MonoBehaviour
     {
         if (other.gameObject.layer == playerLayer)
             Interactable.InteractEnd();
+    }
+    private void OnCollisionExit()
+    {
+        HasCollision = false;
     }
 }
