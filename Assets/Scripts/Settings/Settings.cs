@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using TMPro;
+using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
@@ -24,14 +25,15 @@ public class Settings : MonoBehaviour
     private Controls customControls;
 
     [Header("Settings")]
-    [SerializeField]
-    private int masterMixerDefaultLevel;
 
     [SerializeField]
-    private int sfxMixerDefaultLevel;
+    private GameObject masterMixerSlider;
 
     [SerializeField]
-    private int musicMixerDefaultLevel;
+    private GameObject sfxMixerSlider;
+
+    [SerializeField]
+    private GameObject musicMixerSlider;
 
     [SerializeField]
     [Range(0,2)]
@@ -47,15 +49,30 @@ public class Settings : MonoBehaviour
     private int vSyncSettingOnStart;
 
 
+
     private Resolution[] _resolutions;
 
     private void Start()
     {
         InitializeResolutions();
-        InitializeAudioMixers();
         SetQuality(qualitySettingOnStart);
         SetMouseSensitivity(mouseSensitivityOnStart);
         InitializeVsync(vSyncSettingOnStart);
+
+        UpdateSliders();
+    }
+
+    private void UpdateSliders()
+    {
+        float temp;
+        masterAudioMixer.GetFloat("MasterVolume", out temp);
+        masterMixerSlider.GetComponent<Slider>().value = temp;
+
+        sfxAudioMixer.GetFloat("SFXVolume", out temp);
+        sfxMixerSlider.GetComponent<Slider>().value = temp;
+
+        musicAudioMixer.GetFloat("MusicVolume", out temp);
+        musicMixerSlider.GetComponent<Slider>().value = temp;
     }
 
     private void InitializeResolutions()
@@ -84,13 +101,6 @@ public class Settings : MonoBehaviour
         resolutionDropdown.AddOptions(resolutionOptions);
         resolutionDropdown.value = currentResolutionsIndex;
         resolutionDropdown.RefreshShownValue();
-    }
-
-    private void InitializeAudioMixers()
-    {
-        masterAudioMixer.SetFloat("MasterVolume", masterMixerDefaultLevel);
-        sfxAudioMixer.SetFloat("SFXVolume", sfxMixerDefaultLevel);
-        musicAudioMixer.SetFloat("MusicVolume", musicMixerDefaultLevel);
     }
 
     private void InitializeVsync(int vsynOption)
