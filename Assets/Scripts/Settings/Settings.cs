@@ -19,7 +19,10 @@ public class Settings : MonoBehaviour
 
     [SerializeField] 
     private TMP_Dropdown resolutionDropdown;
-    
+
+    [SerializeField]
+    private TMP_Dropdown vSyncDropdown;
+
     [SerializeField] 
     [Tooltip("Scriptable object for player that will replace the default controls scriptable object")]
     private Controls customControls;
@@ -52,13 +55,14 @@ public class Settings : MonoBehaviour
 
     private Resolution[] _resolutions;
 
+    
+
     private void Start()
     {
         InitializeResolutions();
         SetQuality(qualitySettingOnStart);
         SetMouseSensitivity(mouseSensitivityOnStart);
-        InitializeVsync(vSyncSettingOnStart);
-
+        InitializeVsync();
         UpdateSliders();
     }
 
@@ -103,9 +107,10 @@ public class Settings : MonoBehaviour
         resolutionDropdown.RefreshShownValue();
     }
 
-    private void InitializeVsync(int vsynOption)
+    private void InitializeVsync()
     {
-        QualitySettings.vSyncCount = vsynOption;
+        vSyncDropdown.value = QualitySettings.vSyncCount;
+        vSyncDropdown.RefreshShownValue();
     }
     public void SetResolution(int resolutionIndex)
     {
@@ -139,6 +144,6 @@ public class Settings : MonoBehaviour
 
     public void VsyncToggle()
     {
-        QualitySettings.vSyncCount = QualitySettings.vSyncCount > 0 ? 0 : 1;
+        QualitySettings.vSyncCount = vSyncDropdown.value;
     }
 }
