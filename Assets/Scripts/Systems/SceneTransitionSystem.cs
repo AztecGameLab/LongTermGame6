@@ -43,7 +43,10 @@ public class SceneTransitionSystem : MonoBehaviour
     }
     
     private IEnumerator LoadSceneWithFade(string sceneName)
-    { 
+    {
+        fadeCanvas.interactable = true;
+        fadeCanvas.blocksRaycasts = true;
+        
         while (fadeCanvas.alpha < 1)
         {
             fadeCanvas.alpha = Mathf.Clamp01(fadeCanvas.alpha + 1 / fadeOutDuration * Time.deltaTime);
@@ -57,5 +60,8 @@ public class SceneTransitionSystem : MonoBehaviour
             fadeCanvas.alpha = Mathf.Clamp01(fadeCanvas.alpha - 1 / fadeInDuration * Time.deltaTime);
             yield return null;
         }
+        
+        fadeCanvas.interactable = false;
+        fadeCanvas.blocksRaycasts = false;
     }
 }
