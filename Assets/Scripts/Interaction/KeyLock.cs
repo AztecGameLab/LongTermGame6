@@ -6,24 +6,24 @@ public class KeyLock : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] public GameObject keyObject;
     [SerializeField] public GameObject dummyLockPrefab;
-    [SerializeField] public UnityEvent onUnlock;
+    [SerializeField] public UnityEvent OnUnlock;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.Equals(keyObject))
         {
-            onUnlock.Invoke();
+            OnUnlock.Invoke();
         }
     }
 
-    public void dropLock()
+    public void DropLock()
     {
         Instantiate(dummyLockPrefab, transform.position, transform.rotation);
         Destroy(keyObject);
         Destroy(gameObject);
     }
 
-    public void deleteKey()
+    public void DeleteKey()
     {
         Destroy(keyObject);
     }

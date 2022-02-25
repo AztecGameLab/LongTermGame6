@@ -125,12 +125,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyObject: {fileID: 0}
   dummyLockPrefab: {fileID: 9002933665572775252, guid: 7be7e3477248c4046a9e67af04a53dd8, type: 3}
-  onUnlock:
+  OnUnlock:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3035223381840353072}
         m_TargetAssemblyTypeName: HingeLocker, Assembly-CSharp
-        m_MethodName: unlockHinge
+        m_MethodName: UnlockHinge
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -142,7 +142,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3035223382364655418}
         m_TargetAssemblyTypeName: KeyLock, Assembly-CSharp
-        m_MethodName: dropLock
+        m_MethodName: DropLock
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -154,7 +154,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 3035223382364655418}
         m_TargetAssemblyTypeName: KeyLock, Assembly-CSharp
-        m_MethodName: deleteKey
+        m_MethodName: DeleteKey
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

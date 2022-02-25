@@ -10,33 +10,33 @@ public class HingeLocker : MonoBehaviour
     [SerializeField] public float openMinAngle = -120;
     [SerializeField] public float openMaxAngle = 120;
 
-    JointLimits lockedLimits;
-    JointLimits openLimits;
-
     [Header("Dependencies")]
     [SerializeField] public HingeJoint hinge;
 
 
+    private JointLimits _lockedLimits;
+    private JointLimits _openLimits;
+
     // Start is called before the first frame update
     private void OnEnable()
     {
-        lockedLimits = hinge.limits;
-        lockedLimits.min = lockedMinAngle;
-        lockedLimits.max = lockedMaxAngle;
+        _lockedLimits = hinge.limits;
+        _lockedLimits.min = lockedMinAngle;
+        _lockedLimits.max = lockedMaxAngle;
 
-        openLimits = hinge.limits;
-        openLimits.min = openMinAngle;
-        openLimits.max = openMaxAngle;
+        _openLimits = hinge.limits;
+        _openLimits.min = openMinAngle;
+        _openLimits.max = openMaxAngle;
 
-        hinge.limits = lockedLimits;
+        hinge.limits = _lockedLimits;
     }
 
-    public void unlockHinge()
+    public void UnlockHinge()
     {
-        hinge.limits = openLimits;
+        hinge.limits = _openLimits;
     }
 
-    public void lockHinge(){
-        hinge.limits = lockedLimits;
+    public void LockHinge(){
+        hinge.limits = _lockedLimits;
     }
 }
