@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
 
-    public void loadSceneByNumber(string sceneName)
+    public void loadSceneByNumber(int scene)
     {
-        SceneTransitionSystem.Instance.TransitionToScene(sceneName);
+        SceneManager.LoadScene(scene);
     }
 
     public void ExitGame()
