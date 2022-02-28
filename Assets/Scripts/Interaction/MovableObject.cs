@@ -16,9 +16,10 @@ public class MovableObject : MonoBehaviour
     private Transform _currentPosition;
 
     //The rotation of object when picked up
-    private Quaternion offsetRot;
+    private Quaternion _offsetRot;
 
     private Transform _cameraTransform;
+    private bool _isDoor;
 
     // The position this object is trying to accelerate towards.
     public Transform TargetTransform { get; private set; }
@@ -39,6 +40,8 @@ public class MovableObject : MonoBehaviour
 
         if (Camera.main != null)
             _cameraTransform = Camera.main.transform;
+        
+        _isDoor = Interactable.GetComponent<HingeJoint>() != null;
     }
     
     private void OnEnable()
@@ -71,7 +74,7 @@ public class MovableObject : MonoBehaviour
         
         _currentPosition.position = point;
 
-        offsetRot = Quaternion.Inverse(_cameraTransform.rotation) * transform.rotation;
+        _offsetRot = Quaternion.Inverse(_cameraTransform.rotation) * transform.rotation;
     }
 
 
@@ -104,11 +107,10 @@ public class MovableObject : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        if (Interactable.GetComponent<HingeJoint>() == null)//make sure its not a door
+        if (!_isDoor)//make sure its not a door
         {// thinking of making doors tagged or tag all objects that dont require the rotation
 
-            Rigidbody.MoveRotation(_cameraTransform.rotation * offsetRot);
-
+            Rigidbody.MoveRotation(_cameraTransform.rotation * _offsetRot);
         }
     }
 
