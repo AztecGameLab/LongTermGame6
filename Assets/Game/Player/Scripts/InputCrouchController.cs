@@ -8,9 +8,18 @@ namespace Player.Crouching
     
     public class InputCrouchController : InputController<CrouchSystem>
     {
+        [Header("Dependencies")]
+        
+        [SerializeField]
+        [Tooltip("We can only crouch on the ground - this object tells us if that happens.")]
+        private GroundCheck groundCheck;
+        
         private void Update()
         {
-            system.WantsToCrouch = Input.GetKey(controls.sneak);
+            bool wantsToCrouch = Input.GetKey(controls.sneak);
+        
+            if (groundCheck.IsGrounded || !wantsToCrouch)
+                system.WantsToCrouch = wantsToCrouch;
         }
 
         private void OnDisable()
