@@ -49,6 +49,10 @@ namespace Game.Enemy
         [Tooltip("The system we use to determine whether or not an attack target is detected.")]
         private TargetDetector attackTargetDetector;
 
+        [SerializeField]
+        [Tooltip("The attacls the enemy will do against the player")]
+        private EnemyAttacks enemyAttacks;
+
         [Space(20f)]
         
         [SerializeField]
@@ -146,22 +150,20 @@ namespace Game.Enemy
                 
                 _lastAttackTime = Time.time;
 
-                // todo ai attack 2: add stronger damage feel (knock-back, sound effects, ect.)
+            // todo ai attack 2: add stronger damage feel (knock-back, sound effects, ect.)
 
 
-                // todo ai attack 3: pass damage amount to FMOD for changing the impact of the sound
-                
-                foreach (Rigidbody occupant in damageTrigger.Occupants)
-                {
-                    if (occupant.TryGetComponent(out Health health))
-                        health.Damage(attackDamage);
-                var targetDirection = occupant.transform.position - this.transform.position;
-                occupant.AddForce(targetDirection * 10, ForceMode.Impulse);
-                occupant.drag += 5;
-                //var movementSped = occupant.GetComponent<MovementSettings>().MovementSpeed;
-               // movementSped -= 1;
-                Debug.LogWarning("PUSHED");
-                }
+            // todo ai attack 3: pass damage amount to FMOD for changing the impact of the sound
+                enemyAttacks.DoDamage(attackDamage,damageTrigger);
+                //foreach (Rigidbody occupant in damageTrigger.Occupants)
+                //{
+                //    if (occupant.TryGetComponent(out Health health))
+                //        health.Damage(attackDamage);
+                ////var targetDirection = occupant.transform.position - this.transform.position;
+                ////occupant.AddForce(targetDirection * 5, ForceMode.Impulse);
+                ////occupant.drag += 5;
+                ////occupant.drag = 1;
+                //}
 
                 return TaskStatus.Success;
             }
