@@ -1,7 +1,5 @@
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
-using Utility;
 
 /// <summary>
 /// Allows an object to switch between colliders in a safe way, without clipping into walls.
@@ -10,25 +8,18 @@ using Utility;
 public class CrouchSystem : MyNamespace.System
 {
     [Header("Dependencies")] 
-    [SerializeField]
-    private GroundCheck groundCheck;
+    
+    [SerializeField] 
+    [Tooltip("The trigger used to check if we can stand up without hitting our head.")]
+    private Trigger standingTrigger;
     
     [SerializeField] 
     [Tooltip("The collider that is enabled when we are crouching.")]
-    private SafeCollider crouchCollider;
+    private Collider crouchCollider;
     
     [SerializeField] 
     [Tooltip("The collider that is enabled when we are standing.")]
-    private SafeCollider standingCollider;
-
-    [SerializeField] 
-    private Transform crouchTarget;
-    
-    [SerializeField]
-    private Transform standingTarget;
-    
-    [SerializeField] private Transform crouchTransform;
-    [SerializeField] private float crouchDuration = 1f;
+    private Collider standingCollider;
 
     [Space(20)]
     
@@ -43,83 +34,45 @@ public class CrouchSystem : MyNamespace.System
     // Internal State
     
     public bool WantsToCrouch { get; set; }
+    public bool IsCrouching { get; private set; }
     
-    private bool _isCrouching;
     private bool _wasCrouching;
-    private float _crouchStartTime;
 
     // Methods
     
     private void Update()
     {
-        _wasCrouching = _isCrouching;
-
-        if (ShouldCrouch())
-        {
-            _isCrouching = true;
-            Crouch();
-        }
+        // Ensure that we are only able to change our crouching state if there is room to stand.
         
-        else if (ShouldStand())
-        {
-            _isCrouching = false;
-            Stand();
-        }
-    }
-
-    private bool ShouldCrouch()
-    {
-        bool isGrounded = groundCheck.IsGrounded;
-        bool isNotObstructed = crouchCollider.IsClear;
+        if (CheckIfBlockedAbove() == false)
+            IsCrouching = WantsToCrouch;
+     
+        UpdateEvents();
+        UpdateCollider();
         
-        return WantsToCrouch && isGrounded && isNotObstructed;
+        _wasCrouching = IsCrouching;
     }
     
-    private bool ShouldStand()
+    private bool CheckIfBlockedAbove()
     {
-        bool isGrounded = groundCheck.IsGrounded;
-        bool isNotObstructed = standingCollider.IsClear;
-        bool wantsToStand = !WantsToCrouch;
-        
-        return wantsToStand && isGrounded && isNotObstructed;
+        return standingTrigger.IsOccupied;
     }
-
-    private void Crouch()
+    
+    private void UpdateEvents()
     {
-        if (!_wasCrouching)
-        {
+        bool crouchJustStarted = IsCrouching && !_wasCrouching;
+        bool crouchJustEnded = !IsCrouching && _wasCrouching;
+        
+        if (crouchJustStarted)
             onCrouchStart.Invoke();
-            crouchCollider.SafeEnable();
-            standingCollider.Disable();
-            
-            _crouchStartTime = Time.time;
-        }
-
-        ApplyAnimation(crouchTarget.position);
-    }
-
-    private void Stand()
-    {
-        if (_wasCrouching)
-        {
-            onCrouchEnd.Invoke();
-            crouchCollider.Disable();
-            standingCollider.SafeEnable();
-            
-            _crouchStartTime = Time.time;
-        }
-                
-        ApplyAnimation(standingTarget.position);
-    }
-
-    // Animate our transform's position with the SmoothStep function.
-    // See: https://en.wikipedia.org/wiki/Smoothstep
-    
-    private void ApplyAnimation(Vector3 targetPosition)
-    {
-        float elapsedTime = Time.time - _crouchStartTime;
-        float percentDone = math.smoothstep(0, crouchDuration, elapsedTime * Time.timeScale);
         
-        crouchTransform.position = Vector3.Lerp(crouchTransform.position, targetPosition, percentDone);
+        else if (crouchJustEnded)
+            onCrouchEnd.Invoke();
+    }
+    
+    private void UpdateCollider()
+    {
+        crouchCollider.enabled = IsCrouching;
+        standingCollider.enabled = !IsCrouching;
     }
 }
