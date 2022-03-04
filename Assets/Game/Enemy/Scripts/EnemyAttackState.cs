@@ -149,22 +149,7 @@ namespace Game.Enemy
                     return TaskStatus.Continue;
                 
                 _lastAttackTime = Time.time;
-
-            // todo ai attack 2: add stronger damage feel (knock-back, sound effects, ect.)
-
-
-            // todo ai attack 3: pass damage amount to FMOD for changing the impact of the sound
                 enemyAttacks.DoDamage(attackDamage,damageTrigger);
-                //foreach (Rigidbody occupant in damageTrigger.Occupants)
-                //{
-                //    if (occupant.TryGetComponent(out Health health))
-                //        health.Damage(attackDamage);
-                ////var targetDirection = occupant.transform.position - this.transform.position;
-                ////occupant.AddForce(targetDirection * 5, ForceMode.Impulse);
-                ////occupant.drag += 5;
-                ////occupant.drag = 1;
-                //}
-
                 return TaskStatus.Success;
             }
 

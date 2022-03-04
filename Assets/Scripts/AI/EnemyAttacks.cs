@@ -11,9 +11,17 @@ public class EnemyAttacks : MonoBehaviour
     [SerializeField]
     [Tooltip("The sound to be played when the player takes damage")]
     private AudioSource damageClip;
+
+
+    [SerializeField]
+    [Tooltip("Duration for slow movement")]
+    private float slowDuration = 10f;
+    private float duration;
+
     public void DoDamage(float attackDamage, Trigger damageTrigger)
     {
-        foreach (Rigidbody occupant in damageTrigger.Occupants)
+        duration  = slowDuration + Time.deltaTime;
+        foreach (Rigidbody occupant in damageTrigger.Rigidbodies)
         {
             if (occupant.TryGetComponent(out Health health))
             {
@@ -22,8 +30,20 @@ public class EnemyAttacks : MonoBehaviour
             }
             var targetDirection = occupant.transform.position - this.transform.position;
             occupant.AddForce(targetDirection * pushMultiplier, ForceMode.Impulse);
-            //occupant.drag += 5;
-            //occupant.drag = 1;
+             
+            if(occupant.GetComponent<MovementSystem>()){
+                occupant.GetComponent<MovementSystem>().SpeedMultiplier = 0.5f;     
+                Debug.Log("player movement slowed");
+                StartCoroutine(RestoreMovement(occupant.GetComponent<MovementSystem>()));
+
+            }
         }
+
+        IEnumerator RestoreMovement (MovementSystem system){
+            yield return new WaitForSeconds(slowDuration);
+            Debug.Log("OMONMKOMKOMO");
+            system.SpeedMultiplier = 2.0f;
+        }
+
     }
 }
