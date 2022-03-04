@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Player Jump
+  Event: event:/Player/Footsteps/Dry Cobble
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -83,8 +83,8 @@ MonoBehaviour:
   Preload: 1
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &195183522
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Player Step
+  Event: event:/Player/Jump/Dry Cobble
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -367,8 +367,8 @@ MonoBehaviour:
   Preload: 1
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &1766463585
 GameObject:
   m_ObjectHideFlags: 0
