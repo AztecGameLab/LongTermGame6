@@ -626,7 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Enemy Step
+  Event: event:/Player/Footsteps/Wood
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -634,8 +634,8 @@ MonoBehaviour:
   Preload: 0
   Params: []
   OverrideAttenuation: 0
-  OverrideMinDistance: 0
-  OverrideMaxDistance: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &8742153086395597684
 MonoBehaviour:
   m_ObjectHideFlags: 0

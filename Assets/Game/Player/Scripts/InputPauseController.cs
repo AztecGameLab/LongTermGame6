@@ -38,7 +38,7 @@ public class InputPauseController : InputController<GameObject>
         Time.timeScale = 1f;
         _gameIsPaused = false;
         
-        pauseSnapshot.SetParameter("Intensity", 0);
+        // pauseSnapshot.SetParameter("Intensity", 0);
         onPause.Invoke();
     }
 
@@ -49,7 +49,7 @@ public class InputPauseController : InputController<GameObject>
         Time.timeScale = 0f;
         _gameIsPaused = true;
         
-        pauseSnapshot.SetParameter("Intensity", 100);
+        // pauseSnapshot.SetParameter("Intensity", 100);
         onResume.Invoke();
     }
 
