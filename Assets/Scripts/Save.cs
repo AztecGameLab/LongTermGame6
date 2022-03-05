@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utility;
 
 namespace Game
 {
@@ -68,7 +70,11 @@ namespace Game
             using FileStream saveFile = File.Create(savePath);
             
             // Writes our data to the file.
-            var binaryFormatter = new BinaryFormatter();
+            var surrogateSelector = new SurrogateSelector();
+            surrogateSelector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
+            surrogateSelector.AddSurrogate(typeof(Quaternion), new StreamingContext(StreamingContextStates.All), new QuaternionSerializationSurrogate());
+
+            var binaryFormatter = new BinaryFormatter { SurrogateSelector = surrogateSelector };
             binaryFormatter.Serialize(saveFile, this);
             
             Debug.Log("Wrote save to disk.");
@@ -111,8 +117,13 @@ namespace Game
             using FileStream saveFile = File.OpenRead(savePath);
             
             // Parses the data from our file.
-            var binaryFormatter = new BinaryFormatter();
+            var surrogateSelector = new SurrogateSelector();
+            surrogateSelector.AddSurrogate(typeof(Vector3), new StreamingContext(StreamingContextStates.All), new Vector3SerializationSurrogate());
+            surrogateSelector.AddSurrogate(typeof(Quaternion), new StreamingContext(StreamingContextStates.All), new QuaternionSerializationSurrogate());
+
+            var binaryFormatter = new BinaryFormatter { SurrogateSelector = surrogateSelector };
             var saveData = (Save) binaryFormatter.Deserialize(saveFile);
+            
             return saveData;
         }
 

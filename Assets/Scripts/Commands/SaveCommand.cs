@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using ConsoleUtility;
 using Game;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Commands
@@ -23,18 +24,29 @@ namespace Commands
 
             if (args.Length > 1 && args[0] == "load")
                 HandleLoad(args[1]);
+            
+            if (args.Length > 0 && args[0] == "location")
+                HandleLocation();
         }
 
+        private void HandleLocation()
+        {
+            #if UNITY_EDITOR
+            UnityEditor.EditorUtility.RevealInFinder(Application.persistentDataPath + "/Saves/");
+            #endif
+        }
+        
         private void HandleCreate(string saveName)
         {
             var targetSave = new Save(saveName);
+            targetSave.UpdateData();
             targetSave.Write();
         }
 
         private void HandleLoad(string saveName)
         {
             var targetSave = Save.Read(saveName);
-            SceneManager.LoadScene(targetSave.CurrentScene);
+            targetSave.ApplyData();
         }
     }
 }

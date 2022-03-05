@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 
@@ -7,9 +5,9 @@ namespace Game
 {
     public class GameObjectSaveData : SaveData
     {
+        [Serializable]
         public struct Data
         {
-            
             public Vector3 position;
             public Quaternion rotation;
             public Vector3 scale;
