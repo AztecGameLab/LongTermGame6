@@ -14,22 +14,16 @@ namespace Game
             public bool isObjectEnabled;
         }
 
-        [SerializeField, HideInInspector] 
-        private string id = Guid.NewGuid().ToString();
-        
-        public override string GetID()
-        {
-            return id;
-        }
-
         public override object WriteData()
         {
+            Transform target = transform;
+            
             // generate the data that represents this object's current state.
             Data data = new Data
             {
-                position = transform.position,
-                rotation = transform.rotation,
-                scale = transform.localScale,
+                position = target.position,
+                rotation = target.rotation,
+                scale = target.localScale,
                 isObjectEnabled = gameObject.activeInHierarchy,               
             };
             return data;
@@ -37,11 +31,13 @@ namespace Game
        
         public override void ReadData(object data)
         {
+            Transform target = transform;
+            
             // apply our saved data to our current object!
             Data savedData = (Data)data;
-            transform.position = savedData.position;
-            transform.rotation = savedData.rotation;
-            transform.localScale = savedData.scale;
+            target.position = savedData.position;
+            target.rotation = savedData.rotation;
+            target.localScale = savedData.scale;
             gameObject.SetActive(savedData.isObjectEnabled);
         }
     }

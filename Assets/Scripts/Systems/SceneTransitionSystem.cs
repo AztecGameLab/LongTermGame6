@@ -55,7 +55,7 @@ public class SceneTransitionSystem : MonoBehaviour
         }
         
         yield return SceneManager.LoadSceneAsync(sceneName);
-        postLoadCallback.Invoke();
+        postLoadCallback?.Invoke();
 
         while (fadeCanvas.alpha > 0)
         {

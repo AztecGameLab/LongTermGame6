@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +7,11 @@ namespace Game
 {
     public abstract class SaveData : MonoBehaviour
     {
-        private  static HashSet<SaveData> _instances = new HashSet<SaveData>();
-        public static IReadOnlyCollection<SaveData> Instances => _instances;
+        [SerializeField, HideInInspector] 
+        private string id = Guid.NewGuid().ToString();
+        
+        private static HashSet<SaveData> _instances = new HashSet<SaveData>();
+        public static IEnumerable<SaveData> Instances => _instances;
        
         private void Awake()
         {
@@ -20,7 +23,11 @@ namespace Game
             _instances.Remove(this);
         }
 
-        public abstract string GetID();
+        public string GetID()
+        {
+            return id;
+        }
+        
         public abstract object WriteData();
         public abstract void ReadData(object data);
     }
