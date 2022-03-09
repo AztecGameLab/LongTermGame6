@@ -14,11 +14,12 @@ namespace Game
             public bool isObjectEnabled;
         }
 
+        [SerializeField, HideInInspector] 
+        private string id = Guid.NewGuid().ToString();
+        
         public override string GetID()
         {
-            // new ID for every saved object
-            string objectID = Guid.NewGuid().ToString();
-            return objectID;
+            return id;
         }
 
         public override object WriteData()
@@ -29,7 +30,7 @@ namespace Game
                 position = transform.position,
                 rotation = transform.rotation,
                 scale = transform.localScale,
-                isObjectEnabled = this.gameObject.activeInHierarchy,               
+                isObjectEnabled = gameObject.activeInHierarchy,               
             };
             return data;
         }
@@ -41,7 +42,7 @@ namespace Game
             transform.position = savedData.position;
             transform.rotation = savedData.rotation;
             transform.localScale = savedData.scale;
-            this.gameObject.SetActive(savedData.isObjectEnabled);
+            gameObject.SetActive(savedData.isObjectEnabled);
         }
     }
 }

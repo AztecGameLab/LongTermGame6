@@ -36,14 +36,14 @@ namespace Commands
             #endif
         }
         
-        private void HandleCreate(string saveName)
+        private static void HandleCreate(string saveName)
         {
             var targetSave = new Save(saveName);
             targetSave.UpdateData();
             targetSave.Write();
         }
 
-        private void HandleLoad(string saveName)
+        private static void HandleLoad(string saveName)
         {
             var targetSave = Save.Read(saveName);
             targetSave.ApplyData();

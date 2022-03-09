@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
@@ -50,13 +51,15 @@ namespace Game
 
         public void ApplyData()
         {
-            SceneManager.LoadScene(CurrentScene);
-
-            foreach (SaveData instance in SaveData.Instances)
+            // todo: better system needed than callbacks for loading
+            SceneTransitionSystem.Instance.TransitionToScene(CurrentScene, () =>
             {
-                object saveData = _sceneData[CurrentScene][instance.GetID()];
-                instance.ReadData(saveData);
-            }
+                foreach (SaveData instance in SaveData.Instances)
+                {
+                    object saveData = _sceneData[CurrentScene][instance.GetID()];
+                    instance.ReadData(saveData);
+                }
+            });
         }
         
         #region Instance Methods
