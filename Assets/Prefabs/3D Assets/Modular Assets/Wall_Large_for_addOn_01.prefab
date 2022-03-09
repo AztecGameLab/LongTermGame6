@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9091919584559282356}
   - component: {fileID: 5297120629439182609}
   - component: {fileID: 7955556430122927067}
+  - component: {fileID: -3089920155776211233}
   m_Layer: 0
   m_Name: Wall_Large_for_addOn_01
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-3089920155776211233
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459778925799858702}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4359589640311342536, guid: eb113a985255b314fbed1bc93e1c901f, type: 3}
