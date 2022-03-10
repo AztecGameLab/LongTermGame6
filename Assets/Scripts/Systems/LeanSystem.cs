@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.Mathematics;
+using UnityEngine;
+using Utility;
 
 namespace Player.Lean
 {
@@ -8,55 +11,90 @@ namespace Player.Lean
     
     public class LeanSystem : MyNamespace.System
     {
+        public enum LeanState { Left, Right, Center }
+
+        [Header("Settings")] 
+        [SerializeField] private Transform leanTransform;
+        [SerializeField] private float leanDuration = 1f;
+        
+        [SerializeField] private Transform rightTarget;
+        [SerializeField] private Transform leftTarget;
+        [SerializeField] private Transform centerTarget;
+        
         [Header("Dependencies")]
-        
-        [SerializeField] 
-        [Tooltip("The component that will animate our lean effect.")]
-        private Animator leanAnimator;
-        
+
         [SerializeField] 
         [Tooltip("The collider that is enabled when leaning left.")]
-        private Collider leanLeftCollider;
+        private SafeCollider leftCollider;
         
         [SerializeField] 
         [Tooltip("The collider that is enabled when leaning right.")]
-        private Collider leanRightCollider;
+        private SafeCollider rightCollider;
+        
+        [SerializeField] 
+        [Tooltip("The collider that is enabled when leaning right.")]
+        private SafeCollider centerCollider;
 
         // Internal State
         
-        private static readonly int LeftTrigger = Animator.StringToHash("leanLeft");
-        private static readonly int RightTrigger = Animator.StringToHash("leanRight");
-        private static readonly int ResetLeanTrigger = Animator.StringToHash("resetLean");
+        private float _leanStartTime;
 
-        public bool IsLeaning { get; private set; }
+        public LeanState TargetState { get; set; } = LeanState.Center;
+        public LeanState CurrentState { get; private set; } = LeanState.Center;
         
         // Methods
+
+        private void Update()
+        {
+            switch (TargetState)
+            {
+                case LeanState.Left: 
+                    if (leftCollider.IsClear)
+                        UpdateLean(leftCollider, leftTarget);
+                    break;
+                
+                case LeanState.Right:
+                    if (rightCollider.IsClear)
+                        UpdateLean(rightCollider, rightTarget);
+                    break;
+                
+                case LeanState.Center:
+                    if (centerCollider.IsClear)
+                        UpdateLean(centerCollider, centerTarget);
+                    break;
+                
+                default: throw new ArgumentOutOfRangeException();
+            }
+        }
+
         
-        public void LeanLeft()
+        private void UpdateLean(SafeCollider targetCollider, Transform targetTransform)
         {
-            leanLeftCollider.enabled = true;
-            leanRightCollider.enabled = false;
-            
-            IsLeaning = true;
-            leanAnimator.SetTrigger(LeftTrigger);
+            if (CurrentState != TargetState)
+            {
+                leftCollider.Disable();
+                rightCollider.Disable();
+                centerCollider.Disable();
+                
+                targetCollider.SafeEnable();
+                
+                _leanStartTime = Time.time;
+                CurrentState = TargetState;
+            }
+
+            ApplyAnimation(targetTransform.position, targetTransform.localRotation);
         }
 
-        public void LeanRight()
+        // Animate our transform's position and rotation with the SmoothStep function.
+        // See: https://en.wikipedia.org/wiki/Smoothstep
+        
+        private void ApplyAnimation(Vector3 targetPosition, Quaternion targetRotation)
         {
-            leanLeftCollider.enabled = false;
-            leanRightCollider.enabled = true;
-            
-            IsLeaning = true;
-            leanAnimator.SetTrigger(RightTrigger);
-        }
-
-        public void ResetLean()
-        {
-            leanLeftCollider.enabled = false;
-            leanRightCollider.enabled = false;
-            
-            IsLeaning = false;
-            leanAnimator.SetTrigger(ResetLeanTrigger);
+            float elapsedTime = Time.time - _leanStartTime;
+            float percentDone = math.smoothstep(0, leanDuration, elapsedTime * Time.timeScale);
+        
+            leanTransform.position = Vector3.Lerp(leanTransform.position, targetPosition, percentDone);
+            leanTransform.localRotation = Quaternion.Lerp(leanTransform.localRotation, targetRotation, percentDone);
         }
     }
 }
