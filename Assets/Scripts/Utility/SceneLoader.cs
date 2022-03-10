@@ -7,7 +7,7 @@ namespace Utility
     {
         public void Load(string sceneName)
         {
-            SceneManager.LoadScene(sceneName);
+            SceneTransitionSystem.Instance.TransitionToScene(sceneName);
         }
 
         public void Reload()
