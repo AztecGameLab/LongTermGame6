@@ -8,20 +8,25 @@ public class StealthSystem : MonoBehaviour
     [SerializeField]
     public float crounchedValue = 0.5f;
 
-    float _stealthValue;
+    public float stealthValue { get; set; }
+
+    private void OnEnable()
+    {
+        stealthValue = 1.0f;
+    }
 
     public void MakeUndetectable()
     {
-        this._stealthValue = 0.0f;
+        this.stealthValue = 0.0f;
     }
 
     public void SetCrouched()
     {
-        this._stealthValue = crounchedValue;
+        this.stealthValue = crounchedValue;
     }
 
     public void resetStealthValue()
     {
-        this._stealthValue = 0.0f;
+        this.stealthValue = 1.0f;
     }
 }

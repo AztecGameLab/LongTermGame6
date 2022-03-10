@@ -27,15 +27,22 @@ namespace Game.Enemy
         private Transform viewTransform;
 
         // Methods
-        
+
         protected override bool IsDetected(Transform target)
         {
+            float stealth = 1.0f;
+            StealthSystem stealthSys = (StealthSystem) target.GetComponent(typeof(StealthSystem));
+            if (stealthSys != null)
+            {
+                stealth = stealthSys.stealthValue;
+            }
+
             Vector3 origin = viewTransform.position;
             
             var vectorToTarget = target.position - origin;
             var rayToTarget = new Ray(origin, vectorToTarget);
 
-            if (vectorToTarget.magnitude > viewRange || Vector3.Angle(vectorToTarget, viewTransform.forward) > viewAngle)
+            if (vectorToTarget.magnitude > viewRange * stealth || Vector3.Angle(vectorToTarget, viewTransform.forward) > viewAngle)
                 return false;
             
             return !Physics.Raycast(rayToTarget, vectorToTarget.magnitude ,collisionLayerMask.value, QueryTriggerInteraction.Ignore);
