@@ -33,15 +33,12 @@ public class EnemyAttacks : MonoBehaviour
              
             if(occupant.GetComponent<MovementSystem>()){
                 occupant.GetComponent<MovementSystem>().SpeedMultiplier = 0.5f;     
-                Debug.Log("player movement slowed");
                 StartCoroutine(RestoreMovement(occupant.GetComponent<MovementSystem>()));
-
             }
         }
 
         IEnumerator RestoreMovement (MovementSystem system){
             yield return new WaitForSeconds(slowDuration);
-            Debug.Log("OMONMKOMKOMO");
             system.SpeedMultiplier = 2.0f;
         }
 
