@@ -67,6 +67,11 @@ public class CrouchSystem : MyNamespace.System
         }
     }
 
+    private void OnDisable()
+    {
+        Stand();
+    }
+
     private bool ShouldCrouch()
     {
         bool isGrounded = groundCheck.IsGrounded;
