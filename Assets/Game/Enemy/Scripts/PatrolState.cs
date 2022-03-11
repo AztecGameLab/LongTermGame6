@@ -10,7 +10,7 @@ namespace Game.Enemy
     /// Allows an enemy to travel between a looping set of points, stopping when it sees an enemy.
     /// </summary>
     
-    public class EnemyPatrolState : EnemyState
+    public class PatrolState : State
     {
         [SerializeField] 
         [Tooltip("The positions this enemy will path-find between, starting from the top, moving down and looping.")]
@@ -21,8 +21,11 @@ namespace Game.Enemy
         [SerializeField] 
         [Tooltip("How close do we have to be to a destination before it counts as being visited.")]
         private float stopDistance = 0.1f;
+
+        [Header("Dependencies")] 
         
-        [Header("Dependencies")]
+        [SerializeField]
+        private State attackState;
         
         [SerializeField] 
         [Tooltip("The agent used for pathfinding towards our target.")]
@@ -60,10 +63,8 @@ namespace Game.Enemy
 
         #region Finite State Machine
 
-            public override void OnStateEnter(EnemyStateManager enemy)
+            public override void OnStateEnter(StateManager parent)
             {
-                base.OnStateEnter(enemy);
-
                 agent.ResetPath();
                 patrolTree.Reset();
                 
@@ -71,19 +72,18 @@ namespace Game.Enemy
                 rotationSystem.Deactivate();
                 agent.updateRotation = true;
             }
-
-            public override void OnStateExit(EnemyStateManager enemy)
-            {
-                base.OnStateExit(enemy);
-                agent.ResetPath();
-            }
-
-            public override void OnStateUpdate(EnemyStateManager enemy)
+            
+            public override void OnStateUpdate(StateManager parent)
             {
                 if (attackTargetDetector.HasTarget)
-                    enemy.ChangeState(enemy.AttackState);
+                    parent.ChangeState(attackState);
 
                 else patrolTree.Tick();
+            }
+            
+            public override void OnStateExit(StateManager parent)
+            {
+                agent.ResetPath();
             }
 
         #endregion
