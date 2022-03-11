@@ -50,7 +50,7 @@ namespace Game.Enemy
 
         // Methods
         
-        private void Awake()
+        private void OnEnable()
         {
             patrolTree = BuildPatrolTree();
             
