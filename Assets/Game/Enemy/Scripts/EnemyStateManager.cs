@@ -24,12 +24,18 @@ namespace Game.Enemy
         [SerializeField] 
         [Tooltip("Behaviour for when a target is found.")]
         private EnemyState attackState;
+        
+        [SerializeField] 
+        [Tooltip("Behaviour for when a target is out of sight.")]
+        private EnemyState investigateState;
 
         // Internal Data
 
         public EnemyState DefaultState => defaultState;
         public EnemyState IdleState => idleState;
         public EnemyState AttackState => attackState;
+
+        public EnemyState InvestigateState => investigateState;
         
         public EnemyState CurrentState { get; private set; }
         

@@ -95,6 +95,7 @@ namespace Game.Enemy
             
             public override void OnStateUpdate(EnemyStateManager enemy)
             {
+                // ToDO: Change to go to investigate state
                 if (attackTargetDetector.HasTarget == false)
                     enemy.ChangeState(enemy.IdleState);
 
