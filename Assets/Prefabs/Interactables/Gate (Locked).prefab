@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7797bf1074147a48a7a73d65ada205a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedMinAngle: -2
-  lockedMaxAngle: 2
+  lockedMinAngle: -1
+  lockedMaxAngle: 1
   openMinAngle: -120
   openMaxAngle: 120
   keyObject: {fileID: 0}
@@ -596,7 +596,7 @@ HingeJoint:
   m_Anchor: {x: 0.125, y: 2.25, z: 1}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 10.25, y: 2.25, z: 8}
+  m_ConnectedAnchor: {x: -29.126392, y: 21.722185, z: 48.2231}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -633,6 +633,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls:
