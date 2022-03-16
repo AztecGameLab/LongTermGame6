@@ -1,39 +1,23 @@
-﻿using UnityEngine;
+using JetBrains.Annotations;
+using UnityEngine;
 using Display = UnityTemplateProjects.UI.Display;
 
 namespace Game.Enemy
 {
-    public class EnemyStateManager : MonoBehaviour
+    public class StateManager : MonoBehaviour
     {
-        [Header("Settings")]
+        [Header("Settings")] 
         
         [SerializeField]
         [Tooltip("The starting state for this enemy.")]
-        private EnemyState defaultState;
+        private State defaultState;
 
         [SerializeField] 
         [Tooltip("The display used to show debug information.")]
         private Display debugDisplay;
         
-        [Header("Dependencies")]
-        
-        [SerializeField]
-        [Tooltip("Behaviour for when no targets can be found.")]
-        private EnemyState idleState;
-        
-        [SerializeField] 
-        [Tooltip("Behaviour for when a target is found.")]
-        private EnemyState attackState;
-
-        // Internal Data
-
-        public EnemyState DefaultState => defaultState;
-        public EnemyState IdleState => idleState;
-        public EnemyState AttackState => attackState;
-        
-        public EnemyState CurrentState { get; private set; }
-        
-        // Methods
+        public State DefaultState => defaultState;
+        public State CurrentState { get; private set; }
         
         private void Start()
         {
@@ -49,7 +33,8 @@ namespace Game.Enemy
                 debugDisplay.UpdateText(CurrentState.StateName);
         }
 
-        public void ChangeState(EnemyState state)
+        [PublicAPI]
+        public void ChangeState(State state)
         {
             CurrentState.OnStateExit(this);
             CurrentState = state;

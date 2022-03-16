@@ -10,7 +10,7 @@ namespace Game.Enemy
     /// Allows an enemy to chase and damage a target, stopping when it loses its target.
     /// </summary>
     
-    public class EnemyAttackState : EnemyState 
+    public class AttackState : State 
     {
         [Header("Settings")]
         
@@ -30,8 +30,11 @@ namespace Game.Enemy
         [SerializeField] 
         [Tooltip("How quickly should we turn to face the player, larger values take longer.")]
         private float smoothTime = 1f;
+
+        [Header("Dependencies")] 
         
-        [Header("Dependencies")]
+        [SerializeField]
+        private State idleState;
         
         [SerializeField] 
         [Tooltip("The system used to rotate towards our target.")]
@@ -75,10 +78,8 @@ namespace Game.Enemy
 
         #region Finite State Machine
 
-            public override void OnStateEnter(EnemyStateManager enemy)
+            public override void OnStateEnter(StateManager parent)
             {
-                base.OnStateEnter(enemy);
-
                 agent.ResetPath();
                 attackTree.Reset();
 
@@ -87,18 +88,17 @@ namespace Game.Enemy
                 agent.updateRotation = false;
             }
 
-            public override void OnStateExit(EnemyStateManager enemy)
-            {
-                base.OnStateExit(enemy);
-                agent.ResetPath();
-            }
-            
-            public override void OnStateUpdate(EnemyStateManager enemy)
+            public override void OnStateUpdate(StateManager parent)
             {
                 if (attackTargetDetector.HasTarget == false)
-                    enemy.ChangeState(enemy.IdleState);
+                    parent.ChangeState(idleState);
 
                 else attackTree.Tick();
+            }
+            
+            public override void OnStateExit(StateManager parent)
+            {
+                agent.ResetPath();
             }
 
         #endregion
