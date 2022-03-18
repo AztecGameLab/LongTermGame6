@@ -43,7 +43,7 @@ public class StepTracker : MonoBehaviour
     
     private void Update()
     {
-        if (groundCheck.IsGrounded)
+        if (groundCheck == null || groundCheck.IsGrounded)
             TrackMovement();
     }
 
