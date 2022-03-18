@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,13 +37,13 @@ public class SceneTransitionSystem : MonoBehaviour
         }
     }
     
-    public void TransitionToScene(string sceneName)
+    public void TransitionToScene(string sceneName, Action postLoadCallback = null)
     {
         StopAllCoroutines();
-        StartCoroutine(LoadSceneWithFade(sceneName));
+        StartCoroutine(LoadSceneWithFade(sceneName, postLoadCallback));
     }
     
-    private IEnumerator LoadSceneWithFade(string sceneName)
+    private IEnumerator LoadSceneWithFade(string sceneName, Action postLoadCallback)
     {
         fadeCanvas.interactable = true;
         fadeCanvas.blocksRaycasts = true;
@@ -54,6 +55,7 @@ public class SceneTransitionSystem : MonoBehaviour
         }
         
         yield return SceneManager.LoadSceneAsync(sceneName);
+        postLoadCallback?.Invoke();
 
         while (fadeCanvas.alpha > 0)
         {
