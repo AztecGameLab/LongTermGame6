@@ -10,7 +10,8 @@ public class MovableObject : MonoBehaviour
     [SerializeField] [Range(0, 1)] private float movementSpeed = 0.5f;
     [SerializeField, Layer] private int playerLayer = 6;
     [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private bool freezeRotation = true;
+    [SerializeField] private bool applyRotation = true;
+    [SerializeField] private bool applyConstraintsWhileMoving = true;
     
     // The current position of this object
     private Transform _currentPosition;
@@ -58,13 +59,13 @@ public class MovableObject : MonoBehaviour
 
     private void HandleInteractEnd()
     {
-        if (freezeRotation)
+        if (applyConstraintsWhileMoving)
             Rigidbody.constraints = RigidbodyConstraints.None;
     }
 
     private void HandleInteractStart(GameObject grabber, Vector3 point)
     {
-        if (freezeRotation)
+        if (applyConstraintsWhileMoving)
             Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         
         MovingTarget target = grabber.GetComponentInChildren<MovingTarget>();
@@ -81,17 +82,13 @@ public class MovableObject : MonoBehaviour
     private void Update()
     {
         if (Interactable.IsHeld)
-        {
             RotateTowardsTarget();
-        }
 
     }
     private void FixedUpdate()
     {
         if (Interactable.IsHeld)
-        {
             MoveTowardsTarget();
-        }
                              
     }
 
@@ -107,11 +104,8 @@ public class MovableObject : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        if (!_isDoor)//make sure its not a door
-        {// thinking of making doors tagged or tag all objects that dont require the rotation
-
+        if (applyRotation)
             Rigidbody.MoveRotation(_cameraTransform.rotation * _offsetRot);
-        }
     }
 
     private void OnCollisionEnter(Collision other)
