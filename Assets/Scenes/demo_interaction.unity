@@ -2184,7 +2184,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-1546
+  m_Name: pb_Mesh-73906
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2765,8 +2765,8 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
-  RotSpeed: 5
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
 --- !u!114 &798913139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4244,8 +4244,8 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
-  RotSpeed: 5
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
 --- !u!64 &934679651
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6920,7 +6920,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh22484
+  m_Name: pb_Mesh165262
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7085,6 +7085,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2359756735399934656, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
+      propertyPath: freezeRotation
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2359756735399934657, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
       propertyPath: m_Name
       value: Door v2
@@ -7151,6 +7155,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2359756735399934660, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2359756735399934661, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
+      propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2359756736066362860, guid: c72ecd617af26ff44a37eb25727a0b10, type: 3}
@@ -7636,8 +7644,8 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
-  RotSpeed: 5
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
 --- !u!114 &1247135932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8842,8 +8850,8 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
-  RotSpeed: 5
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
 --- !u!114 &1307437157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14404,8 +14412,8 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
-  RotSpeed: 5
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
 --- !u!114 &1497602018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15427,8 +15435,8 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
-  RotSpeed: 5
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
 --- !u!114 &1999056348
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -135,7 +135,8 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  freezeRotation: 0
+  applyRotation: 0
+  applyConstraintsWhileMoving: 0
 --- !u!114 &3066736616847580424
 MonoBehaviour:
   m_ObjectHideFlags: 0
