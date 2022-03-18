@@ -1,3 +1,4 @@
+using FMODUnity;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,7 @@ using UnityEngine.SceneManagement;
 public class InputPauseController : InputController<GameObject>
 {
     [SerializeField, Scene] private string targetScene;
+    [SerializeField] private StudioEventEmitter pauseSnapshot;
     
     [Space(20f)]
     [SerializeField] private UnityEvent onPause;
@@ -36,6 +38,7 @@ public class InputPauseController : InputController<GameObject>
         Time.timeScale = 1f;
         _gameIsPaused = false;
         
+        // pauseSnapshot.SetParameter("Intensity", 0);
         onPause.Invoke();
     }
 
@@ -45,7 +48,8 @@ public class InputPauseController : InputController<GameObject>
         system.SetActive(true);
         Time.timeScale = 0f;
         _gameIsPaused = true;
-
+        
+        // pauseSnapshot.SetParameter("Intensity", 100);
         onResume.Invoke();
     }
 
