@@ -11,6 +11,7 @@ public class AnimalPen : MonoBehaviour
     [SerializeField] public GameObject smallPig1;
     [SerializeField] public GameObject smallPig2;
     [SerializeField] private GameObject newKey;
+    
 
 
     private void OnTriggerEnter(Collider other)
