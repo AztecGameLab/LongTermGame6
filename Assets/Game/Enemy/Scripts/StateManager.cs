@@ -38,7 +38,9 @@ namespace Game.Enemy
         {
             CurrentState.OnStateExit(this);
             CurrentState = state;
-            CurrentState.OnStateEnter(this);
+            
+            if (state != null) 
+                state.OnStateEnter(this);
         }
     }
 }
