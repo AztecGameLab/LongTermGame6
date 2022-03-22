@@ -27,6 +27,9 @@ namespace Game.Enemy
         [SerializeField]
         private State attackState;
         
+        [SerializeField]
+        private State soundState;
+        
         [SerializeField] 
         [Tooltip("The agent used for pathfinding towards our target.")]
         private NavMeshAgent agent;
@@ -38,6 +41,10 @@ namespace Game.Enemy
         [SerializeField] 
         [Tooltip("The system we use to determine whether or not an attack target is detected.")]
         private TargetDetector attackTargetDetector;
+        
+        [SerializeField] 
+        [Tooltip("The system we use to determine whether or not an attack target is detected.")]
+        private SoundDetector soundTargetDetector;
         
         [Space(20f)]
         
@@ -77,7 +84,9 @@ namespace Game.Enemy
             {
                 if (attackTargetDetector.HasTarget)
                     parent.ChangeState(attackState);
-
+                else if(attackTargetDetector.HasTarget == false && soundTargetDetector.HasSound)
+                    parent.ChangeState(soundState);
+                
                 else patrolTree.Tick();
             }
             

@@ -90,7 +90,7 @@ namespace Game.Enemy
 
             public override void OnStateUpdate(StateManager parent)
             {
-                if (attackTargetDetector.HasTarget == false)
+                if (attackTargetDetector.HasTarget == false )
                     parent.ChangeState(idleState);
 
                 else attackTree.Tick();

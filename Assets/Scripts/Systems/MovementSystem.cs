@@ -25,6 +25,7 @@ public class MovementSystem : MyNamespace.System
     [SerializeField]
     [Tooltip("The forward direction used for calculating a sprint boost.")]
     private Transform lookDirection;
+    
 
     // Internal State
     
