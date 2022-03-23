@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using ConsoleUtility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +14,10 @@ public class Trigger : MonoBehaviour
     [SerializeField]
     [Tooltip("Which layers should be ignored when checking collisions.")]
     private LayerMask excludeLayers;
+
+    [SerializeField]
+    [Tooltip("Should this trigger disable itself after one activation?")]
+    private bool oneShot;
 
     [Space(20f)]
     
@@ -47,7 +50,7 @@ public class Trigger : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (IsValidCollider(other))
+        if (IsValidCollider(other) && enabled)
         {
             if (showDebug)
                 Debug.Log($"Entered trigger: {other.gameObject.name}", gameObject);
@@ -58,12 +61,15 @@ public class Trigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (IsValidCollider(other))
+        if (IsValidCollider(other) && enabled)
         {
             if (showDebug)
                 Debug.Log($"Exited trigger: {other.gameObject.name}", gameObject);
                 
             collisionExit.Invoke(other);
+
+            if (oneShot)
+                enabled = false;
         }
     }
 
@@ -77,7 +83,7 @@ public class Trigger : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (IsValidCollider(other))
+        if (IsValidCollider(other) && enabled)
         {
             _colliders.Add(other);
             
