@@ -21,15 +21,15 @@ namespace Utility
         
         [SerializeField] 
         [Tooltip("The layers that should block line-of-sight.")]
-        private LayerMask collisionLayerMask;
+        private LayerMask collisionLayerMask = 1;
         
         [Space(20f)]
         
         [SerializeField]
-        private UnityEvent onLookStart;
+        public UnityEvent onLookStart = new UnityEvent();
         
         [SerializeField] 
-        private UnityEvent onLookEnd;
+        public UnityEvent onLookEnd = new UnityEvent();
         
         private Transform _trackedTransform;
         private float _elapsedLookTime;
