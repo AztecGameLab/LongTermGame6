@@ -52,6 +52,10 @@ namespace Game.Enemy
         [Tooltip("The system we use to determine whether or not an attack target is detected.")]
         private TargetDetector attackTargetDetector;
 
+        [SerializeField]
+        [Tooltip("The attacls the enemy will do against the player")]
+        private EnemyAttacks enemyAttacks;
+
         [Space(20f)]
         
         [SerializeField]
@@ -145,16 +149,7 @@ namespace Game.Enemy
                     return TaskStatus.Continue;
                 
                 _lastAttackTime = Time.time;
-
-                // todo ai attack 2: add stronger damage feel (knock-back, sound effects, ect.)
-                // todo ai attack 3: pass damage amount to FMOD for changing the impact of the sound
-                
-                foreach (Rigidbody occupant in damageTrigger.Rigidbodies)
-                {
-                    if (occupant.TryGetComponent(out Health health))
-                        health.Damage(attackDamage);
-                }
-
+                enemyAttacks.DoDamage(attackDamage,damageTrigger);
                 return TaskStatus.Success;
             }
 
