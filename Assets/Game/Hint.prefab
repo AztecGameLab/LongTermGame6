@@ -299,14 +299,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3097478180624892521}
-  m_LocalRotation: {x: -0, y: -0.7998027, z: -0, w: 0.600263}
+  m_LocalRotation: {x: 0, y: -0.79980516, z: 0, w: 0.6002597}
   m_LocalPosition: {x: 0, y: 0, z: 0.0000018314056}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3097478178967310991}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -106.223, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.0000009536743, y: 0.00999999}
@@ -375,8 +375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e638cc1ef3d4f4093262222cd059863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: A strangely shaped ball...
+  text: Hint Text Goes Here
   fadeSpeed: 1
-  hintDuration: 2
+  hintDuration: 5
   textDisplay: {fileID: 3097478179963903028}
   textCanvas: {fileID: 3097478178967310989}

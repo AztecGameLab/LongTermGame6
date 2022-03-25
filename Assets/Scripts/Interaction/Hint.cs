@@ -7,16 +7,36 @@ namespace Game.Interaction
 {
     public class Hint : MonoBehaviour
     {
-        [SerializeField] private string text;
-        [SerializeField] private float fadeSpeed = 1f;
-        [SerializeField] private float hintDuration = 4f;
+        [Header("Settings")]
+        
+        [Multiline]
+        [SerializeField]
+        [Tooltip("The text that this hint will display.")]
+        private string text;
+        
+        [SerializeField] 
+        [Tooltip("How quickly the hint should fade in / out.")]
+        private float fadeSpeed = 1f;
+        
+        [SerializeField] 
+        [Tooltip("How long the hint should display before automatically fading out.")]
+        private float hintDuration = 4f;
         
         [Header("Dependencies")]
-        [SerializeField] private Display textDisplay;
-        [SerializeField] private CanvasGroup textCanvas;
 
+        [SerializeField]
+        [Tooltip("The display used for showing the hint.")]
+        private Display textDisplay;
+        
+        [SerializeField] 
+        [Tooltip("The canvas used for fading the hint in and out.")]
+        private CanvasGroup textCanvas;
+        
+        private WaitForSeconds _autoHideDuration;
+        
         private void Start()
         {
+            _autoHideDuration = new WaitForSeconds(hintDuration);
             textDisplay.UpdateText(text);
         }
 
@@ -37,14 +57,18 @@ namespace Game.Interaction
         {
             while (Math.Abs(textCanvas.alpha - target) > 0)
             {
-                textCanvas.alpha = Mathf.MoveTowards(textCanvas.alpha, target, fadeSpeed * Time.deltaTime);
+                float current = textCanvas.alpha;
+                float maxDelta = fadeSpeed * Time.deltaTime;
+                
+                textCanvas.alpha = Mathf.MoveTowards(current, target, maxDelta);
+                
                 yield return null;
             }
         }
 
         private IEnumerator AutoHide()
         {
-            yield return new WaitForSeconds(hintDuration);
+            yield return _autoHideDuration;
             HideHint();
         }
     }
