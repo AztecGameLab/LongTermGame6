@@ -14,9 +14,9 @@ namespace Game.Enemy
     {
         [Header("Settings")]
         
-        [SerializeField]
-        [Range(0, 1)]
-        [Tooltip("What percent of the player's health should we take away when hitting them.")]
+        // [SerializeField]
+        // [Range(0, 1)]
+        // [Tooltip("What percent of the player's health should we take away when hitting them.")]
         private float attackDamage = 0.25f;
         
         [SerializeField] 
@@ -52,6 +52,9 @@ namespace Game.Enemy
         [Tooltip("The system we use to determine whether or not an attack target is detected.")]
         private TargetDetector attackTargetDetector;
 
+        [SerializeField] 
+        private Animator animator;
+        
         [SerializeField]
         [Tooltip("The attacls the enemy will do against the player")]
         private EnemyAttacks enemyAttacks;
@@ -149,7 +152,7 @@ namespace Game.Enemy
                     return TaskStatus.Continue;
                 
                 _lastAttackTime = Time.time;
-                enemyAttacks.DoDamage(attackDamage,damageTrigger);
+                animator.SetTrigger("Attack");
                 return TaskStatus.Success;
             }
 
