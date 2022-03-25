@@ -19,10 +19,9 @@ public class SoundEmitter : MonoBehaviour
     {
         if (tagsIgnored.Contains(other.gameObject.tag)) return;//ignored collisions
         
-        //report collision sound if crashed against another collider
+        //report collision sound if crashed against another collider with certain velocity threshold
         if (_isInstanceNotNull && other.relativeVelocity.magnitude > velocityThreshold)
         {
-            //Debug.Log("CAlled sound collision");
             HearingManager.Instance.OnSoundEmitted(gameObject, transform.position, EHeardSoundCategory.EInteractable, .5f);
         }
     }

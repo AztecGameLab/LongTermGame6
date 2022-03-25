@@ -72,10 +72,14 @@ namespace Game.Enemy
             
             public override void OnStateUpdate(StateManager parent)
             {
-                if (attackTargetDetector.HasTarget == false && soundTargetDetector.HasSound == false)
+                if (attackTargetDetector.HasTarget == false && soundTargetDetector.HasSound == false) //root state
+                {
                     parent.ChangeState(idleState);
-                else if(attackTargetDetector.HasTarget  && soundTargetDetector.HasSound)
+                }
+                else if (attackTargetDetector.HasTarget && soundTargetDetector.HasSound) //attack state
+                {
                     parent.ChangeState(attackState);
+                }
                 
                 else soundTree.Tick();
             }

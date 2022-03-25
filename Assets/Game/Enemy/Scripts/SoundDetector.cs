@@ -33,15 +33,20 @@ public class SoundDetector : MonoBehaviour
     private void OnDestroy()
     {
         if (HearingManager.Instance != null)
+        {
             HearingManager.Instance.Deregister(this);
+        }
     }
 
     public void OnHeardSound(GameObject source, Vector3 location, EHeardSoundCategory category, float intensity)
     {
         // outside of hearing range
         if (Vector3.Distance(location, CurrentPosition) > HearingRange)
+        {
             return;
-
+        }
+        
+        
         HasSound = true;
         HeardPosition = location;
     }
@@ -53,8 +58,8 @@ public class SoundDetectorEditor : Editor
 {
     public void OnSceneGUI()
     {
-        var soundRadius = target as SoundDetector;
-
+        if (!(target is SoundDetector soundRadius)) return;
+        
         // draw the hearing range
         Handles.color = soundRadius.HearingRangeColor;
         Handles.DrawSolidDisc(soundRadius.transform.position, Vector3.up, soundRadius.HearingRange);

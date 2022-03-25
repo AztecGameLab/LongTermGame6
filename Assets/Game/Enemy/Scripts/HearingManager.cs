@@ -4,7 +4,6 @@ using UnityEngine;
 public enum EHeardSoundCategory
 {
     EFootstep,
-    ECrouchFootStep,
     EJump,
     EInteractable
 }
