@@ -7,13 +7,13 @@ namespace Game.Interaction
 {
     public class Hint : MonoBehaviour
     {
-        [Header("Settings")]
-        
         [Multiline]
         [SerializeField]
         [Tooltip("The text that this hint will display.")]
         private string text;
         
+        [Header("Settings")]
+
         [SerializeField] 
         [Tooltip("How quickly the hint should fade in / out.")]
         private float fadeSpeed = 1f;
