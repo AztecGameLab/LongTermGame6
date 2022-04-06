@@ -9113,11 +9113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2620666226370321362, guid: a9a74faecb2f3a3418ff8acfb9196aec, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.97
+      value: 9.24
       objectReference: {fileID: 0}
     - target: {fileID: 2620666226370321362, guid: a9a74faecb2f3a3418ff8acfb9196aec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.17
+      value: 2.15
       objectReference: {fileID: 0}
     - target: {fileID: 2620666226370321362, guid: a9a74faecb2f3a3418ff8acfb9196aec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -12984,11 +12984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.97
+      value: 9.24
       objectReference: {fileID: 0}
     - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.67
+      value: 2.65
       objectReference: {fileID: 0}
     - target: {fileID: 8137009872141556459, guid: d919d17a9f4139549bd3d3460198260b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -44405,6 +44405,7 @@ MonoBehaviour:
   lockedMaxAngle: 1
   openMinAngle: -120
   openMaxAngle: 120
+  lockAmount: 1
   hinge: {fileID: 638938448}
 --- !u!43 &1698050112
 Mesh:
@@ -51646,6 +51647,7 @@ MonoBehaviour:
   lockedMaxAngle: 1
   openMinAngle: -120
   openMaxAngle: 120
+  lockAmount: 1
   hinge: {fileID: 1891463896}
 --- !u!1001 &1929891241
 PrefabInstance:
