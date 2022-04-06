@@ -10,15 +10,17 @@ public class MovableObject : MonoBehaviour
     [SerializeField] [Range(0, 1)] private float movementSpeed = 0.5f;
     [SerializeField, Layer] private int playerLayer = 6;
     [SerializeField] private float maxSpeed = 10f;
-    [SerializeField] private bool freezeRotation = true;
+    [SerializeField] private bool applyRotation = true;
+    [SerializeField] private bool applyConstraintsWhileMoving = true;
     
     // The current position of this object
     private Transform _currentPosition;
 
     //The rotation of object when picked up
-    private Quaternion offsetRot;
+    private Quaternion _offsetRot;
 
     private Transform _cameraTransform;
+    private bool _isDoor;
 
     // The position this object is trying to accelerate towards.
     public Transform TargetTransform { get; private set; }
@@ -39,6 +41,8 @@ public class MovableObject : MonoBehaviour
 
         if (Camera.main != null)
             _cameraTransform = Camera.main.transform;
+        
+        _isDoor = Interactable.GetComponent<HingeJoint>() != null;
     }
     
     private void OnEnable()
@@ -55,13 +59,13 @@ public class MovableObject : MonoBehaviour
 
     private void HandleInteractEnd()
     {
-        if (freezeRotation)
+        if (applyConstraintsWhileMoving)
             Rigidbody.constraints = RigidbodyConstraints.None;
     }
 
     private void HandleInteractStart(GameObject grabber, Vector3 point)
     {
-        if (freezeRotation)
+        if (applyConstraintsWhileMoving)
             Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         
         MovingTarget target = grabber.GetComponentInChildren<MovingTarget>();
@@ -71,24 +75,20 @@ public class MovableObject : MonoBehaviour
         
         _currentPosition.position = point;
 
-        offsetRot = Quaternion.Inverse(_cameraTransform.rotation) * transform.rotation;
+        _offsetRot = Quaternion.Inverse(_cameraTransform.rotation) * transform.rotation;
     }
 
 
     private void Update()
     {
         if (Interactable.IsHeld)
-        {
             RotateTowardsTarget();
-        }
 
     }
     private void FixedUpdate()
     {
         if (Interactable.IsHeld)
-        {
             MoveTowardsTarget();
-        }
                              
     }
 
@@ -104,12 +104,8 @@ public class MovableObject : MonoBehaviour
 
     private void RotateTowardsTarget()
     {
-        if (Interactable.GetComponent<HingeJoint>() == null)//make sure its not a door
-        {// thinking of making doors tagged or tag all objects that dont require the rotation
-
-            Rigidbody.MoveRotation(_cameraTransform.rotation * offsetRot);
-
-        }
+        if (applyRotation)
+            Rigidbody.MoveRotation(_cameraTransform.rotation * _offsetRot);
     }
 
     private void OnCollisionEnter(Collision other)
