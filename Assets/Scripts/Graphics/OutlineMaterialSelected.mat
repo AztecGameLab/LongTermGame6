@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: OutlineMaterialSelected
   m_Shader: {fileID: 4800000, guid: ddee5e160afcb494c8df388a38ab8812, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _DODEPTHEDGEDETECTION_ON _DONORMALEDGEDETECTION_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -97,16 +97,20 @@ Material:
     - _Cull: 2
     - _Cutoff: 0.5
     - _DepthRadius: 0.002
+    - _DepthThreshold: 0.029
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _DoDepthEdgeDetection: 1
+    - _DoNormalEdgeDetection: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _NormalThreshold: 0
     - _OcclusionStrength: 1
-    - _OutlineIntensity: 8
+    - _OutlineIntensity: 28.3
     - _OutlineSize: 0.002
     - _Parallax: 0.005
     - _QueueOffset: 0
@@ -123,6 +127,6 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _OutlineColor: {r: 0.43715137, g: 1, b: 0.39999998, a: 1}
+    - _OutlineColor: {r: 0.4371513, g: 1, b: 0.39999992, a: 0.18431373}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
