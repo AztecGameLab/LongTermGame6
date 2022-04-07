@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 3035223382364655420}
   - component: {fileID: 3035223382364655421}
   - component: {fileID: 3035223382364655418}
-  m_Layer: 7
+  - component: {fileID: 3035223381840353072}
+  - component: {fileID: 4873514863393051642}
+  m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2800726889403200112}
-  m_LocalRotation: {x: -0.7020808, y: 0.084158406, z: -0.08415842, w: 0.7020807}
+  m_LocalRotation: {x: -0.70208067, y: 0.08415935, z: -0.08415935, w: 0.70208067}
   m_LocalPosition: {x: 0.063, y: 0.816, z: -0.947}
   m_LocalScale: {x: 100, y: 100, z: 99.999985}
   m_Children: []
@@ -122,10 +124,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7797bf1074147a48a7a73d65ada205a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedMinAngle: -2
-  lockedMaxAngle: 2
+  keyObject: {fileID: 0}
+  dummyLockPrefab: {fileID: 9002933665572775252, guid: 7be7e3477248c4046a9e67af04a53dd8, type: 3}
+  OnUnlock:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3035223381840353072}
+        m_TargetAssemblyTypeName: HingeLocker, Assembly-CSharp
+        m_MethodName: UnlockHinge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3035223382364655418}
+        m_TargetAssemblyTypeName: KeyLock, Assembly-CSharp
+        m_MethodName: DropLock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3035223382364655418}
+        m_TargetAssemblyTypeName: KeyLock, Assembly-CSharp
+        m_MethodName: DeleteKey
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4873514863393051642}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3035223381840353072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800726889403200112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b559fe634ae3c4eae322a79d587e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockedMinAngle: -15
+  lockedMaxAngle: 15
   openMinAngle: -120
   openMaxAngle: 120
-  keyObject: {fileID: 0}
   hinge: {fileID: 0}
-  dummyLockPrefab: {fileID: 9002933665572775252, guid: 7be7e3477248c4046a9e67af04a53dd8, type: 3}
+--- !u!114 &4873514863393051642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800726889403200112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Objects/Misc./Door Open
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0

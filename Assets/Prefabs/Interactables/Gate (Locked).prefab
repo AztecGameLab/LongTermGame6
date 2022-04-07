@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 8254623289462329078}
   - component: {fileID: 8254623289462329079}
   - component: {fileID: 8254623289462329076}
-  m_Layer: 7
+  - component: {fileID: 4557163014981111578}
+  m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,13 +123,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7797bf1074147a48a7a73d65ada205a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedMinAngle: -2
-  lockedMaxAngle: 2
+  keyObject: {fileID: 0}
+  dummyLockPrefab: {fileID: 9002933665572775252, guid: 7be7e3477248c4046a9e67af04a53dd8, type: 3}
+  OnUnlock:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8254623289462329076}
+        m_TargetAssemblyTypeName: KeyLock, Assembly-CSharp
+        m_MethodName: DropLock
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8254623289462329076}
+        m_TargetAssemblyTypeName: KeyLock, Assembly-CSharp
+        m_MethodName: DeleteKey
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4557163014981111578}
+        m_TargetAssemblyTypeName: HingeLocker, Assembly-CSharp
+        m_MethodName: UnlockHinge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4557163014981111578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8254623289462329074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b559fe634ae3c4eae322a79d587e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lockedMinAngle: -15
+  lockedMaxAngle: 15
   openMinAngle: -120
   openMaxAngle: 120
-  keyObject: {fileID: 0}
   hinge: {fileID: 8254623289744407600}
-  dummyLockPrefab: {fileID: 9002933665572775252, guid: 7be7e3477248c4046a9e67af04a53dd8, type: 3}
 --- !u!1 &8254623289744407615
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +198,7 @@ GameObject:
   - component: {fileID: 8254623289744407600}
   - component: {fileID: 8254623289744407601}
   - component: {fileID: 8254623289744407606}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Gate (Locked)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +648,7 @@ HingeJoint:
   m_Anchor: {x: 0.125, y: 2.25, z: 1}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 10.25, y: 2.25, z: 8}
+  m_ConnectedAnchor: {x: -29.126392, y: 21.722185, z: 48.2231}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -633,36 +685,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8254623289744407606}
-        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
-        m_MethodName: Grab
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onInteractEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8254623289744407606}
-        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
-        m_MethodName: Drop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &8254623289744407606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -691,7 +720,7 @@ GameObject:
   - component: {fileID: 8254623289791865149}
   - component: {fileID: 8254623289791865146}
   - component: {fileID: 8254623289791865147}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Gate (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
