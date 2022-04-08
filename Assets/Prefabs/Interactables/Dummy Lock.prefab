@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3594502753389608681}
   - component: {fileID: 6499754372677302386}
   - component: {fileID: 7241472463710246339}
+  - component: {fileID: 976566040887244869}
   m_Layer: 7
   m_Name: Dummy Lock
   m_TagString: Untagged
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactRange: 2
+  lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
       m_Calls: []
@@ -148,4 +150,19 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
+--- !u!114 &976566040887244869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002933665572775252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0b8527ddfe4854eb45a76181fe6f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsIgnored:
+  - EnemyAI

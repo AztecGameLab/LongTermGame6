@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7609458109135603034}
   - component: {fileID: 7609458109135603035}
   - component: {fileID: 7609458109135603028}
+  - component: {fileID: 4181798283356415950}
   m_Layer: 7
   m_Name: Ball
   m_TagString: Untagged
@@ -2527,7 +2528,8 @@ MonoBehaviour:
   movementSpeed: 1
   playerLayer: 6
   maxSpeed: 10
-  freezeRotation: 1
+  applyRotation: 1
+  applyConstraintsWhileMoving: 1
 --- !u!114 &7609458109135603028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2544,7 +2546,45 @@ MonoBehaviour:
   lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7609458109135603035}
+        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
+        m_MethodName: Grab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onInteractEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7609458109135603035}
+        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
+        m_MethodName: Drop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4181798283356415950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7609458109135603029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c0b8527ddfe4854eb45a76181fe6f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsIgnored:
+  - EnemyAI
