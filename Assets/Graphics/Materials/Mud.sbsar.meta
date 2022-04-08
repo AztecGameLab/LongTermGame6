@@ -21,15 +21,16 @@ ScriptedImporter:
     shaderName: Universal Render Pipeline/Lit
     materialProperties:
       shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-      shaderKeywords: _BASEMAP _BUMPMAP _METALLICGLOSSMAP _OCCLUSIONMAP
+      shaderKeywords: _BASEMAP _BUMPMAP _METALLICGLOSSMAP _METALLICSPECGLOSSMAP _NORMALMAP
+        _OCCLUSIONMAP
       lightmapFlags: 4
       enableInstancingVariants: 0
       doubleSidedGI: 0
-      customRenderQueue: -1
+      customRenderQueue: 2000
       texEnvs:
       - name: _BaseMap
         texture: {fileID: -7906952956402370828, guid: 3d3c3c58b97e82240bd97a174499f937, type: 3}
-        scale: {x: 1, y: 1}
+        scale: {x: 0.5, y: 0.5}
         offset: {x: 0, y: 0}
       - name: _BumpMap
         texture: {fileID: 3711583348917582104, guid: 3d3c3c58b97e82240bd97a174499f937, type: 3}
@@ -53,7 +54,7 @@ ScriptedImporter:
         offset: {x: 0, y: 0}
       - name: _MainTex
         texture: {instanceID: 0}
-        scale: {x: 1, y: 1}
+        scale: {x: 0.5, y: 0.5}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
         texture: {fileID: -7496185838982417425, guid: 3d3c3c58b97e82240bd97a174499f937, type: 3}
@@ -89,7 +90,7 @@ ScriptedImporter:
       - name: _Blend
         float: 0
       - name: _BumpScale
-        float: 1
+        float: 0.58
       - name: _ClearCoatMask
         float: 0
       - name: _ClearCoatSmoothness
