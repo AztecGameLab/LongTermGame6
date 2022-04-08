@@ -32,6 +32,8 @@ public class Interactable : MonoBehaviour
     public Vector3 GrabPoint { get; private set; }
     
     private int _ignoreRaycastLayer;
+    private int _interactableLayer;
+    private int _interactableHeldLayer;
     private Transform _cameraTransform;
     private float _lastLineOfSightCheck;
     
@@ -40,6 +42,8 @@ public class Interactable : MonoBehaviour
     private void Start()
     {
         _ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
+        _interactableLayer = LayerMask.NameToLayer("Interactable");
+        _interactableHeldLayer = LayerMask.NameToLayer("InteractableHeld");
         
         if (Camera.main != null)
             _cameraTransform = Camera.main.transform;
@@ -50,6 +54,7 @@ public class Interactable : MonoBehaviour
         onInteractStart.Invoke(source, point);
         GrabPoint = point;
         IsHeld = true;
+        setLayerForHeldStatus();
         
         _lastLineOfSightCheck = Time.time;
     }
@@ -58,6 +63,7 @@ public class Interactable : MonoBehaviour
     {
         IsHeld = false;
         onInteractEnd.Invoke();
+        setLayerForHeldStatus();
     }
 
     private void Update()
@@ -75,7 +81,6 @@ public class Interactable : MonoBehaviour
         GameObject self = gameObject;
             
         // Move this object to the "Ignore Raycast" layer so we don't count ourself as a blocking object. 
-        int originalLayer = self.layer;
         self.layer = _ignoreRaycastLayer;
             
         if (Physics.Raycast(transform.position, directionToPlayer, out var hit))
@@ -84,7 +89,13 @@ public class Interactable : MonoBehaviour
             if (hit.transform.CompareTag("Player") == false)
                 InteractEnd();
         }
-            
-        gameObject.layer = originalLayer;
+        
+        // reset to correct layer
+        setLayerForHeldStatus();
+    }
+
+    private void setLayerForHeldStatus()
+    {
+        gameObject.layer = IsHeld ? _interactableHeldLayer : _interactableLayer;
     }
 }

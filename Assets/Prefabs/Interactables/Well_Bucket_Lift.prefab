@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4442211184507422947}
   - component: {fileID: 4442211184507422956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Well_Bucket_Lift
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 4442211184634013901}
   - component: {fileID: 4442211184634013891}
   - component: {fileID: 4442211184634013900}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RopeHanging (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,6 +205,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Well_Bucket (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d06e2954ef88f5e48a2fdb4a01290871, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d06e2954ef88f5e48a2fdb4a01290871, type: 3}
 --- !u!1 &3559126117029711454 stripped
@@ -217,19 +221,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d06e2954ef88f5e48a2fdb4a01290871, type: 3}
   m_PrefabInstance: {fileID: 4442211184280744719}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &4442211184714845958
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3559126117029711454}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.002066136, y: 0.0020444675, z: 0.00016364278}
-  m_Center: {x: -0.0000026421635, y: -0.000013506786, z: -0.0025437085}
 --- !u!65 &4442211184714845957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243,6 +234,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0029036289, y: 0.00002732366, z: 0.0025017397}
   m_Center: {x: 0.000012779707, y: -0.0010359833, z: -0.00137466}
+--- !u!65 &4442211184714845958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3559126117029711454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.002066136, y: 0.0020444675, z: 0.00016364278}
+  m_Center: {x: -0.0000026421635, y: -0.000013506786, z: -0.0025437085}
 --- !u!95 &4442211184714845959
 Animator:
   serializedVersion: 3
