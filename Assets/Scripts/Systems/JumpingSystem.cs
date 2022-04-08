@@ -45,6 +45,13 @@ public class JumpingSystem : MyNamespace.System
     private bool CoyoteAvailable => _coyoteAvailable && groundCheck.TimeSpentFalling < jumpSettings.CoyoteTime;
     public JumpSettings JumpSettings => jumpSettings;
     
+    private bool _isInstanceNotNull;
+
+    private void Start()
+    {
+        _isInstanceNotNull = HearingManager.Instance != null;
+    }
+    
     // Methods
     
     [PublicAPI] 
@@ -60,7 +67,12 @@ public class JumpingSystem : MyNamespace.System
     public void TryToJump()
     {
         if (ShouldJump())
+        {
             ApplyJump();
+            
+            if(_isInstanceNotNull)
+                HearingManager.Instance.OnSoundEmitted(gameObject, transform.position, EHeardSoundCategory.EJump, .5f);
+        }
     }
 
     private bool ShouldJump()
