@@ -11662,8 +11662,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489065601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -79.323, y: 8.105, z: 25.202}
-  m_LocalScale: {x: 1, y: 1.3484, z: 7.7562723}
+  m_LocalPosition: {x: -79.599, y: 8.105, z: 25.202}
+  m_LocalScale: {x: 2.2213829, y: 1.3484, z: 7.7562723}
   m_Children: []
   m_Father: {fileID: 1976710112}
   m_RootOrder: 1
@@ -11683,7 +11683,7 @@ MonoBehaviour:
   excludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  oneShot: 0
+  oneShot: 1
   collisionEnter:
     m_PersistentCalls:
       m_Calls:
@@ -11701,7 +11701,19 @@ MonoBehaviour:
         m_CallState: 2
   collisionExit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 236766918}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   showDebug: 0
 --- !u!65 &489065604
 BoxCollider:
@@ -32483,7 +32495,7 @@ MonoBehaviour:
   excludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  oneShot: 0
+  oneShot: 1
   collisionEnter:
     m_PersistentCalls:
       m_Calls:
@@ -32497,7 +32509,7 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
   collisionExit:
     m_PersistentCalls:
@@ -38501,6 +38513,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 1235689519}
+    - target: {fileID: 4567191699710835349, guid: 3f0fbde6cd057c14098343466a8d6780, type: 3}
+      propertyPath: m_Speed
+      value: 1.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4567191699710835351, guid: 3f0fbde6cd057c14098343466a8d6780, type: 3}
       propertyPath: targets.Array.data[0]
       value: 
