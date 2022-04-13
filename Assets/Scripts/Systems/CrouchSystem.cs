@@ -43,9 +43,7 @@ public class CrouchSystem : MyNamespace.System
     // Internal State
     
     public bool WantsToCrouch { get; set; }
-
-    public bool IsCrouching => _isCrouching;
-
+    
     private bool _isCrouching;
     private bool _wasCrouching;
     private float _crouchStartTime;

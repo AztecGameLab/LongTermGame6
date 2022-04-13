@@ -11,17 +11,6 @@ public class InputMovementController : InputController<MovementSystem>
     [SerializeField]
     [Tooltip("The transform that points in the forward movement direction.")]
     private Transform playerYaw;
-    
-    [SerializeField]
-    [Tooltip("The crouch system used for determining crouch walk.")]
-    private CrouchSystem crouchSystem;
-
-    private bool _isInstanceNotNull;
-
-    private void Start()
-    {
-        _isInstanceNotNull = HearingManager.Instance != null;
-    }
 
     private void Update()
     {
@@ -34,29 +23,17 @@ public class InputMovementController : InputController<MovementSystem>
         system.MovementDirection = (forward + right).normalized;
     }
     
-    private float CalculateAxis(KeyCode positive, KeyCode negative)
+    private static float CalculateAxis(KeyCode positive, KeyCode negative)
     {
         float result = 0;
-
+        
         if (Input.GetKey(positive))
-        {
             result += 1;
-            OnWalkEmitSound();
-        }
-
+            
         if (Input.GetKey(negative))
-        {
             result -= 1;
-            OnWalkEmitSound();
-        }
 
         return result;
-    }
-
-    private  void OnWalkEmitSound()
-    {
-        if(!crouchSystem.IsCrouching && _isInstanceNotNull)
-            HearingManager.Instance.OnSoundEmitted(gameObject, transform.position, EHeardSoundCategory.EFootstep, .5f);
     }
 
     private void OnDisable()

@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 4795329138781609756}
   - component: {fileID: 4795329138781609757}
   - component: {fileID: 4795329138781609758}
-  - component: {fileID: 950589851571159716}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -393,22 +392,7 @@ MonoBehaviour:
   movementSpeed: 1
   playerLayer: 6
   maxSpeed: 10
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
---- !u!114 &950589851571159716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4795329138781609759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c0b8527ddfe4854eb45a76181fe6f97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagsIgnored:
-  - EnemyAI
+  freezeRotation: 1
 --- !u!1 &4795329138887181543
 GameObject:
   m_ObjectHideFlags: 0
