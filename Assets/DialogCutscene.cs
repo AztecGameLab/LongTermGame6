@@ -1,27 +1,45 @@
-using System;
 using System.Collections;
+using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DialogCutscene : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private TextMeshProUGUI textDisplay;
     [SerializeField] private GameObject arrowContinueGameObject;
-    [SerializeField] private GameObject textboxGameObject;
-    [SerializeField] private Animator[] cutscenesAnimator; 
+    [SerializeField] private TextBoxBehavior textBoxBehaviorScript;
+    [SerializeField] private Transform canvasTransform;
+    [SerializeField] private Transform[] cutscenesTransform; 
     [SerializeField] private string[] sentences;
 
-    [Header("Settings")]
-    [SerializeField] private float dialogFontSize;
-    [SerializeField] private TMP_FontAsset dialogFont;
-    [SerializeField] private Color dialogColor;
-    [SerializeField] private float dialogSpeed;
+    [Header("Text Settings")]
+    [SerializeField] [Tooltip("Font size of text")] 
+    private float dialogFontSize;
+    [SerializeField] [Tooltip("Font of text")] 
+    private TMP_FontAsset dialogFont;
+    [SerializeField] [Tooltip("Text color")] 
+    private Color dialogColor;
 
+    [Header("Animation Settings")]
+    [SerializeField] [Tooltip("Speed of scene transitions")] 
+    private float speedTransformAnimation;
+    [SerializeField] [Tooltip("Time until text box appears again")] 
+    private float textBoxRestingTime;
+    [SerializeField] [Tooltip("Time until text begins to be typed")] 
+    private float textRestingTime;
+    [SerializeField] [Tooltip("Speed of text typing")] 
+    private float dialogSpeed;
+    
+    [Header("Scene Transitions")]
+    [SerializeField, Scene] [Tooltip("Scene to be transitioned to")]
+    private string nextScene;
+    
+    //inner variables
     private int _indexSentence = 0;
     private int _indexObject = 0;
-    
+    private  Vector3 _finalAnimationPosition;
+
     private void Start()
     {
         //setting up textDisplay
@@ -29,13 +47,23 @@ public class DialogCutscene : MonoBehaviour
         textDisplay.font = dialogFont;
         textDisplay.fontSize = dialogFontSize;
         
-        StartCoroutine(DialogWritter());
+        //canvas setup
+        _finalAnimationPosition = canvasTransform.position;
+        
+        StartCoroutine(StartDialogWriter());
     }
     
-    IEnumerator DialogWritter()
+    private IEnumerator StartDialogWriter()
+    {
+        yield return new WaitForSeconds(textBoxRestingTime);
+        StartCoroutine(DialogWriter());
+    }
+    
+    private IEnumerator DialogWriter()
     {
         
-        textboxGameObject.SetActive(true);
+        textBoxBehaviorScript.FadeInOnEnable();
+        yield return new WaitForSeconds(textRestingTime);
         foreach (char letter in sentences[_indexSentence])
         {
             textDisplay.text += letter;
@@ -47,39 +75,65 @@ public class DialogCutscene : MonoBehaviour
         NextSentence();
     }
 
-    public void NextSentence()
+    private void NextSentence()
     {
-        textboxGameObject.SetActive(false);
-        arrowContinueGameObject.SetActive(false);
-        textDisplay.text = "";
-        if (_indexSentence < sentences.Length - 1)
+        //if we have a scene transition we execute the transition
+        if (_indexSentence + 1 < sentences.Length && sentences[_indexSentence + 1] == "-----CUTSCENE-----" )
         {
-            StartCoroutine(AnimatorWaitDone());
+            textBoxBehaviorScript.FadeOutOnDisable();
+            arrowContinueGameObject.SetActive(false);
+            textDisplay.text = "";
+            if (_indexSentence < sentences.Length - 1)
+            {
+                StartCoroutine(AnimatorWaitDone());
+            }
+            else
+            {
+                NextScene();
+            }
         }
-        else
-        {
-            SceneManager.LoadScene(0);
-            Debug.Log("Ended transitioning next scene");
+        else 
+        {//same scene keep inputting text 
+            arrowContinueGameObject.SetActive(false);
+            textDisplay.text = "";
+            if (_indexSentence < sentences.Length - 1)
+            {
+                _indexSentence++;
+                StartCoroutine(DialogWriter());
+            }
+            else
+            {
+                NextScene();
+            }
         }
     }
     
-    IEnumerator AnimatorWaitDone()
+    private IEnumerator AnimatorWaitDone()
     {
-        if (_indexObject < cutscenesAnimator.Length )
+        if (_indexObject < cutscenesTransform.Length )
         {
-            cutscenesAnimator[_indexObject].SetTrigger("Activate");
-            yield return new WaitUntil(() => cutscenesAnimator[_indexObject].GetCurrentAnimatorStateInfo(0).normalizedTime  > 1 );
+            while (cutscenesTransform[_indexObject].position != _finalAnimationPosition)
+            {
+                cutscenesTransform[_indexObject].position = Vector3.MoveTowards(cutscenesTransform[_indexObject].position,
+                    _finalAnimationPosition, speedTransformAnimation);
+                yield return new WaitForEndOfFrame();
+            }
             _indexObject++;
-            Debug.Log("true");
         }
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(textBoxRestingTime);
         
         if (_indexSentence < sentences.Length - 1)
         {
             _indexSentence++;
-            StartCoroutine(DialogWritter());
+            NextSentence();
         }
+    }
+
+    private void NextScene()
+    {
+        textBoxBehaviorScript.gameObject.SetActive(false);
+        SceneTransitionSystem.Instance.TransitionToScene(nextScene);
     }
     
 }
