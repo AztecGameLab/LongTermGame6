@@ -45,7 +45,19 @@ namespace Game.Enemy
         [SerializeField] 
         [Tooltip("The system we use to determine whether or not an attack target is detected.")]
         private SoundDetector soundTargetDetector;
-        
+
+        // new variables
+        [SerializeField]
+        [Tooltip("The trigger in which objects will be hurt from our attacks.")]
+        private Trigger damageTrigger;
+
+        [SerializeField]
+        [Tooltip("The script that allows the enemy to destroy boxes")]
+        private AttackBoxes attackBoxes;
+        private float TimeSinceAttack => Time.time - _lastAttackTime;
+        private float _lastAttackTime;
+        //
+
         [Space(20f)]
         
         [SerializeField] 
@@ -134,7 +146,17 @@ namespace Game.Enemy
             
             private TaskStatus MoveToPatrolPoint()
             {
+                if (TimeSinceAttack <= 2f)
+                {
                 return agent.MoveTowards(_currentPatrolPoint, stopDistance);
+            }
+            else
+                {
+                _lastAttackTime = Time.time;
+                attackBoxes.AttackBox(damageTrigger);
+                return agent.MoveTowards(_currentPatrolPoint, stopDistance);
+
+                }
             }
 
         #endregion
