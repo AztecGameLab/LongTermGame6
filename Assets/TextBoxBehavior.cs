@@ -16,18 +16,8 @@ public class TextBoxBehavior : MonoBehaviour
     [SerializeField] [Range(0f, 0.5f)]private float alphaTolerance;
     
     
-    
-    public void FadeInOnEnable()
-    {
-        StartCoroutine(FadeIn());
-    }
 
-    public void FadeOutOnDisable()
-    {
-        StartCoroutine(FadeOut());
-    }
-
-    private IEnumerator FadeOut()
+    public IEnumerator FadeOutOnDisable()
     {
         if (Math.Abs(textBoxImage.color.a - alphaMin) < alphaTolerance)
         {
@@ -41,7 +31,7 @@ public class TextBoxBehavior : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeIn()
+    public IEnumerator FadeInOnEnable()
     {
         if (Math.Abs(textBoxImage.color.a - alphaMax) < alphaTolerance)
         {

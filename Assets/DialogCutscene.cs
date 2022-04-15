@@ -9,8 +9,7 @@ public class DialogCutscene : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textDisplay;
     [SerializeField] private GameObject arrowContinueGameObject;
     [SerializeField] private TextBoxBehavior textBoxBehaviorScript;
-    [SerializeField] private Transform canvasTransform;
-    [SerializeField] private Transform[] cutscenesTransform; 
+    [SerializeField] private RectTransform[] cutscenesRectTransforms; 
     [SerializeField] private string[] sentences;
 
     [Header("Text Settings")]
@@ -21,9 +20,9 @@ public class DialogCutscene : MonoBehaviour
     [SerializeField] [Tooltip("Text color")] 
     private Color dialogColor;
 
-    [Header("Animation Settings")]
-    [SerializeField] [Tooltip("Speed of scene transitions")] 
-    private float speedTransformAnimation;
+    [Header("Animation Settings in Seconds")]
+    [SerializeField] [Tooltip("Animation speed for images in seconds")] 
+    private float sceneAnimationSpeed;
     [SerializeField] [Tooltip("Time until text box appears again")] 
     private float textBoxRestingTime;
     [SerializeField] [Tooltip("Time until text begins to be typed")] 
@@ -38,7 +37,7 @@ public class DialogCutscene : MonoBehaviour
     //inner variables
     private int _indexSentence = 0;
     private int _indexObject = 0;
-    private  Vector3 _finalAnimationPosition;
+    private readonly Vector3 _finalAnimationPosition = new Vector3(0f, 0f, 0f);
 
     private void Start()
     {
@@ -46,9 +45,6 @@ public class DialogCutscene : MonoBehaviour
         textDisplay.color = dialogColor;
         textDisplay.font = dialogFont;
         textDisplay.fontSize = dialogFontSize;
-        
-        //canvas setup
-        _finalAnimationPosition = canvasTransform.position;
         
         StartCoroutine(StartDialogWriter());
     }
@@ -62,7 +58,7 @@ public class DialogCutscene : MonoBehaviour
     private IEnumerator DialogWriter()
     {
         
-        textBoxBehaviorScript.FadeInOnEnable();
+        yield return textBoxBehaviorScript.FadeInOnEnable();
         yield return new WaitForSeconds(textRestingTime);
         foreach (char letter in sentences[_indexSentence])
         {
@@ -80,7 +76,7 @@ public class DialogCutscene : MonoBehaviour
         //if we have a scene transition we execute the transition
         if (_indexSentence + 1 < sentences.Length && sentences[_indexSentence + 1] == "-----CUTSCENE-----" )
         {
-            textBoxBehaviorScript.FadeOutOnDisable();
+            //yield return textBoxBehaviorScript.FadeOutOnDisable();
             arrowContinueGameObject.SetActive(false);
             textDisplay.text = "";
             if (_indexSentence < sentences.Length - 1)
@@ -110,13 +106,19 @@ public class DialogCutscene : MonoBehaviour
     
     private IEnumerator AnimatorWaitDone()
     {
-        if (_indexObject < cutscenesTransform.Length )
-        {
-            while (cutscenesTransform[_indexObject].position != _finalAnimationPosition)
+        yield return textBoxBehaviorScript.FadeOutOnDisable();
+        if (_indexObject < cutscenesRectTransforms.Length )
+        {//perform image animation
+            float currentTime = 0f;
+            Vector3 startPosition = cutscenesRectTransforms[_indexObject].anchoredPosition;
+            while (currentTime <= sceneAnimationSpeed)
             {
-                cutscenesTransform[_indexObject].position = Vector3.MoveTowards(cutscenesTransform[_indexObject].position,
-                    _finalAnimationPosition, speedTransformAnimation);
-                yield return new WaitForEndOfFrame();
+                currentTime += Time.deltaTime;
+                float normalizedTime = currentTime / sceneAnimationSpeed;
+
+                cutscenesRectTransforms[_indexObject].anchoredPosition = Vector3.Lerp(startPosition,
+                    _finalAnimationPosition, normalizedTime);
+                yield return null;
             }
             _indexObject++;
         }
@@ -130,9 +132,11 @@ public class DialogCutscene : MonoBehaviour
         }
     }
 
-    private void NextScene()
+    public void NextScene()
     {
         textBoxBehaviorScript.gameObject.SetActive(false);
+        arrowContinueGameObject.SetActive(false);
+        textDisplay.text = "";
         SceneTransitionSystem.Instance.TransitionToScene(nextScene);
     }
     
