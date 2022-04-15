@@ -15,14 +15,29 @@ namespace Game.Enemy
         [SerializeField] 
         [Tooltip("The display used to show debug information.")]
         private Display debugDisplay;
+
+        [SerializeField] private bool runOnStart = true;
         
         public State DefaultState => defaultState;
         public State CurrentState { get; private set; }
-        
+        public bool IsRunning { get; private set; }
+
         private void Start()
         {
-            CurrentState = DefaultState;
-            CurrentState.OnStateEnter(this);
+            if (runOnStart)
+                StartMachine();
+        }
+        
+        public void StartMachine()
+        {
+            IsRunning = true;
+            ChangeState(DefaultState);
+        }
+
+        public void StopMachine()
+        {
+            IsRunning = false;
+            ChangeState(null);
         }
 
         private void Update()
@@ -36,7 +51,9 @@ namespace Game.Enemy
         [PublicAPI]
         public void ChangeState(State state)
         {
-            CurrentState.OnStateExit(this);
+            if (CurrentState != null)
+                CurrentState.OnStateExit(this);
+    
             CurrentState = state;
             
             if (state != null) 
