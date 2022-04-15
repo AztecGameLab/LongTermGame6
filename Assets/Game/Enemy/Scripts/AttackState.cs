@@ -14,11 +14,6 @@ namespace Game.Enemy
     {
         [Header("Settings")]
         
-        // [SerializeField]
-        // [Range(0, 1)]
-        // [Tooltip("What percent of the player's health should we take away when hitting them.")]
-        private float attackDamage = 0.25f;
-        
         [SerializeField] 
         [Tooltip("How often we can attack the player, in seconds.")]
         private float attackFrequency = 1f;
@@ -44,10 +39,6 @@ namespace Game.Enemy
         [Tooltip("The agent used for pathfinding towards our target.")]
         private NavMeshAgent agent;
         
-        [SerializeField] 
-        [Tooltip("The trigger in which objects will be hurt from our attacks.")]
-        private Trigger damageTrigger;
-        
         [SerializeField]
         [Tooltip("The system we use to determine whether or not an attack target is detected.")]
         private TargetDetector attackTargetDetector;
@@ -55,10 +46,6 @@ namespace Game.Enemy
         [SerializeField] 
         private Animator animator;
         
-        [SerializeField]
-        [Tooltip("The attacls the enemy will do against the player")]
-        private EnemyAttacks enemyAttacks;
-
         [Space(20f)]
         
         [SerializeField]
@@ -97,7 +84,7 @@ namespace Game.Enemy
 
             public override void OnStateUpdate(StateManager parent)
             {
-                if (attackTargetDetector.HasTarget == false)
+                if (attackTargetDetector.HasTarget == false && !_inAttackAnimation)
                     parent.ChangeState(idleState);
 
                 else attackTree.Tick();
@@ -141,18 +128,29 @@ namespace Game.Enemy
 
             private TaskStatus MoveTowardsTarget()
             {
-                return agent.MoveTowards(TargetPosition, attackDistance);
+                TaskStatus result = agent.MoveTowards(TargetPosition, attackDistance);
+                
+                
+                return result;
             }
 
             // todo: move into its own "combat system" behaviour
+
+            private bool _inAttackAnimation;
             
             private TaskStatus AttackTarget()
             {
+                if (_inAttackAnimation == false)
+                {
+                    animator.SetTrigger("Attack");
+                    _lastAttackTime = Time.time;
+                    _inAttackAnimation = true;
+                }
+                
                 if (TimeSinceAttack <= attackFrequency)
                     return TaskStatus.Continue;
-                
-                _lastAttackTime = Time.time;
-                animator.SetTrigger("Attack");
+
+                _inAttackAnimation = false;
                 return TaskStatus.Success;
             }
 
