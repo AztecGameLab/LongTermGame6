@@ -54,8 +54,6 @@ namespace Game.Enemy
         [SerializeField]
         [Tooltip("The script that allows the enemy to destroy boxes")]
         private AttackBoxes attackBoxes;
-        private float TimeSinceAttack => Time.time - _lastAttackTime;
-        private float _lastAttackTime;
         //
 
         [Space(20f)]
@@ -146,17 +144,8 @@ namespace Game.Enemy
             
             private TaskStatus MoveToPatrolPoint()
             {
-                if (TimeSinceAttack <= 2f)
-                {
-                return agent.MoveTowards(_currentPatrolPoint, stopDistance);
-            }
-            else
-                {
-                _lastAttackTime = Time.time;
                 attackBoxes.AttackBox(damageTrigger);
                 return agent.MoveTowards(_currentPatrolPoint, stopDistance);
-
-                }
             }
 
         #endregion
