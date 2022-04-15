@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28982
+  m_Name: pb_Mesh23388
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -386,7 +386,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28860
+  m_Name: pb_Mesh23266
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1198,8 +1198,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!54 &167451768
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1270,7 +1269,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29060
+  m_Name: pb_Mesh23466
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1481,8 +1480,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!114 &243897669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1828,7 +1826,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29108
+  m_Name: pb_Mesh23514
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2119,8 +2117,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!54 &289585762
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2143,7 +2140,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29154
+  m_Name: pb_Mesh23560
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2307,7 +2304,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29002
+  m_Name: pb_Mesh23408
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2578,8 +2575,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!114 &454246034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3575,7 +3571,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29138
+  m_Name: pb_Mesh23544
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3739,7 +3735,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29264
+  m_Name: pb_Mesh23670
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3935,8 +3931,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!114 &683378658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4637,7 +4632,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28908
+  m_Name: pb_Mesh23314
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4801,7 +4796,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28964
+  m_Name: pb_Mesh23370
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5042,8 +5037,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!114 &787509455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5389,7 +5383,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29180
+  m_Name: pb_Mesh23586
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6037,8 +6031,7 @@ MonoBehaviour:
   movementSpeed: 1
   playerLayer: 6
   maxSpeed: 10
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 0
 --- !u!114 &803166401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6731,7 +6724,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29216
+  m_Name: pb_Mesh23622
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7166,7 +7159,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f500c6a49f9cae44e92ff2a89a949294, type: 2}
+  - {fileID: 2100000, guid: a99532f1411d8884c90cdf7674e9c89c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9541,7 +9534,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0dca788e75c3e24294d894bd4beb753, type: 2}
+  - {fileID: 2100000, guid: d43bc2b76568c0e4d8233acca1917e0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -9828,8 +9821,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!54 &1001891973
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9852,7 +9844,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28942
+  m_Name: pb_Mesh23348
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10078,8 +10070,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!114 &1051864552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10440,7 +10431,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29228
+  m_Name: pb_Mesh23634
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10604,7 +10595,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29240
+  m_Name: pb_Mesh23646
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10817,7 +10808,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29332
+  m_Name: pb_Mesh23738
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11036,7 +11027,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 530bdb8fb04a2ed43a260aa7c56707a8, type: 2}
+  - {fileID: 2100000, guid: a99532f1411d8884c90cdf7674e9c89c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11265,7 +11256,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29320
+  m_Name: pb_Mesh23726
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11429,7 +11420,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29072
+  m_Name: pb_Mesh23478
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11662,7 +11653,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f500c6a49f9cae44e92ff2a89a949294, type: 2}
+  - {fileID: 2100000, guid: a99532f1411d8884c90cdf7674e9c89c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13222,7 +13213,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29306
+  m_Name: pb_Mesh23712
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15657,8 +15648,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!114 &1666254898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16004,7 +15994,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29168
+  m_Name: pb_Mesh23574
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16168,7 +16158,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29084
+  m_Name: pb_Mesh23490
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16332,7 +16322,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29034
+  m_Name: pb_Mesh23440
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16554,7 +16544,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3b192f01de3f0484890cc4dbaea1ba84, type: 2}
+  - {fileID: 2100000, guid: db322cfc90c63f841afba624c6f956b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -16841,8 +16831,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 10
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!54 &1716951471
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17111,7 +17100,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28830
+  m_Name: pb_Mesh23236
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -17305,7 +17294,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh28926
+  m_Name: pb_Mesh23332
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -18177,7 +18166,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29022
+  m_Name: pb_Mesh23428
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19067,7 +19056,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29192
+  m_Name: pb_Mesh23598
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19263,8 +19252,7 @@ MonoBehaviour:
   movementSpeed: 0.5
   playerLayer: 6
   maxSpeed: 5
-  applyRotation: 1
-  applyConstraintsWhileMoving: 1
+  freezeRotation: 1
 --- !u!114 &2102067466
 MonoBehaviour:
   m_ObjectHideFlags: 0
