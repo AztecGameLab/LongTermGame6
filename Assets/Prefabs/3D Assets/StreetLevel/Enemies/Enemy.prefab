@@ -239,8 +239,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -345,6 +345,10 @@ GameObject:
   - component: {fileID: 8256485562998051709}
   - component: {fileID: 3688019970939931673}
   - component: {fileID: 7270836384157122911}
+<<<<<<< HEAD
+=======
+  - component: {fileID: 4597961717096707998}
+>>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
   - component: {fileID: 7340666651026324995}
   m_Layer: 0
   m_Name: Enemy
@@ -479,15 +483,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39598efe2dd24cf5a7f2939f7ad6a75e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   attackFrequency: 2.4
+=======
+  attackDamage: 0.5
+  attackFrequency: 1
+>>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
   attackDistance: 1.5
   smoothTime: 0.25
   idleState: {fileID: 4567191699710835346}
   rotationSystem: {fileID: 4567191699710835350}
   agent: {fileID: 4567191699710835349}
   attackTargetDetector: {fileID: 4567191699710835351}
+<<<<<<< HEAD
   animator: {fileID: 1950317702799915448}
 --- !u!114 &8256485562998051709
+=======
+  enemyAttacks: {fileID: 4597961717096707998}
+--- !u!114 &8256485562998051709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4567191699710835368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4575956a9968334db76e3f446315766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopDistance: 0.1
+  idleState: {fileID: 4567191699710835346}
+  attackState: {fileID: 4567191699710835348}
+  agent: {fileID: 4567191699710835349}
+  rotationSystem: {fileID: 4567191699710835350}
+  attackTargetDetector: {fileID: 4567191699710835351}
+  soundTargetDetector: {fileID: 2948589174693721462}
+--- !u!114 &3688019970939931673
+>>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,10 +551,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d874aea84a204f8c835435f01921631f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   animator: {fileID: 1950317702799915448}
   agent: {fileID: 4567191699710835349}
   speed: 0
 --- !u!114 &7270836384157122911
+=======
+  defaultState: {fileID: 4567191699710835346}
+  debugDisplay: {fileID: 4992017842508356379}
+--- !u!114 &4597961717096707998
+>>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -533,8 +572,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d33608a32ec5421db0c84f7293b6f97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
   defaultState: {fileID: 4567191699710835346}
   debugDisplay: {fileID: 4992017842508356379}
+=======
+  pushMultiplier: 2
+  damageClip: {fileID: 7340666651026324995}
+  slowDuration: 3
+>>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
 --- !u!82 &7340666651026324995
 AudioSource:
   m_ObjectHideFlags: 0
@@ -984,6 +1029,11 @@ Transform:
 --- !u!4 &8908964563477828173 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
+  m_PrefabInstance: {fileID: 8946886012083041702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8135982237013494007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
   m_PrefabInstance: {fileID: 8946886012083041702}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1950317702799915448
