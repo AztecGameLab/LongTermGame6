@@ -275,15 +275,10 @@ GameObject:
   - component: {fileID: 4567191699710835346}
   - component: {fileID: 4567191699710835348}
   - component: {fileID: 2128936708787845563}
-<<<<<<< HEAD
   - component: {fileID: 4504166265602764927}
   - component: {fileID: 149392840606657607}
   - component: {fileID: 6918147157707745626}
   - component: {fileID: 5685525233645996125}
-=======
-  - component: {fileID: 1895578443}
-  - component: {fileID: 4504166265602764927}
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -397,13 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolPoints: []
   stopDistance: 0.1
-<<<<<<< HEAD
   attackState: {fileID: 4567191699710835348}
   soundState: {fileID: 2128936708787845563}
-=======
-  attackState: {fileID: 0}
-  soundState: {fileID: 0}
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
   agent: {fileID: 4567191699710835349}
   rotationSystem: {fileID: 4567191699710835350}
   attackTargetDetector: {fileID: 4567191699710835351}
@@ -423,18 +413,11 @@ MonoBehaviour:
   attackFrequency: 2
   attackDistance: 1.5
   smoothTime: 0.25
-<<<<<<< HEAD
   idleState: {fileID: 4567191699710835346}
-=======
-  idleState: {fileID: 0}
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
   rotationSystem: {fileID: 4567191699710835350}
   agent: {fileID: 4567191699710835349}
   attackTargetDetector: {fileID: 4567191699710835351}
-<<<<<<< HEAD
   animator: {fileID: 1521852822010343926}
-=======
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
 --- !u!114 &2128936708787845563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,17 +431,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopDistance: 0.25
-<<<<<<< HEAD
-=======
-  smoothTime: 0.25
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
   idleState: {fileID: 4567191699710835346}
   attackState: {fileID: 4567191699710835348}
   agent: {fileID: 4567191699710835349}
   rotationSystem: {fileID: 4567191699710835350}
   attackTargetDetector: {fileID: 4567191699710835351}
   soundTargetDetector: {fileID: 751673395260543991}
-<<<<<<< HEAD
 --- !u!114 &4504166265602764927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,9 +563,6 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!114 &5685525233645996125
-=======
---- !u!114 &1895578443
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -602,20 +577,6 @@ MonoBehaviour:
   animator: {fileID: 1521852822010343926}
   agent: {fileID: 4567191699710835349}
   speed: 0
---- !u!114 &4504166265602764927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4567191699710835368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33608a32ec5421db0c84f7293b6f97d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultState: {fileID: 0}
-  debugDisplay: {fileID: 317213400691991634}
 --- !u!1 &4567191700531195584
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,13 +768,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
-<<<<<<< HEAD
 --- !u!4 &570479904140364536 stripped
-=======
---- !u!4 &1861629060692546267 stripped
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
   m_PrefabInstance: {fileID: 27154699798211859}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &910027153418571842 stripped
@@ -826,14 +783,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -3321919801592875672, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
   m_PrefabInstance: {fileID: 27154699798211859}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &910027153418571842 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
-  m_PrefabInstance: {fileID: 27154699798211859}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &570479904140364536 stripped
+--- !u!4 &1861629060692546267 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 7ccf2cfbc36cc424ebc56995697718f4, type: 3}
   m_PrefabInstance: {fileID: 27154699798211859}
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1521852822010343926

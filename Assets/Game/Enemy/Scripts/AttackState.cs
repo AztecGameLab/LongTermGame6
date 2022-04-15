@@ -84,11 +84,7 @@ namespace Game.Enemy
 
             public override void OnStateUpdate(StateManager parent)
             {
-<<<<<<< HEAD
                 if (attackTargetDetector.HasTarget == false && !_inAttackAnimation)
-=======
-                if (attackTargetDetector.HasTarget == false )
->>>>>>> parent of 9993814 (Revert "Merge branch 'master' into Aly-Branch")
                     parent.ChangeState(idleState);
 
                 else attackTree.Tick();
