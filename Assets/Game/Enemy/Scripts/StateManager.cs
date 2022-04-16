@@ -17,9 +17,10 @@ namespace Game.Enemy
         private Display debugDisplay;
 
         [SerializeField] private bool runOnStart = true;
-        
+
         public State DefaultState => defaultState;
         public State CurrentState { get; private set; }
+        public bool HasCurrentState { get; private set; }
         public bool IsRunning { get; private set; }
 
         private void Start()
@@ -30,18 +31,27 @@ namespace Game.Enemy
         
         public void StartMachine()
         {
+            if (IsRunning)
+                return;
+            
             IsRunning = true;
             ChangeState(DefaultState);
         }
 
         public void StopMachine()
         {
+            if (!IsRunning)
+                return;
+            
             IsRunning = false;
             ChangeState(null);
         }
 
         private void Update()
         {
+            if (!IsRunning || !HasCurrentState)
+                return;
+        
             CurrentState.OnStateUpdate(this);
             
             if (debugDisplay != null)
@@ -51,12 +61,13 @@ namespace Game.Enemy
         [PublicAPI]
         public void ChangeState(State state)
         {
-            if (CurrentState != null)
+            if (HasCurrentState)
                 CurrentState.OnStateExit(this);
     
             CurrentState = state;
+            HasCurrentState = state != null;
             
-            if (state != null) 
+            if (HasCurrentState) 
                 state.OnStateEnter(this);
         }
     }
