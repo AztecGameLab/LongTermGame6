@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HingeLocker : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class HingeLocker : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] public HingeJoint hinge;
+
+    [Space(20)] 
+    [SerializeField] private UnityEvent onUnlock;
 
     private int _remainingLocks;
     private JointLimits _lockedLimits;
@@ -35,9 +39,12 @@ public class HingeLocker : MonoBehaviour
     public void UnlockHinge()
     {
         _remainingLocks--;
-        
+
         if (_remainingLocks <= 0)
+        {
             hinge.limits = _openLimits;
+            onUnlock.Invoke();
+        }
     }
 
     public void LockHinge()
