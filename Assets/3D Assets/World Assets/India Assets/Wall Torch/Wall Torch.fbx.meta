@@ -3,7 +3,17 @@ guid: 4b2182198f5cc04479afee17f866a997
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: e1ee45f075498e940af08f5b48461f80, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: c0f0d17c092c6454a928601238247b52, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
