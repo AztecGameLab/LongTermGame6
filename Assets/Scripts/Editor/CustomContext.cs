@@ -23,6 +23,9 @@ namespace Game.Editor
                 
                 if (hintInstance is Hint hint)
                 {
+                    var canvas = hint.GetComponentInChildren<Canvas>();
+                    canvas.worldCamera = Camera.main;
+                    
                     Undo.RegisterCreatedObjectUndo(hint.gameObject, "");
                     UnityEventTools.AddVoidPersistentListener(lookTrigger.onLookStart, hint.ShowHint);
                     UnityEventTools.AddVoidPersistentListener(lookTrigger.onLookEnd, hint.HideHint);
