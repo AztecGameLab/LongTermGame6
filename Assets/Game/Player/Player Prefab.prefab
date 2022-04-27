@@ -45,14 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stepDistance: 1.2
+  soundProfile: {fileID: 11400000, guid: f254c099fe2dbdf43b4683ed097a4c2a, type: 2}
   groundCheck: {fileID: 264729698032632307}
   movementSource: {fileID: 8137009872141556459}
   stepEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 125854684}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
-        m_MethodName: Play
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
