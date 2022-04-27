@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8254623289462329078}
   - component: {fileID: 8254623289462329079}
   - component: {fileID: 8254623289462329076}
-  - component: {fileID: 3105486930057877823}
+  - component: {fileID: 4557163014981111578}
   m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
@@ -128,18 +128,6 @@ MonoBehaviour:
   OnUnlock:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3105486930057877823}
-        m_TargetAssemblyTypeName: HingeLocker, Assembly-CSharp
-        m_MethodName: UnlockHinge
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8254623289462329076}
         m_TargetAssemblyTypeName: KeyLock, Assembly-CSharp
         m_MethodName: DropLock
@@ -164,7 +152,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3105486930057877823
+      - m_Target: {fileID: 4557163014981111578}
+        m_TargetAssemblyTypeName: HingeLocker, Assembly-CSharp
+        m_MethodName: UnlockHinge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4557163014981111578
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,11 +176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1b559fe634ae3c4eae322a79d587e2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lockedMinAngle: -5
-  lockedMaxAngle: 5
+  lockedMinAngle: -15
+  lockedMaxAngle: 15
   openMinAngle: -120
   openMaxAngle: 120
-  hinge: {fileID: 0}
+  hinge: {fileID: 8254623289744407600}
 --- !u!1 &8254623289744407615
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,34 +688,10 @@ MonoBehaviour:
   lineOfSightCheckInterval: 1.5
   onInteractStart:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8254623289744407606}
-        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
-        m_MethodName: Grab
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onInteractEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8254623289744407606}
-        m_TargetAssemblyTypeName: MovableObject, Assembly-CSharp
-        m_MethodName: Drop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &8254623289744407606
 MonoBehaviour:
   m_ObjectHideFlags: 0
