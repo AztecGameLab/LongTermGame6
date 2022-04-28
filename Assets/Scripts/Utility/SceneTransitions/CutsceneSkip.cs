@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Assertions;
  
 public class CutsceneSkip : MonoBehaviour
 {

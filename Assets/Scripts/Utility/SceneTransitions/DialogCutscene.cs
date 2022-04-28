@@ -1,16 +1,18 @@
 using System.Collections;
+using System.Collections.Generic;
 using NaughtyAttributes;
 using TMPro;
 using UnityEngine;
 
 public class DialogCutscene : MonoBehaviour
 {
+    [Header("Scriptable")] 
+    [SerializeField] private List<CutscenesInfo> cutscenesInfo;
+
     [Header("Dependencies")]
     [SerializeField] private TextMeshProUGUI textDisplay;
     [SerializeField] private GameObject arrowContinueGameObject;
     [SerializeField] private TextBoxBehavior textBoxBehaviorScript;
-    [SerializeField] private RectTransform[] cutscenesRectTransforms; 
-    [SerializeField] private string[] sentences;
 
     [Header("Text Settings")]
     [SerializeField] [Tooltip("Font size of text")] 
@@ -35,8 +37,8 @@ public class DialogCutscene : MonoBehaviour
     private string nextScene;
     
     //inner variables
-    private int _indexSentence = 0;
-    private int _indexObject = 0;
+    private int _sentenceCount = 0;
+    private int _sceneCount = 0;
     private readonly Vector3 _finalAnimationPosition = new Vector3(0f, 0f, 0f);
 
     private void Start()
@@ -53,14 +55,13 @@ public class DialogCutscene : MonoBehaviour
     {
         yield return new WaitForSeconds(textBoxRestingTime);
         StartCoroutine(DialogWriter());
-    }
+    }   
     
     private IEnumerator DialogWriter()
     {
-        
         yield return textBoxBehaviorScript.FadeInOnEnable();
         yield return new WaitForSeconds(textRestingTime);
-        foreach (char letter in sentences[_indexSentence])
+        foreach (char letter in cutscenesInfo[_sceneCount].DialogData[_sentenceCount]) 
         {
             textDisplay.text += letter;
             yield return new WaitForSeconds(dialogSpeed);
@@ -73,63 +74,52 @@ public class DialogCutscene : MonoBehaviour
 
     private void NextSentence()
     {
+        arrowContinueGameObject.SetActive(false);
+        textDisplay.text = "";
+        
         //if we have a scene transition we execute the transition
-        if (_indexSentence + 1 < sentences.Length && sentences[_indexSentence + 1] == "-----CUTSCENE-----" )
+        if (_sentenceCount +1 >= cutscenesInfo[_sceneCount].DialogData.Count) 
         {
-            //yield return textBoxBehaviorScript.FadeOutOnDisable();
-            arrowContinueGameObject.SetActive(false);
-            textDisplay.text = "";
-            if (_indexSentence < sentences.Length - 1)
-            {
-                StartCoroutine(AnimatorWaitDone());
-            }
-            else
-            {
-                NextScene();
-            }
+            StartCoroutine(AnimatorWaitDone());
         }
         else 
         {//same scene keep inputting text 
-            arrowContinueGameObject.SetActive(false);
-            textDisplay.text = "";
-            if (_indexSentence < sentences.Length - 1)
-            {
-                _indexSentence++;
-                StartCoroutine(DialogWriter());
-            }
-            else
-            {
-                NextScene();
-            }
+            _sentenceCount++;
+            StartCoroutine(DialogWriter());
         }
     }
     
     private IEnumerator AnimatorWaitDone()
     {
+        _sceneCount++;
+        if (_sceneCount >= cutscenesInfo.Count)
+        {
+            NextScene();
+            yield break;
+        }
         yield return textBoxBehaviorScript.FadeOutOnDisable();
-        if (_indexObject < cutscenesRectTransforms.Length )
+        if ( !cutscenesInfo[_sceneCount].IsFirstScene )
         {//perform image animation
+            Debug.Log("executed animation scene");
             float currentTime = 0f;
-            Vector3 startPosition = cutscenesRectTransforms[_indexObject].anchoredPosition;
+            Vector3 startPosition = cutscenesInfo[_sceneCount].ImageRectTransform.anchoredPosition;
             while (currentTime <= sceneAnimationSpeed)
             {
                 currentTime += Time.deltaTime;
                 float normalizedTime = currentTime / sceneAnimationSpeed;
 
-                cutscenesRectTransforms[_indexObject].anchoredPosition = Vector3.Lerp(startPosition,
+                cutscenesInfo[_sceneCount].ImageRectTransform.anchoredPosition = Vector3.Lerp(startPosition,
                     _finalAnimationPosition, normalizedTime);
                 yield return null;
             }
-            _indexObject++;
         }
 
         yield return new WaitForSeconds(textBoxRestingTime);
-        
-        if (_indexSentence < sentences.Length - 1)
-        {
-            _indexSentence++;
-            NextSentence();
-        }
+
+
+        _sentenceCount = -1;
+        NextSentence();
+        yield return null;
     }
 
     public void NextScene()
