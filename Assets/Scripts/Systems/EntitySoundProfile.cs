@@ -15,6 +15,8 @@ public class EntitySoundProfile : ScriptableObject
         public string crouchedStepSound;
         [EventRef]
         public string jumpSound;
+        [EventRef] 
+        public string landSound;
         [SerializeField]
         public bool isWet;
     }

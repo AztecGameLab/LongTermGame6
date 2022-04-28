@@ -91,8 +91,11 @@
 	<object class="MixerBusPanner" id="{e18f51d1-4174-49a6-9f48-5369765247e6}" />
 	<object class="MultiSound" id="{8e6c2575-cc6f-4895-970c-65efd2114c79}">
 		<property name="length">
-			<value>1.3653333333333333</value>
+			<value>0.46875</value>
 		</property>
+		<relationship name="fadeOutCurve">
+			<destination>{3aef2846-c28f-4abc-8150-622980ae6282}</destination>
+		</relationship>
 		<relationship name="sounds">
 			<destination>{997c35bb-d1ff-4b35-9350-ddfb0a7cef53}</destination>
 			<destination>{caf8975d-a36c-496c-bb7a-337048092bab}</destination>
@@ -121,6 +124,14 @@
 	</object>
 	<object class="MixerBusPanner" id="{2335522a-d407-4f7d-854b-67df4c00f7e7}" />
 	<object class="MixerBusFader" id="{299a08f4-0ba0-4738-86ce-92cd8e9f89fb}" />
+	<object class="FadeCurve" id="{3aef2846-c28f-4abc-8150-622980ae6282}">
+		<relationship name="startPoint">
+			<destination>{ac3139f1-70f0-402b-a064-406ba13bcc89}</destination>
+		</relationship>
+		<relationship name="endPoint">
+			<destination>{89b01d2c-e5dd-44e2-9a4b-c18b93dfe03e}</destination>
+		</relationship>
+	</object>
 	<object class="SingleSound" id="{997c35bb-d1ff-4b35-9350-ddfb0a7cef53}">
 		<relationship name="audioFile">
 			<destination>{ab15aeb6-37d2-4d4e-b456-e5927c4ad635}</destination>
@@ -146,6 +157,25 @@
 	<object class="SpatialiserEffect" id="{ee69c7bb-846a-4d5d-ba58-1e8f6b4cef75}">
 		<property name="bypass">
 			<value>true</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{ac3139f1-70f0-402b-a064-406ba13bcc89}">
+		<property name="position">
+			<value>0.25</value>
+		</property>
+		<property name="value">
+			<value>1</value>
+		</property>
+		<property name="curveShape">
+			<value>0.25471893</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{89b01d2c-e5dd-44e2-9a4b-c18b93dfe03e}">
+		<property name="position">
+			<value>0.46875</value>
+		</property>
+		<property name="value">
+			<value>0</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{41b6dde8-3165-4631-bcb6-cf9e0670caf2}" />

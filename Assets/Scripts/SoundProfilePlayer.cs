@@ -66,7 +66,15 @@ namespace Game
 
         public void PlayJump()
         {
-            string path = profile.FindSurface(groundCheck.ConnectedCollider.tag).jumpSound;
+            string surfaceTag = GetTag();
+            string path = profile.FindSurface(surfaceTag).jumpSound;
+            RuntimeManager.PlayOneShotAttached(path, gameObject);
+        }
+
+        public void PlayLand()
+        {
+            string surfaceTag = GetTag();
+            string path = profile.FindSurface(surfaceTag).landSound;
             RuntimeManager.PlayOneShotAttached(path, gameObject);
         }
     }

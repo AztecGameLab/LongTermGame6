@@ -17,20 +17,24 @@ MonoBehaviour:
     stepSound: event:/Player/Footsteps/Dry Cobble
     crouchedStepSound: event:/Player/Crouch/Dry Cobble
     jumpSound: event:/Player/Jump/Dry Cobble
+    landSound: event:/Player/Land/Dry Cobble
     isWet: 0
   surfaces:
   - surfaceTag: Mud
     stepSound: event:/Player/Footsteps/Mud
     crouchedStepSound: event:/Player/Crouch/Mud
     jumpSound: event:/Player/Jump/Mud
+    landSound: event:/Player/Land/Mud
     isWet: 0
   - surfaceTag: Wood
     stepSound: event:/Player/Footsteps/Wood
     crouchedStepSound: event:/Player/Crouch/Wood
     jumpSound: event:/Player/Jump/Wood
+    landSound: event:/Player/Land/Wood
     isWet: 0
   - surfaceTag: Cobble
     stepSound: event:/Player/Footsteps/Dry Cobble
     crouchedStepSound: event:/Player/Crouch/Dry Cobble
     jumpSound: event:/Player/Jump/Dry Cobble
+    landSound: event:/Player/Land/Dry Cobble
     isWet: 0
