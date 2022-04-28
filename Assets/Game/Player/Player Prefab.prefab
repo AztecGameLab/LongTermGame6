@@ -716,11 +716,13 @@ MonoBehaviour:
   profile: {fileID: 11400000, guid: f254c099fe2dbdf43b4683ed097a4c2a, type: 2}
   groundCheck: {fileID: 264729698032632307}
   crouchSystem: {fileID: 8137009872141556450}
+  targetRigidbody: {fileID: 8137009872141556462}
   definitions:
   - terrainLayer: 0
     tag: Mud
   - terrainLayer: 1
     tag: Cobble
+  maxVelocity: 15
 --- !u!114 &1400832691
 MonoBehaviour:
   m_ObjectHideFlags: 0
