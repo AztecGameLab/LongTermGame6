@@ -1,17 +1,16 @@
 using FMODUnity;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
+
 [CreateAssetMenu(fileName = "Sound", menuName = "ScriptableObjects/EntitySoundProfile", order = 1)]
 public class EntitySoundProfile : ScriptableObject
 {
     [System.Serializable]
-    private struct Surface {
+    public struct Surface {
         [NaughtyAttributes.Tag]
         public string surfaceTag;
         [EventRef]
-        public string defaultStepSound;
+        public string stepSound;
         [EventRef]
         public string crouchedStepSound;
         [EventRef]
@@ -19,22 +18,21 @@ public class EntitySoundProfile : ScriptableObject
         [SerializeField]
         public bool isWet;
     }
+
+    [SerializeField]
+    private Surface defaultSurface;
+    
     [SerializeField]
     private List<Surface> surfaces;
 
-    /*[EventRef]
-    public string crawlingSound;
-    [EventRef]
-    public string runningSound;*/
-
-    public string GetSoundOnSurface(string tag)
+    public Surface FindSurface(string tag)
     {
-        foreach(Surface s in surfaces)
+        foreach (Surface surface in surfaces)
         {
-            if (tag == s.surfaceTag)
-                return s.defaultStepSound;
+            if (tag == surface.surfaceTag)
+                return surface;
         }
 
-        return "";
+        return defaultSurface;
     }
 }

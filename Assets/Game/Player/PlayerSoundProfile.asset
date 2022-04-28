@@ -12,24 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c2fe17c8fc01545bd324eb7cad3703, type: 3}
   m_Name: PlayerSoundProfile
   m_EditorClassIdentifier: 
+  defaultSurface:
+    surfaceTag: 
+    stepSound: event:/Player/Footsteps/Dry Cobble
+    crouchedStepSound: event:/Player/Crouch/Dry Cobble
+    jumpSound: event:/Player/Jump/Dry Cobble
+    isWet: 0
   surfaces:
   - surfaceTag: Mud
-    defaultStepSound: event:/Player Jump
-    crouchedStepSound: 
-    jumpSound: 
+    stepSound: event:/Player/Footsteps/Mud
+    crouchedStepSound: event:/Player/Crouch/Mud
+    jumpSound: event:/Player/Jump/Mud
     isWet: 0
   - surfaceTag: Wood
-    defaultStepSound: event:/Player Step
-    crouchedStepSound: 
-    jumpSound: 
+    stepSound: event:/Player/Footsteps/Wood
+    crouchedStepSound: event:/Player/Crouch/Wood
+    jumpSound: event:/Player/Jump/Wood
     isWet: 0
   - surfaceTag: Cobble
-    defaultStepSound: event:/Footsteps Stone
-    crouchedStepSound: 
-    jumpSound: 
-    isWet: 0
-  - surfaceTag: Sand
-    defaultStepSound: event:/Player Step
-    crouchedStepSound: 
-    jumpSound: 
+    stepSound: event:/Player/Footsteps/Dry Cobble
+    crouchedStepSound: event:/Player/Crouch/Dry Cobble
+    jumpSound: event:/Player/Jump/Dry Cobble
     isWet: 0
