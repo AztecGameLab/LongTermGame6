@@ -4776,6 +4776,8 @@ PrefabInstance:
       value: 'Let us in for salvation!
 
 
+        We beg of you!
+
 '
       objectReference: {fileID: 0}
     - target: {fileID: 8636561212927952251, guid: 04201bed81f47324d92f1d46a63852dc, type: 3}
@@ -11399,6 +11401,10 @@ PrefabInstance:
 
         Last line of defense may be the top of the tower'
       objectReference: {fileID: 0}
+    - target: {fileID: 7739528848125776018, guid: 1fd24b3fdba08bb41824dc2d392cf7b1, type: 3}
+      propertyPath: hintDuration
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fd24b3fdba08bb41824dc2d392cf7b1, type: 3}
 --- !u!114 &1145198567 stripped
@@ -12734,7 +12740,15 @@ PrefabInstance:
       value: 'Let us in for salvation!
 
 
-        Quick! Escape upwards!'
+        We beg of you!
+
+
+        Quick!
+        Escape upwards while you can!'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739528848125776018, guid: 1fd24b3fdba08bb41824dc2d392cf7b1, type: 3}
+      propertyPath: hintDuration
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fd24b3fdba08bb41824dc2d392cf7b1, type: 3}
@@ -17773,10 +17787,12 @@ PrefabInstance:
       objectReference: {fileID: 391815817}
     - target: {fileID: 7739528848125776018, guid: 1fd24b3fdba08bb41824dc2d392cf7b1, type: 3}
       propertyPath: text
-      value: 'Let us in for salvation!
-
-
-        Quick! Escape upwards!'
+      value: "Upstairs, you can see the view of the city burn. \nThe city is in dire
+        condition, with many begging to escape \nthrough this cathedral."
+      objectReference: {fileID: 0}
+    - target: {fileID: 7739528848125776018, guid: 1fd24b3fdba08bb41824dc2d392cf7b1, type: 3}
+      propertyPath: hintDuration
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fd24b3fdba08bb41824dc2d392cf7b1, type: 3}
