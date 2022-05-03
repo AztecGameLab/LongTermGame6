@@ -64,9 +64,9 @@
 	<object class="MarkerTrack" id="{855dfc57-82ec-4957-8ab6-b69465b98f41}" />
 	<object class="GroupTrack" id="{bee3157b-8277-44a9-838f-1166db17afca}">
 		<relationship name="modules">
-			<destination>{ff0dbc86-591b-4447-aaa7-ba722991bb9c}</destination>
 			<destination>{6b96a342-74a1-4205-b85e-492907382a55}</destination>
 			<destination>{da859b6e-1618-48ec-a1e4-fecb1656594d}</destination>
+			<destination>{79c631c1-aaa4-4750-bdee-b18d39e1275c}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{f278e712-7f31-42b2-b5c5-f40d73da080c}</destination>
@@ -74,7 +74,7 @@
 	</object>
 	<object class="Timeline" id="{d02ed2ad-4344-4abd-ad3e-bad9188ee30c}">
 		<relationship name="modules">
-			<destination>{ff0dbc86-591b-4447-aaa7-ba722991bb9c}</destination>
+			<destination>{79c631c1-aaa4-4750-bdee-b18d39e1275c}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{e03d7826-1f4a-4c83-a4f7-a87700039061}</destination>
@@ -110,14 +110,6 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{5068cea9-31b4-4540-831e-1e5a57f717d2}" />
-	<object class="SingleSound" id="{ff0dbc86-591b-4447-aaa7-ba722991bb9c}">
-		<property name="length">
-			<value>124.03947845804989</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{f1a44019-6d21-47c3-af70-c62ad369cad6}</destination>
-		</relationship>
-	</object>
 	<object class="TransitionSourceSound" id="{6b96a342-74a1-4205-b85e-492907382a55}">
 		<property name="length">
 			<value>8</value>
@@ -132,6 +124,14 @@
 		</property>
 		<relationship name="fadeInCurve">
 			<destination>{9853a911-cf00-442a-925f-e41f48347e45}</destination>
+		</relationship>
+	</object>
+	<object class="SingleSound" id="{79c631c1-aaa4-4750-bdee-b18d39e1275c}">
+		<property name="length">
+			<value>124.03947845804989</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{d479ce90-4566-44b2-b8ee-1b0d56b830f0}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{f278e712-7f31-42b2-b5c5-f40d73da080c}">
@@ -155,7 +155,6 @@
 		<property name="length">
 			<value>114</value>
 		</property>
-		<property name="name" />
 		<relationship name="timeline">
 			<destination>{d02ed2ad-4344-4abd-ad3e-bad9188ee30c}</destination>
 		</relationship>
