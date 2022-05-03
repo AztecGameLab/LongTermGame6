@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4423187633194298104}
   - component: {fileID: 778430193088685405}
   - component: {fileID: 3254270104525705623}
+  - component: {fileID: 7780530212281647815}
   m_Layer: 0
   m_Name: Tabernacle-door
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7780530212281647815
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902792506026373186}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3148793577539419794, guid: 7df11df5d34f77e41adf06ad64fc0e14, type: 3}
 --- !u!1 &5347358979192631429
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,8 +201,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7439338e6d2ff6041bdaa1e913ab603d, type: 3}
+--- !u!1 &3902792507088833551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7439338e6d2ff6041bdaa1e913ab603d, type: 3}
+  m_PrefabInstance: {fileID: 4244898605713535326}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4423187634271442613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7439338e6d2ff6041bdaa1e913ab603d, type: 3}
   m_PrefabInstance: {fileID: 4244898605713535326}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &6297846724480600203
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3902792507088833551}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -753803816705289760, guid: 7439338e6d2ff6041bdaa1e913ab603d, type: 3}

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1035976384597897819}
   - component: {fileID: 1552046517475640982}
   - component: {fileID: 9007897168004818359}
+  - component: {fileID: 8355120722459675038}
   m_Layer: 0
   m_Name: Sewer_Crouch_05
   m_TagString: Untagged
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8355120722459675038
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1340877832456486364}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 950506670222929574, guid: 362eabec6b6f10a4187b1c6e67e22ca5, type: 3}
 --- !u!1 &3955179846979471341
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +107,7 @@ GameObject:
   - component: {fileID: 5206452479458401866}
   - component: {fileID: 3507510161954133896}
   - component: {fileID: 5853274577743802728}
+  - component: {fileID: 2418446785518081306}
   m_Layer: 0
   m_Name: Sewer_Hall_25
   m_TagString: Untagged
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2418446785518081306
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3955179846979471341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1799003480945478384, guid: 362eabec6b6f10a4187b1c6e67e22ca5, type: 3}
 --- !u!1 &6126230980740629828
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +203,7 @@ GameObject:
   - component: {fileID: 3553763895624029141}
   - component: {fileID: 2195682318099541432}
   - component: {fileID: 6616655240619544671}
+  - component: {fileID: 6062864276909855063}
   m_Layer: 0
   m_Name: Sewer_Square_Room_01.001
   m_TagString: Untagged
@@ -243,6 +274,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6062864276909855063
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126230980740629828}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5782940245906916964, guid: 362eabec6b6f10a4187b1c6e67e22ca5, type: 3}
 --- !u!1 &7213972931531291232
 GameObject:
   m_ObjectHideFlags: 0
