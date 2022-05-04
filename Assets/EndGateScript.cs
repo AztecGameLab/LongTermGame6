@@ -13,9 +13,10 @@ public class EndGateScript : MonoBehaviour
     public void addUnlock()
     {
         _locksTriggered++;
-        if (_locksTriggered > locksToUnlock)
+        if (_locksTriggered >= locksToUnlock)
         {
             OnUnlock.Invoke();
+            SceneTransitionSystem.Instance.TransitionToScene("Cutscene2to3");
         }
     }
 }
