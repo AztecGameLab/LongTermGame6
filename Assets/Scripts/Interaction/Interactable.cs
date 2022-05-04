@@ -47,17 +47,23 @@ public class Interactable : MonoBehaviour
 
     public void InteractStart(GameObject source, Vector3 point)
     {
-        onInteractStart.Invoke(source, point);
-        GrabPoint = point;
-        IsHeld = true;
+        if (!IsHeld)
+        {
+            onInteractStart.Invoke(source, point);
+            GrabPoint = point;
+            IsHeld = true;
         
-        _lastLineOfSightCheck = Time.time;
+            _lastLineOfSightCheck = Time.time;
+        }
     }
 
     public void InteractEnd()
     {
-        IsHeld = false;
-        onInteractEnd.Invoke();
+        if (IsHeld)
+        {
+            IsHeld = false;
+            onInteractEnd.Invoke();
+        }
     }
 
     private void Update()

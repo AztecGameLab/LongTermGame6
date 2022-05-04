@@ -1,4 +1,5 @@
-﻿using NaughtyAttributes;
+﻿using FMODUnity;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
