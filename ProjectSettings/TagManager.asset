@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Trigger
-  - Rat
-  - EnemyAI
+  - Mud
+  - Wood
+  - Cobble
+  - Sand
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Fire
+    uniqueID: 2644848069
+    locked: 0
+  - name: Smoke
+    uniqueID: 118654615
     locked: 0

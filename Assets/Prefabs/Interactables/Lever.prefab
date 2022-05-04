@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 6605151298756057774}
   - component: {fileID: 4323034481409964688}
   - component: {fileID: 5918976052246829148}
+  - component: {fileID: 2291187750809895246}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -276,7 +277,19 @@ MonoBehaviour:
         m_CallState: 2
   onInteractEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2291187750809895246}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5918976052246829148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +303,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Objects/Misc./Extra Keys
+  Event: event:/Objects/Gallows Lever/Pickup
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -300,3 +313,26 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!114 &2291187750809895246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7722558345484627983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Objects/Gallows Lever/Drop
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0

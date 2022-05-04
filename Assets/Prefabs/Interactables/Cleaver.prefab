@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 8587765583363967497}
   - component: {fileID: 9155525876452282810}
   - component: {fileID: 305520030580270505}
+  - component: {fileID: 5339726174747361068}
   m_Layer: 0
   m_Name: Cleaver
   m_TagString: Untagged
@@ -263,7 +264,19 @@ MonoBehaviour:
         m_CallState: 2
   onInteractEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5339726174747361068}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9155525876452282810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Objects/Misc./Extra Keys
+  Event: event:/Objects/Cleaver/Pickup
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1
@@ -300,3 +313,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.60234237, y: 0.15581721, z: 0.040813476}
   m_Center: {x: 0.15164228, y: 0.030118197, z: 0.0028245181}
+--- !u!114 &5339726174747361068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6807228834869980101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Objects/Cleaver/Drop
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
