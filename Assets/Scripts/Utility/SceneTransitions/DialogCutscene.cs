@@ -59,16 +59,21 @@ public class DialogCutscene : MonoBehaviour
     
     private IEnumerator DialogWriter()
     {
+        float remainingTime = cutscenesInfo[_sceneCount].Duration;
+        
         yield return textBoxBehaviorScript.FadeInOnEnable();
         yield return new WaitForSeconds(textRestingTime);
+        remainingTime -= textRestingTime;
         foreach (char letter in cutscenesInfo[_sceneCount].DialogData[_sentenceCount]) 
         {
             textDisplay.text += letter;
+            remainingTime -= dialogSpeed;
             yield return new WaitForSeconds(dialogSpeed);
         }
 
         arrowContinueGameObject.SetActive(true);
-        yield return new WaitUntil(() => Input.GetMouseButton(0));
+        // yield return new WaitUntil(() => Input.GetMouseButton(0));
+        yield return new WaitForSeconds(remainingTime);
         NextSentence();
     }
 
