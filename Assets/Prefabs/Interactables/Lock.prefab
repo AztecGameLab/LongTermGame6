@@ -193,7 +193,11 @@ MonoBehaviour:
   lockedMaxAngle: 15
   openMinAngle: -120
   openMaxAngle: 120
+  lockAmount: 1
   hinge: {fileID: 0}
+  onUnlock:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4873514863393051642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Objects/Misc./Door Open
+  Event: event:/Objects/Misc./Lock
   PlayEvent: 0
   StopEvent: 0
   AllowFadeout: 1

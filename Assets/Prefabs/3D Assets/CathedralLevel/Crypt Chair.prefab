@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4312597891487432351
+--- !u!1 &7875619226621626403
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,45 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3500066854213559333}
-  - component: {fileID: 521687305925929856}
-  - component: {fileID: 2367082090989313866}
+  - component: {fileID: 7349876074432729753}
+  - component: {fileID: 5886163809478614332}
+  - component: {fileID: 8523956771191745014}
+  - component: {fileID: 7094800155229872757}
   m_Layer: 0
   m_Name: Crypt Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!4 &3500066854213559333
+--- !u!4 &7349876074432729753
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4312597891487432351}
+  m_GameObject: {fileID: 7875619226621626403}
   m_LocalRotation: {x: -0.7071068, y: -0.000000057601163, z: -0.000000057601163, w: 0.7071068}
-  m_LocalPosition: {x: -8.48, y: 6.63, z: 22.6}
-  m_LocalScale: {x: 142.99, y: 142.99, z: 142.99}
+  m_LocalPosition: {x: 2.695125, y: 1.864224, z: 13.630852}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &521687305925929856
+--- !u!33 &5886163809478614332
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4312597891487432351}
+  m_GameObject: {fileID: 7875619226621626403}
   m_Mesh: {fileID: -6264831526926562434, guid: b0dbc9e33a07b2c44b53beb860231cb8, type: 3}
---- !u!23 &2367082090989313866
+--- !u!23 &8523956771191745014
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4312597891487432351}
+  m_GameObject: {fileID: 7875619226621626403}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7094800155229872757
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7875619226621626403}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.005601422, y: 0.0063788886, z: 0.01300765}
+  m_Center: {x: -1.1641532e-10, y: 0.002671742, z: -0.0029401518}
