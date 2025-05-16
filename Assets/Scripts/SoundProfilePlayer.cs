@@ -47,9 +47,9 @@ namespace Game
         private string GetStepPath(string surfaceTag) 
         {
             if (crouchSystem != null && crouchSystem.IsCrouching)
-                return profile.FindSurface(surfaceTag).crouchedStepSound;
+                return profile.FindSurface(surfaceTag).crouchedStepSound.Path;
             
-            return profile.FindSurface(surfaceTag).stepSound;
+            return profile.FindSurface(surfaceTag).stepSound.Path;
         }
 
         private string GetTag()
@@ -73,7 +73,7 @@ namespace Game
         public void PlayJump()
         {
             string surfaceTag = GetTag();
-            string path = profile.FindSurface(surfaceTag).jumpSound;
+            string path = profile.FindSurface(surfaceTag).jumpSound.Path;
             RuntimeManager.PlayOneShotAttached(path, gameObject);
         }
 
@@ -92,7 +92,7 @@ namespace Game
         public void PlayLand()
         {
             string surfaceTag = GetTag();
-            string path = profile.FindSurface(surfaceTag).landSound;
+            string path = profile.FindSurface(surfaceTag).landSound.Path;
             
             if (targetRigidbody != null)
             {

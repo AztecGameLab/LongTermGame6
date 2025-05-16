@@ -13,28 +13,124 @@ MonoBehaviour:
   m_Name: PlayerSoundProfile
   m_EditorClassIdentifier: 
   defaultSurface:
-    surfaceTag: 
-    stepSound: event:/Player/Footsteps/Dry Cobble
-    crouchedStepSound: event:/Player/Crouch/Dry Cobble
-    jumpSound: event:/Player/Jump/Dry Cobble
-    landSound: event:/Player/Land/Dry Cobble
+    surfaceTag: Cobble
     isWet: 0
+    stepSound:
+      Guid:
+        Data1: 1684066538
+        Data2: 1223891506
+        Data3: -1913064293
+        Data4: 1451006342
+      Path: event:/Player/Footsteps/Dry Cobble
+    crouchedStepSound:
+      Guid:
+        Data1: 137330370
+        Data2: 1224374246
+        Data3: -1436499035
+        Data4: 1028385429
+      Path: event:/Player/Crouch/Dry Cobble
+    jumpSound:
+      Guid:
+        Data1: -876504869
+        Data2: 1319513233
+        Data3: -412366445
+        Data4: -2134796373
+      Path: event:/Player/Jump/Dry Cobble
+    landSound:
+      Guid:
+        Data1: -876504869
+        Data2: 1319513233
+        Data3: -412366445
+        Data4: -2134796373
+      Path: event:/Player/Jump/Dry Cobble
   surfaces:
   - surfaceTag: Mud
-    stepSound: event:/Player/Footsteps/Mud
-    crouchedStepSound: event:/Player/Crouch/Mud
-    jumpSound: event:/Player/Jump/Mud
-    landSound: event:/Player/Land/Mud
     isWet: 0
+    stepSound:
+      Guid:
+        Data1: 1209091240
+        Data2: 1205192596
+        Data3: -724900932
+        Data4: 1385599801
+      Path: event:/Player/Footsteps/Mud
+    crouchedStepSound:
+      Guid:
+        Data1: 951130543
+        Data2: 1319531729
+        Data3: -380060238
+        Data4: 1820553963
+      Path: event:/Player/Crouch/Mud
+    jumpSound:
+      Guid:
+        Data1: 10446877
+        Data2: 1125819844
+        Data3: 2058184629
+        Data4: 1010306782
+      Path: event:/Player/Jump/Mud
+    landSound:
+      Guid:
+        Data1: 10446877
+        Data2: 1125819844
+        Data3: 2058184629
+        Data4: 1010306782
+      Path: event:/Player/Jump/Mud
   - surfaceTag: Wood
-    stepSound: event:/Player/Footsteps/Wood
-    crouchedStepSound: event:/Player/Crouch/Wood
-    jumpSound: event:/Player/Jump/Wood
-    landSound: event:/Player/Land/Wood
     isWet: 0
+    stepSound:
+      Guid:
+        Data1: 954166648
+        Data2: 1327275537
+        Data3: 2053034385
+        Data4: 830824897
+      Path: event:/Player/Footsteps/Wood
+    crouchedStepSound:
+      Guid:
+        Data1: 679953264
+        Data2: 1085131702
+        Data3: 205573294
+        Data4: -2687043
+      Path: event:/Player/Crouch/Wood
+    jumpSound:
+      Guid:
+        Data1: 376468343
+        Data2: 1342100619
+        Data3: 128146847
+        Data4: -1203516565
+      Path: event:/Player/Jump/Wood
+    landSound:
+      Guid:
+        Data1: 376468343
+        Data2: 1342100619
+        Data3: 128146847
+        Data4: -1203516565
+      Path: event:/Player/Jump/Wood
   - surfaceTag: Cobble
-    stepSound: event:/Player/Footsteps/Dry Cobble
-    crouchedStepSound: event:/Player/Crouch/Dry Cobble
-    jumpSound: event:/Player/Jump/Dry Cobble
-    landSound: event:/Player/Land/Dry Cobble
     isWet: 0
+    stepSound:
+      Guid:
+        Data1: 1684066538
+        Data2: 1223891506
+        Data3: -1913064293
+        Data4: 1451006342
+      Path: event:/Player/Footsteps/Dry Cobble
+    crouchedStepSound:
+      Guid:
+        Data1: 137330370
+        Data2: 1224374246
+        Data3: -1436499035
+        Data4: 1028385429
+      Path: event:/Player/Crouch/Dry Cobble
+    jumpSound:
+      Guid:
+        Data1: -876504869
+        Data2: 1319513233
+        Data3: -412366445
+        Data4: -2134796373
+      Path: event:/Player/Jump/Dry Cobble
+    landSound:
+      Guid:
+        Data1: -876504869
+        Data2: 1319513233
+        Data3: -412366445
+        Data4: -2134796373
+      Path: event:/Player/Jump/Dry Cobble

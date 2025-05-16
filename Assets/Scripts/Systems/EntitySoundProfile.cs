@@ -9,16 +9,14 @@ public class EntitySoundProfile : ScriptableObject
     public struct Surface {
         [NaughtyAttributes.Tag]
         public string surfaceTag;
-        [EventRef]
-        public string stepSound;
-        [EventRef]
-        public string crouchedStepSound;
-        [EventRef]
-        public string jumpSound;
-        [EventRef] 
-        public string landSound;
+
         [SerializeField]
         public bool isWet;
+    
+        public EventReference stepSound;
+        public EventReference crouchedStepSound;
+        public EventReference jumpSound;
+        public EventReference landSound;
     }
 
     [SerializeField]
