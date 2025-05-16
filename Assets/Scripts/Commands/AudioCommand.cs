@@ -62,10 +62,11 @@ namespace Commands
                 }
             }
 
+            //TODO: Commented out some error stuff, needs to be fixed later
             private static string GetCPUData()
             {
-                RuntimeManager.StudioSystem.getCPUUsage(out var cpuUsage);
-                return $"CPU: dsp = {cpuUsage.dspusage:F1}%, studio = {cpuUsage.studiousage:F1}%";
+                //RuntimeManager.StudioSystem.getCPUUsage(out var cpuUsage);
+                return null;//$"CPU: dsp = {cpuUsage.dspusage:F1}%, studio = {cpuUsage.studiousage:F1}%";
             }
 
             private static string GetMemoryData()

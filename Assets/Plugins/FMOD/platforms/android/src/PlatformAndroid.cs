@@ -35,52 +35,79 @@ namespace FMODUnity
             Settings.AddPlatformTemplate<PlatformAndroid>("2fea114e74ecf3c4f920e1d5cc1c4c40");
         }
 
-        public override string DisplayName { get { return "Android"; } }
-        public override void DeclareUnityMappings(Settings settings)
+        internal override string DisplayName { get { return "Android"; } }
+        internal override void DeclareRuntimePlatforms(Settings settings)
         {
             settings.DeclareRuntimePlatform(RuntimePlatform.Android, this);
-
-#if UNITY_EDITOR
-            settings.DeclareBuildTarget(BuildTarget.Android, this);
-#endif
         }
 
 #if UNITY_EDITOR
-        public override Legacy.Platform LegacyIdentifier { get { return Legacy.Platform.Android; } }
-
-        protected override IEnumerable<string> GetRelativeBinaryPaths(BuildTarget buildTarget, bool allVariants, string suffix)
+        internal override IEnumerable<BuildTarget> GetBuildTargets()
         {
-            yield return "android/fmod.jar";
+            yield return BuildTarget.Android;
+        }
 
-            foreach (string architecture in new[] { "arm64-v8a", "armeabi-v7a", "x86" })
+        internal override Legacy.Platform LegacyIdentifier { get { return Legacy.Platform.Android; } }
+
+        protected override BinaryAssetFolderInfo GetBinaryAssetFolder(BuildTarget buildTarget)
+        {
+            return new BinaryAssetFolderInfo("android", "Plugins/Android/libs");
+        }
+
+        private static readonly string[] Architectures = { "arm64-v8a", "armeabi-v7a", "x86", "x86_64" };
+
+        protected override IEnumerable<FileRecord> GetBinaryFiles(BuildTarget buildTarget, bool allVariants, string suffix)
+        {
+            yield return new FileRecord("fmod.jar")
+                .WithAbsoluteVersion(FileLayout.Release_1_10, "Plugins/Android/fmod.jar");
+
+            foreach (string architecture in Architectures)
             {
-                yield return string.Format("android/{0}/libfmod{1}.so", architecture, suffix);
-                yield return string.Format("android/{0}/libfmodstudio{1}.so", architecture, suffix);
+                yield return new FileRecord(string.Format("{0}/libfmod{1}.so", architecture, suffix));
+                yield return new FileRecord(string.Format("{0}/libfmodstudio{1}.so", architecture, suffix));
             }
         }
+
+        protected override IEnumerable<FileRecord> GetOptionalBinaryFiles(BuildTarget buildTarget, bool allVariants)
+        {
+            foreach (string architecture in Architectures)
+            {
+                yield return new FileRecord(string.Format("{0}/libgvraudio.so", architecture));
+                yield return new FileRecord(string.Format("{0}/libresonanceaudio.so", architecture));
+            }
+        }
+
+        internal override bool SupportsAdditionalCPP(BuildTarget target)
+        {
+            // Unity parses --additional-cpp arguments specified via
+            // PlayerSettings.SetAdditionalIl2CppArgs() incorrectly when the Android
+            // Export Project option is set.
+            return false;
+        }
 #endif
 
-        public override string GetBankFolder()
+        internal override string GetBankFolder()
         {
             return StaticGetBankFolder();
         }
 
-        public static string StaticGetBankFolder()
+        internal static string StaticGetBankFolder()
         {
-            return Settings.Instance.AndroidUseOBB ? Application.streamingAssetsPath : "file:///android_asset";
+            return (Settings.Instance.AndroidUseOBB || Settings.Instance.AndroidPatchBuild)
+                ? Application.streamingAssetsPath : "file:///android_asset";
         }
 
-        public override string GetPluginPath(string pluginName)
+        internal override string GetPluginPath(string pluginName)
         {
             return StaticGetPluginPath(pluginName);
         }
 
-        public static string StaticGetPluginPath(string pluginName)
+        internal static string StaticGetPluginPath(string pluginName)
         {
             return string.Format("lib{0}.so", pluginName);
         }
 #if UNITY_EDITOR
-        public override OutputType[] ValidOutputTypes
+        internal override OutputType[] ValidOutputTypes
         {
             get
             {
@@ -94,7 +121,7 @@ namespace FMODUnity
            new OutputType() { displayName = "AAudio", outputType = FMOD.OUTPUTTYPE.AAUDIO },
         };
 
-        public override int CoreCount { get { return MaximumCoreCount; } }
+        internal override int CoreCount { get { return MaximumCoreCount; } }
 #endif
     }
 }
