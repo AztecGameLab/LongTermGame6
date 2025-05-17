@@ -17,6 +17,7 @@ public class InputPauseController : InputController<GameObject>
     [Space(20f)]
     [SerializeField] private UnityEvent onPause;
     [SerializeField] private UnityEvent onResume;
+    [SerializeField] private GameObject[] objects;
     
     private static bool _gameIsPaused;
 
@@ -25,9 +26,14 @@ public class InputPauseController : InputController<GameObject>
         if (Input.GetKeyDown(controls.pause)) 
         {
             if (_gameIsPaused)
+            {
                 Resume();
-
-            else Pause();
+                ToggleObjects(false);
+            }
+            else {
+                ToggleObjects(true);
+                Pause();
+            }
         }
     }
 
@@ -39,7 +45,7 @@ public class InputPauseController : InputController<GameObject>
         _gameIsPaused = false;
         
         // pauseSnapshot.SetParameter("Intensity", 0);
-        onPause.Invoke();
+        onResume.Invoke();
     }
 
     public void Pause()
@@ -50,12 +56,20 @@ public class InputPauseController : InputController<GameObject>
         _gameIsPaused = true;
         
         // pauseSnapshot.SetParameter("Intensity", 100);
-        onResume.Invoke();
+        onPause.Invoke();
     }
 
     public void LoadMenu()
     {
         Resume();
         SceneManager.LoadScene(targetScene);
+    }
+
+    private void ToggleObjects(bool hide)
+    {
+        foreach(GameObject obj in objects)
+        {
+            obj.SetActive(!hide);
+        }
     }
 }

@@ -20,6 +20,7 @@ public class AxeDamage : MonoBehaviour
     [Range(0, 1)]
     [Tooltip("What percent of the player's health should we take away when hitting them.")]
     private float attackDamage = 0.25f;
+    
     public void OnCollisionEnter(Collision collision)
     {
         if(collision.rigidbody == null) return;
